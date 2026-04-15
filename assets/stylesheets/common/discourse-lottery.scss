@@ -1,0 +1,20 @@
+.discourse-lottery-list ul {
+  padding-left: 0;
+}
+
+.discourse-lottery-list li {
+  list-style: none;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.discourse-lottery-show .lottery-actions {
+  margin: 16px 0;
+}
+
+.discourse-lottery-show .lottery-reasons {
+  padding-left: 16px;
+}
+

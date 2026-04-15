@@ -1,0 +1,19 @@
+plugins:
+  lottery_enabled:
+    default: true
+    client: true
+  lottery_admin_only:
+    default: true
+    client: true
+  lottery_participation_enabled:
+    default: true
+    client: true
+  lottery_results_public:
+    default: true
+    client: true
+  lottery_send_notifications:
+    default: true
+    client: false
+  lottery_one_entry_per_ip:
+    default: false
+    client: false

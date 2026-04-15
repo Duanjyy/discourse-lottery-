@@ -1,0 +1,46 @@
+en:
+  system_messages:
+    discourse_lottery_win:
+      subject_template: "You won: %{lottery_title}"
+      text_body_template: |
+        Congratulations, you won!
+
+        Lottery: %{lottery_title}
+        Prize: %{prize_name}
+
+        View: %{lottery_url}
+  site_settings:
+    lottery_enabled: "Enable lottery plugin"
+    lottery_admin_only: "Only admins can create/manage lotteries"
+    lottery_participation_enabled: "Allow users to enter lotteries"
+    lottery_results_public: "Lottery results are public"
+    lottery_send_notifications: "Send win notifications"
+    lottery_one_entry_per_ip: "One entry per IP per lottery (global default)"
+  discourse_lottery:
+    eligibility:
+      not_logged_in: "Please log in first"
+      suspended: "Account is suspended"
+      silenced: "Account is silenced"
+      inactive: "Account is inactive"
+      blacklisted: "You are blacklisted"
+      min_registered_days: "Registered less than %{expected} days (now %{actual})"
+      min_topic_count: "Topic count less than %{expected} (now %{actual})"
+      min_post_count: "Post count less than %{expected} (now %{actual})"
+      min_reply_count: "Reply count less than %{expected} (now %{actual})"
+      require_verified_email: "Email is not verified"
+      required_group_ids: "Not in required group"
+      require_like_topic_id: "You have not liked the required topic"
+      require_reply_topic_id: "You have not replied to the required topic"
+      one_entry_per_ip: "This IP has already entered"
+    errors:
+      not_enabled: "Lottery plugin is not enabled"
+      not_found: "Lottery not found"
+      not_started: "Lottery has not started"
+      ended: "Lottery has ended"
+      already_entered: "You already entered"
+      not_entered: "You have not entered"
+      not_eligible: "You are not eligible"
+      draw_not_allowed: "Draw is not allowed"
+      update_not_allowed: "Core settings cannot be changed after draw"
+      results_not_public: "Results are not public"
+      admin_only: "Admin only"

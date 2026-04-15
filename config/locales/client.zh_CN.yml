@@ -1,0 +1,14 @@
+zh_CN:
+  js:
+    discourse_lottery:
+      nav: "抽奖活动"
+      admin_title: "抽奖管理"
+      list:
+        title: "抽奖活动"
+        empty: "暂无抽奖活动"
+      show:
+        enter: "立即参与"
+        entered: "已参与"
+        leave: "取消参与"
+        ineligible: "无法参与"
+        results: "中奖结果"

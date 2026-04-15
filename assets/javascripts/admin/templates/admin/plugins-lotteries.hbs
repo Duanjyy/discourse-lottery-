@@ -1,0 +1,29 @@
+<div class="discourse-lottery-admin">
+  <h1>{{i18n "discourse_lottery.admin_title"}}</h1>
+
+  {{#if this.model.lotteries.length}}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>{{i18n "title"}}</th>
+          <th>Status</th>
+          <th>Participants</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.model.lotteries as |l|}}
+          <tr>
+            <td>{{l.id}}</td>
+            <td>{{l.title}}</td>
+            <td>{{l.status}}</td>
+            <td>{{l.participants_count}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{else}}
+    <p>{{i18n "discourse_lottery.list.empty"}}</p>
+  {{/if}}
+</div>
+

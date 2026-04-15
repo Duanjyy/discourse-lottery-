@@ -1,0 +1,52 @@
+<div class="discourse-lottery-show">
+  <h1>{{this.model.title}}</h1>
+
+  <div class="lottery-meta">
+    <span>{{this.model.participants_count}}</span>
+  </div>
+
+  <div class="lottery-description">
+    {{{this.model.description_cooked}}}
+  </div>
+
+  <div class="lottery-actions">
+    {{#if this.model.entered}}
+      <button type="button" class="btn" {{on "click" this.leave}}>
+        {{i18n "discourse_lottery.show.leave"}}
+      </button>
+    {{else if this.model.eligibility.ok}}
+      <button type="button" class="btn btn-primary" {{on "click" this.enter}}>
+        {{i18n "discourse_lottery.show.enter"}}
+      </button>
+    {{else}}
+      <button type="button" class="btn" disabled>
+        {{i18n "discourse_lottery.show.ineligible"}}
+      </button>
+    {{/if}}
+  </div>
+
+  {{#if (and (not this.model.eligibility.ok) this.model.eligibility.reasons.length)}}
+    <ul class="lottery-reasons">
+      {{#each this.model.eligibility.reasons_text as |t|}}
+        <li>{{t}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  {{#if (or (eq this.model.status "drawn") (eq this.model.status "closed"))}}
+    <div class="lottery-results">
+      <h2>{{i18n "discourse_lottery.show.results"}}</h2>
+      {{#if this.results}}
+        <ul>
+          {{#each this.results.winners as |w|}}
+            <li>{{w.username}} - {{w.prize_name}}</li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <button type="button" class="btn" {{on "click" this.loadResults}}>
+          {{i18n "discourse_lottery.show.results"}}
+        </button>
+      {{/if}}
+    </div>
+  {{/if}}
+</div>

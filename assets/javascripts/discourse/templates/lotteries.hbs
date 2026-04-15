@@ -1,0 +1,17 @@
+<div class="discourse-lottery-list">
+  <h1>{{i18n "discourse_lottery.list.title"}}</h1>
+
+  {{#if this.model.lotteries.length}}
+    <ul>
+      {{#each this.model.lotteries as |lottery|}}
+        <li>
+          <a href="/lotteries/{{lottery.id}}">{{lottery.title}}</a>
+          <span>{{lottery.participants_count}}</span>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>{{i18n "discourse_lottery.list.empty"}}</p>
+  {{/if}}
+</div>
+

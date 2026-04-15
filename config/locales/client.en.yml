@@ -1,0 +1,14 @@
+en:
+  js:
+    discourse_lottery:
+      nav: "Lotteries"
+      admin_title: "Lottery Admin"
+      list:
+        title: "Lotteries"
+        empty: "No lotteries"
+      show:
+        enter: "Enter"
+        entered: "Entered"
+        leave: "Leave"
+        ineligible: "Not eligible"
+        results: "Results"

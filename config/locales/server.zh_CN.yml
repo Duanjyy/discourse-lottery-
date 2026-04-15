@@ -1,0 +1,46 @@
+zh_CN:
+  system_messages:
+    discourse_lottery_win:
+      subject_template: "你在抽奖活动中中奖了：%{lottery_title}"
+      text_body_template: |
+        恭喜你中奖！
+
+        活动：%{lottery_title}
+        奖品：%{prize_name}
+
+        查看活动：%{lottery_url}
+  site_settings:
+    lottery_enabled: "启用抽奖插件"
+    lottery_admin_only: "仅管理员可创建/管理抽奖"
+    lottery_participation_enabled: "允许用户参与抽奖"
+    lottery_results_public: "抽奖结果公开"
+    lottery_send_notifications: "发送中奖通知"
+    lottery_one_entry_per_ip: "同一IP每个活动仅可参与一次（全局默认）"
+  discourse_lottery:
+    eligibility:
+      not_logged_in: "请先登录"
+      suspended: "账号已被封禁"
+      silenced: "账号已被禁言"
+      inactive: "账号不可用"
+      blacklisted: "你已被加入黑名单"
+      min_registered_days: "注册未满 %{expected} 天（当前 %{actual} 天）"
+      min_topic_count: "发帖数不足 %{expected}（当前 %{actual}）"
+      min_post_count: "总发言数不足 %{expected}（当前 %{actual}）"
+      min_reply_count: "回帖数不足 %{expected}（当前 %{actual}）"
+      require_verified_email: "邮箱未验证"
+      required_group_ids: "未加入指定用户组"
+      require_like_topic_id: "未点赞指定帖子"
+      require_reply_topic_id: "未回复指定帖子"
+      one_entry_per_ip: "同一IP已参与过该活动"
+    errors:
+      not_enabled: "抽奖插件未启用"
+      not_found: "抽奖活动不存在"
+      not_started: "活动未开始"
+      ended: "活动已结束"
+      already_entered: "你已参与该活动"
+      not_entered: "你尚未参与该活动"
+      not_eligible: "不满足参与条件"
+      draw_not_allowed: "当前不可开奖"
+      update_not_allowed: "开奖后禁止修改核心配置"
+      results_not_public: "结果未公开"
+      admin_only: "仅管理员可操作"
