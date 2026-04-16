@@ -51,7 +51,7 @@ export default function TemplateBusiness({ resume, settings, baseFontPx }: Templ
                   <img className="h-full w-full object-cover" src={b.avatarDataUrl} alt="" />
                 ) : (
                   <div className="grid h-full w-full place-items-center text-xs font-semibold text-white/70">
-                    {(b.name?.value || " ").trim().slice(-2)}
+                    {name.trim().slice(-2)}
                   </div>
                 )}
               </div>

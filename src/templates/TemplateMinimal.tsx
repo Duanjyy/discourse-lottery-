@@ -53,7 +53,7 @@ export default function TemplateMinimal({ resume, settings, baseFontPx, sectionG
         ) : null}
 
         <div className="min-w-0 flex-1">
-          <div className="text-[28px] font-semibold tracking-tight">{b.name?.visible ? b.name.value || "未命名" : "未命名"}</div>
+          <div className="text-[28px] font-semibold tracking-tight">{b.name?.visible ? b.name?.value || "未命名" : "未命名"}</div>
           <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
             {contacts.map((c, i) => (
               <Line key={i}>{c}</Line>
