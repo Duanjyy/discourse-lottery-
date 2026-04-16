@@ -29,7 +29,7 @@ export default function TemplateMinimal({ resume, settings, baseFontPx, sectionG
   const b = resume.basic
   const color = settings.themeColor
 
-  const name = b.name?.visible ? b.name.value || "未命名" : "未命名"
+  const name = b.name?.visible ? b.name?.value || "未命名" : "未命名"
 
   const contacts = [
     b.phone?.visible ? b.phone.value : "",
