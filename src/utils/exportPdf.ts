@@ -1,69 +1,45 @@
-import html2canvas from "html2canvas"
-import jsPDF from "jspdf"
+import html2pdf from "html2pdf.js"
 
 export async function exportResumeToPdf(target: HTMLElement, fileName: string) {
-  // 彻底解决偏移问题：将滚动条临时置顶
-  const originalScrollY = window.scrollY
-  const originalScrollX = window.scrollX
-  window.scrollTo(0, 0)
+  // 查找我们要导出的根节点
+  const el = target.querySelector(`[data-pdf-target="true"]`) as HTMLElement
+  if (!el) return
 
-  // 稍微延迟等待可能未完成的重绘
-  await new Promise((resolve) => setTimeout(resolve, 100))
+  // 设置导出配置，调整 scale 和 格式保证清晰度与无偏移
+  const opt = {
+    margin: 0,
+    filename: `${fileName}.pdf`,
+    image: { type: "jpeg", quality: 1 },
+    html2canvas: {
+      scale: 3,
+      useCORS: true,
+      letterRendering: true,
+      scrollY: 0,
+      windowWidth: el.offsetWidth,
+      windowHeight: el.scrollHeight,
+    },
+    jsPDF: { unit: "pt", format: "a4", orientation: "portrait", compress: true },
+  }
+
+  // 临时创建一个脱离原来复杂包裹容器（没有 scale 干扰）的节点用于克隆截图
+  const printContainer = document.createElement("div")
+  printContainer.style.position = "absolute"
+  printContainer.style.top = "-9999px"
+  printContainer.style.left = "0"
+  printContainer.style.width = `${el.offsetWidth}px`
+  printContainer.style.backgroundColor = "white"
+
+  // 深度克隆节点以保留样式
+  const clonedEl = el.cloneNode(true) as HTMLElement
+  printContainer.appendChild(clonedEl)
+  document.body.appendChild(printContainer)
 
   try {
-    const canvas = await html2canvas(target, {
-      backgroundColor: "#ffffff",
-      scale: 3, // 稍微提高清晰度
-      useCORS: true,
-      logging: false,
-      scrollY: -window.scrollY,
-      scrollX: 0,
-      windowWidth: document.documentElement.offsetWidth,
-      windowHeight: document.documentElement.offsetHeight,
-      onclone: (clonedDoc) => {
-        // 在克隆的 DOM 中，找到我们要导出的节点
-        const el = clonedDoc.body.querySelector(`[data-pdf-target="true"]`) as HTMLElement
-        if (el) {
-          // 清除外层所有可能的 transform 缩放
-          let current: HTMLElement | null = el.parentElement
-          while (current && current !== clonedDoc.body) {
-            current.style.transform = "none"
-            current = current.parentElement
-          }
-        }
-      },
-    })
-
-    const pdf = new jsPDF({ orientation: "p", unit: "pt", format: "a4", compress: true })
-    const pageWidth = pdf.internal.pageSize.getWidth()
-    const pageHeight = pdf.internal.pageSize.getHeight()
-
-    const ratio = pageWidth / canvas.width
-    const pageHeightPx = pageHeight / ratio
-
-    let y = 0
-    let page = 0
-    while (y < canvas.height) {
-      const sliceHeight = Math.min(pageHeightPx, canvas.height - y)
-      const sliceCanvas = document.createElement("canvas")
-      sliceCanvas.width = canvas.width
-      sliceCanvas.height = sliceHeight
-      const ctx = sliceCanvas.getContext("2d")
-      if (!ctx) break
-      ctx.drawImage(canvas, 0, y, canvas.width, sliceHeight, 0, 0, canvas.width, sliceHeight)
-
-      const imgData = sliceCanvas.toDataURL("image/jpeg", 0.98)
-      if (page > 0) pdf.addPage()
-      pdf.addImage(imgData, "JPEG", 0, 0, pageWidth, sliceHeight * ratio)
-
-      y += sliceHeight
-      page += 1
-    }
-
-    pdf.save(`${fileName}.pdf`)
+    // 调用 html2pdf 生成
+    await html2pdf().set(opt).from(printContainer).save()
   } finally {
-    // 恢复原有的滚动条位置
-    window.scrollTo(originalScrollX, originalScrollY)
+    // 销毁临时节点
+    document.body.removeChild(printContainer)
   }
 }
 
