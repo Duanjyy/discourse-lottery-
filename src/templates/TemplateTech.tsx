@@ -22,13 +22,13 @@ function Title(props: { children: string; color: string }) {
 export default function TemplateTech({ resume, settings, baseFontPx, sectionGapPx }: TemplateProps) {
   const b = resume.basic
   const color = settings.themeColor
-  const name = b.name?.visible ? b.name.value || "未命名" : "未命名"
+  const name = b.name.visible ? b.name.value || "未命名" : "未命名"
 
   const meta = [
-    b.target?.visible ? b.target.value : "",
-    b.phone?.visible ? b.phone.value : "",
-    b.email?.visible ? b.email.value : "",
-    b.location?.visible ? b.location.value : "",
+    b.target.visible ? b.target.value : "",
+    b.phone.visible ? b.phone.value : "",
+    b.email.visible ? b.email.value : "",
+    b.location.visible ? b.location.value : "",
   ].filter(Boolean)
 
   const left = (
@@ -169,7 +169,7 @@ export default function TemplateTech({ resume, settings, baseFontPx, sectionGapP
               <img className="h-full w-full object-cover" src={b.avatarDataUrl} alt="" />
             ) : (
               <div className="grid h-full w-full place-items-center text-xs font-semibold text-zinc-500">
-                {name.trim().slice(-2)}
+                {(b.name.value || " ").trim().slice(-2)}
               </div>
             )}
           </div>
@@ -192,4 +192,3 @@ export default function TemplateTech({ resume, settings, baseFontPx, sectionGapP
     </div>
   )
 }
-

@@ -30,14 +30,14 @@ function Title(props: { children: string; color: string }) {
 export default function TemplateBusiness({ resume, settings, baseFontPx }: TemplateProps) {
   const b = resume.basic
   const color = settings.themeColor
-  const name = b.name?.visible ? b.name.value || "未命名" : "未命名"
+  const name = b.name.visible ? b.name.value || "未命名" : "未命名"
 
   const contactLines = [
-    b.target?.visible ? b.target.value : "",
-    b.phone?.visible ? b.phone.value : "",
-    b.email?.visible ? b.email.value : "",
-    b.location?.visible ? b.location.value : "",
-    b.birthday?.visible ? b.birthday.value : "",
+    b.target.visible ? b.target.value : "",
+    b.phone.visible ? b.phone.value : "",
+    b.email.visible ? b.email.value : "",
+    b.location.visible ? b.location.value : "",
+    b.birthday.visible ? b.birthday.value : "",
   ].filter(Boolean)
 
   return (
@@ -51,7 +51,7 @@ export default function TemplateBusiness({ resume, settings, baseFontPx }: Templ
                   <img className="h-full w-full object-cover" src={b.avatarDataUrl} alt="" />
                 ) : (
                   <div className="grid h-full w-full place-items-center text-xs font-semibold text-white/70">
-                    {name.trim().slice(-2)}
+                    {(b.name.value || " ").trim().slice(-2)}
                   </div>
                 )}
               </div>
@@ -210,4 +210,3 @@ export default function TemplateBusiness({ resume, settings, baseFontPx }: Templ
     </div>
   )
 }
-
