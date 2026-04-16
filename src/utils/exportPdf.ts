@@ -2,8 +2,10 @@ import html2canvas from "html2canvas"
 import jsPDF from "jspdf"
 
 export async function exportResumeToPdf(target: HTMLElement, fileName: string) {
-  // 查找我们要导出的真实根节点
-  const el = target.querySelector(`[data-pdf-target="true"]`) as HTMLElement
+  // 从 target 内部，或者干脆从整个 document 里找
+  const el = (target.querySelector(`[data-pdf-target="true"]`) ||
+    document.querySelector(`[data-pdf-target="true"]`)) as HTMLElement
+
   if (!el) {
     console.error("未找到 PDF 导出目标节点")
     return
@@ -12,7 +14,6 @@ export async function exportResumeToPdf(target: HTMLElement, fileName: string) {
   // 临时创建一个脱离原来复杂包裹容器的节点用于克隆截图
   const printContainer = document.createElement("div")
   printContainer.style.position = "absolute"
-  // 不能放到屏幕外太远，否则某些浏览器的离屏渲染会有问题，直接放到最顶层 z-index 在后面即可
   printContainer.style.top = "0"
   printContainer.style.left = "0"
   printContainer.style.zIndex = "-9999"
@@ -23,8 +24,10 @@ export async function exportResumeToPdf(target: HTMLElement, fileName: string) {
 
   // 深度克隆节点以保留样式
   const clonedEl = el.cloneNode(true) as HTMLElement
-  // 去除克隆节点自身的缩放影响（如果有的话）
+  // 去除克隆节点自身的缩放影响、阴影和圆角，以适配 A4 纸
   clonedEl.style.transform = "none"
+  clonedEl.style.borderRadius = "0"
+  clonedEl.style.boxShadow = "none"
   printContainer.appendChild(clonedEl)
   document.body.appendChild(printContainer)
 
