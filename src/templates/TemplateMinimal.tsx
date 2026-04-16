@@ -46,7 +46,7 @@ export default function TemplateMinimal({ resume, settings, baseFontPx, sectionG
               <img className="h-full w-full object-cover" src={b.avatarDataUrl} alt="" />
             ) : (
               <div className="grid h-full w-full place-items-center text-xs font-semibold text-zinc-500">
-                {(b.name.value || " ").trim().slice(-2)}
+                {(b.name?.value || " ").trim().slice(-2)}
               </div>
             )}
           </div>
