@@ -29,6 +29,8 @@ export default function TemplateMinimal({ resume, settings, baseFontPx, sectionG
   const b = resume.basic
   const color = settings.themeColor
 
+  const name = b.name?.visible ? b.name.value || "未命名" : "未命名"
+
   const contacts = [
     b.phone?.visible ? b.phone.value : "",
     b.email?.visible ? b.email.value : "",
@@ -46,14 +48,14 @@ export default function TemplateMinimal({ resume, settings, baseFontPx, sectionG
               <img className="h-full w-full object-cover" src={b.avatarDataUrl} alt="" />
             ) : (
               <div className="grid h-full w-full place-items-center text-xs font-semibold text-zinc-500">
-                {(b.name?.value || " ").trim().slice(-2)}
+                {name.trim().slice(-2)}
               </div>
             )}
           </div>
         ) : null}
 
         <div className="min-w-0 flex-1">
-          <div className="text-[28px] font-semibold tracking-tight">{b.name?.visible ? b.name?.value || "未命名" : "未命名"}</div>
+          <div className="text-[28px] font-semibold tracking-tight">{name}</div>
           <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
             {contacts.map((c, i) => (
               <Line key={i}>{c}</Line>
