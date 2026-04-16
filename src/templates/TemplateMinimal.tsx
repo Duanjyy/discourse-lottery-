@@ -30,11 +30,11 @@ export default function TemplateMinimal({ resume, settings, baseFontPx, sectionG
   const color = settings.themeColor
 
   const contacts = [
-    b.phone.visible ? b.phone.value : "",
-    b.email.visible ? b.email.value : "",
-    b.location.visible ? b.location.value : "",
-    b.birthday.visible ? b.birthday.value : "",
-    b.target.visible ? b.target.value : "",
+    b.phone?.visible ? b.phone.value : "",
+    b.email?.visible ? b.email.value : "",
+    b.location?.visible ? b.location.value : "",
+    b.birthday?.visible ? b.birthday.value : "",
+    b.target?.visible ? b.target.value : "",
   ].filter(Boolean)
 
   return (

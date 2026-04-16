@@ -25,10 +25,10 @@ export default function TemplateTech({ resume, settings, baseFontPx, sectionGapP
   const name = b.name?.visible ? b.name.value || "未命名" : "未命名"
 
   const meta = [
-    b.target.visible ? b.target.value : "",
-    b.phone.visible ? b.phone.value : "",
-    b.email.visible ? b.email.value : "",
-    b.location.visible ? b.location.value : "",
+    b.target?.visible ? b.target.value : "",
+    b.phone?.visible ? b.phone.value : "",
+    b.email?.visible ? b.email.value : "",
+    b.location?.visible ? b.location.value : "",
   ].filter(Boolean)
 
   const left = (

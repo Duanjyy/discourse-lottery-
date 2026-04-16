@@ -23,10 +23,10 @@ export default function TemplateCampus({ resume, settings, baseFontPx, sectionGa
   const name = b.name?.visible ? b.name.value || "未命名" : "未命名"
 
   const contacts = [
-    b.target.visible ? b.target.value : "",
-    b.phone.visible ? b.phone.value : "",
-    b.email.visible ? b.email.value : "",
-    b.location.visible ? b.location.value : "",
+    b.target?.visible ? b.target.value : "",
+    b.phone?.visible ? b.phone.value : "",
+    b.email?.visible ? b.email.value : "",
+    b.location?.visible ? b.location.value : "",
   ].filter(Boolean)
 
   return (
