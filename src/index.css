@@ -41,9 +41,9 @@ body,
 @layer utilities {
   .bg-mesh {
     background:
-      radial-gradient(1100px 800px at 20% 10%, rgba(var(--jade), 0.10), transparent 55%),
-      radial-gradient(900px 700px at 82% 24%, rgba(var(--blush), 0.10), transparent 52%),
-      radial-gradient(1000px 900px at 60% 88%, rgba(var(--jade), 0.08), transparent 55%),
+      radial-gradient(1200px 900px at 10% 10%, rgba(var(--jade), 0.08), transparent 60%),
+      radial-gradient(1000px 800px at 85% 20%, rgba(var(--blush), 0.06), transparent 50%),
+      radial-gradient(1100px 900px at 50% 90%, rgba(var(--jade), 0.05), transparent 60%),
       linear-gradient(135deg, rgba(var(--paper), 1), rgba(var(--paper-2), 1));
   }
 
@@ -56,10 +56,19 @@ body,
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.15;
-    background-image: radial-gradient(rgba(0, 0, 0, 0.24) 1px, transparent 1px);
-    background-size: 14px 14px;
+    opacity: 0.25;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px);
+    background-size: 10px 10px;
     mix-blend-mode: multiply;
+  }
+  
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .letter-spacing-lg {
+    letter-spacing: 0.3em;
   }
 
   .ink {
