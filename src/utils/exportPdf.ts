@@ -6,6 +6,12 @@ export async function exportResumeToPdf(target: HTMLElement, fileName: string) {
     backgroundColor: "#ffffff",
     scale: 2.5,
     useCORS: true,
+    onclone: (clonedDoc) => {
+      const el = clonedDoc.body.querySelector(`[data-pdf-target="true"]`)
+      if (el && el.parentElement) {
+        el.parentElement.style.transform = "none"
+      }
+    },
   })
 
   const pdf = new jsPDF({ orientation: "p", unit: "pt", format: "a4", compress: true })
