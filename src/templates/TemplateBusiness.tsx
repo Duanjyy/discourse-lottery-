@@ -30,7 +30,7 @@ function Title(props: { children: string; color: string }) {
 export default function TemplateBusiness({ resume, settings, baseFontPx }: TemplateProps) {
   const b = resume.basic
   const color = settings.themeColor
-  const name = b.name.visible ? b.name.value || "未命名" : "未命名"
+  const name = b.name?.visible ? b.name.value || "未命名" : "未命名"
 
   const contactLines = [
     b.target.visible ? b.target.value : "",

@@ -20,7 +20,7 @@ function H2(props: { children: string; color: string }) {
 export default function TemplateCampus({ resume, settings, baseFontPx, sectionGapPx }: TemplateProps) {
   const b = resume.basic
   const color = settings.themeColor
-  const name = b.name.visible ? b.name.value || "未命名" : "未命名"
+  const name = b.name?.visible ? b.name.value || "未命名" : "未命名"
 
   const contacts = [
     b.target.visible ? b.target.value : "",
