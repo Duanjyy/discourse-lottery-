@@ -54,6 +54,67 @@ function moveById<T extends { id: string }>(list: T[], id: string, dir: -1 | 1) 
   return next
 }
 
+function isRecord(v: unknown): v is Record<string, unknown> {
+  return !!v && typeof v === "object"
+}
+
+function normalizeSwitchableText(base: Resume["basic"]["name"], v: unknown): Resume["basic"]["name"] {
+  if (!isRecord(v)) return base
+  const value = typeof v.value === "string" ? v.value : base.value
+  const visible = typeof v.visible === "boolean" ? v.visible : base.visible
+  return { value, visible }
+}
+
+function normalizeResume(v: unknown): Resume {
+  const base = createBlankResume()
+  if (!isRecord(v)) return base
+
+  const basicIn = isRecord(v.basic) ? v.basic : {}
+  const skillBlockIn = isRecord(v.skillBlock) ? v.skillBlock : {}
+
+  return {
+    version: RESUME_VERSION,
+    basic: {
+      name: normalizeSwitchableText(base.basic.name, basicIn.name),
+      phone: normalizeSwitchableText(base.basic.phone, basicIn.phone),
+      email: normalizeSwitchableText(base.basic.email, basicIn.email),
+      target: normalizeSwitchableText(base.basic.target, basicIn.target),
+      birthday: normalizeSwitchableText(base.basic.birthday, basicIn.birthday),
+      location: normalizeSwitchableText(base.basic.location, basicIn.location),
+      avatarVisible: typeof basicIn.avatarVisible === "boolean" ? basicIn.avatarVisible : base.basic.avatarVisible,
+      avatarDataUrl: typeof basicIn.avatarDataUrl === "string" ? basicIn.avatarDataUrl : undefined,
+    },
+    education: Array.isArray(v.education) ? (v.education as Resume["education"]) : base.education,
+    experience: Array.isArray(v.experience) ? (v.experience as Resume["experience"]) : base.experience,
+    projects: Array.isArray(v.projects) ? (v.projects as Resume["projects"]) : base.projects,
+    skillBlock: {
+      skills: Array.isArray(skillBlockIn.skills) ? (skillBlockIn.skills as Resume["skillBlock"]["skills"]) : base.skillBlock.skills,
+      languages: Array.isArray(skillBlockIn.languages)
+        ? (skillBlockIn.languages as Resume["skillBlock"]["languages"])
+        : base.skillBlock.languages,
+      certificates: Array.isArray(skillBlockIn.certificates)
+        ? (skillBlockIn.certificates as Resume["skillBlock"]["certificates"])
+        : base.skillBlock.certificates,
+      honors: Array.isArray(skillBlockIn.honors) ? (skillBlockIn.honors as Resume["skillBlock"]["honors"]) : base.skillBlock.honors,
+    },
+    summary: {
+      text: isRecord(v.summary) && typeof v.summary.text === "string" ? v.summary.text : base.summary.text,
+    },
+  }
+}
+
+function normalizeSettings(v: unknown): Settings {
+  const base = createDefaultSettings()
+  if (!isRecord(v)) return base
+  return {
+    templateId: typeof v.templateId === "string" ? v.templateId : base.templateId,
+    themeColor: typeof v.themeColor === "string" ? v.themeColor : base.themeColor,
+    fontScale: typeof v.fontScale === "number" ? v.fontScale : base.fontScale,
+    paragraphSpacing: typeof v.paragraphSpacing === "number" ? v.paragraphSpacing : base.paragraphSpacing,
+    layout: v.layout === "single" || v.layout === "double" ? v.layout : base.layout,
+  }
+}
+
 export const STORAGE_KEY = "resume_builder_v1"
 
 export const useAppStore = create<AppState>()(
@@ -258,7 +319,14 @@ export const useAppStore = create<AppState>()(
         if (!persisted || typeof persisted !== "object") {
           return { resume: createSampleResume(), settings: createDefaultSettings(), updatedAt: Date.now() }
         }
-        if (v >= RESUME_VERSION) return persisted as { resume: Resume; settings: Settings; updatedAt: number }
+        if (v >= RESUME_VERSION) {
+          const p = persisted as { resume?: unknown; settings?: unknown; updatedAt?: unknown }
+          return {
+            resume: normalizeResume(p.resume),
+            settings: normalizeSettings(p.settings),
+            updatedAt: typeof p.updatedAt === "number" ? p.updatedAt : Date.now(),
+          }
+        }
 
         const next: { resume: Resume; settings: Settings; updatedAt: number } = {
           resume: createSampleResume(),
@@ -266,12 +334,11 @@ export const useAppStore = create<AppState>()(
           updatedAt: Date.now(),
         }
         const p = persisted as Partial<typeof next>
-        if (p.resume) next.resume = { ...next.resume, ...p.resume, version: RESUME_VERSION }
-        if (p.settings) next.settings = { ...next.settings, ...p.settings }
+        if (p.resume) next.resume = normalizeResume(p.resume)
+        if (p.settings) next.settings = normalizeSettings(p.settings)
         if (typeof p.updatedAt === "number") next.updatedAt = p.updatedAt
         return next
       },
     },
   ),
 )
-
