@@ -1,4 +1,4 @@
-import { Download, Copy, RotateCcw, Trash2, LayoutGrid, Image as ImageIcon } from "lucide-react"
+import { Download, Copy, RotateCcw, Trash2, LayoutGrid, Image as ImageIcon, ImageDown } from "lucide-react"
 import { useAppStore } from "@/state/store"
 
 const templates = [
@@ -9,8 +9,9 @@ const templates = [
 ] as const
 
 export default function EditorToolbar(props: {
-  busy: null | "pdf" | "copy"
+  busy: null | "pdf" | "image" | "copy"
   onExportPdf: () => Promise<void> | void
+  onExportImage: () => Promise<void> | void
   onCopyText: () => Promise<void> | void
   onResetBlank: () => void
   onResetSample: () => void
@@ -122,11 +123,21 @@ export default function EditorToolbar(props: {
         <button
           className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-70"
           onClick={props.onExportPdf}
-          disabled={props.busy === "pdf"}
+          disabled={props.busy === "pdf" || props.busy === "image"}
           type="button"
         >
           <Download className="size-4" />
           {props.busy === "pdf" ? "导出中…" : "导出 PDF"}
+        </button>
+
+        <button
+          className="inline-flex items-center gap-2 rounded-xl bg-zinc-50 px-3 py-2 text-xs font-semibold text-zinc-700 ring-1 ring-zinc-200/70 transition hover:bg-zinc-100 disabled:cursor-not-allowed disabled:opacity-70"
+          onClick={props.onExportImage}
+          disabled={props.busy === "pdf" || props.busy === "image"}
+          type="button"
+        >
+          <ImageDown className="size-4" />
+          {props.busy === "image" ? "生成中…" : "导出图片"}
         </button>
 
         <button

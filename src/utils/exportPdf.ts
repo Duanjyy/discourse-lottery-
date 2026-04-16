@@ -1,8 +1,8 @@
-import html2canvas from "html2canvas"
+import { toCanvas, toPng } from "html-to-image"
 import jsPDF from "jspdf"
 
 export async function exportResumeToPdf(target: HTMLElement, fileName: string) {
-  // 从 target 内部，或者干脆从整个 document 里找
+  // 查找导出节点
   const el = (target.querySelector(`[data-pdf-target="true"]`) ||
     document.querySelector(`[data-pdf-target="true"]`)) as HTMLElement
 
@@ -14,12 +14,9 @@ export async function exportResumeToPdf(target: HTMLElement, fileName: string) {
   // 临时创建一个脱离原来复杂包裹容器的节点用于克隆截图
   const printContainer = document.createElement("div")
   printContainer.style.position = "absolute"
-  // 直接挂到文档顶部最前方（不受任何滚动条干扰）
   printContainer.style.top = "0"
   printContainer.style.left = "0"
-  // 放在肉眼看不见的最底层
   printContainer.style.zIndex = "-9999"
-  // 强行赋予绝对准确的 A4 等比例宽度
   printContainer.style.width = `${el.offsetWidth}px`
   printContainer.style.backgroundColor = "white"
 
@@ -35,19 +32,16 @@ export async function exportResumeToPdf(target: HTMLElement, fileName: string) {
   document.body.appendChild(printContainer)
 
   try {
-    // 等待克隆节点在屏幕边缘彻底渲染完毕
+    // 等待克隆节点渲染
     await new Promise((resolve) => setTimeout(resolve, 300))
 
-    // 重点：生成 canvas 时必须让滚动参数归零，且指定真实的 DOM 宽高
-    const canvas = await html2canvas(printContainer, {
+    // 使用更稳定的 html-to-image（基于 SVG foreignObject 渲染引擎，不存在偏移问题）
+    const canvas = await toCanvas(printContainer, {
+      pixelRatio: 3,
       backgroundColor: "#ffffff",
-      scale: 3, // 3 倍超高清缩放
-      useCORS: true,
-      logging: false,
-      scrollY: 0,
-      scrollX: 0,
-      windowWidth: printContainer.offsetWidth,
-      windowHeight: printContainer.scrollHeight,
+      style: {
+        transform: "none",
+      },
     })
 
     const pdf = new jsPDF({ orientation: "p", unit: "pt", format: "a4", compress: true })
@@ -83,6 +77,54 @@ export async function exportResumeToPdf(target: HTMLElement, fileName: string) {
     console.error("PDF 导出失败:", err)
   } finally {
     // 销毁临时节点
+    if (document.body.contains(printContainer)) {
+      document.body.removeChild(printContainer)
+    }
+  }
+}
+
+export async function exportResumeToImage(target: HTMLElement, fileName: string) {
+  const el = (target.querySelector(`[data-pdf-target="true"]`) ||
+    document.querySelector(`[data-pdf-target="true"]`)) as HTMLElement
+
+  if (!el) {
+    console.error("未找到图片导出目标节点")
+    return
+  }
+
+  const printContainer = document.createElement("div")
+  printContainer.style.position = "absolute"
+  printContainer.style.top = "0"
+  printContainer.style.left = "0"
+  printContainer.style.zIndex = "-9999"
+  printContainer.style.width = `${el.offsetWidth}px`
+  printContainer.style.backgroundColor = "white"
+
+  const clonedEl = el.cloneNode(true) as HTMLElement
+  clonedEl.style.transform = "none"
+  clonedEl.style.borderRadius = "0"
+  clonedEl.style.boxShadow = "none"
+  clonedEl.style.margin = "0"
+
+  printContainer.appendChild(clonedEl)
+  document.body.appendChild(printContainer)
+
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 300))
+
+    const dataUrl = await toPng(printContainer, {
+      pixelRatio: 3,
+      backgroundColor: "#ffffff",
+      style: { transform: "none" },
+    })
+
+    const link = document.createElement("a")
+    link.download = `${fileName}.png`
+    link.href = dataUrl
+    link.click()
+  } catch (err) {
+    console.error("图片导出失败:", err)
+  } finally {
     if (document.body.contains(printContainer)) {
       document.body.removeChild(printContainer)
     }

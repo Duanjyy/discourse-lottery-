@@ -5,7 +5,7 @@ import { useAppStore } from "@/state/store"
 import EditorToolbar from "@/features/editor/EditorToolbar"
 import EditorForm from "@/features/editor/EditorForm"
 import PreviewPane from "@/features/editor/PreviewPane"
-import { exportResumeToPdf } from "@/utils/exportPdf"
+import { exportResumeToPdf, exportResumeToImage } from "@/utils/exportPdf"
 import { buildResumeText } from "@/utils/exportText"
 
 export default function Editor() {
@@ -16,7 +16,7 @@ export default function Editor() {
   const resetSample = useAppStore((s) => s.resetSample)
   const clearStorage = useAppStore((s) => s.clearStorage)
   const previewRef = useRef<HTMLDivElement | null>(null)
-  const [busy, setBusy] = useState<null | "pdf" | "copy">(null)
+  const [busy, setBusy] = useState<null | "pdf" | "image" | "copy">(null)
 
   const pageTitle = useMemo(() => {
     const name = resume.basic.name.value.trim()
@@ -48,6 +48,15 @@ export default function Editor() {
                 setBusy("pdf")
                 try {
                   await exportResumeToPdf(previewRef.current, pageTitle)
+                } finally {
+                  setBusy(null)
+                }
+              }}
+              onExportImage={async () => {
+                if (!previewRef.current) return
+                setBusy("image")
+                try {
+                  await exportResumeToImage(previewRef.current, pageTitle)
                 } finally {
                   setBusy(null)
                 }
