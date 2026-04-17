@@ -29,7 +29,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#f3f4f6] flex flex-col items-center p-6 text-gray-800 font-sans">
       <div className="mt-12 mb-8 text-center">
         <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-600 drop-shadow-sm mb-2 tracking-wider">
-          消了个消
+          果泡消消乐
         </h1>
         <p className="text-gray-500 text-sm">极致简约的消除挑战</p>
       </div>
