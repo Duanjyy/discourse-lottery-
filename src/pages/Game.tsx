@@ -3,14 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/gameStore';
 import { Card } from '../components/Card';
 import { Slot } from '../components/Slot';
-import { ArrowLeft, RefreshCw, Lightbulb, Search, PlusSquare } from 'lucide-react';
+import { ArrowLeft, RefreshCw, Search, PlusSquare, Volume2, VolumeX } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { useAudio } from '../hooks/useAudio';
 
 export default function Game() {
   const navigate = useNavigate();
   const { 
     cards, slot, isGameOver, isWin, clickCard, props, useProp, resetGame, slotCapacity, getCoveredStatus, resetCount 
   } = useGameStore();
+
+  const { isMuted, toggleMute, playClick, playPop, playWin } = useAudio();
 
   const handleReset = () => {
     if (resetCount <= 0) {
@@ -27,15 +30,24 @@ export default function Game() {
 
   useEffect(() => {
     if (isWin) {
+      playWin();
       confetti({
         particleCount: 150,
         spread: 70,
         origin: { y: 0.6 }
       });
     }
-  }, [isWin]);
+  }, [isWin, playWin]);
 
   const idleCards = cards.filter(c => c.status === 'idle');
+
+  // Listen to state changes to play pop sound
+  useEffect(() => {
+    const hasEliminating = slot.some(c => c.isEliminating);
+    if (hasEliminating) {
+      playPop();
+    }
+  }, [slot, playPop]);
 
   // Compute board bounds to center the cards
   const boardWidth = 8 * 44;
@@ -53,6 +65,12 @@ export default function Game() {
         </button>
         <div className="font-bold text-gray-500">第 {useGameStore.getState().currentLevel} 关</div>
         <div className="flex gap-2">
+          <button 
+            onClick={toggleMute}
+            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 active:scale-95 transition-transform text-gray-700"
+          >
+            {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+          </button>
           <button 
             onClick={handleReset}
             className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 active:scale-95 transition-transform text-gray-700 relative"
@@ -76,7 +94,10 @@ export default function Game() {
               key={card.id}
               card={card}
               isCovered={coveredStatus[card.id]}
-              onClick={() => clickCard(card.id)}
+              onClick={() => {
+                playClick();
+                clickCard(card.id);
+              }}
             />
           ))}
         </div>
