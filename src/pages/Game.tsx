@@ -9,8 +9,19 @@ import confetti from 'canvas-confetti';
 export default function Game() {
   const navigate = useNavigate();
   const { 
-    cards, slot, isGameOver, isWin, clickCard, props, useProp, resetGame, slotCapacity, getCoveredStatus 
+    cards, slot, isGameOver, isWin, clickCard, props, useProp, resetGame, slotCapacity, getCoveredStatus, resetCount 
   } = useGameStore();
+
+  const handleReset = () => {
+    if (resetCount <= 0) {
+      alert("本局重置次数已用完！");
+      return;
+    }
+    const success = resetGame();
+    if (!success) {
+      alert("本局重置次数已用完！");
+    }
+  };
 
   const coveredStatus = useMemo(() => getCoveredStatus(), [cards, getCoveredStatus]);
 
@@ -42,10 +53,13 @@ export default function Game() {
         </button>
         <div className="flex gap-2">
           <button 
-            onClick={resetGame}
-            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 active:scale-95 transition-transform text-gray-700"
+            onClick={handleReset}
+            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 active:scale-95 transition-transform text-gray-700 relative"
           >
             <RefreshCw size={18} />
+            <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white">
+              {resetCount}
+            </div>
           </button>
         </div>
       </header>
@@ -109,10 +123,10 @@ export default function Game() {
             <h2 className="text-2xl font-black text-gray-800 mb-2">闯关失败</h2>
             <p className="text-gray-500 mb-8">卡槽已满，再试一次吧！</p>
             <button 
-              onClick={resetGame}
+              onClick={handleReset}
               className="bg-green-500 text-white px-8 py-3 rounded-full font-bold text-lg w-full shadow-lg shadow-green-500/30 hover:bg-green-600 active:scale-95 transition-all"
             >
-              重新开始
+              重新开始 ({resetCount}次)
             </button>
             <button 
               onClick={() => navigate('/')}

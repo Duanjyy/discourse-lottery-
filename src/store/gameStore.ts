@@ -73,11 +73,12 @@ export interface GameState {
   points: number;
   unlockedPatterns: string[];
   unlockedSkins: string[];
+  resetCount: number;
 
-  initGame: (level: number) => void;
+  initGame: (level: number, keepResetCount?: boolean) => void;
   clickCard: (id: string) => void;
   useProp: (propType: 'remove' | 'hint' | 'shuffle' | 'expand') => void;
-  resetGame: () => void;
+  resetGame: () => boolean;
   getCoveredStatus: () => Record<string, boolean>;
   removeEliminatedFromSlot: (type: string) => void;
   checkWinLose: () => void;
@@ -107,8 +108,9 @@ export const useGameStore = create<GameState>()(
       points: 0,
       unlockedPatterns: ['🍎'],
       unlockedSkins: ['default'],
+      resetCount: 3,
 
-      initGame: (level: number) => {
+      initGame: (level: number, keepResetCount: boolean = false) => {
         let numCards = 30;
         let maxLayer = 2;
         let typesCount = 5;
@@ -145,20 +147,21 @@ export const useGameStore = create<GameState>()(
           status: 'idle',
         }));
 
-        set({
+        set((state) => ({
           currentLevel: level,
           cards,
           slot: [],
           isGameOver: false,
           isWin: false,
           slotCapacity,
+          resetCount: keepResetCount ? state.resetCount : 3,
           props: {
             remove: 1,
             hint: 2,
             shuffle: 1,
             expand: 1,
           },
-        });
+        }));
       },
 
       removeEliminatedFromSlot: (type: string) => {
@@ -331,7 +334,12 @@ export const useGameStore = create<GameState>()(
 
       resetGame: () => {
         const state = get();
-        state.initGame(state.currentLevel);
+        if (state.resetCount <= 0) return false;
+        
+        set({ resetCount: state.resetCount - 1 });
+        state.initGame(state.currentLevel, true);
+        
+        return true;
       }
     }),
     {
