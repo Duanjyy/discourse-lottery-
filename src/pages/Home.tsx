@@ -34,11 +34,6 @@ export default function Home() {
         </div>
         <div className="w-px bg-gray-200" />
         <div className="flex flex-col items-center">
-          <span className="text-xl font-bold text-blue-500">{points}</span>
-          <span className="text-xs text-gray-400">积分</span>
-        </div>
-        <div className="w-px bg-gray-200" />
-        <div className="flex flex-col items-center">
           <span className="text-xl font-bold text-purple-500">
             {normalCleared + hardCleared + eliteCleared}
           </span>
@@ -77,14 +72,6 @@ export default function Home() {
           </div>
         </button>
       </div>
-
-      <button 
-        onClick={() => navigate('/collection')}
-        className="mt-8 w-full max-w-sm bg-gray-800 text-white rounded-2xl p-4 flex items-center justify-center gap-2 hover:bg-gray-700 active:scale-95 transition-all font-bold"
-      >
-        <BookOpen size={20} />
-        查看图鉴与成就
-      </button>
     </div>
   );
 }
