@@ -111,20 +111,25 @@ export const useGameStore = create<GameState>()(
       resetCount: 3,
 
       initGame: (level: number, keepResetCount: boolean = false) => {
+        // Base parameters
         let numCards = 30;
         let maxLayer = 2;
         let typesCount = 5;
         let slotCapacity = 7;
 
-        if (level === 2) {
-          numCards = 90;
-          maxLayer = 4;
-          typesCount = 10;
-        } else if (level === 3) {
-          numCards = 150;
-          maxLayer = 7;
-          typesCount = 15;
-          slotCapacity = 6; // 精英关卡更难
+        // Dynamic difficulty calculation based on level (1-50)
+        // Ensure numCards is always a multiple of 3
+        const calculatedCards = 30 + Math.floor((level - 1) * 3.5) * 3;
+        numCards = Math.min(calculatedCards, 180); // Cap at 180 cards
+        
+        maxLayer = 2 + Math.floor(level / 10);
+        maxLayer = Math.min(maxLayer, 7); // Cap at layer 7
+
+        typesCount = 5 + Math.floor(level / 5);
+        typesCount = Math.min(typesCount, 18); // Cap at max available types
+
+        if (level >= 30) {
+          slotCapacity = 6; // Harder after level 30
         }
 
         const positions = shuffle(getPyramidPositions(maxLayer)).slice(0, numCards);
@@ -182,9 +187,16 @@ export const useGameStore = create<GameState>()(
           const isGameOver = !isWin && activeSlot.length >= state.slotCapacity;
 
           if (isWin) {
-            if (state.currentLevel === 1) return { isWin, normalCleared: state.normalCleared + 1, fragments: state.fragments + 10 };
-            if (state.currentLevel === 2) return { isWin, hardCleared: state.hardCleared + 1, points: state.points + 20 };
-            if (state.currentLevel === 3) return { isWin, eliteCleared: state.eliteCleared + 1, points: state.points + 50, fragments: state.fragments + 30 };
+            // General rewards based on level difficulty
+            const basePoints = 10 + Math.floor(state.currentLevel * 2.5);
+            const baseFragments = 5 + Math.floor(state.currentLevel * 1.5);
+            
+            return { 
+              isWin, 
+              normalCleared: state.normalCleared + 1, 
+              points: state.points + basePoints,
+              fragments: state.fragments + baseFragments
+            };
           }
           if (isGameOver) {
             return { isGameOver };

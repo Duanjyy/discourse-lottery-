@@ -42,7 +42,7 @@ export default function Home() {
 
       <div className="w-full max-w-sm flex flex-col gap-4">
         <button 
-          onClick={() => handleStart(1)}
+          onClick={() => handleStart(Math.max(1, normalCleared + 1))}
           className="relative overflow-hidden group bg-white border-2 border-green-500 rounded-2xl p-4 flex items-center justify-between hover:bg-green-50 transition-colors active:scale-95"
         >
           <div className="flex items-center gap-3">
@@ -50,48 +50,10 @@ export default function Home() {
               <Play size={20} className="ml-1" />
             </div>
             <div className="text-left">
-              <h2 className="text-lg font-bold text-gray-800">普通关卡</h2>
-              <p className="text-xs text-gray-500">适合新手入门，轻松消除</p>
+              <h2 className="text-lg font-bold text-gray-800">开始闯关</h2>
+              <p className="text-xs text-gray-500">当前进度：第 {Math.max(1, normalCleared + 1)} 关 (共50关)</p>
             </div>
           </div>
-        </button>
-
-        <button 
-          onClick={() => handleStart(2)}
-          disabled={normalCleared < 10}
-          className="relative overflow-hidden group bg-white border-2 border-amber-500 rounded-2xl p-4 flex items-center justify-between hover:bg-amber-50 transition-colors active:scale-95 disabled:opacity-60 disabled:bg-gray-100 disabled:border-gray-300 disabled:cursor-not-allowed"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
-              <Star size={20} />
-            </div>
-            <div className="text-left">
-              <h2 className="text-lg font-bold text-gray-800">困难关卡</h2>
-              <p className="text-xs text-gray-500">需通关10次普通关卡解锁</p>
-            </div>
-          </div>
-          {normalCleared < 10 && (
-            <div className="text-xs font-bold text-gray-400">{normalCleared}/10</div>
-          )}
-        </button>
-
-        <button 
-          onClick={() => handleStart(3)}
-          disabled={normalCleared < 20}
-          className="relative overflow-hidden group bg-white border-2 border-purple-500 rounded-2xl p-4 flex items-center justify-between hover:bg-purple-50 transition-colors active:scale-95 disabled:opacity-60 disabled:bg-gray-100 disabled:border-gray-300 disabled:cursor-not-allowed"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
-              <Trophy size={20} />
-            </div>
-            <div className="text-left">
-              <h2 className="text-lg font-bold text-gray-800">精英关卡</h2>
-              <p className="text-xs text-gray-500">需通关20次普通关卡解锁</p>
-            </div>
-          </div>
-          {normalCleared < 20 && (
-            <div className="text-xs font-bold text-gray-400">{normalCleared}/20</div>
-          )}
         </button>
       </div>
 

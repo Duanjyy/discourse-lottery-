@@ -51,6 +51,7 @@ export default function Game() {
         >
           <ArrowLeft size={20} />
         </button>
+        <div className="font-bold text-gray-500">第 {useGameStore.getState().currentLevel} 关</div>
         <div className="flex gap-2">
           <button 
             onClick={handleReset}
@@ -142,14 +143,30 @@ export default function Game() {
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center animate-in fade-in duration-300">
           <div className="bg-white p-8 rounded-3xl shadow-2xl flex flex-col items-center text-center animate-in zoom-in-95 duration-300">
             <div className="text-6xl mb-4">🎉</div>
-            <h2 className="text-2xl font-black text-gray-800 mb-2">通关成功！</h2>
+            <h2 className="text-2xl font-black text-gray-800 mb-2">第 {useGameStore.getState().currentLevel} 关 通关成功！</h2>
             <p className="text-gray-500 mb-8">恭喜你清空了所有卡牌</p>
-            <button 
-              onClick={() => navigate('/')}
-              className="bg-amber-500 text-white px-8 py-3 rounded-full font-bold text-lg w-full shadow-lg shadow-amber-500/30 hover:bg-amber-600 active:scale-95 transition-all"
-            >
-              返回首页
-            </button>
+            <div className="flex gap-4 w-full">
+              <button 
+                onClick={() => navigate('/')}
+                className="flex-1 bg-gray-200 text-gray-700 px-4 py-3 rounded-full font-bold shadow-sm hover:bg-gray-300 active:scale-95 transition-all"
+              >
+                返回首页
+              </button>
+              <button 
+                onClick={() => {
+                  const nextLevel = useGameStore.getState().currentLevel + 1;
+                  if (nextLevel > 50) {
+                    alert("恭喜你，已经通关所有50关！");
+                    navigate('/');
+                  } else {
+                    useGameStore.getState().initGame(nextLevel);
+                  }
+                }}
+                className="flex-1 bg-amber-500 text-white px-4 py-3 rounded-full font-bold shadow-lg shadow-amber-500/30 hover:bg-amber-600 active:scale-95 transition-all"
+              >
+                下一关
+              </button>
+            </div>
           </div>
         </div>
       )}
