@@ -27,17 +27,19 @@ export default function Home() {
         <p className="text-gray-500 text-sm">极致简约的消除挑战</p>
       </div>
 
-      <div className="flex gap-4 mb-8 bg-white p-4 rounded-2xl shadow-sm w-full max-w-sm justify-around">
-        <div className="flex flex-col items-center">
-          <span className="text-xl font-bold text-amber-500">{fragments}</span>
-          <span className="text-xs text-gray-400">碎片</span>
+      <div className="flex gap-4 mb-10 w-full max-w-sm">
+        <div className="flex-1 bg-white p-5 rounded-[1.25rem] shadow-sm flex flex-col items-center justify-center border border-gray-100 relative overflow-hidden group hover:shadow-md transition-all">
+          <div className="absolute top-0 right-0 w-16 h-16 bg-amber-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110" />
+          <span className="text-3xl font-black text-amber-500 mb-1">{fragments}</span>
+          <span className="text-xs font-bold tracking-widest text-gray-400">碎片</span>
         </div>
-        <div className="w-px bg-gray-200" />
-        <div className="flex flex-col items-center">
-          <span className="text-xl font-bold text-purple-500">
+        
+        <div className="flex-1 bg-white p-5 rounded-[1.25rem] shadow-sm flex flex-col items-center justify-center border border-gray-100 relative overflow-hidden group hover:shadow-md transition-all">
+          <div className="absolute top-0 right-0 w-16 h-16 bg-purple-50 rounded-bl-full -z-10 transition-transform group-hover:scale-110" />
+          <span className="text-3xl font-black text-purple-500 mb-1">
             {normalCleared + hardCleared + eliteCleared}
           </span>
-          <span className="text-xs text-gray-400">通关数</span>
+          <span className="text-xs font-bold tracking-widest text-gray-400">通关数</span>
         </div>
       </div>
 
