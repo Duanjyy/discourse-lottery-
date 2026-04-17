@@ -11,11 +11,11 @@ interface AudioContextType {
 
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
-// Using high-quality sound sprites from mixkit
-const BGM_URL = 'https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3';
-const CLICK_URL = 'https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3';
-const POP_URL = 'https://assets.mixkit.co/active_storage/sfx/2578/2578-preview.mp3';
-const WIN_URL = 'https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3';
+// Using local audio files
+const BGM_URL = '/sounds/bgm.mp3';
+const CLICK_URL = '/sounds/click.mp3';
+const POP_URL = '/sounds/pop.mp3';
+const WIN_URL = '/sounds/win.mp3';
 
 export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isMuted, setIsMuted] = useState(() => {
