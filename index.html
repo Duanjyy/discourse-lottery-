@@ -1,0 +1,2284 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>人生重开模拟器 V2.0</title>
+    <style>
+      :root{
+        --bg0:#07080a;
+        --bg1:#0c0f14;
+        --panel:rgba(18,22,28,.62);
+        --panel2:rgba(18,22,28,.84);
+        --stroke:rgba(255,255,255,.12);
+        --stroke2:rgba(255,255,255,.18);
+        --text:rgba(255,255,255,.92);
+        --muted:rgba(255,255,255,.64);
+        --muted2:rgba(255,255,255,.46);
+        --shadow:0 20px 80px rgba(0,0,0,.55);
+        --shadow2:0 10px 40px rgba(0,0,0,.45);
+        --blue:#5aa7ff;
+        --purple:#b38cff;
+        --orange:#ffb25a;
+        --danger:#ff4a4a;
+        --ok:#57f0b2;
+        --warn:#ffde63;
+        --radius:18px;
+        --radius2:14px;
+        --fontDisplay: ui-serif, "STSong", "Songti SC", serif;
+        --fontBody: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+        --fontMono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      body{
+        margin:0;
+        background: radial-gradient(1200px 800px at 18% 0%, rgba(120,90,255,.14), transparent 60%),
+          radial-gradient(1000px 900px at 80% 20%, rgba(90,200,255,.12), transparent 58%),
+          radial-gradient(900px 700px at 56% 96%, rgba(255,170,90,.09), transparent 60%),
+          linear-gradient(180deg, var(--bg0), var(--bg1));
+        color:var(--text);
+        font-family: var(--fontBody);
+        overflow:hidden;
+      }
+
+      #noise{
+        position:fixed;
+        inset:0;
+        width:100%;
+        height:100%;
+        opacity:.22;
+        mix-blend-mode: overlay;
+        pointer-events:none;
+        z-index:1;
+      }
+
+      .blobLayer{
+        position:fixed;
+        inset:-30vh -30vw;
+        z-index:0;
+        pointer-events:none;
+        filter: blur(18px) saturate(1.2);
+      }
+      .blobLayer::before,
+      .blobLayer::after{
+        content:"";
+        position:absolute;
+        width:min(82vw, 880px);
+        height:min(82vw, 880px);
+        border-radius: 60% 40% 38% 62% / 44% 52% 48% 56%;
+        background:
+          radial-gradient(circle at 30% 28%, rgba(90,180,255,.22), transparent 62%),
+          radial-gradient(circle at 64% 70%, rgba(180,120,255,.19), transparent 62%),
+          radial-gradient(circle at 40% 64%, rgba(255,170,90,.12), transparent 66%);
+        animation: floatA 16s ease-in-out infinite;
+        opacity:.95;
+      }
+      .blobLayer::after{
+        left:54%;
+        top:40%;
+        width:min(72vw, 760px);
+        height:min(72vw, 760px);
+        border-radius: 42% 58% 62% 38% / 54% 44% 56% 46%;
+        background:
+          radial-gradient(circle at 40% 26%, rgba(255,170,90,.14), transparent 66%),
+          radial-gradient(circle at 64% 74%, rgba(90,180,255,.16), transparent 60%),
+          radial-gradient(circle at 46% 58%, rgba(180,120,255,.12), transparent 62%);
+        animation: floatB 20s ease-in-out infinite;
+        opacity:.85;
+      }
+      @keyframes floatA{
+        0%{transform:translate(10%,6%) rotate(0deg) scale(1)}
+        40%{transform:translate(28%,14%) rotate(10deg) scale(1.05)}
+        70%{transform:translate(18%,22%) rotate(-6deg) scale(0.98)}
+        100%{transform:translate(10%,6%) rotate(0deg) scale(1)}
+      }
+      @keyframes floatB{
+        0%{transform:translate(-10%,-6%) rotate(0deg) scale(1)}
+        45%{transform:translate(-26%,-18%) rotate(-10deg) scale(1.06)}
+        75%{transform:translate(-18%,-8%) rotate(8deg) scale(0.97)}
+        100%{transform:translate(-10%,-6%) rotate(0deg) scale(1)}
+      }
+
+      .app{
+        position:relative;
+        height:100%;
+        z-index:2;
+        display:flex;
+        flex-direction:column;
+      }
+
+      .topbar{
+        position:sticky;
+        top:0;
+        z-index:30;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        background: linear-gradient(180deg, rgba(8,10,14,.68), rgba(10,12,18,.32));
+        border-bottom: 1px solid rgba(255,255,255,.06);
+        padding: calc(14px + env(safe-area-inset-top)) 16px 12px;
+      }
+      .topbarInner{
+        max-width: 980px;
+        margin: 0 auto;
+        display:flex;
+        align-items:center;
+        gap:12px;
+      }
+      .brand{
+        display:flex;
+        flex-direction:column;
+        line-height:1.05;
+        gap:4px;
+      }
+      .brand .title{
+        font-family: var(--fontDisplay);
+        letter-spacing:.08em;
+        font-size: 14px;
+        color: rgba(255,255,255,.78);
+      }
+      .brand .subtitle{
+        font-size: 11px;
+        color: rgba(255,255,255,.42);
+      }
+      .statusbar{
+        margin-left:auto;
+        display:flex;
+        align-items:center;
+        gap:10px;
+      }
+      .chip{
+        display:flex;
+        align-items:center;
+        gap:8px;
+        padding: 8px 10px;
+        border: 1px solid rgba(255,255,255,.10);
+        background: rgba(10,12,18,.35);
+        border-radius: 999px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      }
+      .chip .k{
+        font-size: 11px;
+        color: rgba(255,255,255,.55);
+      }
+      .chip .v{
+        font-family: var(--fontMono);
+        font-size: 12px;
+        letter-spacing:.02em;
+        color: rgba(255,255,255,.90);
+      }
+      .chipBar{
+        width:72px;
+        height:6px;
+        border-radius: 999px;
+        overflow:hidden;
+        background: rgba(255,255,255,.10);
+      }
+      .chipBar > i{
+        display:block;
+        height:100%;
+        width:0%;
+        border-radius:999px;
+        background: linear-gradient(90deg, rgba(90,200,255,.95), rgba(90,255,180,.9));
+      }
+      .chipBar.happy > i{
+        background: linear-gradient(90deg, rgba(255,210,90,.95), rgba(255,140,90,.92));
+      }
+
+      .main{
+        flex:1;
+        overflow:hidden;
+        display:flex;
+        flex-direction:column;
+      }
+
+      .stage{
+        flex:1;
+        overflow:hidden;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding: 28px 16px calc(28px + env(safe-area-inset-bottom));
+      }
+
+      .panel{
+        width:min(960px, 100%);
+        border-radius: var(--radius);
+        border: 1px solid rgba(255,255,255,.10);
+        background: linear-gradient(180deg, rgba(18,22,28,.70), rgba(12,14,18,.52));
+        box-shadow: var(--shadow);
+        overflow:hidden;
+        position:relative;
+      }
+      .panel::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:
+          radial-gradient(700px 340px at 14% 8%, rgba(90,200,255,.12), transparent 60%),
+          radial-gradient(680px 420px at 88% 14%, rgba(180,120,255,.11), transparent 58%),
+          radial-gradient(680px 520px at 56% 104%, rgba(255,170,90,.08), transparent 60%);
+        pointer-events:none;
+      }
+      .panelInner{
+        position:relative;
+        padding: 26px 22px 22px;
+      }
+      .panelHeader{
+        display:flex;
+        align-items:flex-end;
+        justify-content:space-between;
+        gap:16px;
+        margin-bottom: 16px;
+      }
+      .hTitle{
+        font-family: var(--fontDisplay);
+        font-size: 26px;
+        letter-spacing:.08em;
+        margin:0;
+      }
+      .hMeta{
+        font-size: 12px;
+        color: rgba(255,255,255,.50);
+      }
+      .hr{
+        height:1px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+        margin: 12px 0 18px;
+      }
+
+      .btnRow{
+        display:flex;
+        gap:12px;
+        flex-wrap:wrap;
+        align-items:center;
+        justify-content:flex-end;
+      }
+      .btn{
+        appearance:none;
+        border:none;
+        cursor:pointer;
+        padding: 12px 16px;
+        border-radius: 999px;
+        font-weight: 700;
+        letter-spacing:.02em;
+        color: rgba(255,255,255,.92);
+        background: rgba(255,255,255,.10);
+        border: 1px solid rgba(255,255,255,.14);
+        box-shadow: 0 14px 40px rgba(0,0,0,.35);
+        transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
+      }
+      .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.20)}
+      .btn:active{transform: translateY(0px) scale(.99); box-shadow: 0 10px 30px rgba(0,0,0,.28)}
+      .btn[disabled]{opacity:.45; cursor:not-allowed; transform:none}
+
+      .btnPrimary{
+        position:relative;
+        background: linear-gradient(180deg, rgba(90,200,255,.22), rgba(180,120,255,.16));
+        border-color: rgba(140,200,255,.22);
+      }
+      .btnPrimary::before{
+        content:"";
+        position:absolute;
+        inset:-1px;
+        border-radius:999px;
+        background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.25), rgba(255,255,255,0));
+        transform: translateX(-130%);
+        animation: shimmer 1.9s ease-in-out infinite;
+        pointer-events:none;
+        opacity:.7;
+      }
+      @keyframes shimmer{
+        0%{transform: translateX(-130%)}
+        55%{transform: translateX(130%)}
+        100%{transform: translateX(130%)}
+      }
+
+      .btnDanger{
+        background: rgba(255,74,74,.14);
+        border-color: rgba(255,74,74,.28);
+      }
+
+      .grid2{
+        display:grid;
+        grid-template-columns: 1.1fr .9fr;
+        gap: 18px;
+        align-items:start;
+      }
+      @media (max-width: 860px){
+        .grid2{grid-template-columns: 1fr}
+      }
+
+      .cardGrid{
+        display:grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      @media (max-width: 640px){
+        .cardGrid{grid-template-columns: 1fr}
+      }
+      .card{
+        appearance:none;
+        text-align:left;
+        width:100%;
+        border-radius: var(--radius2);
+        border: 1px solid rgba(255,255,255,.10);
+        background: rgba(10,12,18,.38);
+        padding: 14px 14px 12px;
+        box-shadow: var(--shadow2);
+        transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      }
+      .card:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.16); background: rgba(12,14,20,.46)}
+      .card.selected{
+        border-color: rgba(90,200,255,.36);
+        box-shadow: 0 24px 80px rgba(0,0,0,.62);
+        background: rgba(14,18,26,.60);
+      }
+      .cardTitleRow{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        margin-bottom: 8px;
+      }
+      .cardTitle{
+        font-weight: 800;
+        letter-spacing:.02em;
+        font-size: 14px;
+        margin:0;
+      }
+      .badge{
+        font-family: var(--fontMono);
+        font-size: 11px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,.14);
+        background: rgba(255,255,255,.08);
+        color: rgba(255,255,255,.76);
+      }
+      .badge.blue{border-color: rgba(90,167,255,.32); background: rgba(90,167,255,.10); color: rgba(180,220,255,.90)}
+      .badge.purple{border-color: rgba(179,140,255,.30); background: rgba(179,140,255,.10); color: rgba(220,205,255,.92)}
+      .badge.orange{border-color: rgba(255,178,90,.34); background: rgba(255,178,90,.11); color: rgba(255,230,200,.92); box-shadow: 0 0 0 1px rgba(255,178,90,.08), 0 0 24px rgba(255,178,90,.12)}
+      .cardDesc{
+        font-size: 12px;
+        color: rgba(255,255,255,.62);
+        line-height:1.55;
+      }
+
+      .hint{
+        font-size: 12px;
+        color: rgba(255,255,255,.52);
+        line-height:1.7;
+      }
+      .hint strong{color: rgba(255,255,255,.86)}
+
+      .difficultyList{display:flex; flex-direction:column; gap:10px}
+      .difficultyRow{
+        appearance:none;
+        text-align:left;
+        width:100%;
+        display:flex;
+        gap:12px;
+        align-items:flex-start;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.10);
+        background: rgba(10,12,18,.38);
+        cursor:pointer;
+        transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      }
+      .difficultyRow:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.18); background: rgba(12,14,20,.46)}
+      .difficultyRow.selected{border-color: rgba(180,120,255,.40); background: rgba(14,18,26,.62)}
+      .difficultyName{
+        min-width: 76px;
+        font-family: var(--fontDisplay);
+        letter-spacing:.08em;
+        font-size: 15px;
+        margin-top: 2px;
+      }
+      .difficultyMeta{
+        font-size: 12px;
+        color: rgba(255,255,255,.62);
+        line-height:1.55;
+      }
+      .kv{
+        margin-top: 6px;
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+      }
+      .kv span{
+        font-family: var(--fontMono);
+        font-size: 11px;
+        color: rgba(255,255,255,.72);
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.06);
+        border-radius: 999px;
+        padding: 4px 8px;
+      }
+
+      .attrGrid{
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+        margin-top: 8px;
+      }
+      .attrRow{
+        display:flex;
+        align-items:center;
+        gap:12px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.10);
+        background: rgba(10,12,18,.34);
+      }
+      .attrName{
+        width:72px;
+        font-weight: 800;
+        font-size: 13px;
+        letter-spacing:.02em;
+      }
+      .attrVal{
+        font-family: var(--fontMono);
+        width:56px;
+        text-align:center;
+        color: rgba(255,255,255,.90);
+      }
+      .attrSub{
+        font-size: 11px;
+        color: rgba(255,255,255,.50);
+        margin-left: -6px;
+        width:86px;
+      }
+      .attrCtrl{
+        margin-left:auto;
+        display:flex;
+        gap:8px;
+      }
+      .iconBtn{
+        width:38px;
+        height:32px;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,.14);
+        background: rgba(255,255,255,.08);
+        color: rgba(255,255,255,.90);
+        font-weight: 900;
+        cursor:pointer;
+        transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      }
+      .iconBtn:hover{transform: translateY(-1px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.20)}
+      .iconBtn:active{transform: translateY(0px) scale(.99)}
+      .iconBtn[disabled]{opacity:.35; cursor:not-allowed; transform:none}
+
+      .runShell{
+        width:min(980px, 100%);
+        height: calc(100vh - 70px);
+        max-height: 860px;
+        display:flex;
+        flex-direction:column;
+        border-radius: var(--radius);
+        border: 1px solid rgba(255,255,255,.10);
+        background: linear-gradient(180deg, rgba(18,22,28,.62), rgba(10,12,18,.44));
+        box-shadow: var(--shadow);
+        overflow:hidden;
+      }
+      .log{
+        flex:1;
+        overflow:auto;
+        padding: 18px 18px 110px;
+        scrollbar-width: none;
+      }
+      .log::-webkit-scrollbar{width:0; height:0}
+      .logItem{
+        padding: 12px 12px 10px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.08);
+        background: rgba(8,10,14,.34);
+        margin-bottom: 10px;
+        transform: translateY(4px);
+        opacity: 0;
+        animation: popIn .22s ease forwards;
+      }
+      @keyframes popIn{to{transform: translateY(0px); opacity:1}}
+      .logItem .y{
+        font-family: var(--fontMono);
+        font-size: 11px;
+        color: rgba(255,255,255,.46);
+        margin-bottom: 6px;
+      }
+      .logItem .t{
+        font-size: 13px;
+        line-height:1.65;
+        color: rgba(255,255,255,.84);
+        white-space: pre-wrap;
+      }
+      .logItem.highlight{border-color: rgba(255,255,255,.16); background: rgba(12,14,20,.45)}
+      .logItem.death{border-color: rgba(255,74,74,.30); background: rgba(255,74,74,.10)}
+      .logItem.death .t{color: rgba(255,160,160,.96); font-weight: 800}
+
+      .controls{
+        position:relative;
+        padding: 14px 16px calc(16px + env(safe-area-inset-bottom));
+        border-top: 1px solid rgba(255,255,255,.06);
+        background: rgba(10,12,18,.42);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+      }
+      .ctrlLeft{
+        display:flex;
+        align-items:center;
+        gap:10px;
+      }
+      .ctrlTag{
+        font-family: var(--fontMono);
+        font-size: 11px;
+        color: rgba(255,255,255,.62);
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.06);
+        border-radius: 999px;
+        padding: 6px 10px;
+      }
+      .ctrlRight{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        flex-wrap:wrap;
+        justify-content:flex-end;
+      }
+
+      .overlay{
+        position:fixed;
+        inset:0;
+        background: rgba(0,0,0,.55);
+        display:none;
+        align-items:center;
+        justify-content:center;
+        padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
+        z-index:50;
+      }
+      .overlay.show{display:flex}
+      .modal{
+        width:min(760px, 100%);
+        border-radius: var(--radius);
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(14,18,26,.82);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: var(--shadow);
+        overflow:hidden;
+      }
+      .modalInner{padding: 18px 18px 16px}
+      .modalTitle{
+        font-family: var(--fontDisplay);
+        letter-spacing:.08em;
+        margin:0 0 10px;
+        font-size: 18px;
+        color: rgba(255,255,255,.88);
+      }
+      .modalText{
+        font-size: 13px;
+        line-height:1.75;
+        color: rgba(255,255,255,.78);
+        white-space: pre-wrap;
+      }
+      .choiceRow{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        padding: 14px 18px 18px;
+        border-top: 1px solid rgba(255,255,255,.08);
+      }
+      .choiceBtn{
+        width:100%;
+        text-align:left;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.06);
+        color: rgba(255,255,255,.88);
+        cursor:pointer;
+        transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      }
+      .choiceBtn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18)}
+      .choiceBtn:active{transform: translateY(0px) scale(.995)}
+      .choiceBtn:disabled{opacity:.42; cursor:not-allowed; transform:none}
+
+      .homeHero{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+        padding: 30px 24px 24px;
+      }
+      .homeHero h1{
+        margin:0;
+        font-family: var(--fontDisplay);
+        letter-spacing:.12em;
+        font-size: clamp(28px, 5.2vw, 56px);
+        line-height:1.02;
+      }
+      .homeHero p{
+        margin:0;
+        font-size: 13px;
+        color: rgba(255,255,255,.62);
+        line-height:1.75;
+        max-width: 52ch;
+      }
+      .homeBadgeRow{
+        display:flex;
+        flex-wrap:wrap;
+        gap:10px;
+        margin-top: 6px;
+      }
+      .homeBadge{
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.06);
+        border-radius: 999px;
+        padding: 8px 10px;
+        font-size: 12px;
+        color: rgba(255,255,255,.70);
+      }
+
+      .summaryWrap{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        align-items:start;
+      }
+      @media (max-width: 760px){
+        .summaryWrap{grid-template-columns: 1fr}
+      }
+      .statBox{
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,.10);
+        background: rgba(10,12,18,.36);
+        padding: 14px 14px 12px;
+      }
+      .statBox h3{
+        margin:0 0 10px;
+        font-size: 13px;
+        letter-spacing:.02em;
+        color: rgba(255,255,255,.74);
+      }
+      .statRow{
+        display:flex;
+        align-items:baseline;
+        justify-content:space-between;
+        gap: 10px;
+        padding: 8px 0;
+        border-bottom: 1px dashed rgba(255,255,255,.10);
+      }
+      .statRow:last-child{border-bottom:none}
+      .statRow .k{font-size: 12px; color: rgba(255,255,255,.56)}
+      .statRow .v{font-family: var(--fontMono); font-size: 12px; color: rgba(255,255,255,.90)}
+
+      .epitaph{
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,.12);
+        background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+        padding: 16px 16px 14px;
+      }
+      .epitaph .big{
+        font-family: var(--fontDisplay);
+        letter-spacing:.10em;
+        font-size: 18px;
+        line-height:1.35;
+        margin: 0 0 10px;
+        color: rgba(255,255,255,.92);
+      }
+      .epitaph .small{
+        margin:0;
+        font-size: 12px;
+        line-height:1.75;
+        color: rgba(255,255,255,.62);
+        white-space: pre-wrap;
+      }
+
+      .hidden{display:none !important}
+    </style>
+  </head>
+  <body>
+    <div class="blobLayer"></div>
+    <canvas id="noise"></canvas>
+
+    <div class="app" id="app">
+      <div class="topbar">
+        <div class="topbarInner">
+          <div class="brand">
+            <div class="title">人生重开模拟器</div>
+            <div class="subtitle" id="topSubtitle">V2.0 · 纯前端 · 单文件</div>
+          </div>
+          <div class="statusbar" id="statusbar"></div>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="stage" id="stageHome">
+          <div class="panel">
+            <div class="panelInner">
+              <div class="homeHero">
+                <h1>重开一次，<br />你会活成谁？</h1>
+                <p>抽天赋、分属性、走剧情链。每一年都可能是转机，也可能是社畜的最后一行日志。</p>
+                <div class="homeBadgeRow">
+                  <div class="homeBadge">高随机</div>
+                  <div class="homeBadge">有主线</div>
+                  <div class="homeBadge">可自动播放</div>
+                  <div class="homeBadge">墓志铭结算</div>
+                </div>
+              </div>
+              <div class="hr"></div>
+              <div class="btnRow">
+                <button class="btn btnPrimary" id="btnStart">立即重开</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage hidden" id="stageDifficulty">
+          <div class="panel">
+            <div class="panelInner">
+              <div class="panelHeader">
+                <div>
+                  <h2 class="hTitle">选择难度</h2>
+                  <div class="hMeta">不同难度会影响可分配点数、初始资金与健康衰减方式。</div>
+                </div>
+                <div class="hMeta" id="difficultyPickHint"></div>
+              </div>
+              <div class="grid2">
+                <div>
+                  <div class="difficultyList" id="difficultyList"></div>
+                </div>
+                <div>
+                  <div class="hint" id="difficultyExplain"></div>
+                  <div class="hr"></div>
+                  <div class="btnRow">
+                    <button class="btn" id="btnBackHome1">返回</button>
+                    <button class="btn btnPrimary" id="btnToTalent" disabled>进入天赋抽取</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage hidden" id="stageTalent">
+          <div class="panel">
+            <div class="panelInner">
+              <div class="panelHeader">
+                <div>
+                  <h2 class="hTitle">抽取天赋</h2>
+                  <div class="hMeta">随机抽 10 个，必须选择 3 个。橙色更亮，但人生也更难说。</div>
+                </div>
+                <div class="hMeta" id="talentPickHint"></div>
+              </div>
+              <div class="grid2">
+                <div>
+                  <div class="cardGrid" id="talentGrid"></div>
+                </div>
+                <div>
+                  <div class="hint">
+                    <div><strong>稀有度</strong>：蓝（普通）/ 紫（稀有）/ 橙（传说）。</div>
+                    <div><strong>提示</strong>：部分天赋会解锁隐藏剧情标记（职业线、梗事件、离谱结局）。</div>
+                  </div>
+                  <div class="hr"></div>
+                  <div class="btnRow">
+                    <button class="btn" id="btnBackHome2">返回</button>
+                    <button class="btn" id="btnRerollTalent">刷新 10 个</button>
+                    <button class="btn btnPrimary" id="btnToAttrs" disabled>确认选择（0/3）</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage hidden" id="stageAttrs">
+          <div class="panel">
+            <div class="panelInner">
+              <div class="panelHeader">
+                <div>
+                  <h2 class="hTitle">分配属性</h2>
+                  <div class="hMeta">颜值/智力/体质/家境。点数分完才能开始新人生。</div>
+                </div>
+                <div class="hMeta" id="attrHint"></div>
+              </div>
+              <div class="grid2">
+                <div>
+                  <div class="attrGrid" id="attrGrid"></div>
+                </div>
+                <div>
+                  <div class="hint" id="attrExplain"></div>
+                  <div class="hr"></div>
+                  <div class="btnRow">
+                    <button class="btn" id="btnBackTalent">返回</button>
+                    <button class="btn" id="btnRandomAttrs">一键随机</button>
+                    <button class="btn btnPrimary" id="btnBeginLife" disabled>开始新人生</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage hidden" id="stageRun">
+          <div class="runShell">
+            <div class="log" id="log"></div>
+            <div class="controls">
+              <div class="ctrlLeft">
+                <div class="ctrlTag" id="ctrlAge">Age</div>
+                <div class="ctrlTag" id="ctrlCareer">Line</div>
+              </div>
+              <div class="ctrlRight">
+                <button class="btn" id="btnToggleAuto">自动播放：关</button>
+                <button class="btn btnPrimary" id="btnNextYear">下一年</button>
+                <button class="btn btnDanger hidden" id="btnViewSummary">查看结局</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage hidden" id="stageSummary">
+          <div class="panel">
+            <div class="panelInner">
+              <div class="panelHeader">
+                <div>
+                  <h2 class="hTitle">结局结算</h2>
+                  <div class="hMeta" id="summaryMeta"></div>
+                </div>
+                <div class="hMeta" id="summaryMeta2"></div>
+              </div>
+              <div class="summaryWrap">
+                <div class="statBox">
+                  <h3>人生统计</h3>
+                  <div id="summaryStats"></div>
+                </div>
+                <div class="epitaph">
+                  <div class="big" id="epitaphBig"></div>
+                  <p class="small" id="epitaphSmall"></p>
+                </div>
+              </div>
+              <div class="hr"></div>
+              <div class="btnRow">
+                <button class="btn" id="btnReplay">再次重开</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+      <div class="modal">
+        <div class="modalInner">
+          <h3 class="modalTitle" id="modalTitle"></h3>
+          <div class="modalText" id="modalText"></div>
+        </div>
+        <div class="choiceRow" id="choiceRow"></div>
+      </div>
+    </div>
+
+    <script>
+      ;(() => {
+        const $ = (id) => document.getElementById(id)
+
+        const stageNodes = {
+          home: $("stageHome"),
+          difficulty: $("stageDifficulty"),
+          talent: $("stageTalent"),
+          attrs: $("stageAttrs"),
+          run: $("stageRun"),
+          summary: $("stageSummary"),
+        }
+
+        const difficulties = [
+          {
+            id: "easy",
+            name: "简单",
+            points: 26,
+            money: 20000,
+            decayMultiplier: 0.85,
+            immuneChance: 0.5,
+            extraPenaltyAge: 999,
+            extraPenaltyChance: 0,
+            extraPenalty: 0,
+            blurb: "点多钱多，50% 概率免疫老年自然掉血。",
+          },
+          {
+            id: "normal",
+            name: "普通",
+            points: 20,
+            money: 10000,
+            decayMultiplier: 1,
+            immuneChance: 0,
+            extraPenaltyAge: 999,
+            extraPenaltyChance: 0,
+            extraPenalty: 0,
+            blurb: "标准开局，人生按部就班，痛苦也标准化。",
+          },
+          {
+            id: "hard",
+            name: "困难",
+            points: 16,
+            money: 6000,
+            decayMultiplier: 1.18,
+            immuneChance: 0,
+            extraPenaltyAge: 52,
+            extraPenaltyChance: 0.22,
+            extraPenalty: 4,
+            blurb: "点少钱少，中老年偶发额外扣健康。",
+          },
+          {
+            id: "hell",
+            name: "地狱",
+            points: 12,
+            money: 3000,
+            decayMultiplier: 1.4,
+            immuneChance: 0,
+            extraPenaltyAge: 45,
+            extraPenaltyChance: 0.48,
+            extraPenalty: 6,
+            blurb: "极少点数，身家寒酸，健康像 KPI 一样被扣。",
+          },
+        ]
+
+        const talentPool = [
+          { id: "t_look", name: "镜头偏爱", rarity: "blue", desc: "颜值 +1。人群中更容易被看见。", add: { face: 1 } },
+          { id: "t_brain", name: "脑回路清奇", rarity: "blue", desc: "智力 +1。思考多一步，痛苦多一倍。", add: { iq: 1 } },
+          { id: "t_body", name: "天生硬朗", rarity: "blue", desc: "体质 +1。加班也能多扛一阵。", add: { body: 1 } },
+          { id: "t_family", name: "家里不太穷", rarity: "blue", desc: "家境 +1。至少不用一毕业就背房贷。", add: { family: 1 } },
+          { id: "t_keyboard", name: "键盘侠", rarity: "blue", desc: "快乐 +8。吵架赢了，人生也赢了。", add: { happy: 8 }, flags: ["keyboard"] },
+          { id: "t_meme", name: "热梗体质", rarity: "blue", desc: "快乐 +6。你走到哪都像在写段子。", add: { happy: 6 }, flags: ["meme"] },
+          { id: "t_hair", name: "发际线保卫者", rarity: "purple", desc: "体质 +1，程序员线掉发事件负面降低。", add: { body: 1 }, flags: ["hairGuard"] },
+          { id: "t_oss", name: "开源信徒", rarity: "purple", desc: "智力 +1。更容易走上程序员线。", add: { iq: 1 }, flags: ["devUnlocked"] },
+          { id: "t_ops", name: "营销鬼才", rarity: "purple", desc: "智力 +1。更容易走上运营线。", add: { iq: 1 }, flags: ["opsUnlocked"] },
+          { id: "t_persuade", name: "语言魔法", rarity: "purple", desc: "颜值 +1，快乐 +4。表白成功率提升。", add: { face: 1, happy: 4 }, flags: ["rizz"] },
+          { id: "t_fund", name: "理财入门", rarity: "purple", desc: "初始资金 +6000。你开始认真对待钱。", add: { money: 6000 }, flags: ["finance"] },
+          { id: "t_trae", name: "Trae 开发者", rarity: "orange", desc: "智力 +3，家境 +1，初始资金 +12000。写代码如写诗。", add: { iq: 3, family: 1, money: 12000 }, flags: ["traeDev", "devUnlocked"] },
+          { id: "t_mine", name: "家里有矿", rarity: "orange", desc: "家境 +3，初始资金 +30000。你只是在体验生活。", add: { family: 3, money: 30000 }, flags: ["rich"] },
+          { id: "t_psy", name: "异能者", rarity: "orange", desc: "体质 +3，健康 +18。离谱事件更常见。", add: { body: 3, health: 18 }, flags: ["psychic"] },
+          { id: "t_destiny", name: "剧情主角", rarity: "orange", desc: "快乐 +12。主线事件更容易出现。", add: { happy: 12 }, flags: ["protagonist"] },
+          { id: "t_cultivate", name: "修仙起手", rarity: "purple", desc: "智力 +1。解锁修仙事件池。", add: { iq: 1 }, flags: ["cultivate"] },
+          { id: "t_noSleep", name: "睡眠削弱", rarity: "blue", desc: "健康 +6。年轻时你觉得自己无敌。", add: { health: 6 }, flags: ["nosleep"] },
+          { id: "t_zen", name: "佛系心态", rarity: "purple", desc: "快乐 +10。事情发生了，也就那样。", add: { happy: 10 }, flags: ["zen"] },
+          { id: "t_mentor", name: "贵人相助", rarity: "purple", desc: "家境 +1。关键节点更容易翻盘。", add: { family: 1 }, flags: ["mentor"] },
+          { id: "t_intern", name: "实习怪物", rarity: "blue", desc: "智力 +1。更早接触职场。", add: { iq: 1 }, flags: ["earlyWork"] },
+          { id: "t_luck", name: "人间欧皇", rarity: "orange", desc: "事件更偏向正向结果，但离谱也更离谱。", add: {}, flags: ["lucky"] },
+        ]
+
+        const rarityLabel = { blue: "普通", purple: "稀有", orange: "传说" }
+
+        const attrDefs = [
+          { key: "face", name: "颜值" },
+          { key: "iq", name: "智力" },
+          { key: "body", name: "体质" },
+          { key: "family", name: "家境" },
+        ]
+
+        const state = {
+          view: "home",
+          difficultyId: null,
+          talentDraft: [],
+          selectedTalentIds: [],
+          attrsBase: { face: 0, iq: 0, body: 0, family: 0 },
+          attrsBonus: { face: 0, iq: 0, body: 0, family: 0 },
+          pointsRemaining: 0,
+          run: null,
+          autoTimer: null,
+          audio: { ctx: null },
+        }
+
+        const clamp = (n, a, b) => Math.max(a, Math.min(b, n))
+        const pick = (arr) => arr[Math.floor(Math.random() * arr.length)]
+        const sum = (obj) => Object.values(obj).reduce((a, b) => a + b, 0)
+
+        const fmtMoney = (v) => {
+          const n = Math.floor(v)
+          if (Math.abs(n) < 10000) return n.toString()
+          if (Math.abs(n) < 100000000) return (n / 10000).toFixed(n % 10000 === 0 ? 0 : 1) + "w"
+          return (n / 100000000).toFixed(1) + "亿"
+        }
+
+        const randWeighted = (items) => {
+          const total = items.reduce((a, it) => a + it.w, 0)
+          if (total <= 0) return null
+          let r = Math.random() * total
+          for (const it of items) {
+            r -= it.w
+            if (r <= 0) return it.item
+          }
+          return items[items.length - 1]?.item || null
+        }
+
+        const stageFromAge = (age) => {
+          if (age <= 12) return "child"
+          if (age <= 18) return "teen"
+          if (age <= 35) return "adult"
+          return "mid"
+        }
+
+        const effectiveAttrs = () => {
+          const out = {}
+          for (const def of attrDefs) {
+            out[def.key] = clamp(state.attrsBase[def.key] + state.attrsBonus[def.key], 0, 10)
+          }
+          return out
+        }
+
+        const activeTags = () => {
+          const tags = new Set()
+          if (!state.run) return tags
+          for (const f of state.run.flags) tags.add(f)
+          const career = state.run.career
+          if (career) tags.add(career)
+          return tags
+        }
+
+        const playTone = (type) => {
+          try {
+            if (!state.audio.ctx) state.audio.ctx = new (window.AudioContext || window.webkitAudioContext)()
+            const ctx = state.audio.ctx
+            const now = ctx.currentTime
+            const osc = ctx.createOscillator()
+            const gain = ctx.createGain()
+            osc.connect(gain)
+            gain.connect(ctx.destination)
+
+            const cfg =
+              type === "start"
+                ? { f0: 220, f1: 520, dur: 0.22, g0: 0.0001, g1: 0.12, wave: "triangle" }
+                : type === "death"
+                  ? { f0: 180, f1: 64, dur: 0.55, g0: 0.0001, g1: 0.18, wave: "sawtooth" }
+                  : { f0: 420, f1: 560, dur: 0.09, g0: 0.0001, g1: 0.08, wave: "sine" }
+
+            osc.type = cfg.wave
+            osc.frequency.setValueAtTime(cfg.f0, now)
+            osc.frequency.exponentialRampToValueAtTime(cfg.f1, now + cfg.dur)
+            gain.gain.setValueAtTime(cfg.g0, now)
+            gain.gain.exponentialRampToValueAtTime(cfg.g1, now + 0.02)
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + cfg.dur)
+            osc.start(now)
+            osc.stop(now + cfg.dur + 0.02)
+          } catch (_) {}
+        }
+
+        const clearAuto = () => {
+          if (state.autoTimer) {
+            clearInterval(state.autoTimer)
+            state.autoTimer = null
+          }
+        }
+
+        const setAuto = (on) => {
+          clearAuto()
+          $("btnToggleAuto").textContent = on ? "自动播放：开" : "自动播放：关"
+          if (!on) return
+          state.autoTimer = setInterval(() => {
+            if (!state.run) return
+            if ($("overlay").classList.contains("show")) return
+            if (state.run.dead) return
+            nextYear()
+          }, 720)
+        }
+
+        const switchView = (view) => {
+          state.view = view
+          for (const [k, node] of Object.entries(stageNodes)) node.classList.toggle("hidden", k !== view)
+          renderTop()
+        }
+
+        const renderTop = () => {
+          const statusbar = $("statusbar")
+          statusbar.innerHTML = ""
+          if (!state.run || !["run", "summary"].includes(state.view)) {
+            $("topSubtitle").textContent = "V2.0 · 纯前端 · 单文件"
+            return
+          }
+          $("topSubtitle").textContent = `${difficulties.find((d) => d.id === state.run.difficultyId)?.name || ""} · ${
+            state.run.careerLabel || "人生历程"
+          }`
+          const chip = (k, v, barVal, barClass) => {
+            const el = document.createElement("div")
+            el.className = "chip"
+            const kk = document.createElement("div")
+            kk.className = "k"
+            kk.textContent = k
+            const vv = document.createElement("div")
+            vv.className = "v"
+            vv.textContent = v
+            el.appendChild(kk)
+            el.appendChild(vv)
+            if (barVal != null) {
+              const b = document.createElement("div")
+              b.className = "chipBar" + (barClass ? " " + barClass : "")
+              const i = document.createElement("i")
+              i.style.width = clamp(barVal, 0, 100) + "%"
+              b.appendChild(i)
+              el.appendChild(b)
+            }
+            return el
+          }
+          statusbar.appendChild(chip("健康", String(state.run.health), clamp(state.run.health, 0, 120) / 1.2))
+          statusbar.appendChild(chip("快乐", String(state.run.happy), clamp(state.run.happy, 0, 120) / 1.2, "happy"))
+          statusbar.appendChild(chip("资金", fmtMoney(state.run.money)))
+        }
+
+        const renderDifficulty = () => {
+          const list = $("difficultyList")
+          list.innerHTML = ""
+          for (const d of difficulties) {
+            const row = document.createElement("button")
+            row.className = "difficultyRow" + (state.difficultyId === d.id ? " selected" : "")
+            row.type = "button"
+            row.setAttribute("aria-pressed", state.difficultyId === d.id ? "true" : "false")
+            row.innerHTML = `
+              <div class="difficultyName">${d.name}</div>
+              <div class="difficultyMeta">
+                <div>${d.blurb}</div>
+                <div class="kv">
+                  <span>点数 ${d.points}</span>
+                  <span>资金 ${fmtMoney(d.money)}</span>
+                  <span>衰减 ×${d.decayMultiplier.toFixed(2)}</span>
+                </div>
+              </div>
+            `
+            row.addEventListener("click", () => {
+              playTone("click")
+              state.difficultyId = d.id
+              renderDifficulty()
+              $("btnToTalent").disabled = false
+              $("difficultyPickHint").textContent = `已选择：${d.name}`
+              $("difficultyExplain").innerHTML = `
+                <div><strong>${d.name}</strong>：${d.blurb}</div>
+                <div style="margin-top:10px">
+                  <div>开局属性点：<strong>${d.points}</strong></div>
+                  <div>开局资金：<strong>${fmtMoney(d.money)}</strong></div>
+                  <div>50 岁后自然掉血：<strong>×${d.decayMultiplier.toFixed(2)}</strong></div>
+                  <div>额外扣血机制：<strong>${d.extraPenaltyChance > 0 ? `≥${d.extraPenaltyAge} 岁起，${Math.round(
+                    d.extraPenaltyChance * 100
+                  )}% 概率额外 -${d.extraPenalty}` : "无"}</strong></div>
+                </div>
+              `
+            })
+            list.appendChild(row)
+          }
+          if (!state.difficultyId) {
+            $("difficultyPickHint").textContent = "未选择"
+            $("difficultyExplain").innerHTML =
+              "<div><strong>提示</strong>：难度越高，越像你真正的工作群。</div><div style='margin-top:10px'>建议第一次从 <strong>普通</strong> 开始，看看你抽到的天赋到底在帮你还是在看你笑话。</div>"
+          }
+        }
+
+        const rerollTalents = () => {
+          const picked = new Set()
+          const out = []
+          const pool = talentPool.slice()
+          while (out.length < 10 && out.length < pool.length) {
+            const t = pick(pool)
+            if (picked.has(t.id)) continue
+            picked.add(t.id)
+            out.push(t)
+          }
+          state.talentDraft = out
+          state.selectedTalentIds = []
+          renderTalent()
+        }
+
+        const renderTalent = () => {
+          const grid = $("talentGrid")
+          grid.innerHTML = ""
+          for (const t of state.talentDraft) {
+            const selected = state.selectedTalentIds.includes(t.id)
+            const card = document.createElement("button")
+            card.className = "card" + (selected ? " selected" : "")
+            card.type = "button"
+            card.setAttribute("aria-pressed", selected ? "true" : "false")
+            card.innerHTML = `
+              <div class="cardTitleRow">
+                <h4 class="cardTitle">${t.name}</h4>
+                <span class="badge ${t.rarity}">${rarityLabel[t.rarity]}</span>
+              </div>
+              <div class="cardDesc">${t.desc}</div>
+            `
+            card.addEventListener("click", () => {
+              playTone("click")
+              const idx = state.selectedTalentIds.indexOf(t.id)
+              if (idx >= 0) {
+                state.selectedTalentIds.splice(idx, 1)
+              } else {
+                if (state.selectedTalentIds.length >= 3) return
+                state.selectedTalentIds.push(t.id)
+              }
+              $("btnToAttrs").disabled = state.selectedTalentIds.length !== 3
+              $("btnToAttrs").textContent = `确认选择（${state.selectedTalentIds.length}/3）`
+              $("talentPickHint").textContent = state.selectedTalentIds.length ? `已选 ${state.selectedTalentIds.length} 个` : ""
+              renderTalent()
+            })
+            grid.appendChild(card)
+          }
+          $("btnToAttrs").disabled = state.selectedTalentIds.length !== 3
+          $("btnToAttrs").textContent = `确认选择（${state.selectedTalentIds.length}/3）`
+          $("talentPickHint").textContent = state.selectedTalentIds.length ? `已选 ${state.selectedTalentIds.length} 个` : ""
+        }
+
+        const deriveBonusFromTalents = () => {
+          const bonus = { face: 0, iq: 0, body: 0, family: 0 }
+          const extra = { money: 0, health: 0, happy: 0, flags: [] }
+          for (const id of state.selectedTalentIds) {
+            const t = talentPool.find((x) => x.id === id)
+            if (!t) continue
+            if (t.add?.face) bonus.face += t.add.face
+            if (t.add?.iq) bonus.iq += t.add.iq
+            if (t.add?.body) bonus.body += t.add.body
+            if (t.add?.family) bonus.family += t.add.family
+            if (t.add?.money) extra.money += t.add.money
+            if (t.add?.health) extra.health += t.add.health
+            if (t.add?.happy) extra.happy += t.add.happy
+            if (Array.isArray(t.flags)) extra.flags.push(...t.flags)
+          }
+          state.attrsBonus = bonus
+          return extra
+        }
+
+        const resetAttrs = () => {
+          state.attrsBase = { face: 0, iq: 0, body: 0, family: 0 }
+          const d = difficulties.find((x) => x.id === state.difficultyId)
+          state.pointsRemaining = d?.points ?? 0
+        }
+
+        const renderAttrs = () => {
+          const grid = $("attrGrid")
+          grid.innerHTML = ""
+          const effective = effectiveAttrs()
+          const remaining = state.pointsRemaining
+          $("attrHint").textContent = `剩余点数：${remaining}`
+          $("btnBeginLife").disabled = remaining !== 0
+          $("attrExplain").innerHTML = `
+            <div><strong>天赋加成</strong>：显示在右侧括号内，最终属性上限为 10。</div>
+            <div style="margin-top:10px">
+              <div>剩余点数：<strong>${remaining}</strong></div>
+              <div>总属性（含加成）：<strong>${sum(effective)}</strong></div>
+            </div>
+          `
+          for (const def of attrDefs) {
+            const base = state.attrsBase[def.key]
+            const bonus = state.attrsBonus[def.key]
+            const total = effective[def.key]
+            const row = document.createElement("div")
+            row.className = "attrRow"
+            const canPlus = remaining > 0 && total < 10
+            const canMinus = base > 0
+            row.innerHTML = `
+              <div class="attrName">${def.name}</div>
+              <div class="attrVal">${total}</div>
+              <div class="attrSub">${bonus ? `(天赋 +${bonus})` : ""}</div>
+              <div class="attrCtrl">
+                <button class="iconBtn" data-k="${def.key}" data-op="-" ${canMinus ? "" : "disabled"}>-</button>
+                <button class="iconBtn" data-k="${def.key}" data-op="+" ${canPlus ? "" : "disabled"}>+</button>
+              </div>
+            `
+            grid.appendChild(row)
+          }
+          grid.querySelectorAll("button.iconBtn").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              e.preventDefault()
+              playTone("click")
+              const k = btn.getAttribute("data-k")
+              const op = btn.getAttribute("data-op")
+              const effectiveBefore = effectiveAttrs()
+              if (op === "+") {
+                if (state.pointsRemaining <= 0) return
+                if (effectiveBefore[k] >= 10) return
+                state.attrsBase[k] += 1
+                state.pointsRemaining -= 1
+              } else {
+                if (state.attrsBase[k] <= 0) return
+                state.attrsBase[k] -= 1
+                state.pointsRemaining += 1
+              }
+              renderAttrs()
+            })
+          })
+        }
+
+        const randomizeAttrs = () => {
+          const keys = attrDefs.map((d) => d.key)
+          while (state.pointsRemaining > 0) {
+            const pool = keys
+              .map((k) => ({ k, cap: 10 - clamp(state.attrsBase[k] + state.attrsBonus[k], 0, 10) }))
+              .filter((x) => x.cap > 0)
+            if (!pool.length) break
+            const weights = pool.map((x) => {
+              const w = x.k === "body" ? 1.25 : x.k === "iq" ? 1.15 : 1
+              return { k: x.k, w }
+            })
+            const choice = randWeighted(weights.map((x) => ({ item: x.k, w: x.w })))
+            if (!choice) break
+            state.attrsBase[choice] += 1
+            state.pointsRemaining -= 1
+          }
+          renderAttrs()
+        }
+
+        const impactApply = (impact, causeHint) => {
+          if (!state.run) return
+          if (!impact) return
+          const s = state.run
+          if (impact.health) s.health += impact.health
+          if (impact.happy) s.happy += impact.happy
+          if (impact.money) s.money += impact.money
+          if (Array.isArray(impact.flagsAdd)) for (const f of impact.flagsAdd) s.flags.add(f)
+          if (Array.isArray(impact.flagsDel)) for (const f of impact.flagsDel) s.flags.delete(f)
+          s.health = clamp(s.health, -999, 120)
+          s.happy = clamp(s.happy, -999, 120)
+          s.stats.maxHealth = Math.max(s.stats.maxHealth, s.health)
+          s.stats.maxHappy = Math.max(s.stats.maxHappy, s.happy)
+          s.stats.maxMoney = Math.max(s.stats.maxMoney, s.money)
+          if (impact.money && impact.money > 0) s.stats.totalIncome += impact.money
+          if (impact.money && impact.money < 0) s.stats.totalExpense += -impact.money
+          if (impact.cause) s.lastCause = impact.cause
+          if (causeHint) s.lastCause = causeHint
+        }
+
+        const logPush = (age, text, kind) => {
+          const el = document.createElement("div")
+          el.className = "logItem" + (kind ? " " + kind : "")
+          const y = document.createElement("div")
+          y.className = "y"
+          y.textContent = typeof age === "number" ? `${age} 岁` : ""
+          const t = document.createElement("div")
+          t.className = "t"
+          t.textContent = text
+          el.appendChild(y)
+          el.appendChild(t)
+          $("log").appendChild(el)
+          requestAnimationFrame(() => {
+            const box = $("log")
+            box.scrollTop = box.scrollHeight
+          })
+        }
+
+        const openChoices = (title, text, choices) => {
+          const overlay = $("overlay")
+          overlay.classList.add("show")
+          $("modalTitle").textContent = title
+          $("modalText").textContent = text
+          const row = $("choiceRow")
+          row.innerHTML = ""
+          for (const c of choices) {
+            const btn = document.createElement("button")
+            btn.className = "choiceBtn"
+            btn.textContent = c.label
+            btn.disabled = !!c.disabled
+            btn.addEventListener("click", () => {
+              if (btn.disabled) return
+              playTone("click")
+              overlay.classList.remove("show")
+              if (!state.run || state.run.dead) return
+              if (typeof c.effect === "function") c.effect(state.run)
+              if (c.followText) logPush(state.run.age, c.followText, "highlight")
+              postYearUpdate()
+            })
+            row.appendChild(btn)
+          }
+        }
+
+        const eventsFixed = [
+          {
+            id: "e_birth",
+            age: 0,
+            title: "出生",
+            text: (s) => `你出生了。\n世界很吵，但你还没学会在群里回复“收到”。`,
+            effect: (s) => {
+              const a = s.attrs
+              const baseHealth = 72 + a.body * 3 + Math.floor(a.family * 1.2)
+              const baseHappy = 70 + a.family * 2 + Math.floor(a.face * 0.8)
+              s.health = clamp(baseHealth + s.bonus.health, 1, 120)
+              s.happy = clamp(baseHappy + s.bonus.happy, 1, 120)
+              s.money = s.money + s.bonus.money
+              s.stats.maxHealth = s.health
+              s.stats.maxHappy = s.happy
+              s.stats.maxMoney = s.money
+            },
+          },
+          {
+            id: "e_school",
+            age: 7,
+            title: "上学",
+            text: () => "7 岁了。\n你要不要去上学？",
+            choices: [
+              {
+                label: "去上学（至少会写周报）",
+                effect: (s) => {
+                  s.flags.add("inSchool")
+                  s.happy += 2
+                  s.lastCause = ""
+                },
+                followText: "你背上小书包，开始学习如何在集体生活里保持体面。",
+              },
+              {
+                label: "不上学（早点进入社会）",
+                effect: (s) => {
+                  s.flags.add("skippedSchool")
+                  s.happy += 3
+                },
+                followText: "你选择不上学，提前进入现实的副本。",
+              },
+            ],
+          },
+          {
+            id: "e_middle",
+            age: 13,
+            title: "初中",
+            cond: (s) => s.flags.has("inSchool") && !s.flags.has("skippedSchool"),
+            text: () => "你进入初中。\n你开始意识到：努力不一定有回报，但摆烂一定很舒服。",
+            effect: (s) => {
+              const d = Math.floor(s.attrs.iq / 3)
+              s.happy += 2
+              s.money -= 500 + d * 120
+            },
+          },
+          {
+            id: "e_gaokao",
+            age: 18,
+            title: "高考",
+            cond: (s) => s.flags.has("inSchool") && !s.flags.has("skippedSchool"),
+            text: () => "18 岁，高考来了。\n你决定怎么面对它？",
+            choices: [
+              {
+                label: "拼一把",
+                effect: (s) => {
+                  const roll = Math.random() + s.attrs.iq / 20
+                  if (roll > 1.05) {
+                    s.flags.add("topUni")
+                    s.happy += 10
+                    s.money -= 1200
+                  } else if (roll > 0.75) {
+                    s.flags.add("uni")
+                    s.happy += 6
+                    s.money -= 900
+                  } else {
+                    s.flags.add("failedExam")
+                    s.happy -= 8
+                    s.money -= 500
+                  }
+                },
+                followText: "你把青春压进试卷，交给一个分数来结算。",
+              },
+              {
+                label: "随缘",
+                effect: (s) => {
+                  const roll = Math.random() + s.attrs.iq / 28
+                  if (roll > 0.92) {
+                    s.flags.add("uni")
+                    s.happy += 4
+                  } else {
+                    s.flags.add("failedExam")
+                    s.happy -= 4
+                  }
+                },
+                followText: "你决定随缘：不焦虑，不内耗，顺便也不太上进。",
+              },
+            ],
+          },
+          {
+            id: "e_graduate",
+            age: 22,
+            title: "毕业",
+            cond: (s) => (s.flags.has("uni") || s.flags.has("topUni")) && !s.flags.has("skippedSchool"),
+            text: (s) => `22 岁，毕业。\n你把简历投向世界，世界把你投向“待定”。`,
+            effect: (s) => {
+              s.happy += 3
+              s.money += s.flags.has("topUni") ? 8000 : 4000
+            },
+          },
+          {
+            id: "e_career",
+            age: 26,
+            title: "职业分支",
+            text: () => "26 岁。\n你要走哪条职业线？",
+            choices: [
+              {
+                label: "程序员线（开源、修 Bug、掉发）",
+                effect: (s) => {
+                  s.career = "dev"
+                  s.careerLabel = "程序员线"
+                  s.flags.add("dev")
+                },
+                followText: "你选择写代码：把未来写进一个随时可能报错的运行时。",
+              },
+              {
+                label: "运营线（爆款、背锅、对齐颗粒度）",
+                effect: (s) => {
+                  s.career = "ops"
+                  s.careerLabel = "运营线"
+                  s.flags.add("ops")
+                },
+                followText: "你选择运营：用语言和表格对抗不可控的人性与流量。",
+              },
+              {
+                label: "大厂线（内卷赚钱，折寿换绩效）",
+                effect: (s) => {
+                  s.career = "big"
+                  s.careerLabel = "大厂线"
+                  s.flags.add("big")
+                },
+                followText: "你进入大厂：薪资涨了，睡眠没了，健康开始做减法。",
+              },
+              {
+                label: "清闲线（摸鱼长寿，但偶尔焦虑）",
+                effect: (s) => {
+                  s.career = "chill"
+                  s.careerLabel = "清闲线"
+                  s.flags.add("chill")
+                },
+                followText: "你选择清闲：人生更像散步，但你偶尔会想起别人跑步的声音。",
+              },
+            ],
+          },
+          {
+            id: "e_marriage",
+            age: 28,
+            title: "结婚",
+            cond: (s) => s.flags.has("hasLover"),
+            text: () => "28 岁。\n你们聊过房、聊过未来，也聊过“要不要结婚”。",
+            choices: [
+              {
+                label: "结婚",
+                effect: (s) => {
+                  s.flags.add("married")
+                  s.happy += 10
+                  s.money -= 18000
+                },
+                followText: "你们结婚了，爱情升级成了共同财产与家庭群。",
+              },
+              {
+                label: "再等等",
+                effect: (s) => {
+                  s.happy -= 2
+                },
+                followText: "你说再等等。对方点点头，空气里多了一点点沉默。",
+              },
+            ],
+          },
+          {
+            id: "e_child",
+            age: 30,
+            title: "孩子",
+            cond: (s) => s.flags.has("married"),
+            text: () => "30 岁。\n你们讨论要不要孩子。",
+            choices: [
+              {
+                label: "要孩子",
+                effect: (s) => {
+                  s.flags.add("hasKid")
+                  s.happy += 8
+                  s.money -= 12000
+                },
+                followText: "你成为父母，睡眠从此变成稀缺资源。",
+              },
+              {
+                label: "不要孩子",
+                effect: (s) => {
+                  s.happy += 3
+                },
+                followText: "你们决定不要孩子：自由仍是你们共同的信仰。",
+              },
+            ],
+          },
+        ]
+
+        const randomEvents = [
+          {
+            id: "r_child_friend",
+            stage: "child",
+            weight: 12,
+            text: () => "你交到一个朋友。\n你们用一颗玻璃弹珠，兑换了一个下午的快乐。",
+            impact: () => ({ happy: 6 }),
+          },
+          {
+            id: "r_child_sick",
+            stage: "child",
+            weight: 9,
+            text: () => "你发烧了。\n爸妈的手背比体温计更早发现问题。",
+            impact: () => ({ health: -6, happy: -2 }),
+          },
+          {
+            id: "r_child_game",
+            stage: "child",
+            weight: 8,
+            text: () => "你沉迷游戏机。\n你学会了两件事：手柄会坏，父母会生气。",
+            impact: () => ({ happy: 5, money: -300 }),
+          },
+          {
+            id: "r_teen_crush",
+            stage: "teen",
+            weight: 10,
+            cond: (s) => !s.flags.has("hasLover"),
+            text: () => "你暗恋上一个人。\n你心里的 BGM 变得很大声。",
+            choices: (s) => [
+              {
+                label: "表白",
+                effect: () => {
+                  const base = 0.35 + s.attrs.face / 18 + (s.flags.has("rizz") ? 0.12 : 0)
+                  const ok = Math.random() < clamp(base, 0.18, 0.78)
+                  if (ok) {
+                    s.flags.add("hasLover")
+                    s.happy += 12
+                  } else {
+                    s.happy -= 7
+                  }
+                },
+                followText: "你把心事说出口，风都停了一秒。",
+              },
+              {
+                label: "继续暗恋",
+                effect: () => {
+                  s.happy += 2
+                },
+                followText: "你继续暗恋：用沉默维持一种安全的靠近。",
+              },
+            ],
+          },
+          {
+            id: "r_teen_exam",
+            stage: "teen",
+            weight: 9,
+            text: () => "一次考试。\n你在试卷上写下答案，也写下焦虑。",
+            impact: (s) => {
+              const r = Math.random() + s.attrs.iq / 22
+              if (r > 1.05) return { happy: 6 }
+              if (r > 0.75) return { happy: 2 }
+              return { happy: -5 }
+            },
+          },
+          {
+            id: "r_early_work",
+            stage: "teen",
+            weight: 7,
+            cond: (s) => s.flags.has("skippedSchool") || s.flags.has("earlyWork"),
+            text: () => "你开始打零工。\n你学会了：钱很少，辛苦很多。",
+            impact: () => ({ money: 800, happy: -2, health: -2 }),
+          },
+          {
+            id: "r_adult_rent",
+            stage: "adult",
+            weight: 10,
+            text: () => "房租到期。\n你把一部分人生交给了押一付三。",
+            impact: () => ({ money: -1800, happy: -2 }),
+          },
+          {
+            id: "r_adult_side",
+            stage: "adult",
+            weight: 9,
+            text: () => "你做了点副业。\n虽然不多，但足够让你多点底气。",
+            impact: (s) => ({ money: 1600 + Math.floor(s.attrs.iq * 90), happy: 2 }),
+          },
+          {
+            id: "r_adult_workout",
+            stage: "adult",
+            weight: 8,
+            text: () => "你开始健身。\n镜子不会夸你，但肌肉会。",
+            impact: (s) => ({ health: 4 + Math.floor(s.attrs.body / 2), happy: 2 }),
+          },
+          {
+            id: "r_adult_burnout",
+            stage: "adult",
+            weight: 10,
+            text: () => "你开始感到疲惫。\n不是那种睡一觉就好，而是那种“生活本身”的疲惫。",
+            impact: () => ({ happy: -6 }),
+          },
+          {
+            id: "r_dev_bug",
+            stage: "adult",
+            tags: ["dev"],
+            weight: 12,
+            text: () => "你在修一个诡异的 Bug。\n它像幽灵一样，只在你下班前出现。",
+            impact: (s) => {
+              const pain = s.flags.has("traeDev") ? -1 : -3
+              return { happy: pain, money: 2200 + Math.floor(s.attrs.iq * 120) }
+            },
+          },
+          {
+            id: "r_dev_oncall",
+            stage: "adult",
+            tags: ["dev", "big"],
+            weight: 10,
+            text: () => "你被拉进了 oncall 群。\n深夜的报警像极了人生的提示音。",
+            impact: (s) => ({ health: -6 - Math.floor(Math.random() * 3), happy: -4, money: 2800 + Math.floor(s.attrs.iq * 120) }),
+          },
+          {
+            id: "r_dev_hair",
+            stage: "adult",
+            tags: ["dev"],
+            weight: 9,
+            text: () => "你发现自己掉发变多了。\n你开始研究防脱配方和人生意义。",
+            impact: (s) => ({ happy: s.flags.has("hairGuard") ? -1 : -5, health: -2 }),
+          },
+          {
+            id: "r_dev_del",
+            stage: "adult",
+            tags: ["dev"],
+            weight: 6,
+            cond: (s) => s.attrs.iq >= 4,
+            text: () => "你在生产环境里敲下了一行命令。\n系统沉默了三秒，然后世界也沉默了。",
+            choices: (s) => [
+              {
+                label: "立刻回滚（装作无事发生）",
+                effect: () => {
+                  const ok = Math.random() < clamp(0.55 + s.attrs.iq / 18, 0.3, 0.9)
+                  if (ok) {
+                    s.happy += 3
+                    s.money += 3000
+                  } else {
+                    s.happy -= 10
+                    s.health -= 4
+                    s.money -= 8000
+                  }
+                },
+                followText: "你开了终端，手心发热。",
+              },
+              {
+                label: "删库跑路（传说诞生）",
+                effect: () => {
+                  s.happy -= 14
+                  s.health -= 6
+                  s.money -= 15000
+                  s.flags.add("fugitive")
+                },
+                followText: "你选择跑路：人生从此进入隐藏难度。",
+              },
+            ],
+          },
+          {
+            id: "r_ops_hot",
+            stage: "adult",
+            tags: ["ops"],
+            weight: 12,
+            text: () => "你做了一条爆款推文。\n数据一路飙升，你的精神也跟着膨胀。",
+            impact: (s) => ({ happy: 10, money: 2600 + Math.floor(s.attrs.iq * 90) }),
+          },
+          {
+            id: "r_ops_backpot",
+            stage: "adult",
+            tags: ["ops", "big"],
+            weight: 10,
+            text: () => "活动翻车了。\n会议室里，所有目光都精准对齐了你。",
+            impact: () => ({ happy: -10, health: -3, money: -2000 }),
+          },
+          {
+            id: "r_ops_granular",
+            stage: "adult",
+            tags: ["ops"],
+            weight: 9,
+            text: () => "你开始对齐颗粒度。\n你对齐了半天，发现对齐的是自己的灵魂。",
+            impact: () => ({ happy: -5, money: 1800 }),
+          },
+          {
+            id: "r_big_overwork",
+            stage: "adult",
+            tags: ["big"],
+            weight: 12,
+            text: () => "你加班到凌晨。\n你看见了城市的另一种安静。",
+            impact: (s) => ({ health: -7 - Math.floor(Math.random() * 3), happy: -6, money: 4200 + Math.floor(s.attrs.iq * 100) }),
+          },
+          {
+            id: "r_chill_moyu",
+            stage: "adult",
+            tags: ["chill"],
+            weight: 12,
+            text: () => "你今天摸鱼摸得很有艺术感。\n你在表格里隐藏了一个小宇宙。",
+            impact: () => ({ happy: 6, health: 2, money: 1500 }),
+          },
+          {
+            id: "r_chill_anx",
+            stage: "adult",
+            tags: ["chill"],
+            weight: 9,
+            text: () => "你突然焦虑了一下。\n你担心摸鱼的人生没有 KPI 可交付。",
+            impact: () => ({ happy: -3 }),
+          },
+          {
+            id: "r_mid_bodycheck",
+            stage: "mid",
+            weight: 12,
+            text: () => "体检报告出来了。\n你开始认真对待每一个小数点。",
+            impact: (s) => {
+              const r = Math.random() + s.attrs.body / 18
+              if (r > 1.05) return { happy: 4 }
+              if (r > 0.82) return { happy: 1, health: -2 }
+              return { happy: -6, health: -6 }
+            },
+          },
+          {
+            id: "r_mid_childedu",
+            stage: "mid",
+            weight: 10,
+            cond: (s) => s.flags.has("hasKid"),
+            text: () => "孩子教育要花钱。\n你看着账单，心里开始背《悯农》。",
+            impact: () => ({ money: -16000, happy: -2 }),
+          },
+          {
+            id: "r_mid_invest",
+            stage: "mid",
+            weight: 9,
+            cond: (s) => s.flags.has("finance"),
+            text: () => "你做了一次投资决策。\n你开始理解“风险”这个词的温度。",
+            impact: (s) => {
+              const r = Math.random() + s.attrs.iq / 26 + (s.flags.has("lucky") ? 0.12 : 0)
+              if (r > 1.04) return { money: 32000, happy: 4 }
+              if (r > 0.78) return { money: 6000, happy: 1 }
+              return { money: -18000, happy: -6 }
+            },
+          },
+          {
+            id: "r_cultivate_gate",
+            stage: "adult",
+            tags: ["cultivate"],
+            weight: 8,
+            text: () => "你遇到一个看起来很普通的老者。\n他问你：想不想修仙？",
+            choices: (s) => [
+              {
+                label: "想（当然想）",
+                effect: () => {
+                  s.flags.add("cultivator")
+                  s.happy += 8
+                },
+                followText: "你获得了一个离谱的入门口诀：它听起来像是产品的需求变更。",
+              },
+              {
+                label: "不想（太累了）",
+                effect: () => {
+                  s.happy += 1
+                },
+                followText: "你拒绝修仙：你已经被现实修过一次了。",
+              },
+            ],
+          },
+          {
+            id: "r_cultivate_trib",
+            stage: "mid",
+            tags: ["cultivator"],
+            weight: 9,
+            text: () => "你渡劫。\n雷劈下来的一瞬间，你突然想起了未读的群消息。",
+            impact: (s) => {
+              const r = Math.random() + s.attrs.body / 18 + (s.flags.has("psychic") ? 0.18 : 0)
+              if (r > 1.08) return { health: 10, happy: 6 }
+              if (r > 0.82) return { health: 2, happy: 2 }
+              return { health: -14, happy: -6, cause: "渡劫失败" }
+            },
+          },
+          {
+            id: "r_meme_online",
+            stage: "adult",
+            tags: ["meme", "keyboard"],
+            weight: 8,
+            text: () => "你在网上冲浪。\n你打字很快，生活也过得很快。",
+            impact: () => ({ happy: 5, health: -2 }),
+          },
+          {
+            id: "r_protagonist_turn",
+            stage: "adult",
+            tags: ["protagonist"],
+            weight: 7,
+            text: () => "一个关键机会出现了。\n你意识到：这是剧情节点。",
+            choices: (s) => [
+              {
+                label: "抓住机会",
+                effect: () => {
+                  const r = Math.random() + s.attrs.iq / 22 + (s.flags.has("mentor") ? 0.1 : 0)
+                  if (r > 1.0) {
+                    s.money += 24000
+                    s.happy += 8
+                  } else {
+                    s.happy -= 6
+                  }
+                },
+                followText: "你往前走了一步，命运像是在点头。",
+              },
+              {
+                label: "算了，保守点",
+                effect: () => {
+                  s.happy += 2
+                },
+                followText: "你选择保守：错过也许很痛，但后悔更贵。",
+              },
+            ],
+          },
+        ]
+
+        const dailyEvents = [
+          "你平静地过完了一年。\n你没有变得更好，也没有变得更坏。",
+          "你学会了一个新技能。\n它暂时派不上用场，但让你感觉自己还在成长。",
+          "你和朋友吃了顿饭。\n你们聊了很久，最后谁也没解决人生。",
+          "你刷了一晚短视频。\n你获得了很多信息，也失去了一点时间。",
+          "你完成了一次小目标。\n你给自己点了个赞，继续往前走。",
+        ]
+
+        const shouldAllowCareer = (careerId, s) => {
+          if (careerId === "dev") return s.attrs.iq >= 4 || s.flags.has("devUnlocked") || s.flags.has("traeDev")
+          if (careerId === "ops") return s.attrs.iq >= 3 || s.flags.has("opsUnlocked")
+          return true
+        }
+
+        const patchCareerChoice = (s) => {
+          const ev = eventsFixed.find((x) => x.id === "e_career")
+          if (!ev) return
+          ev.choices = ev.choices.map((c) => ({
+            ...c,
+            label: c.label,
+            disabled: !shouldAllowCareer(
+              c.label.includes("程序员") ? "dev" : c.label.includes("运营") ? "ops" : c.label.includes("大厂") ? "big" : "chill",
+              s
+            ),
+          }))
+        }
+
+        const findFixedEvent = (age, s) => {
+          for (const e of eventsFixed) {
+            if (e.age !== age) continue
+            if (e.cond && !e.cond(s)) continue
+            return e
+          }
+          return null
+        }
+
+        const eventCooldownFactor = (id, s) => {
+          const last = s.eventHistory.get(id)
+          if (last == null) return 1
+          const diff = s.age - last
+          if (diff <= 3) return 0
+          return 0.5
+        }
+
+        const pickRandomEvent = (s) => {
+          const ageStage = stageFromAge(s.age)
+          const tags = activeTags()
+          const pool = []
+          for (const e of randomEvents) {
+            if (e.stage && e.stage !== ageStage) continue
+            if (e.cond && !e.cond(s)) continue
+            const etags = e.tags || []
+            if (etags.length) {
+              let ok = false
+              for (const t of etags) if (tags.has(t)) ok = true
+              if (!ok) continue
+            }
+            const factor = eventCooldownFactor(e.id, s)
+            if (factor <= 0) continue
+            pool.push({ item: e, w: (e.weight || 1) * factor })
+          }
+          return randWeighted(pool)
+        }
+
+        const naturalDecay = (s) => {
+          if (s.age < 50) return 0
+          const d = difficulties.find((x) => x.id === s.difficultyId)
+          if (!d) return 0
+          if (d.immuneChance > 0 && Math.random() < d.immuneChance) return 0
+          const base = 1 + Math.floor((s.age - 49) * 0.34 * d.decayMultiplier)
+          const resist = Math.floor(s.attrs.body / 3)
+          let dec = Math.max(0, base - resist)
+          if (s.age >= d.extraPenaltyAge && Math.random() < d.extraPenaltyChance) dec += d.extraPenalty
+          return dec
+        }
+
+        const maybeDie = () => {
+          const s = state.run
+          if (!s) return
+          if (s.dead) return
+          if (s.health <= 0 || s.happy <= 0) {
+            s.dead = true
+            clearAuto()
+            $("btnToggleAuto").textContent = "自动播放：关"
+            const cause = s.lastCause || (s.health <= 0 ? "健康归零" : "快乐归零")
+            s.deathCause = cause
+            logPush(s.age, `死亡：${cause}`, "death")
+            $("btnViewSummary").classList.remove("hidden")
+            $("btnNextYear").disabled = true
+            $("btnToggleAuto").disabled = true
+            playTone("death")
+            renderTop()
+          }
+        }
+
+        const postYearUpdate = () => {
+          if (!state.run) return
+          const s = state.run
+          const dec = naturalDecay(s)
+          if (dec > 0) {
+            s.health -= dec
+            s.lastCause = s.health <= 0 ? "老年衰竭" : s.lastCause
+            logPush(s.age, `（自然衰减）健康 -${dec}`, "highlight")
+          }
+          s.stats.maxHealth = Math.max(s.stats.maxHealth, s.health)
+          s.stats.maxHappy = Math.max(s.stats.maxHappy, s.happy)
+          s.stats.maxMoney = Math.max(s.stats.maxMoney, s.money)
+          $("ctrlAge").textContent = `${s.age} 岁`
+          $("ctrlCareer").textContent = s.careerLabel || "未定职业线"
+          renderTop()
+          maybeDie()
+        }
+
+        const runEvent = (ev) => {
+          const s = state.run
+          if (!s) return
+          if (ev.id) s.eventHistory.set(ev.id, s.age)
+
+          if (ev.id === "e_career") patchCareerChoice(s)
+          const title = ev.title || "事件"
+          const text = typeof ev.text === "function" ? ev.text(s) : ev.text
+          logPush(s.age, text, ev.highlight ? "highlight" : "")
+          if (typeof ev.effect === "function") ev.effect(s)
+          if (typeof ev.impact === "function") impactApply(ev.impact(s))
+          if (typeof ev.impact === "object") impactApply(ev.impact)
+
+          if (typeof ev.choices === "function") {
+            const choices = ev.choices(s)
+            openChoices(title, text, choices)
+            return
+          }
+          if (Array.isArray(ev.choices)) {
+            const choices = ev.choices.map((c) => {
+              const disabled = !!c.disabled
+              return {
+                label: disabled ? c.label + "（条件不足）" : c.label,
+                disabled,
+                effect: disabled ? () => {} : c.effect,
+                followText: disabled ? "" : c.followText,
+              }
+            })
+            openChoices(title, text, choices)
+            return
+          }
+          postYearUpdate()
+        }
+
+        const nextYear = () => {
+          const s = state.run
+          if (!s || s.dead) return
+          s.age += 1
+          const fixed = findFixedEvent(s.age, s)
+          if (fixed) {
+            runEvent(fixed)
+            return
+          }
+          const ev = pickRandomEvent(s)
+          if (ev) {
+            runEvent(ev)
+            return
+          }
+          logPush(s.age, pick(dailyEvents))
+          postYearUpdate()
+        }
+
+        const beginLife = () => {
+          playTone("start")
+          clearAuto()
+          const d = difficulties.find((x) => x.id === state.difficultyId)
+          const bonus = deriveBonusFromTalents()
+          const attrs = effectiveAttrs()
+          const flags = new Set(bonus.flags)
+          const run = {
+            difficultyId: d.id,
+            age: 0,
+            health: 80,
+            happy: 80,
+            money: d.money,
+            attrs,
+            bonus: { money: bonus.money, health: bonus.health, happy: bonus.happy },
+            flags,
+            eventHistory: new Map(),
+            stats: { maxHealth: 0, maxHappy: 0, maxMoney: d.money, totalIncome: 0, totalExpense: 0 },
+            career: null,
+            careerLabel: null,
+            dead: false,
+            deathCause: "",
+            lastCause: "",
+          }
+          state.run = run
+          $("log").innerHTML = ""
+          $("btnViewSummary").classList.add("hidden")
+          $("btnNextYear").disabled = false
+          $("btnToggleAuto").disabled = false
+          $("btnToggleAuto").textContent = "自动播放：关"
+          $("btnNextYear").textContent = "下一年"
+          $("ctrlAge").textContent = "0 岁"
+          $("ctrlCareer").textContent = "未定职业线"
+          switchView("run")
+          runEvent(findFixedEvent(0, run))
+        }
+
+        const epitaph = (s) => {
+          const age = s.age
+          const money = s.money
+          const c = s.deathCause || "未知"
+          const rich = money >= 1000000
+          const comfy = money >= 200000
+          const poor = money < 0
+          const lines = []
+          if (age < 25) lines.push("英年早逝，连“开局配置”都还没读完。")
+          else if (age < 40) lines.push("半路下车，像一条中断的需求。")
+          else if (age < 60) lines.push("中年归档，人生像一段终于停止增长的曲线。")
+          else if (age < 80) lines.push("安然落幕，岁月没有白走，只是走得很慢。")
+          else lines.push("活得很久，像一个永远不关的后台进程。")
+          if (rich) lines.push("富甲一方，钱是你最稳定的剧情线。")
+          else if (comfy) lines.push("略有积蓄，至少不会被账单催着醒来。")
+          else if (poor) lines.push("负债前行，连梦都要分期付款。")
+          if (c.includes("过劳") || c.includes("加班") || c.includes("衰竭")) lines.push("死因提示：身体不是无限重试的函数。")
+          if (s.flags.has("fugitive")) lines.push("江湖传说：有人说你删库跑路，也有人说你只是去追寻自由。")
+          if (s.flags.has("cultivator")) lines.push("你曾试图突破凡人上限，可现实的上限更硬。")
+          const big = `享年 ${age} 岁 · ${c}`
+          return { big, small: lines.join("\n") }
+        }
+
+        const renderSummary = () => {
+          const s = state.run
+          if (!s) return
+          $("summaryMeta").textContent = `最终年龄：${s.age} 岁`
+          $("summaryMeta2").textContent = `死因：${s.deathCause}`
+          const stats = [
+            ["最终资金", fmtMoney(s.money)],
+            ["最高健康", String(s.stats.maxHealth)],
+            ["最高快乐", String(s.stats.maxHappy)],
+            ["最高资金", fmtMoney(s.stats.maxMoney)],
+            ["总收入", fmtMoney(s.stats.totalIncome)],
+            ["总支出", fmtMoney(s.stats.totalExpense)],
+          ]
+          const box = $("summaryStats")
+          box.innerHTML = ""
+          for (const [k, v] of stats) {
+            const row = document.createElement("div")
+            row.className = "statRow"
+            row.innerHTML = `<div class="k">${k}</div><div class="v">${v}</div>`
+            box.appendChild(row)
+          }
+          const epi = epitaph(s)
+          $("epitaphBig").textContent = epi.big
+          $("epitaphSmall").textContent = epi.small
+        }
+
+        const bindUI = () => {
+          $("btnStart").addEventListener("click", () => {
+            playTone("start")
+            state.difficultyId = null
+            $("btnToTalent").disabled = true
+            renderDifficulty()
+            switchView("difficulty")
+          })
+          $("btnBackHome1").addEventListener("click", () => {
+            playTone("click")
+            switchView("home")
+          })
+          $("btnBackHome2").addEventListener("click", () => {
+            playTone("click")
+            switchView("difficulty")
+          })
+          $("btnToTalent").addEventListener("click", () => {
+            playTone("click")
+            rerollTalents()
+            switchView("talent")
+          })
+          $("btnRerollTalent").addEventListener("click", () => {
+            playTone("click")
+            rerollTalents()
+          })
+          $("btnToAttrs").addEventListener("click", () => {
+            playTone("click")
+            deriveBonusFromTalents()
+            resetAttrs()
+            renderAttrs()
+            switchView("attrs")
+          })
+          $("btnBackTalent").addEventListener("click", () => {
+            playTone("click")
+            switchView("talent")
+          })
+          $("btnRandomAttrs").addEventListener("click", () => {
+            playTone("click")
+            randomizeAttrs()
+          })
+          $("btnBeginLife").addEventListener("click", () => {
+            if (state.pointsRemaining !== 0) return
+            beginLife()
+          })
+          $("btnNextYear").addEventListener("click", () => {
+            playTone("click")
+            nextYear()
+          })
+          $("btnToggleAuto").addEventListener("click", () => {
+            playTone("click")
+            const on = !state.autoTimer
+            setAuto(on)
+          })
+          $("btnViewSummary").addEventListener("click", () => {
+            playTone("click")
+            clearAuto()
+            renderSummary()
+            switchView("summary")
+          })
+          $("btnReplay").addEventListener("click", () => {
+            playTone("start")
+            clearAuto()
+            state.run = null
+            state.difficultyId = null
+            state.selectedTalentIds = []
+            state.talentDraft = []
+            resetAttrs()
+            renderTop()
+            switchView("home")
+          })
+          $("overlay").addEventListener("click", (e) => {
+            if (e.target !== $("overlay")) return
+          })
+        }
+
+        const initNoise = () => {
+          const canvas = $("noise")
+          const ctx = canvas.getContext("2d", { alpha: true })
+          const resize = () => {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2)
+            canvas.width = Math.floor(window.innerWidth * dpr)
+            canvas.height = Math.floor(window.innerHeight * dpr)
+            canvas.style.width = window.innerWidth + "px"
+            canvas.style.height = window.innerHeight + "px"
+          }
+          resize()
+          window.addEventListener("resize", resize)
+
+          const draw = () => {
+            const w = canvas.width
+            const h = canvas.height
+            const img = ctx.createImageData(w, h)
+            const data = img.data
+            for (let i = 0; i < data.length; i += 4) {
+              const v = Math.random() * 255
+              data[i] = v
+              data[i + 1] = v
+              data[i + 2] = v
+              data[i + 3] = 18 + Math.random() * 22
+            }
+            ctx.putImageData(img, 0, 0)
+          }
+
+          draw()
+          setInterval(draw, 1300)
+        }
+
+        const init = () => {
+          bindUI()
+          initNoise()
+          renderTop()
+          renderDifficulty()
+          switchView("home")
+        }
+
+        init()
+      })()
+    </script>
+  </body>
+</html>
