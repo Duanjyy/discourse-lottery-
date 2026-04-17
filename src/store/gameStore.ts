@@ -79,6 +79,7 @@ export interface GameState {
   clickCard: (id: string) => void;
   useProp: (propType: 'remove' | 'hint' | 'shuffle' | 'expand') => void;
   resetGame: () => void;
+  resetAllProgress: () => void;
   getCoveredStatus: () => Record<string, boolean>;
   removeEliminatedFromSlot: (type: string) => void;
   checkWinLose: () => void;
@@ -117,19 +118,23 @@ export const useGameStore = create<GameState>()(
         let typesCount = 5;
         let slotCapacity = 7;
 
-        // Dynamic difficulty calculation based on level (1-50)
+        // Dynamic difficulty calculation based on level (1-999)
         // Ensure numCards is always a multiple of 3
-        const calculatedCards = 30 + Math.floor((level - 1) * 3.5) * 3;
-        numCards = Math.min(calculatedCards, 180); // Cap at 180 cards
+        // Slower progression for 999 levels to avoid getting too hard too fast
+        const calculatedCards = 30 + Math.floor((level - 1) * 1.5) * 3;
+        numCards = Math.min(calculatedCards, 240); // Cap at 240 cards for extreme levels
         
-        maxLayer = 2 + Math.floor(level / 10);
+        maxLayer = 2 + Math.floor(level / 20);
         maxLayer = Math.min(maxLayer, 7); // Cap at layer 7
 
-        typesCount = 5 + Math.floor(level / 5);
+        typesCount = 5 + Math.floor(level / 15);
         typesCount = Math.min(typesCount, 18); // Cap at max available types
 
-        if (level >= 30) {
-          slotCapacity = 6; // Harder after level 30
+        if (level >= 50) {
+          slotCapacity = 6; // Harder after level 50
+        }
+        if (level >= 100) {
+          slotCapacity = 5; // Extreme mode after level 100
         }
 
         const positions = shuffle(getPyramidPositions(maxLayer)).slice(0, numCards);
@@ -346,6 +351,19 @@ export const useGameStore = create<GameState>()(
       resetGame: () => {
         const state = get();
         state.initGame(state.currentLevel);
+      },
+
+      resetAllProgress: () => {
+        set({
+          currentLevel: 1,
+          normalCleared: 0,
+          hardCleared: 0,
+          eliteCleared: 0,
+          fragments: 0,
+          points: 0,
+          unlockedPatterns: ['🍎'],
+          unlockedSkins: ['default'],
+        });
       }
     }),
     {

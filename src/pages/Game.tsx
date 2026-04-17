@@ -158,8 +158,8 @@ export default function Game() {
               <button 
                 onClick={() => {
                   const nextLevel = useGameStore.getState().currentLevel + 1;
-                  if (nextLevel > 50) {
-                    alert("恭喜你，已经通关所有50关！");
+                  if (nextLevel > 999) {
+                    alert("恭喜你，已经通关所有999关！神一般的存在！");
                     navigate('/');
                   } else {
                     useGameStore.getState().initGame(nextLevel);

@@ -1,15 +1,21 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/gameStore';
-import { Trophy, Play, Star, BookOpen } from 'lucide-react';
+import { Trophy, Play, Star, BookOpen, RotateCcw } from 'lucide-react';
 
 export default function Home() {
   const navigate = useNavigate();
-  const { initGame, normalCleared, hardCleared, eliteCleared, fragments, points } = useGameStore();
+  const { initGame, normalCleared, hardCleared, eliteCleared, fragments, points, resetAllProgress } = useGameStore();
 
   const handleStart = (level: number) => {
     initGame(level);
     navigate('/game');
+  };
+
+  const handleResetProgress = () => {
+    if (window.confirm("确定要重置所有关卡进度和资产吗？这无法撤销！")) {
+      resetAllProgress();
+    }
   };
 
   return (
@@ -51,7 +57,22 @@ export default function Home() {
             </div>
             <div className="text-left">
               <h2 className="text-lg font-bold text-gray-800">开始闯关</h2>
-              <p className="text-xs text-gray-500">当前进度：第 {Math.max(1, normalCleared + 1)} 关 (共50关)</p>
+              <p className="text-xs text-gray-500">当前进度：第 {Math.max(1, normalCleared + 1)} 关 (共999关)</p>
+            </div>
+          </div>
+        </button>
+
+        <button 
+          onClick={handleResetProgress}
+          className="relative overflow-hidden group bg-white border-2 border-red-200 rounded-2xl p-4 flex items-center justify-between hover:bg-red-50 transition-colors active:scale-95"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500">
+              <RotateCcw size={20} />
+            </div>
+            <div className="text-left">
+              <h2 className="text-lg font-bold text-red-600">重置进度</h2>
+              <p className="text-xs text-red-400">清除所有关卡记录和收集</p>
             </div>
           </div>
         </button>
