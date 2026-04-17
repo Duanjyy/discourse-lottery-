@@ -26,8 +26,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f3f4f6] flex flex-col items-center p-6 text-gray-800 font-sans">
-      <div className="mt-12 mb-8 text-center">
+    <div className="h-full w-full bg-[#f3f4f6] flex flex-col items-center justify-center p-6 text-gray-800 font-sans overflow-hidden">
+      <div className="mb-10 text-center">
         <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-600 drop-shadow-sm mb-2 tracking-wider">
           果泡消消乐
         </h1>

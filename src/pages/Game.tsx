@@ -43,7 +43,7 @@ export default function Game() {
   const boardHeight = 8 * 44;
 
   return (
-    <div className="min-h-screen bg-[#f3f4f6] flex flex-col items-center select-none overflow-hidden relative font-sans">
+    <div className="h-full w-full bg-[#f3f4f6] flex flex-col items-center select-none overflow-hidden relative font-sans">
       {/* Header */}
       <header className="w-full max-w-md p-4 flex items-center justify-between z-10">
         <button 
