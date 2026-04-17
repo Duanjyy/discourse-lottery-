@@ -1,14 +1,21 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/gameStore';
-import { Trophy, Play, Star, BookOpen, RotateCcw } from 'lucide-react';
+import { Trophy, Play, Star, BookOpen, RotateCcw, FastForward } from 'lucide-react';
 
 export default function Home() {
   const navigate = useNavigate();
-  const { initGame, normalCleared, hardCleared, eliteCleared, fragments, points, resetAllProgress } = useGameStore();
+  const { initGame, normalCleared, hardCleared, eliteCleared, fragments, points, resetAllProgress, cards, isGameOver, isWin } = useGameStore();
+
+  const currentLevelProgress = Math.max(1, normalCleared + 1);
+  const hasInProgressGame = cards && cards.length > 0 && !isGameOver && !isWin;
 
   const handleStart = (level: number) => {
     initGame(level);
+    navigate('/game');
+  };
+
+  const handleContinue = () => {
     navigate('/game');
   };
 
@@ -44,8 +51,25 @@ export default function Home() {
       </div>
 
       <div className="w-full max-w-sm flex flex-col gap-4">
+        {hasInProgressGame && (
+          <button 
+            onClick={handleContinue}
+            className="relative overflow-hidden group bg-gradient-to-r from-amber-400 to-orange-500 border-none rounded-2xl p-4 flex items-center justify-between hover:brightness-110 shadow-lg shadow-amber-500/30 transition-all active:scale-95"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white">
+                <FastForward size={20} />
+              </div>
+              <div className="text-left text-white">
+                <h2 className="text-lg font-bold">继续闯关</h2>
+                <p className="text-xs text-white/80">恢复第 {useGameStore.getState().currentLevel} 关未完成的进度</p>
+              </div>
+            </div>
+          </button>
+        )}
+
         <button 
-          onClick={() => handleStart(Math.max(1, normalCleared + 1))}
+          onClick={() => handleStart(currentLevelProgress)}
           className="relative overflow-hidden group bg-white border-2 border-green-500 rounded-2xl p-4 flex items-center justify-between hover:bg-green-50 transition-colors active:scale-95"
         >
           <div className="flex items-center gap-3">
@@ -53,8 +77,8 @@ export default function Home() {
               <Play size={20} className="ml-1" />
             </div>
             <div className="text-left">
-              <h2 className="text-lg font-bold text-gray-800">开始闯关</h2>
-              <p className="text-xs text-gray-500">当前进度：第 {Math.max(1, normalCleared + 1)} 关 (共999关)</p>
+              <h2 className="text-lg font-bold text-gray-800">{hasInProgressGame ? "重新开始本关" : "开始闯关"}</h2>
+              <p className="text-xs text-gray-500">当前进度：第 {currentLevelProgress} 关 (共999关)</p>
             </div>
           </div>
         </button>

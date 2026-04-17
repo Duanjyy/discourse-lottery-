@@ -369,6 +369,13 @@ export const useGameStore = create<GameState>()(
     {
       name: 'xiaolegexiao-storage',
       partialize: (state) => ({
+        currentLevel: state.currentLevel,
+        cards: state.cards,
+        slot: state.slot,
+        isGameOver: state.isGameOver,
+        isWin: state.isWin,
+        props: state.props,
+        slotCapacity: state.slotCapacity,
         normalCleared: state.normalCleared,
         hardCleared: state.hardCleared,
         eliteCleared: state.eliteCleared,
