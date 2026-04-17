@@ -8,6 +8,7 @@ export interface CardData {
   x: number;
   y: number;
   status: 'idle' | 'in-slot' | 'eliminated';
+  isEliminating?: boolean;
 }
 
 interface Pos {
@@ -78,6 +79,8 @@ export interface GameState {
   useProp: (propType: 'remove' | 'hint' | 'shuffle' | 'expand') => void;
   resetGame: () => void;
   getCoveredStatus: () => Record<string, boolean>;
+  removeEliminatedFromSlot: (type: string) => void;
+  checkWinLose: () => void;
 }
 
 export const useGameStore = create<GameState>()(
@@ -158,6 +161,35 @@ export const useGameStore = create<GameState>()(
         });
       },
 
+      removeEliminatedFromSlot: (type: string) => {
+        set((state) => {
+          const newSlot = state.slot.filter(c => !(c.type === type && c.isEliminating));
+          return { slot: newSlot };
+        });
+        get().checkWinLose();
+      },
+
+      checkWinLose: () => {
+        set((state) => {
+          if (state.isGameOver || state.isWin) return state;
+          
+          const activeSlot = state.slot.filter(c => !c.isEliminating);
+          const remainingIdle = state.cards.filter(c => c.status === 'idle').length;
+          const isWin = remainingIdle === 0 && state.slot.length === 0;
+          const isGameOver = !isWin && activeSlot.length >= state.slotCapacity;
+
+          if (isWin) {
+            if (state.currentLevel === 1) return { isWin, normalCleared: state.normalCleared + 1, fragments: state.fragments + 10 };
+            if (state.currentLevel === 2) return { isWin, hardCleared: state.hardCleared + 1, points: state.points + 20 };
+            if (state.currentLevel === 3) return { isWin, eliteCleared: state.eliteCleared + 1, points: state.points + 50, fragments: state.fragments + 30 };
+          }
+          if (isGameOver) {
+            return { isGameOver };
+          }
+          return state;
+        });
+      },
+
       getCoveredStatus: () => {
         const { cards } = get();
         const covered: Record<string, boolean> = {};
@@ -190,17 +222,27 @@ export const useGameStore = create<GameState>()(
         const card = state.cards.find(c => c.id === id);
         if (!card || card.status !== 'idle') return;
 
-        if (state.slot.length >= state.slotCapacity) return;
+        const activeSlot = state.slot.filter(c => !c.isEliminating);
+        if (activeSlot.length >= state.slotCapacity) return;
 
         // Move to slot
         const newCards = state.cards.map(c => c.id === id ? { ...c, status: 'in-slot' as const } : c);
-        const newSlot = [...state.slot, { ...card, status: 'in-slot' as const }];
+        
+        let newSlot = [...state.slot];
+        const lastIndex = newSlot.map(c => c.type).lastIndexOf(card.type);
+        if (lastIndex !== -1) {
+          newSlot.splice(lastIndex + 1, 0, { ...card, status: 'in-slot' as const });
+        } else {
+          newSlot.push({ ...card, status: 'in-slot' as const });
+        }
         
         // Check for matches
         const typeCount: Record<string, CardData[]> = {};
         newSlot.forEach(c => {
-          if (!typeCount[c.type]) typeCount[c.type] = [];
-          typeCount[c.type].push(c);
+          if (!c.isEliminating) {
+            if (!typeCount[c.type]) typeCount[c.type] = [];
+            typeCount[c.type].push(c);
+          }
         });
 
         let finalSlot = [...newSlot];
@@ -208,35 +250,22 @@ export const useGameStore = create<GameState>()(
 
         for (const [type, group] of Object.entries(typeCount)) {
           if (group.length === 3) {
-            // Remove from slot
-            finalSlot = finalSlot.filter(c => c.type !== type);
-            // Mark as eliminated in cards
+            finalSlot = finalSlot.map(c => c.type === type ? { ...c, isEliminating: true } : c);
             const idsToRemove = group.map(c => c.id);
             finalCards = finalCards.map(c => idsToRemove.includes(c.id) ? { ...c, status: 'eliminated' as const } : c);
+            
+            setTimeout(() => {
+              get().removeEliminatedFromSlot(type);
+            }, 300);
           }
         }
 
-        // Check win/lose
-        const remainingIdle = finalCards.filter(c => c.status === 'idle').length;
-        const isWin = remainingIdle === 0 && finalSlot.length === 0;
-        const isGameOver = !isWin && finalSlot.length >= state.slotCapacity;
-
-        set((prevState) => {
-          const nextState = {
-            cards: finalCards,
-            slot: finalSlot,
-            isWin,
-            isGameOver,
-          };
-
-          if (isWin) {
-            if (prevState.currentLevel === 1) return { ...nextState, normalCleared: prevState.normalCleared + 1, fragments: prevState.fragments + 10 };
-            if (prevState.currentLevel === 2) return { ...nextState, hardCleared: prevState.hardCleared + 1, points: prevState.points + 20 };
-            if (prevState.currentLevel === 3) return { ...nextState, eliteCleared: prevState.eliteCleared + 1, points: prevState.points + 50, fragments: prevState.fragments + 30 };
-          }
-
-          return nextState;
+        set({
+          cards: finalCards,
+          slot: finalSlot,
         });
+
+        get().checkWinLose();
       },
 
       useProp: (propType) => {
@@ -244,18 +273,18 @@ export const useGameStore = create<GameState>()(
         if (state.isGameOver || state.isWin || state.props[propType] <= 0) return;
 
         if (propType === 'remove') {
-          if (state.slot.length === 0) return;
-          // Remove the first card in slot
-          const cardToRemove = state.slot[0];
-          const newSlot = state.slot.slice(1);
-          // Put it back to board? Or just eliminate? "移除卡槽内1张" -> 也可以直接消除
-          // Let's just eliminate it to make it simple and beneficial
+          const activeSlot = state.slot.filter(c => !c.isEliminating);
+          if (activeSlot.length === 0) return;
+          // Remove the first active card in slot
+          const cardToRemove = activeSlot[0];
+          const newSlot = state.slot.filter(c => c.id !== cardToRemove.id);
           const newCards = state.cards.map(c => c.id === cardToRemove.id ? { ...c, status: 'eliminated' as const } : c);
           set({
             slot: newSlot,
             cards: newCards,
             props: { ...state.props, remove: state.props.remove - 1 }
           });
+          get().checkWinLose();
         } 
         else if (propType === 'shuffle') {
           // Shuffle all idle cards' positions
