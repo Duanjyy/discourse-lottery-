@@ -10,21 +10,10 @@ import { useAudio } from '../hooks/useAudio';
 export default function Game() {
   const navigate = useNavigate();
   const { 
-    cards, slot, isGameOver, isWin, clickCard, props, useProp, resetGame, slotCapacity, getCoveredStatus, resetCount 
+    cards, slot, isGameOver, isWin, clickCard, props, useProp, resetGame, slotCapacity, getCoveredStatus 
   } = useGameStore();
 
   const { isMuted, toggleMute, playClick, playPop, playWin } = useAudio();
-
-  const handleReset = () => {
-    if (resetCount <= 0) {
-      alert("本局重置次数已用完！");
-      return;
-    }
-    const success = resetGame();
-    if (!success) {
-      alert("本局重置次数已用完！");
-    }
-  };
 
   const coveredStatus = useMemo(() => getCoveredStatus(), [cards, getCoveredStatus]);
 
@@ -67,18 +56,15 @@ export default function Game() {
         <div className="flex gap-2">
           <button 
             onClick={toggleMute}
-            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 active:scale-95 transition-transform text-gray-700"
+            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 hover:text-amber-500 active:scale-95 transition-all text-gray-700"
           >
             {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
           </button>
           <button 
-            onClick={handleReset}
-            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 active:scale-95 transition-transform text-gray-700 relative"
+            onClick={resetGame}
+            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50 hover:text-green-500 active:scale-95 transition-all text-gray-700"
           >
             <RefreshCw size={18} />
-            <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white">
-              {resetCount}
-            </div>
           </button>
         </div>
       </header>
@@ -145,10 +131,10 @@ export default function Game() {
             <h2 className="text-2xl font-black text-gray-800 mb-2">闯关失败</h2>
             <p className="text-gray-500 mb-8">卡槽已满，再试一次吧！</p>
             <button 
-              onClick={handleReset}
+              onClick={resetGame}
               className="bg-green-500 text-white px-8 py-3 rounded-full font-bold text-lg w-full shadow-lg shadow-green-500/30 hover:bg-green-600 active:scale-95 transition-all"
             >
-              重新开始 ({resetCount}次)
+              重新开始
             </button>
             <button 
               onClick={() => navigate('/')}
@@ -161,18 +147,14 @@ export default function Game() {
       )}
 
       {isWin && (
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center animate-in fade-in duration-300">
-          <div className="bg-white p-8 rounded-3xl shadow-2xl flex flex-col items-center text-center animate-in zoom-in-95 duration-300">
-            <div className="text-6xl mb-4">🎉</div>
-            <h2 className="text-2xl font-black text-gray-800 mb-2">第 {useGameStore.getState().currentLevel} 关 通关成功！</h2>
-            <p className="text-gray-500 mb-8">恭喜你清空了所有卡牌</p>
-            <div className="flex gap-4 w-full">
-              <button 
-                onClick={() => navigate('/')}
-                className="flex-1 bg-gray-200 text-gray-700 px-4 py-3 rounded-full font-bold shadow-sm hover:bg-gray-300 active:scale-95 transition-all"
-              >
-                返回首页
-              </button>
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center animate-in fade-in duration-300">
+          <div className="bg-white/90 backdrop-blur-md p-8 rounded-[2rem] shadow-2xl border border-white/50 flex flex-col items-center text-center animate-in zoom-in-95 duration-300 max-w-[85vw] w-80">
+            <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center text-5xl mb-6 shadow-inner">
+              🎉
+            </div>
+            <h2 className="text-2xl font-black text-gray-800 mb-2">第 {useGameStore.getState().currentLevel} 关 通关！</h2>
+            <p className="text-gray-500 text-sm mb-8 font-medium">你真棒，所有的卡牌都被清空了</p>
+            <div className="flex flex-col gap-3 w-full">
               <button 
                 onClick={() => {
                   const nextLevel = useGameStore.getState().currentLevel + 1;
@@ -183,9 +165,15 @@ export default function Game() {
                     useGameStore.getState().initGame(nextLevel);
                   }
                 }}
-                className="flex-1 bg-amber-500 text-white px-4 py-3 rounded-full font-bold shadow-lg shadow-amber-500/30 hover:bg-amber-600 active:scale-95 transition-all"
+                className="w-full bg-gradient-to-b from-amber-400 to-amber-500 text-white py-3.5 rounded-2xl font-bold shadow-lg shadow-amber-500/30 hover:brightness-110 active:scale-95 transition-all"
               >
                 下一关
+              </button>
+              <button 
+                onClick={() => navigate('/')}
+                className="w-full bg-gray-100 text-gray-600 py-3.5 rounded-2xl font-bold hover:bg-gray-200 active:scale-95 transition-all"
+              >
+                返回首页
               </button>
             </div>
           </div>
