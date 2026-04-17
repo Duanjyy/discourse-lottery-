@@ -12,10 +12,10 @@ interface AudioContextType {
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 // Using local audio files
-const BGM_URL = '/sounds/bgm.mp3';
-const CLICK_URL = '/sounds/click.mp3';
-const POP_URL = '/sounds/pop.mp3';
-const WIN_URL = '/sounds/win.mp3';
+const BGM_URL = './sounds/bgm.mp3';
+const CLICK_URL = './sounds/click.mp3';
+const POP_URL = './sounds/pop.mp3';
+const WIN_URL = './sounds/win.mp3';
 
 export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isMuted, setIsMuted] = useState(() => {
