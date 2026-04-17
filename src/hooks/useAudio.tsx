@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import useSound from 'use-sound';
 
 interface AudioContextType {
   isMuted: boolean;
@@ -10,11 +11,11 @@ interface AudioContextType {
 
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
-// Simple base64 sounds to avoid external dependencies for a standalone app
-// Real implementation would use actual sound files
-const CLICK_SOUND = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAB/f39/";
-const POP_SOUND = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAB/f39/";
-const WIN_SOUND = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAB/f39/";
+// Using high-quality sound sprites from mixkit
+const BGM_URL = 'https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3';
+const CLICK_URL = 'https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3';
+const POP_URL = 'https://assets.mixkit.co/active_storage/sfx/2578/2578-preview.mp3';
+const WIN_URL = 'https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3';
 
 export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isMuted, setIsMuted] = useState(() => {
@@ -22,45 +23,46 @@ export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return saved ? JSON.parse(saved) : false;
   });
 
-  const [bgm] = useState(() => {
-    const audio = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_732a3fc267.mp3?filename=casual-game-track-104595.mp3');
-    audio.loop = true;
-    audio.volume = 0.3;
-    return audio;
+  const [playBgm, { stop: stopBgm }] = useSound(BGM_URL, { 
+    loop: true, 
+    volume: isMuted ? 0 : 0.3 
   });
+  
+  const [playClickSound] = useSound(CLICK_URL, { volume: isMuted ? 0 : 0.6 });
+  const [playPopSound] = useSound(POP_URL, { volume: isMuted ? 0 : 0.8 });
+  const [playWinSound] = useSound(WIN_URL, { volume: isMuted ? 0 : 0.7 });
 
-  const [clickAudio] = useState(() => new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_24b40dc079.mp3?filename=click-button-140881.mp3'));
-  const [popAudio] = useState(() => new Audio('https://cdn.pixabay.com/download/audio/2021/08/09/audio_6b24baeb5f.mp3?filename=pop-39222.mp3'));
-  const [winAudio] = useState(() => new Audio('https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c1539c.mp3?filename=success-1-6297.mp3'));
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('xiaolegexiao-muted', JSON.stringify(isMuted));
-    if (isMuted) {
-      bgm.pause();
+    if (!isMuted && hasInteracted) {
+      playBgm();
     } else {
-      // Browsers require user interaction before playing audio
-      const playBgm = () => {
-        bgm.play().catch(e => console.log("BGM play failed, waiting for user interaction", e));
-        document.removeEventListener('click', playBgm);
-      };
-      document.addEventListener('click', playBgm);
-      bgm.play().catch(() => {}); // Try to play immediately if possible
-      
-      return () => document.removeEventListener('click', playBgm);
+      stopBgm();
     }
-  }, [isMuted, bgm]);
+  }, [isMuted, hasInteracted, playBgm, stopBgm]);
+
+  useEffect(() => {
+    const handleInteraction = () => {
+      setHasInteracted(true);
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+    };
+    
+    document.addEventListener('click', handleInteraction);
+    document.addEventListener('keydown', handleInteraction);
+    
+    return () => {
+      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener('keydown', handleInteraction);
+    };
+  }, []);
 
   const toggleMute = () => setIsMuted(!isMuted);
-
-  const playSound = (audio: HTMLAudioElement) => {
-    if (isMuted) return;
-    audio.currentTime = 0;
-    audio.play().catch(e => console.log("Audio play failed", e));
-  };
-
-  const playClick = () => playSound(clickAudio);
-  const playPop = () => playSound(popAudio);
-  const playWin = () => playSound(winAudio);
+  const playClick = () => !isMuted && playClickSound();
+  const playPop = () => !isMuted && playPopSound();
+  const playWin = () => !isMuted && playWinSound();
 
   return (
     <AudioContext.Provider value={{ isMuted, toggleMute, playClick, playPop, playWin }}>
