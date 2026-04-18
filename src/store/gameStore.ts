@@ -356,6 +356,10 @@ export const useGameStore = create<GameState>()(
       resetAllProgress: () => {
         set({
           currentLevel: 1,
+          cards: [],
+          slot: [],
+          isGameOver: false,
+          isWin: false,
           normalCleared: 0,
           hardCleared: 0,
           eliteCleared: 0,
@@ -364,7 +368,7 @@ export const useGameStore = create<GameState>()(
           unlockedPatterns: ['🍎'],
           unlockedSkins: ['default'],
         });
-      }
+      },
     }),
     {
       name: 'xiaolegexiao-storage',
