@@ -305,16 +305,15 @@ export const useGameStore = create<GameState>()(
           get().checkWinLose();
         } 
         else if (propType === 'shuffle') {
-          // Shuffle all idle cards' positions
+          // Shuffle all idle cards' types
           const idleCards = state.cards.filter(c => c.status === 'idle');
-          const positions = idleCards.map(c => ({ layer: c.layer, x: c.x, y: c.y }));
-          const shuffledPositions = shuffle(positions);
+          const types = idleCards.map(c => c.type);
+          const shuffledTypes = shuffle(types);
           
-          let posIndex = 0;
+          let typeIndex = 0;
           const newCards = state.cards.map(c => {
             if (c.status === 'idle') {
-              const p = shuffledPositions[posIndex++];
-              return { ...c, layer: p.layer, x: p.x, y: p.y };
+              return { ...c, type: shuffledTypes[typeIndex++] };
             }
             return c;
           });
