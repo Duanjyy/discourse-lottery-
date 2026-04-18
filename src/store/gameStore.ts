@@ -79,7 +79,6 @@ export interface GameState {
   clickCard: (id: string) => void;
   useProp: (propType: 'remove' | 'hint' | 'shuffle' | 'expand') => void;
   resetGame: () => void;
-  resetAllProgress: () => void;
   getCoveredStatus: () => Record<string, boolean>;
   removeEliminatedFromSlot: (type: string) => void;
   checkWinLose: () => void;
@@ -351,23 +350,6 @@ export const useGameStore = create<GameState>()(
       resetGame: () => {
         const state = get();
         state.initGame(state.currentLevel);
-      },
-
-      resetAllProgress: () => {
-        set({
-          currentLevel: 1,
-          cards: [],
-          slot: [],
-          isGameOver: false,
-          isWin: false,
-          normalCleared: 0,
-          hardCleared: 0,
-          eliteCleared: 0,
-          fragments: 0,
-          points: 0,
-          unlockedPatterns: ['🍎'],
-          unlockedSkins: ['default'],
-        });
       },
     }),
     {
