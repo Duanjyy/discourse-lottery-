@@ -12,7 +12,11 @@ export default function Home() {
   const hasInProgressGame = cards && cards.length > 0 && !isGameOver && !isWin;
 
   const handleStart = (level: number) => {
-    initGame(level);
+    // Prevent UI jumping by not updating Zustand state synchronously before navigation
+    // We use setTimeout to allow navigation to happen first
+    setTimeout(() => {
+      initGame(level);
+    }, 10);
     navigate('/game');
   };
 
