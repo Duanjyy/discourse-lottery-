@@ -6,6 +6,7 @@ import { grade3Data } from '../data/grade3';
 import { grade4Data } from '../data/grade4';
 import { grade5Data } from '../data/grade5';
 import { grade6Data } from '../data/grade6';
+import { readingData } from '../data/reading';
 
 const getRandomItems = <T>(array: T[], count: number): T[] => {
   const shuffled = [...array].sort(() => 0.5 - Math.random());
@@ -255,6 +256,19 @@ const generateProblemByType = (type: TopicType, grade: number, count: number, is
           type,
           content: `${isGrouped ? '' : '仿写句子：\n'}例：${item.example}\n仿：(                                                                      )`,
           answer: '（略）',
+        });
+        break;
+      }
+      case 'reading': {
+        const data = readingData.filter(d => d.grade <= grade);
+        const source = data.length > 0 ? data[data.length - 1] : readingData[0];
+        const item = getRandomItems([source], 1)[0];
+        problems.push({
+          id,
+          type,
+          content: `${item.title}\n\n　　${item.content}`,
+          questions: item.questions,
+          answer: item.questions.map((q, i) => `${i + 1}. ${q.a}`).join('\n'),
         });
         break;
       }

@@ -22,7 +22,8 @@ export type TopicType =
   | 'proverb'
   | 'literature'
   | 'classical_chinese'
-  | 'imitate_sentence';
+  | 'imitate_sentence'
+  | 'reading';
 
 export interface ChineseProblem {
   id: string;
@@ -31,6 +32,7 @@ export interface ChineseProblem {
   options?: string[]; // 选项（如果是选择题）
   answer: string; // 答案
   pinyin?: string; // 拼音（如果是拼音题）
+  questions?: { q: string; a: string }[]; // 阅读理解的小题
   isContinued?: boolean; // 是否是跨页的续题标记
 }
 

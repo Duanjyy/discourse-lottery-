@@ -26,6 +26,7 @@ export const allTopics: TopicConfig[] = [
   { id: 'literature', name: '文学常识填空', enabled: false, columns: 1, count: 'auto' },
   { id: 'classical_chinese', name: '文言文加点字解释', enabled: false, columns: 1, count: 'auto' },
   { id: 'imitate_sentence', name: '仿写句子', enabled: false, columns: 1, count: 'auto' },
+  { id: 'reading', name: '阅读理解', enabled: false, columns: 1, count: 1 },
 ];
 
 const initialState = {

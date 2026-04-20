@@ -52,6 +52,39 @@ export const ProblemRenderer = ({ problem, index }: Props) => {
           </div>
         );
 
+      case 'reading': {
+        const lines = problem.content.split('\n');
+        const title = lines[0];
+        const body = lines.slice(1).join('\n');
+        
+        return (
+          <div className="flex flex-col w-full text-base text-zinc-800">
+            <h3 className="text-center font-bold text-lg mb-4 tracking-widest">{title}</h3>
+            <div className="leading-loose mb-6 whitespace-pre-wrap indent-8 text-justify">{body}</div>
+            
+            <div className="space-y-8 pl-4">
+              {problem.questions?.map((q, i) => (
+                <div key={i} className="flex flex-col gap-3">
+                  <div className="flex gap-2">
+                    <span className="font-medium shrink-0">{i + 1}.</span>
+                    <span>{q.q}</span>
+                  </div>
+                  <div className="w-full mt-2">
+                    <div className="w-full h-8 border-b border-emerald-500" />
+                    <div className="w-full h-8 border-b border-emerald-500" />
+                  </div>
+                  {store.answerMode === 'inline' && (
+                    <div className="text-red-500 text-sm mt-1 border-t border-red-100 pt-1">
+                      答：{q.a}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
       default:
         return (
           <div className="flex flex-col">
