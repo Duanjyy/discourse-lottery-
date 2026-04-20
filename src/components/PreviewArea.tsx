@@ -73,8 +73,8 @@ export const PreviewArea = () => {
   };
 
   return (
-    <div className="flex-1 bg-zinc-100 h-screen overflow-y-auto custom-scrollbar relative flex flex-col items-center py-10 print:py-0 print:bg-white overflow-x-auto">
-      <div className="absolute top-6 right-8 flex gap-3 no-print z-50">
+    <div className="flex-1 bg-zinc-100 h-screen overflow-auto custom-scrollbar relative flex flex-col py-10 print:py-0 print:bg-white print:overflow-visible">
+      <div className="fixed top-6 right-8 flex gap-3 no-print z-50">
         <button
           onClick={handlePrint}
           disabled={isMeasuring || store.problems.length === 0}
@@ -108,7 +108,7 @@ export const PreviewArea = () => {
         </div>
       )}
 
-      <div className="flex flex-row gap-8 px-8 items-start min-w-max pb-20 print:flex-col print:px-0 print:gap-0 print:w-full print:min-w-0">
+      <div className="flex flex-row gap-8 px-12 items-start w-max mx-auto pb-20 print:flex-col print:px-0 print:gap-0 print:w-full print:min-w-0 print:mx-0">
         {pages.map((page, index) => (
           <div key={page.id} id={`paper-${index}`} className="print:break-after-page print:w-full">
             <Paper page={page} />
