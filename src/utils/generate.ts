@@ -39,7 +39,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
           id,
           type,
           content: word, // Content is actually the answer in this case, we need to show pinyin
-          pinyin: pinyin(word, { toneType: 'num', type: 'array' }).join(' '),
+          pinyin: pinyin(word, { toneType: 'symbol', type: 'array' }).join(' '),
           answer: word,
         });
         break;
