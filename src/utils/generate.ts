@@ -6,7 +6,6 @@ import { grade3Data } from '../data/grade3';
 import { grade4Data } from '../data/grade4';
 import { grade5Data } from '../data/grade5';
 import { grade6Data } from '../data/grade6';
-import { readingData } from '../data/reading';
 
 const getRandomItems = <T>(array: T[], count: number): T[] => {
   const shuffled = [...array].sort(() => 0.5 - Math.random());
@@ -16,12 +15,9 @@ const getRandomItems = <T>(array: T[], count: number): T[] => {
 const generateProblemByType = (type: TopicType, grade: number, count: number, isGrouped: boolean): ChineseProblem[] => {
   const problems: ChineseProblem[] = [];
   
-  // A helper to pick random word/char from all available data across grades if needed, 
-  // or specifically from the current grade. For simplicity, we fallback to lower grades if data is missing.
   let words = [...grade1Data.words, ...grade2Data.words, ...grade3Data.words, ...grade4Data.words, ...grade5Data.words, ...grade6Data.words];
   let chars = [...grade1Data.chars, ...grade2Data.dictionary_chars];
 
-  // Specific grade data
   if (grade === 1) {
     words = grade1Data.words;
     chars = grade1Data.chars;
@@ -127,7 +123,6 @@ const generateProblemByType = (type: TopicType, grade: number, count: number, is
       }
       case 'idiom': {
         const item = getRandomItems(grade3Data.idioms, 1)[0];
-        // Replace the answer characters inside the parentheses with spaces
         const content = item.word.replace(/\(.*?\)/g, '(    )');
         problems.push({
           id,
@@ -256,24 +251,6 @@ const generateProblemByType = (type: TopicType, grade: number, count: number, is
           type,
           content: `${isGrouped ? '' : '仿写句子：\n'}例：${item.example}\n仿：(                                                                      )`,
           answer: '（略）',
-        });
-        break;
-      }
-      case 'reading': {
-        // Find all reading materials that are suitable for the current grade (or lower grades if current grade is missing)
-        const availableData = readingData.filter(d => d.grade <= grade);
-        
-        // If there are multiple articles for the current grade or below, pick one randomly.
-        // If the array is empty (which shouldn't happen with our data), fallback to the first one.
-        const sourcePool = availableData.length > 0 ? availableData : [readingData[0]];
-        const item = getRandomItems(sourcePool, 1)[0];
-        
-        problems.push({
-          id,
-          type,
-          content: `${item.title}\n\n　　${item.content}`,
-          questions: item.questions,
-          answer: item.questions.map((q, i) => `${i + 1}. ${q.a}`).join('\n'),
         });
         break;
       }

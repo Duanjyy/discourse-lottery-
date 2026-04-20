@@ -26,7 +26,6 @@ export const allTopics: TopicConfig[] = [
   { id: 'literature', name: '文学常识填空', enabled: false, columns: 1, count: 'auto' },
   { id: 'classical_chinese', name: '文言文加点字解释', enabled: false, columns: 1, count: 'auto' },
   { id: 'imitate_sentence', name: '仿写句子', enabled: false, columns: 1, count: 'auto' },
-  { id: 'reading', name: '阅读理解', enabled: false, columns: 1, count: 1 },
 ];
 
 const initialState = {
@@ -69,17 +68,19 @@ export const useAppStore = create<AppStore>()(
     }),
     {
       name: 'chinese-practice-generator-storage',
-      version: 1, // Added version for migration
-      migrate: (persistedState: any, version: number) => {
-        if (version === 0) {
-          // If migrating from v0 to v1, we need to add the missing 'reading' topic
-          const state = persistedState as AppState;
-          if (!state.topics.find(t => t.id === 'reading')) {
-            state.topics.push({ id: 'reading', name: '阅读理解', enabled: false, columns: 1, count: 1 });
-          }
-          return state;
-        }
-        return persistedState;
+      version: 2,
+      migrate: (persistedState: unknown) => {
+        const state = persistedState as Partial<AppStore> | undefined;
+        if (!state || !Array.isArray(state.topics)) return persistedState as AppStore;
+
+        const map = new Map(state.topics.map(t => [t.id, t]));
+        return {
+          ...state,
+          topics: allTopics.map((t) => {
+            const old = map.get(t.id);
+            return old ? { ...t, ...old, name: t.name } : t;
+          }),
+        } as AppStore;
       },
       partialize: (state) => ({
         grade: state.grade,
