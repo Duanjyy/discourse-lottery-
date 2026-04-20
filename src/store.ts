@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { AppStore, TopicConfig, TopicType } from './types';
+import { AppStore, TopicConfig } from './types';
 import { arrayMove } from '@dnd-kit/sortable';
 
 export const allTopics: TopicConfig[] = [

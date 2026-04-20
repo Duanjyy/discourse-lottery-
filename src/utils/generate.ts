@@ -1,5 +1,5 @@
 import { pinyin } from 'pinyin-pro';
-import { AppState, ChineseProblem, TopicConfig, TopicType } from '../types';
+import { AppState, ChineseProblem, TopicType } from '../types';
 import { grade1Data } from '../data/grade1';
 import { grade2Data } from '../data/grade2';
 import { grade3Data } from '../data/grade3';
@@ -285,7 +285,7 @@ export const generateProblems = (state: AppState): ChineseProblem[] => {
     }
   });
 
-  let remainingCount = Math.max(0, state.totalCount - fixedCountSum);
+  const remainingCount = Math.max(0, state.totalCount - fixedCountSum);
   const autoCountPerTopic = autoCountTopics > 0 ? Math.floor(remainingCount / autoCountTopics) : 0;
 
   const problems: ChineseProblem[] = [];

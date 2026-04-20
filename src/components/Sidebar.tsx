@@ -1,6 +1,7 @@
 import { useAppStore } from '../store';
 import { DraggableTopicList } from './DraggableTopicList';
 import { generateProblems } from '../utils/generate';
+import { Difficulty, AppState } from '../types';
 
 export const Sidebar = () => {
   const store = useAppStore();
@@ -45,7 +46,7 @@ export const Sidebar = () => {
             ].map((d) => (
               <button
                 key={d.id}
-                onClick={() => store.setDifficulty(d.id as any)}
+                onClick={() => store.setDifficulty(d.id as Difficulty)}
                 className={`flex-1 py-1.5 text-sm rounded-md transition-colors ${store.difficulty === d.id ? 'bg-emerald-600 text-white' : 'bg-white border border-zinc-200 text-zinc-700 hover:border-emerald-500'}`}
               >
                 {d.label}
@@ -110,7 +111,7 @@ export const Sidebar = () => {
           <label className="text-sm text-zinc-600 block">留白辅助线</label>
           <select 
             value={store.guideline}
-            onChange={(e) => store.setGuideline(e.target.value as any)}
+            onChange={(e) => store.setGuideline(e.target.value as AppState['guideline'])}
             className="w-full p-2 text-sm border border-zinc-200 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             <option value="none">无辅助线</option>
@@ -134,7 +135,7 @@ export const Sidebar = () => {
           <label className="text-sm text-zinc-600 block">答案模式</label>
           <select 
             value={store.answerMode}
-            onChange={(e) => store.setAnswerMode(e.target.value as any)}
+            onChange={(e) => store.setAnswerMode(e.target.value as AppState['answerMode'])}
             className="w-full p-2 text-sm border border-zinc-200 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             <option value="none">不附答案</option>

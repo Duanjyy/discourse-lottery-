@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { TopicConfig } from '../types';
+import { TopicConfig, ColumnCount } from '../types';
 import { useAppStore } from '../store';
 import { GripVertical } from 'lucide-react';
 import clsx from 'clsx';
@@ -65,7 +65,7 @@ export const SortableTopicItem = ({ topic }: Props) => {
             <span className="text-zinc-500">列数</span>
             <select
               value={topic.columns}
-              onChange={(e) => store.updateTopic(topic.id, { columns: e.target.value as any })}
+              onChange={(e) => store.updateTopic(topic.id, { columns: (e.target.value === 'auto' ? 'auto' : Number(e.target.value)) as ColumnCount })}
               className="border border-zinc-200 rounded p-1 text-zinc-700 outline-none focus:border-emerald-500"
             >
               <option value="auto">自动</option>
