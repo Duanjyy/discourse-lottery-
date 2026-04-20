@@ -44,8 +44,8 @@ export const ProblemRenderer = ({ problem, index }: Props) => {
       case 'char_to_pinyin':
         return (
           <div className="flex flex-col items-center">
-            <div className="flex mb-1">{renderGuideline(problem.content.length, 'pinyin')}</div>
-            <div className="text-2xl tracking-widest font-serif">{problem.content}</div>
+            <div className="flex mb-2">{renderGuideline(problem.content.length, 'pinyin')}</div>
+            <div className="text-3xl tracking-[1.5rem] ml-[1.5rem] font-serif">{problem.content}</div>
             {store.answerMode === 'inline' && (
               <div className="text-red-500 mt-1">{problem.answer}</div>
             )}
