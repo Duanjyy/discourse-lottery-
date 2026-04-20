@@ -69,6 +69,18 @@ export const useAppStore = create<AppStore>()(
     }),
     {
       name: 'chinese-practice-generator-storage',
+      version: 1, // Added version for migration
+      migrate: (persistedState: any, version: number) => {
+        if (version === 0) {
+          // If migrating from v0 to v1, we need to add the missing 'reading' topic
+          const state = persistedState as AppState;
+          if (!state.topics.find(t => t.id === 'reading')) {
+            state.topics.push({ id: 'reading', name: '阅读理解', enabled: false, columns: 1, count: 1 });
+          }
+          return state;
+        }
+        return persistedState;
+      },
       partialize: (state) => ({
         grade: state.grade,
         difficulty: state.difficulty,
