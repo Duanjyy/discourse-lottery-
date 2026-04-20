@@ -126,10 +126,12 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
       }
       case 'idiom': {
         const item = getRandomItems(grade3Data.idioms, 1)[0];
+        // Replace the answer characters inside the parentheses with spaces
+        const content = item.word.replace(/\(.*?\)/g, '(    )');
         problems.push({
           id,
           type,
-          content: `补充成语：${item.word}`,
+          content: `补充成语：${content}`,
           answer: item.answer.join('、'),
         });
         break;
