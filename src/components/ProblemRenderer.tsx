@@ -10,14 +10,16 @@ interface Props {
 export const ProblemRenderer = ({ problem, index }: Props) => {
   const store = useAppStore();
 
-  const renderGuideline = (count: number) => {
+  const renderGuideline = (count: number, forceType?: 'tianzige' | 'pinyin' | 'underline') => {
+    const type = forceType || store.guideline;
+    
     return Array.from({ length: count }).map((_, i) => (
       <div key={i} className="inline-flex flex-col items-center mx-0.5">
-        {store.guideline === 'pinyin' && <div className="pinyin-line" />}
-        {(store.guideline === 'tianzige' || store.guideline === 'pinyin') && (
+        {type === 'pinyin' && <div className="pinyin-line" />}
+        {type === 'tianzige' && (
           <div className="tianzige" />
         )}
-        {store.guideline === 'underline' && (
+        {type === 'underline' && (
           <div className="w-10 h-6 border-b border-emerald-500 inline-block" />
         )}
       </div>
@@ -29,10 +31,10 @@ export const ProblemRenderer = ({ problem, index }: Props) => {
       case 'pinyin_to_char':
         return (
           <div className="flex flex-col items-center">
-            <div className="text-emerald-700 font-medium mb-1 tracking-widest text-sm">
+            <div className="text-emerald-700 font-medium mb-1 tracking-widest text-sm h-5">
               {problem.pinyin}
             </div>
-            <div className="flex">{renderGuideline(problem.answer.length)}</div>
+            <div className="flex">{renderGuideline(problem.answer.length, 'tianzige')}</div>
             {store.answerMode === 'inline' && (
               <div className="text-red-500 mt-1">{problem.answer}</div>
             )}
@@ -42,8 +44,8 @@ export const ProblemRenderer = ({ problem, index }: Props) => {
       case 'char_to_pinyin':
         return (
           <div className="flex flex-col items-center">
-            <div className="flex mb-1">{renderGuideline(problem.content.length)}</div>
-            <div className="text-lg tracking-widest">{problem.content}</div>
+            <div className="flex mb-1">{renderGuideline(problem.content.length, 'pinyin')}</div>
+            <div className="text-2xl tracking-widest font-serif">{problem.content}</div>
             {store.answerMode === 'inline' && (
               <div className="text-red-500 mt-1">{problem.answer}</div>
             )}
