@@ -260,9 +260,14 @@ const generateProblemByType = (type: TopicType, grade: number, count: number, is
         break;
       }
       case 'reading': {
-        const data = readingData.filter(d => d.grade <= grade);
-        const source = data.length > 0 ? data[data.length - 1] : readingData[0];
-        const item = getRandomItems([source], 1)[0];
+        // Find all reading materials that are suitable for the current grade (or lower grades if current grade is missing)
+        const availableData = readingData.filter(d => d.grade <= grade);
+        
+        // If there are multiple articles for the current grade or below, pick one randomly.
+        // If the array is empty (which shouldn't happen with our data), fallback to the first one.
+        const sourcePool = availableData.length > 0 ? availableData : [readingData[0]];
+        const item = getRandomItems(sourcePool, 1)[0];
+        
         problems.push({
           id,
           type,
