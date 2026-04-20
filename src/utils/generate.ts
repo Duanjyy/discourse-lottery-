@@ -12,7 +12,7 @@ const getRandomItems = <T>(array: T[], count: number): T[] => {
   return shuffled.slice(0, count);
 };
 
-const generateProblemByType = (type: TopicType, grade: number, count: number): ChineseProblem[] => {
+const generateProblemByType = (type: TopicType, grade: number, count: number, isGrouped: boolean): ChineseProblem[] => {
   const problems: ChineseProblem[] = [];
   
   // A helper to pick random word/char from all available data across grades if needed, 
@@ -69,7 +69,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `写出反义词：${item.word1} — (    )`,
+          content: `${isGrouped ? '' : '写出反义词：'}${item.word1} — (    )`,
           answer: item.word2,
         });
         break;
@@ -119,7 +119,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `多音字组词：${item.char} (    ) (    )`,
+          content: `${isGrouped ? '' : '多音字组词：'}${item.char} (    ) (    )`,
           answer: item.pinyins.join(' / '),
         });
         break;
@@ -131,7 +131,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `补充成语：${content}`,
+          content: `${isGrouped ? '' : '补充成语：'}${content}`,
           answer: item.answer.join('、'),
         });
         break;
@@ -142,7 +142,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `修改病句：${item.wrong}`,
+          content: `${isGrouped ? '' : '修改病句：'}${item.wrong}`,
           answer: item.correct,
         });
         break;
@@ -152,7 +152,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `关联词填空：${item.text}`,
+          content: `${isGrouped ? '' : '关联词填空：'}${item.text}`,
           answer: item.answer.join('、'),
         });
         break;
@@ -162,7 +162,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `改成${item.type === 'ba' ? '“把”' : '“被”'}字句：${item.original}`,
+          content: `${isGrouped ? '' : `改成${item.type === 'ba' ? '“把”' : '“被”'}字句：`}${item.original}`,
           answer: item.answer,
         });
         break;
@@ -172,7 +172,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `${item.type === 'expand' ? '扩句' : '缩句'}：${item.original}`,
+          content: `${isGrouped ? '' : `${item.type === 'expand' ? '扩句' : '缩句'}：`}${item.original}`,
           answer: item.answer,
         });
         break;
@@ -182,7 +182,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `指出下面句子的修辞手法：${item.sentence}`,
+          content: `${isGrouped ? '' : '指出下面句子的修辞手法：'}${item.sentence}`,
           answer: item.answer,
         });
         break;
@@ -203,7 +203,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `直接引语与间接引语转换：${item.original}`,
+          content: `${isGrouped ? '' : '直接引语与间接引语转换：'}${item.original}`,
           answer: item.answer,
         });
         break;
@@ -213,7 +213,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `指出词语的感情色彩（褒义词/贬义词）：${item.word}`,
+          content: `${isGrouped ? '' : '指出词语的感情色彩（褒义词/贬义词）：'}${item.word}`,
           answer: item.answer,
         });
         break;
@@ -223,7 +223,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `补充歇后语：${item.up} —— (                  )`,
+          content: `${isGrouped ? '' : '补充歇后语：'}${item.up} —— (                  )`,
           answer: item.down,
         });
         break;
@@ -233,7 +233,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `文学常识：${item.question}`,
+          content: `${isGrouped ? '' : '文学常识：'}${item.question}`,
           answer: item.answer,
         });
         break;
@@ -243,7 +243,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `解释加点字：${item.sentence}  “${item.word}”的意思是(                  )`,
+          content: `${isGrouped ? '' : '解释加点字：'}${item.sentence}  “${item.word}”的意思是(                  )`,
           answer: item.answer,
         });
         break;
@@ -253,7 +253,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number): C
         problems.push({
           id,
           type,
-          content: `仿写句子：\n例：${item.example}\n仿：(                                                                      )`,
+          content: `${isGrouped ? '' : '仿写句子：\n'}例：${item.example}\n仿：(                                                                      )`,
           answer: '（略）',
         });
         break;
@@ -295,7 +295,7 @@ export const generateProblems = (state: AppState): ChineseProblem[] => {
   enabledTopics.forEach(t => {
     const count = t.count === 'auto' ? autoCountPerTopic : t.count;
     if (count > 0) {
-      problems.push(...generateProblemByType(t.id, state.grade, count));
+      problems.push(...generateProblemByType(t.id, state.grade, count, state.isGrouped));
     }
   });
 
