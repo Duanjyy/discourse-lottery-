@@ -73,7 +73,7 @@ export const PreviewArea = () => {
   };
 
   return (
-    <div className="w-full bg-slate-100/50 h-full overflow-y-auto custom-scrollbar relative flex flex-col items-center py-10 print:py-0 print:bg-white print:overflow-visible">
+    <div className="w-full bg-slate-100/50 absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col items-center py-10 print:py-0 print:bg-white print:overflow-visible">
       <div className="fixed bottom-8 right-8 flex flex-col gap-3 no-print z-30">
         <div className="bg-white/90 backdrop-blur-md p-1.5 rounded-2xl shadow-xl border border-slate-200/60 flex flex-col gap-1">
           <button
