@@ -163,36 +163,36 @@ export const SettingsPanel = () => {
             <div className="flex-1 p-8 overflow-y-auto custom-scrollbar">
               {activeTab === 'topics' && (
                 <div className="max-w-2xl mx-auto space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                  <div>
-                    <h2 className="text-lg font-bold text-slate-800">题型配置</h2>
-                    <p className="text-sm text-slate-500 mt-1">勾选需要的题型，拖拽可改变试卷上的顺序。</p>
+                  <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                    <div>
+                      <h2 className="text-lg font-bold text-slate-800">题型配置</h2>
+                      <p className="text-sm text-slate-500 mt-1">勾选需要的题型，拖拽可改变试卷上的顺序。</p>
+                    </div>
+                    <label className="flex items-center gap-2 cursor-pointer bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200 hover:bg-slate-100 transition-colors">
+                      <span className="text-sm font-medium text-slate-700">在试卷中显示大题标题</span>
+                      <input 
+                        type="checkbox" 
+                        checked={store.isGrouped} 
+                        onChange={(e) => store.setIsGrouped(e.target.checked)}
+                        className="w-4 h-4 rounded text-teal-600 focus:ring-teal-500 border-slate-300"
+                      />
+                    </label>
                   </div>
-                  <label className="flex items-center gap-2 cursor-pointer bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200 hover:bg-slate-100 transition-colors">
-                    <span className="text-sm font-medium text-slate-700">在试卷中显示大题标题</span>
-                    <input 
-                      type="checkbox" 
-                      checked={store.isGrouped} 
-                      onChange={(e) => store.setIsGrouped(e.target.checked)}
-                      className="w-4 h-4 rounded text-teal-600 focus:ring-teal-500 border-slate-300"
-                    />
-                  </label>
+                  
+                  <div className="w-full">
+                    <DraggableTopicList />
+                  </div>
                 </div>
-                
-                <div className="w-full">
-                  <DraggableTopicList />
-                </div>
-              </div>
-            )}
+              )}
 
-            {activeTab === 'layout' && (
+              {activeTab === 'layout' && (
                 <div className="max-w-3xl mx-auto space-y-8">
-                <div>
-                  <h2 className="text-lg font-bold text-slate-800">排版参数</h2>
-                  <p className="text-sm text-slate-500 mt-1">调整试卷的细节表现，实时生效。</p>
-                </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-slate-800">排版参数</h2>
+                    <p className="text-sm text-slate-500 mt-1">调整试卷的细节表现，实时生效。</p>
+                  </div>
 
-                <div className="grid grid-cols-2 gap-8">
+                  <div className="grid grid-cols-2 gap-8">
                   {/* Left Column */}
                   <div className="space-y-8">
                     <div className="space-y-4">
