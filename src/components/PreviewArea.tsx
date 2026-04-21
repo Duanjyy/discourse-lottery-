@@ -112,7 +112,8 @@ export const PreviewArea = () => {
         </div>
       )}
 
-      <div className="flex flex-col gap-8 pb-20 w-full items-center print:px-0 print:gap-0 print:w-full print:min-w-0 print:mx-0">
+      {/* Pages Container */}
+      <div className="grid grid-cols-1 2xl:grid-cols-2 gap-12 pb-20 px-8 w-fit mx-auto print:block print:px-0 print:gap-0 print:w-full print:mx-0">
         {pages.map((page, index) => (
           <div key={page.id} id={`paper-${index}`} className="print:break-after-page print:w-full">
             <Paper page={page} />
@@ -121,7 +122,7 @@ export const PreviewArea = () => {
         
         {/* Answers Section */}
         {store.answerMode === 'separate' && store.problems.length > 0 && !isMeasuring && (
-          <div className="shrink-0 w-[210mm] print:w-full print:break-before-page no-print mt-12 mb-20">
+          <div className="shrink-0 w-[210mm] print:w-full print:break-before-page no-print mb-20 2xl:col-span-1">
             <div className="bg-white shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)] rounded-lg mx-auto p-12 relative overflow-hidden text-slate-800 border-t-[12px] border-teal-600 min-h-[297mm]">
               <h2 className="text-2xl font-bold tracking-[0.2em] text-center text-slate-800 mb-10 pb-6 border-b-2 border-slate-100">
                 参考答案
