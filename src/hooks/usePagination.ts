@@ -14,7 +14,7 @@ export interface PageData {
 }
 
 const A4_HEIGHT_PX = 1122;
-const PAGE_PADDING_Y = 96; // 48px top + 48px bottom
+const PAGE_PADDING_Y = 72; // 48px top + 24px bottom (reduced bottom padding)
 const HEADER_HEIGHT = 160; // Estimated header height
 const USABLE_HEIGHT = A4_HEIGHT_PX - PAGE_PADDING_Y - HEADER_HEIGHT;
 

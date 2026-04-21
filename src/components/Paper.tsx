@@ -22,7 +22,7 @@ export const Paper = ({ page }: Props) => {
   };
 
   return (
-    <div className="w-[210mm] min-h-[297mm] bg-white shadow-xl mx-auto my-8 p-12 paper relative overflow-hidden text-zinc-900 flex-shrink-0">
+    <div className="w-[210mm] min-h-[297mm] bg-white shadow-xl mx-auto my-8 pt-12 px-12 pb-6 paper relative overflow-hidden text-zinc-900 flex-shrink-0">
       <div className="text-center mb-10 border-b-2 border-emerald-700 pb-6">
         <h1 className="text-3xl font-bold tracking-widest text-zinc-900 mb-6">
           小学{store.grade}年级语文专项练习
