@@ -249,7 +249,7 @@ const generateProblemByType = (type: TopicType, grade: number, count: number, is
         problems.push({
           id,
           type,
-          content: `${isGrouped ? '' : '仿写句子：\n'}例：${item.example}\n仿：(                                                                      )`,
+          content: `${isGrouped ? '' : '仿写句子：\n'}例：${item.example}\n仿：`,
           answer: '（略）',
         });
         break;

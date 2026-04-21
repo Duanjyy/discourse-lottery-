@@ -68,6 +68,24 @@ export const ProblemRenderer = ({ problem, index }: Props) => {
           </div>
         );
 
+      case 'imitate_sentence':
+        return (
+          <div className="flex flex-col">
+            <div className="text-[15px] leading-loose text-slate-800 break-words whitespace-pre-wrap tracking-wide">
+              {formatLongText(problem.content)}
+            </div>
+            <div className="w-full mt-2 pl-6">
+              <div className="w-[95%] h-8 border-b border-slate-400" />
+              <div className="w-[95%] h-8 border-b border-slate-400" />
+            </div>
+            {store.answerMode === 'inline' && problem.answer !== '（略）' && (
+              <div className="text-rose-500 text-sm mt-2 border-t border-rose-100 pt-1.5 w-fit">
+                答：{problem.answer}
+              </div>
+            )}
+          </div>
+        );
+
       default:
         return (
           <div className="flex flex-col">
