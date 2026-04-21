@@ -42,7 +42,11 @@ const generateProblemByType = (type: TopicType, grade: number, count: number, is
         break;
       }
       case 'char_to_pinyin': {
-        const word = getRandomItems(words, 1)[0];
+        // Find a word that hasn't been used yet in this batch, if possible
+        const availableWords = words.filter(w => !problems.some(p => p.type === 'char_to_pinyin' && p.content === w));
+        const pool = availableWords.length > 0 ? availableWords : words;
+        const word = getRandomItems(pool, 1)[0];
+        
         problems.push({
           id,
           type,
