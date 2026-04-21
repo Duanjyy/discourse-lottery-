@@ -1,6 +1,6 @@
 import { Paper } from './Paper';
 import { useAppStore } from '../store';
-import { Download, Printer, Image as ImageIcon, Loader2 } from 'lucide-react';
+import { Download, Printer, Image as ImageIcon, Loader2, BookOpen } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { usePagination } from '../hooks/usePagination';
@@ -73,12 +73,12 @@ export const PreviewArea = () => {
   };
 
   return (
-    <div className="flex-1 bg-zinc-100 h-screen overflow-y-auto custom-scrollbar relative flex flex-col items-center py-10 print:py-0 print:bg-white print:overflow-visible">
-      <div className="fixed top-6 right-8 flex gap-3 no-print z-50">
+    <div className="flex-1 bg-slate-100/50 h-screen overflow-y-auto custom-scrollbar relative flex flex-col items-center py-10 print:py-0 print:bg-white print:overflow-visible">
+      <div className="fixed top-6 right-8 flex gap-3 no-print z-50 bg-white/80 backdrop-blur-md p-1.5 rounded-xl shadow-sm border border-slate-200/60">
         <button
           onClick={handlePrint}
           disabled={isMeasuring || store.problems.length === 0}
-          className="flex items-center gap-2 px-4 py-2 bg-white border border-zinc-200 text-zinc-700 rounded-md hover:border-emerald-500 hover:text-emerald-600 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-4 py-2 bg-white text-slate-700 rounded-lg hover:bg-slate-50 hover:text-teal-600 transition-all shadow-sm border border-slate-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm"
         >
           <Printer size={16} />
           <span>打印</span>
@@ -86,7 +86,7 @@ export const PreviewArea = () => {
         <button
           onClick={handleExportPDF}
           disabled={isMeasuring || store.problems.length === 0}
-          className="flex items-center gap-2 px-4 py-2 bg-white border border-zinc-200 text-zinc-700 rounded-md hover:border-emerald-500 hover:text-emerald-600 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-4 py-2 bg-white text-slate-700 rounded-lg hover:bg-slate-50 hover:text-teal-600 transition-all shadow-sm border border-slate-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm"
         >
           <Download size={16} />
           <span>存为PDF</span>
@@ -94,7 +94,7 @@ export const PreviewArea = () => {
         <button
           onClick={handleExportImage}
           disabled={isMeasuring || store.problems.length === 0}
-          className="flex items-center gap-2 px-4 py-2 bg-white border border-zinc-200 text-zinc-700 rounded-md hover:border-emerald-500 hover:text-emerald-600 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-4 py-2 bg-white text-slate-700 rounded-lg hover:bg-slate-50 hover:text-teal-600 transition-all shadow-sm border border-slate-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm"
         >
           <ImageIcon size={16} />
           <span>存为图片</span>
@@ -102,9 +102,9 @@ export const PreviewArea = () => {
       </div>
 
       {isMeasuring && store.problems.length > 0 && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-100/80 z-40 backdrop-blur-sm no-print">
-          <Loader2 className="w-12 h-12 animate-spin text-emerald-600 mb-4" />
-          <p className="text-emerald-800 font-medium tracking-widest">正在智能排版中...</p>
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-100/80 z-40 backdrop-blur-sm no-print">
+          <Loader2 className="w-12 h-12 animate-spin text-teal-600 mb-4" />
+          <p className="text-teal-800 font-bold tracking-widest">正在智能排版中...</p>
         </div>
       )}
 
@@ -117,14 +117,16 @@ export const PreviewArea = () => {
         
         {/* Answers Section */}
         {store.answerMode === 'separate' && store.problems.length > 0 && !isMeasuring && (
-          <div className="shrink-0 w-[210mm] print:w-full print:break-before-page no-print">
-            <div className="bg-white shadow-xl mx-auto p-12 paper relative overflow-hidden text-zinc-900 border-t-8 border-emerald-600 min-h-[297mm]">
-              <h2 className="text-2xl font-bold tracking-widest text-center text-zinc-900 mb-8 border-b border-zinc-200 pb-4">参考答案</h2>
-              <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+          <div className="shrink-0 w-[210mm] print:w-full print:break-before-page no-print mt-12 mb-20">
+            <div className="bg-white shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)] rounded-lg mx-auto p-12 relative overflow-hidden text-slate-800 border-t-[12px] border-teal-600 min-h-[297mm]">
+              <h2 className="text-2xl font-bold tracking-[0.2em] text-center text-slate-800 mb-10 pb-6 border-b-2 border-slate-100">
+                参考答案
+              </h2>
+              <div className="grid grid-cols-2 gap-x-12 gap-y-6">
                 {store.problems.map((p, idx) => (
-                  <div key={p.id} className="flex gap-4 text-sm border-b border-zinc-100 pb-2 break-inside-avoid">
-                    <span className="font-bold text-zinc-500 shrink-0 w-6">{idx + 1}.</span>
-                    <span className="text-red-600 break-words flex-1">{p.answer}</span>
+                  <div key={p.id} className="flex gap-4 text-sm border-b border-slate-100 pb-3 break-inside-avoid hover:bg-slate-50 transition-colors px-2 rounded-t">
+                    <span className="font-bold text-slate-400 shrink-0 w-6 pt-0.5">{idx + 1}.</span>
+                    <span className="text-rose-600 break-words flex-1 font-medium leading-relaxed">{p.answer}</span>
                   </div>
                 ))}
               </div>
@@ -134,9 +136,11 @@ export const PreviewArea = () => {
       </div>
 
       {store.problems.length === 0 && !isMeasuring && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-zinc-400 bg-white shadow-xl mx-auto my-8 p-12 w-[210mm] min-h-[297mm]">
-          <div className="w-24 h-24 mb-4 opacity-20 border-4 border-dashed border-zinc-400 rounded-full" />
-          <p className="text-lg tracking-widest">请在左侧点击“一键生成试卷”</p>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-400 bg-white shadow-[0_0_40px_rgba(0,0,0,0.05)] mx-auto my-12 p-12 w-[210mm] min-h-[297mm] rounded-xl border border-slate-100">
+          <div className="w-24 h-24 mb-6 opacity-20 border-4 border-dashed border-slate-400 rounded-full flex items-center justify-center">
+            <BookOpen size={32} />
+          </div>
+          <p className="text-lg tracking-widest font-medium text-slate-500">请在左侧点击“一键生成试卷”</p>
         </div>
       )}
 
