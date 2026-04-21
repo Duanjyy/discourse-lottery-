@@ -193,8 +193,8 @@ export const SettingsPanel = () => {
                   </div>
 
                   <div className="grid grid-cols-2 gap-8">
-                  {/* Left Column */}
-                  <div className="space-y-8">
+                    {/* Left Column */}
+                    <div className="space-y-8">
                     <div className="space-y-4">
                       <label className="flex justify-between text-sm font-bold text-slate-700">
                         <span className="flex items-center gap-2"><Type size={16} className="text-teal-600"/> 题目总数</span>
@@ -293,6 +293,7 @@ export const SettingsPanel = () => {
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               )}
             </div>
