@@ -9,9 +9,10 @@ import {
   DragEndEvent
 } from '@dnd-kit/core';
 import { 
+  arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
+  rectSortingStrategy,
 } from '@dnd-kit/sortable';
 import { SortableTopicItem } from './SortableTopicItem';
 
@@ -39,7 +40,7 @@ export const DraggableTopicList = () => {
   };
 
   return (
-    <div className="space-y-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <DndContext 
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -47,7 +48,7 @@ export const DraggableTopicList = () => {
       >
         <SortableContext 
           items={topics.map(t => t.id)}
-          strategy={verticalListSortingStrategy}
+          strategy={rectSortingStrategy}
         >
           {topics.map((topic) => (
             <SortableTopicItem key={topic.id} topic={topic} />

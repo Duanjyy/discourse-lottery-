@@ -73,32 +73,36 @@ export const PreviewArea = () => {
   };
 
   return (
-    <div className="flex-1 bg-slate-100/50 h-screen overflow-y-auto custom-scrollbar relative flex flex-col items-center py-10 print:py-0 print:bg-white print:overflow-visible">
-      <div className="fixed top-6 right-8 flex gap-3 no-print z-50 bg-white/80 backdrop-blur-md p-1.5 rounded-xl shadow-sm border border-slate-200/60">
-        <button
-          onClick={handlePrint}
-          disabled={isMeasuring || store.problems.length === 0}
-          className="flex items-center gap-2 px-4 py-2 bg-white text-slate-700 rounded-lg hover:bg-slate-50 hover:text-teal-600 transition-all shadow-sm border border-slate-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm"
-        >
-          <Printer size={16} />
-          <span>打印</span>
-        </button>
-        <button
-          onClick={handleExportPDF}
-          disabled={isMeasuring || store.problems.length === 0}
-          className="flex items-center gap-2 px-4 py-2 bg-white text-slate-700 rounded-lg hover:bg-slate-50 hover:text-teal-600 transition-all shadow-sm border border-slate-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm"
-        >
-          <Download size={16} />
-          <span>存为PDF</span>
-        </button>
-        <button
-          onClick={handleExportImage}
-          disabled={isMeasuring || store.problems.length === 0}
-          className="flex items-center gap-2 px-4 py-2 bg-white text-slate-700 rounded-lg hover:bg-slate-50 hover:text-teal-600 transition-all shadow-sm border border-slate-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm"
-        >
-          <ImageIcon size={16} />
-          <span>存为图片</span>
-        </button>
+    <div className="w-full bg-slate-100/50 h-full overflow-y-auto custom-scrollbar relative flex flex-col items-center py-10 print:py-0 print:bg-white print:overflow-visible">
+      <div className="fixed bottom-8 right-8 flex flex-col gap-3 no-print z-30">
+        <div className="bg-white/90 backdrop-blur-md p-1.5 rounded-2xl shadow-xl border border-slate-200/60 flex flex-col gap-1">
+          <button
+            onClick={handlePrint}
+            disabled={isMeasuring || store.problems.length === 0}
+            className="flex items-center justify-center gap-2 p-3 bg-white text-slate-700 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
+            title="打印"
+          >
+            <Printer size={20} className="group-hover:scale-110 transition-transform" />
+          </button>
+          <div className="w-8 h-px bg-slate-200 mx-auto" />
+          <button
+            onClick={handleExportPDF}
+            disabled={isMeasuring || store.problems.length === 0}
+            className="flex items-center justify-center gap-2 p-3 bg-white text-slate-700 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
+            title="存为PDF"
+          >
+            <Download size={20} className="group-hover:scale-110 transition-transform" />
+          </button>
+          <div className="w-8 h-px bg-slate-200 mx-auto" />
+          <button
+            onClick={handleExportImage}
+            disabled={isMeasuring || store.problems.length === 0}
+            className="flex items-center justify-center gap-2 p-3 bg-white text-slate-700 rounded-xl hover:bg-teal-50 hover:text-teal-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed group"
+            title="存为图片"
+          >
+            <ImageIcon size={20} className="group-hover:scale-110 transition-transform" />
+          </button>
+        </div>
       </div>
 
       {isMeasuring && store.problems.length > 0 && (

@@ -34,8 +34,8 @@ export const SortableTopicItem = ({ topic }: Props) => {
       ref={setNodeRef}
       style={style}
       className={clsx(
-        "flex flex-col p-3 rounded-xl border border-slate-200 bg-white shadow-sm transition-all hover:border-slate-300 hover:shadow",
-        isDragging && "opacity-60 shadow-lg scale-105 z-10 relative border-teal-400"
+        "flex flex-col p-4 rounded-xl border border-slate-200 bg-white shadow-sm transition-all hover:border-slate-300 hover:shadow break-inside-avoid h-fit",
+        isDragging && "opacity-60 shadow-lg scale-[1.02] z-10 relative border-teal-400 bg-teal-50/50"
       )}
     >
       <div className="flex items-center gap-3">
