@@ -1,4 +1,4 @@
-# 【Code With SOLO】用SOLO搓一个小学语文题目生成器
+# 【Code With SOLO】继数学题之后，我又用 SOLO 搓了一个小学语文题目生成器
 
 ## 1. 摘要
 
