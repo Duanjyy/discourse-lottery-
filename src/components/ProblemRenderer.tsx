@@ -68,23 +68,6 @@ export const ProblemRenderer = ({ problem, index }: Props) => {
           </div>
         );
 
-      case 'word_to_pinyin':
-        return (
-          <div className="flex flex-col items-center gap-1 mt-1">
-            <div className="flex gap-1">
-              {Array.from(problem.content).map((_, i) => (
-                <div key={i} className="pinyin-line" />
-              ))}
-            </div>
-            <div className="text-xl tracking-[0.5em] font-serif text-slate-800 ml-[0.25em]">
-              {problem.content}
-            </div>
-            {store.answerMode === 'inline' && problem.pinyin && (
-              <div className="text-rose-500 text-sm mt-1">{problem.pinyin}</div>
-            )}
-          </div>
-        );
-
       case 'imitate_sentence':
         return (
           <div className="flex flex-col">
