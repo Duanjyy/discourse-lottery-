@@ -26,6 +26,22 @@ export const ProblemRenderer = ({ problem, index }: Props) => {
     ));
   };
 
+  const formatLongText = (text: string) => {
+    // Split the text by (...) to style the parentheses separately
+    const parts = text.split(/(\([^)]*\))/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('(') && part.endsWith(')')) {
+        // Increase the size of the parentheses and add some horizontal tracking inside
+        return (
+          <span key={i} className="text-xl mx-1 tracking-[0.25em] font-medium text-slate-500 inline-block translate-y-[2px]">
+            {part}
+          </span>
+        );
+      }
+      return <span key={i}>{part}</span>;
+    });
+  };
+
   const renderContent = () => {
     switch (problem.type) {
       case 'pinyin_to_char':
@@ -55,11 +71,11 @@ export const ProblemRenderer = ({ problem, index }: Props) => {
       default:
         return (
           <div className="flex flex-col">
-            <div className="text-base leading-relaxed text-zinc-800 break-words whitespace-pre-wrap">
-              {problem.content}
+            <div className="text-[15px] leading-loose text-slate-800 break-words whitespace-pre-wrap tracking-wide">
+              {formatLongText(problem.content)}
             </div>
             {store.answerMode === 'inline' && problem.answer !== '（略）' && (
-              <div className="text-red-500 text-sm mt-1 border-t border-red-100 pt-1 w-fit">
+              <div className="text-rose-500 text-sm mt-2 border-t border-rose-100 pt-1.5 w-fit">
                 答：{problem.answer}
               </div>
             )}
