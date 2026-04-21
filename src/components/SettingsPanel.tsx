@@ -80,7 +80,7 @@ export const SettingsPanel = () => {
           >
             <Settings2 size={16} />
             <span>高级配置</span>
-            <ChevronDown size={16} className={clsx("transition-transform duration-300", isExpanded && "rotate-180")} />
+            <ChevronDown size={16} className={clsx("transition-transform duration-300", isExpanded ? "rotate-0" : "rotate-180")} />
           </button>
 
           <button 
@@ -93,10 +93,10 @@ export const SettingsPanel = () => {
         </div>
       </div>
 
-      {/* Expandable Settings Panel */}
+      {/* Expandable Settings Panel - Slides up from bottom */}
       <div className={clsx(
-        "absolute top-16 left-0 right-0 bg-white border-b border-slate-200 shadow-2xl shadow-slate-900/10 transition-all duration-300 ease-in-out origin-top overflow-hidden z-50",
-        isExpanded ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0 h-0 border-transparent"
+        "fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-[0_-20px_40px_-10px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out z-50",
+        isExpanded ? "translate-y-0" : "translate-y-full"
       )}>
         <div className="max-w-6xl mx-auto flex h-[500px]">
           
