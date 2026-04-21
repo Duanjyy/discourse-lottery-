@@ -1,15 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAppStore } from '../store';
 import { DraggableTopicList } from './DraggableTopicList';
 import { generateProblems } from '../utils/generate';
 import { Difficulty, AppState } from '../types';
-import { Settings2, Layers, Type, BookOpen, ChevronDown, Sparkles, SlidersHorizontal, Settings } from 'lucide-react';
+import { Settings2, Layers, Type, BookOpen, Sparkles, SlidersHorizontal, Settings, X } from 'lucide-react';
 import clsx from 'clsx';
 
 export const SettingsPanel = () => {
   const store = useAppStore();
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeTab, setActiveTab] = useState<'topics' | 'layout'>('topics');
+
+  // Prevent background scrolling when full-screen modal is open
+  useEffect(() => {
+    if (isExpanded) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isExpanded]);
 
   const handleGenerate = () => {
     const problems = generateProblems(store);
@@ -70,17 +82,11 @@ export const SettingsPanel = () => {
           <div className="w-px h-8 bg-slate-200"></div>
 
           <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className={clsx(
-              "flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all border",
-              isExpanded 
-                ? "bg-slate-100 text-slate-800 border-slate-200" 
-                : "bg-white text-slate-600 border-slate-200 hover:border-teal-300 hover:text-teal-700 shadow-sm"
-            )}
+            onClick={() => setIsExpanded(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all border bg-white text-slate-600 border-slate-200 hover:border-teal-300 hover:text-teal-700 shadow-sm"
           >
             <Settings2 size={16} />
             <span>高级配置</span>
-            <ChevronDown size={16} className={clsx("transition-transform duration-300", isExpanded ? "rotate-0" : "rotate-180")} />
           </button>
 
           <button 
@@ -93,41 +99,70 @@ export const SettingsPanel = () => {
         </div>
       </div>
 
-      {/* Expandable Settings Panel - Slides up from bottom */}
+      {/* Full Screen Overlay Modal - Slides in from right or bottom */}
       <div className={clsx(
-        "fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 shadow-[0_-20px_40px_-10px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out z-50",
-        isExpanded ? "translate-y-0" : "translate-y-full"
+        "fixed inset-0 z-50 transition-opacity duration-300",
+        isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"
       )}>
-        <div className="max-w-6xl mx-auto flex h-[500px]">
+        {/* Backdrop */}
+        <div 
+          className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+          onClick={() => setIsExpanded(false)}
+        />
+        
+        {/* Drawer */}
+        <div className={clsx(
+          "absolute inset-y-0 right-0 w-full max-w-4xl bg-white shadow-2xl flex flex-col transition-transform duration-500 ease-out",
+          isExpanded ? "translate-x-0" : "translate-x-full"
+        )}>
           
-          {/* Tabs */}
-          <div className="w-48 bg-slate-50 border-r border-slate-200 p-4 space-y-2">
-            <button
-              onClick={() => setActiveTab('topics')}
-              className={clsx(
-                "w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-left",
-                activeTab === 'topics' ? "bg-white text-teal-700 shadow-sm border border-slate-200" : "text-slate-600 hover:bg-slate-100"
-              )}
+          {/* Modal Header */}
+          <div className="flex items-center justify-between px-8 py-6 border-b border-slate-100">
+            <div className="flex items-center gap-3">
+              <Settings2 size={24} className="text-teal-600" />
+              <div>
+                <h2 className="text-xl font-bold text-slate-800">高级配置</h2>
+                <p className="text-xs text-slate-500 mt-1">个性化定制您的试卷排版与题型</p>
+              </div>
+            </div>
+            <button 
+              onClick={() => setIsExpanded(false)}
+              className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
             >
-              <Layers size={18} />
-              题型选择与排序
-            </button>
-            <button
-              onClick={() => setActiveTab('layout')}
-              className={clsx(
-                "w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all text-left",
-                activeTab === 'layout' ? "bg-white text-teal-700 shadow-sm border border-slate-200" : "text-slate-600 hover:bg-slate-100"
-              )}
-            >
-              <SlidersHorizontal size={18} />
-              排版与样式参数
+              <X size={24} />
             </button>
           </div>
 
-          {/* Content Area */}
-          <div className="flex-1 p-8 overflow-y-auto custom-scrollbar bg-white">
-            {activeTab === 'topics' && (
-              <div className="max-w-3xl space-y-6">
+          {/* Modal Body */}
+          <div className="flex flex-1 overflow-hidden bg-slate-50/50">
+            {/* Tabs Sidebar */}
+            <div className="w-56 bg-white border-r border-slate-100 p-6 space-y-2 shrink-0">
+              <button
+                onClick={() => setActiveTab('topics')}
+                className={clsx(
+                  "w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all text-left",
+                  activeTab === 'topics' ? "bg-teal-50 text-teal-700 shadow-[inset_0_0_0_1px_rgba(20,184,166,0.2)]" : "text-slate-600 hover:bg-slate-50"
+                )}
+              >
+                <Layers size={18} />
+                题型选择与排序
+              </button>
+              <button
+                onClick={() => setActiveTab('layout')}
+                className={clsx(
+                  "w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-medium transition-all text-left",
+                  activeTab === 'layout' ? "bg-teal-50 text-teal-700 shadow-[inset_0_0_0_1px_rgba(20,184,166,0.2)]" : "text-slate-600 hover:bg-slate-50"
+                )}
+              >
+                <SlidersHorizontal size={18} />
+                排版与样式参数
+              </button>
+            </div>
+
+            {/* Content Area */}
+            <div className="flex-1 p-8 overflow-y-auto custom-scrollbar">
+              {activeTab === 'topics' && (
+                <div className="max-w-2xl mx-auto space-y-6">
                 <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                   <div>
                     <h2 className="text-lg font-bold text-slate-800">题型配置</h2>
@@ -151,7 +186,7 @@ export const SettingsPanel = () => {
             )}
 
             {activeTab === 'layout' && (
-              <div className="max-w-3xl space-y-8">
+                <div className="max-w-3xl mx-auto space-y-8">
                 <div>
                   <h2 className="text-lg font-bold text-slate-800">排版参数</h2>
                   <p className="text-sm text-slate-500 mt-1">调整试卷的细节表现，实时生效。</p>
@@ -259,19 +294,11 @@ export const SettingsPanel = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
-      
-      {/* Backdrop overlay when expanded */}
-      {isExpanded && (
-        <div 
-          className="fixed inset-0 top-16 bg-slate-900/20 backdrop-blur-sm z-40 transition-opacity"
-          onClick={() => setIsExpanded(false)}
-        />
-      )}
     </div>
   );
 };
