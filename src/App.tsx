@@ -8,7 +8,7 @@ import { ProcessedTopic } from './types/discourse';
 const CATEGORY_ID = 35;
 
 function App() {
-  const { voteRank, interactionRank, loading, error, refetch } = useDiscourseData(CATEGORY_ID);
+  const { voteRank, interactionRank, loading, error, progress, refetch } = useDiscourseData(CATEGORY_ID);
   const [activeTab, setActiveTab] = useState<'vote' | 'interaction'>('vote');
 
   const containerVariants = {
@@ -141,7 +141,10 @@ function App() {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
             <RefreshCw className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
-            <p className="text-zinc-500">正在同步论坛数据...</p>
+            <p className="text-zinc-500">正在同步所有论坛数据...</p>
+            {progress > 0 && (
+              <p className="text-indigo-400 text-sm mt-2 font-medium">已获取 {progress} 条帖子</p>
+            )}
           </div>
         ) : error ? (
           <div className="flex flex-col items-center justify-center py-20 text-red-400">

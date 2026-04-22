@@ -52,6 +52,7 @@ export interface TopicList {
   per_page: number;
   top_tags: string[];
   topics: Topic[];
+  more_topics_url?: string;
 }
 
 export interface DiscourseCategoryResponse {
