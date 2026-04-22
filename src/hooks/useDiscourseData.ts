@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { DiscourseCategoryResponse, ProcessedTopic, User, Topic } from '../types/discourse';
 
 export function useDiscourseData(categoryId: number = 35) {
@@ -10,7 +10,7 @@ export function useDiscourseData(categoryId: number = 35) {
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState<number>(0);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     setError(null);
     setProgress(0);
@@ -99,11 +99,11 @@ export function useDiscourseData(categoryId: number = 35) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [categoryId]);
 
   useEffect(() => {
     fetchData();
-  }, [categoryId]);
+  }, [fetchData]);
 
   return { ...data, loading, error, progress, refetch: fetchData };
 }
