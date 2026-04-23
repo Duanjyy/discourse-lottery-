@@ -1,4 +1,4 @@
-<div class="author-content"
+<div class="author-content" <?php /* if() */ ?>
      xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="author-content-item single reward" id="about-reward">
         <div class="author-content-item-tips">致谢</div>
@@ -7,7 +7,7 @@
             
         </div>
 
-        <div class="about-reward">
+        <div <?php /* if() */ ?> class="about-reward">
             <div id="con"></div>
             <div id="TA-con" onclick="heo.rewardShowConsole()">
                 <div id="text-con">
@@ -54,19 +54,19 @@
                     </svg>
                 </div>
 
-                <th:block>
+                <th:block <?php /* if(not ) */ ?>>
                     <p id="people">共<b></b>人</p>
                 </th:block>
-                <th:block>
+                <th:block <?php /* if() */ ?>>
                     <p id="people">共<b></b>人</p>
                 </th:block>
 
             </div>
         </div>
-        <div class="reward-list-all">
+        <div class="reward-list-all" <?php /* if() */ ?>>
 
-            <div class="reward-list-item" <?php /* loop over authorReward :  */ ?>>
-                <div>
+            <div class="reward-list-item" <?php /* loop */ ?>>
+                <div <?php /* if() */ ?>>
                     <div>
                         <div class="reward-list-item-avatar">
                             <img>
@@ -76,25 +76,25 @@
                         </div>
                     </div>
                     <div class="reward-list-bottom-group">
-                        <div
+                        <div <?php /* if() */ ?>
                              class="reward-list-item-money">¥
                             
                         </div>
-                        <div
+                        <div <?php /* if() */ ?>
                              class="reward-list-item-money"
                              style="background: var(--heo-vip);">¥ 
                         </div>
                         <time class="datatime reward-list-item-time"></time>
                     </div>
                 </div>
-                <div>
+                <div <?php /* if() */ ?>>
                     <div class="reward-list-item-name"></div>
                     <div class="reward-list-bottom-group">
-                        <div
+                        <div <?php /* if() */ ?>
                              class="reward-list-item-money">¥
                             
                         </div>
-                        <div
+                        <div <?php /* if() */ ?>
                              class="reward-list-item-money"
                              style="background: var(--heo-vip);">¥ 
                         </div>
@@ -106,11 +106,11 @@
 
         </div>
 
-        <th:block>
+        <th:block <?php /* if() */ ?>>
             <a href="https://afdian.com/a/carolcoral" target="_blank"><span class="sponar_afdian">爱发电</span></a>
-            <div class="reward-list-all">
-                <div class="reward-list-item" <?php /* loop over authorReward :  */ ?>>
-                    <div>
+            <div class="reward-list-all" <?php /* if() */ ?>>
+                <div class="reward-list-item" <?php /* loop */ ?>>
+                    <div <?php /* if() */ ?>>
                         <div>
                             <div class="reward-list-item-avatar">
                                 <img>
@@ -120,11 +120,11 @@
                             </div>
                         </div>
                         <div class="reward-list-bottom-group">
-                            <div
+                            <div <?php /* if() */ ?>
                                  class="reward-list-item-money">¥
                                 
                             </div>
-                            <div
+                            <div <?php /* if() */ ?>
                                  class="reward-list-item-money"
                                  style="background: var(--heo-vip);">¥ 
                             </div>

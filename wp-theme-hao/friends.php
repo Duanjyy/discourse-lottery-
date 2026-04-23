@@ -2,7 +2,11 @@
 <htmlname"); ?>, head = ~{::head})}">
 
 <th:block>
-    <th:block></th:block>
+    <th:block <?php get_template_part("modules/common/open-graph :: open-graph(_title = '朋友圈',
+                _permalink = '/moments',
+                _cover = '',
+                _excerpt = '友链朋友圈 - 发现更多精彩内容',
+                _type = 'website')"); ?>></th:block>
     <!-- 分离CSS文件 -->
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/fmoments.css}" data-pjax>
 </th:block>
@@ -11,7 +15,7 @@
     <div class="page" id="body-wrap">
         <!-- 头部导航栏 -->
         <header class="not-top-img" id="page-header">
-            <?php get_template_part("modules/nav"); ?>
+            <?php get_template_part("modules/nav :: nav(title = '朋友圈')"); ?>
         </header>
 
         <main class="layout hide-aside" id="content-inner">
@@ -133,7 +137,7 @@
         </main>
 
         <!-- 底部 -->
-        <?php get_template_part("modules/footer"); ?>
+        <footer <?php get_template_part("modules/footer"); ?> />
 
         <!-- 资源检查和动态加载脚本 -->
         <script data-pjax>

@@ -1,10 +1,14 @@
 <?php get_header(); ?>
 
+<th:block>
+    <th:block></th:block>
+</th:block>
+<th:block>
     <div class="page" id="body-wrap">
 
         <!-- 头部导航栏 -->
         <header class="not-top-img" id="page-header">
-            <?php get_template_part("modules/nav"); ?>
+            <?php get_template_part("modules/nav :: nav(title = '追番')"); ?>
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page">
@@ -364,7 +368,171 @@
                     </div>
                     <div>
                         <div id="bangumi-item1" class="bangumi-hide">
-                            <th:block <?php /* loop over bangumi :  */ ?>>
-                                <?php get_template_part("macro/bangumi-item"); ?>
-                            
+                            <th:block <?php /* loop */ ?>>
+                                <th:block/>
+                            </th:block>
+                            <div class="bangumi-pagination">
+                                <a class="bangumi-button bangumi-firstpage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state=""> 首页</a>
+                                <a class="bangumi-button bangumi-previouspage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state="">上一页</a>
+                                <span class="bangumi-pagenum">1 / 1</span>
+                                <a class="bangumi-button bangumi-nextpage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state="">下一页</a>
+                                <a class="bangumi-button bangumi-lastpage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state="">尾页</a>
+                            </div>
+                        </div>
+                        <div id="bangumi-item2" class="bangumi-show">
+                            <th:block <?php /* loop */ ?>>
+                                <th:block/>
+                            </th:block>
+                            <div class="bangumi-pagination">
+                                <a class="bangumi-button bangumi-firstpage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state=""> 首页</a>
+                                <a class="bangumi-button bangumi-previouspage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state="">上一页</a>
+                                <span class="bangumi-pagenum">1 / 1</span>
+                                <a class="bangumi-button bangumi-nextpage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state="">下一页</a>
+                                <a class="bangumi-button bangumi-lastpage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state="">尾页</a>
+                            </div>
+                        </div>
+                        <div id="bangumi-item3" class="bangumi-hide">
+                            <th:block <?php /* loop */ ?>>
+                                <th:block/>
+                            </th:block>
+                            <div class="bangumi-pagination">
+                                <a class="bangumi-button bangumi-firstpage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state=""> 首页</a>
+                                <a class="bangumi-button bangumi-previouspage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state="">上一页</a>
+                                <span class="bangumi-pagenum">1 / 1</span>
+                                <a class="bangumi-button bangumi-nextpage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state="">下一页</a>
+                                <a class="bangumi-button bangumi-lastpage" href="javascript:;" target="_self"
+                                   onclick="return false" data-pjax-state="">尾页</a>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        (function () {
+                            const bangumiLazyload = false;
+                            "use strict";/* eslint-disable no-plusplus */
+                            (function () {// eslint-disable-next-line func-style
+                                function a() {
+                                    this.classList.add("bangumi-active");
+                                    for (var a = this.siblings(), b = 0; b < a.length; b++) a[b].classList.remove("bangumi-active");// 显示对应板块
+                                    var c = this.id.replace("tab", "item"), d = document.getElementById(c);
+                                    d.classList.remove("bangumi-hide"), d.classList.add("bangumi-show"), a = document.getElementById(c).siblings();
+                                    for (var e = 0; e < a.length; e++) a[e].classList.remove("bangumi-show"), a[e].classList.add("bangumi-hide")
+                                }
+
+                                Element.prototype.siblings = function () {
+                                    for (var a = [], b = this.parentNode.children, c = 0; c < b.length; c++) b[c] !== this && a.push(b[c]);
+                                    return a
+                                };
+                                for (var b = document.getElementsByClassName("bangumi-tab"), c = 0; c < b.length; c++) b[c].onclick = a, b[c].onclick.apply(b[c]);
+                                "undefined" != typeof pagenumsPre && axios.get(new URL("../bangumis.json", window.location.href)).then(function (a) {
+                                    if (a.data) {
+                                        var b = {
+                                            wantWatch: a.data.wantWatch.slice(10).map(function (a) {
+                                                return ejs.render(ejsTemplate, {
+                                                    item: a,
+                                                    loading: loading,
+                                                    metaColor: metaColor,
+                                                    type: type
+                                                })
+                                            }).join("\n"), watching: a.data.watching.slice(10).map(function (a) {
+                                                return ejs.render(ejsTemplate, {
+                                                    item: a,
+                                                    loading: loading,
+                                                    metaColor: metaColor,
+                                                    type: type
+                                                })
+                                            }).join("\n"), watched: a.data.watched.slice(10).map(function (a) {
+                                                return ejs.render(ejsTemplate, {
+                                                    item: a,
+                                                    loading: loading,
+                                                    metaColor: metaColor,
+                                                    type: type
+                                                })
+                                            }).join("\n")
+                                        };
+                                        document.querySelectorAll("#bangumi-item1>.bangumi-pagination")[0].insertAdjacentHTML("beforeBegin", b.wantWatch), document.querySelectorAll("#bangumi-item2>.bangumi-pagination")[0].insertAdjacentHTML("beforeBegin", b.watching), document.querySelectorAll("#bangumi-item3>.bangumi-pagination")[0].insertAdjacentHTML("beforeBegin", b.watched)
+                                    }
+                                })
+                            })();
+                            document.getElementsByClassName('bangumi-tab')[1].click();
+                            /* eslint-disable no-plusplus, func-style */
+                            (function () {
+                                var a = Math.ceil;
+
+                                function b(b, c) {
+                                    return ` / `
+                                }
+
+                                function c() {
+                                    const a = this.parentNode.siblings();
+                                    g(a, 0), this.parentNode.getElementsByClassName("bangumi-pagenum")[0].innerText = b(0, a)
+                                }
+
+                                function d() {
+                                    const a = this.parentNode.siblings();
+                                    let c = this.parentNode.getElementsByClassName("bangumi-pagenum")[0].innerText;
+                                    c = c.substr(0, c.indexOf("/") - 1), c = parseInt(c, 10) - 1, 0 < c && c--, g(a, c), this.parentNode.getElementsByClassName("bangumi-pagenum")[0].innerText = b(c, a)
+                                }
+
+                                function e() {
+                                    const c = this.parentNode.siblings();
+                                    let d = this.parentNode.getElementsByClassName("bangumi-pagenum")[0].innerText;
+                                    d = d.substr(0, d.indexOf("/") - 1), d = parseInt(d, 10) - 1, d < a(c.length / 10) - 1 && d++, g(c, d), this.parentNode.getElementsByClassName("bangumi-pagenum")[0].innerText = b(d, c)
+                                }
+
+                                function f() {
+                                    const c = this.parentNode.siblings();
+                                    g(c, a(c.length / 10) - 1), this.parentNode.getElementsByClassName("bangumi-pagenum")[0].innerText = b(-1 == a(c.length / 10) - 1 ? 0 : a(c.length / 10) - 1, c)
+                                }
+
+                                function g(a, b) {
+                                    for (let c = 0; c < a.length; c++) if (Math.floor(c / 10) === b) {
+                                        a[c].classList.remove("bangumi-hide");
+                                        const [b] = a[c].getElementsByTagName("img");
+                                        bangumiLazyload && (b.src = b.getAttribute("data-src"))
+                                    } else a[c].classList.add("bangumi-hide")
+                                }
+
+                                const h = document.getElementsByClassName("bangumi-firstpage"),
+                                    j = document.getElementsByClassName("bangumi-previouspage"),
+                                    k = document.getElementsByClassName("bangumi-nextpage"),
+                                    l = document.getElementsByClassName("bangumi-lastpage"),
+                                    m = document.getElementsByClassName("bangumi-pagenum");
+                                for (let b = 0; b < h.length; b++) {
+                                    h[b].onclick = c, j[b].onclick = d, k[b].onclick = e, l[b].onclick = f;// set page num
+                                    const g = "undefined" == typeof pagenumsPre ? m[b].parentNode.siblings().length : pagenumsPre[b] ?? m[b].parentNode.siblings().length;
+                                    h[b].click(), m[b].innerText = `1 / `
+                                }
+                            })();
+                        })();
+                    </script>
+                </div>
+                <hr>
+                <!--/* 评论组件 */-->
+                <th:block
+                        <?php get_template_part("modules/comment :: comment(group = 'content.halo.run',
+                  kind = 'SinglePage',
+                  name = 'bangumis',
+                  allowComment = true)"); ?>
+            </div>
+
+
+        </main>
+        <!-- 底部 -->
+        <footer <?php get_template_part("modules/footer"); ?>
+    </div>
+
+</th:block>
+
+
 <?php get_footer(); ?>

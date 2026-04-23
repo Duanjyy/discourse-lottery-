@@ -1,4 +1,3 @@
-<?php get_header(); ?>
 <!-- 目录条 -->
 <div id="category-bar">
     <div class="category-bar-items" id="category-bar-items">
@@ -9,12 +8,11 @@
         <th:block>
 
             <div class="category-bar-item"
-                 <?php /* loop over categoryItem :  */ ?>>
+                 <?php /* loop */ ?>>
                 <a></a>
             </div>
 
         </th:block>
     </div>
-    <a class="category-bar-more">更多</a>
+    <a class="category-bar-more" <?php get_template_part("modules/bar/more"); ?>>更多</a>
 </div>
-<?php get_footer(); ?>

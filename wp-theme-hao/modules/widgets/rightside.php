@@ -1,25 +1,25 @@
 <th:block >
     <div id="rightside">
         <div id="rightside-config-hide">
-            <button id="readmode" type="button" title="阅读模式"><i class="haofont hao-icon-book-open"></i></button>
-            <button id="translateLink" type="button" title="简繁转换">繁</button>
+            <button <?php /* if() */ ?> id="readmode" type="button" title="阅读模式"><i class="haofont hao-icon-book-open"></i></button>
+            <button <?php /* if() */ ?> id="translateLink" type="button" title="简繁转换">繁</button>
             <button id="darkmode" type="button" title="浅色和深色模式转换"><i class="haofont hao-icon-circle-half-stroke"></i></button>
             <button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="haofont hao-icon-arrows-left-right"></i></button>
         </div>
         <div id="rightside-config-show">
             <button id="rightside-config" type="button" title="设置"><i class="haofont hao-icon-gear"></i></button>
-            <button class="close" id="mobile-toc-button" type="button" title="目录"><i class="haofont hao-icon-list-ul"></i></button>
+            <button <?php /* if() */ ?> class="close" id="mobile-toc-button" type="button" title="目录"><i class="haofont hao-icon-list-ul"></i></button>
             <a id="to_comment" href="#post-comment" title="直达评论" ><i class="haofont hao-icon-chat--fill" style="font-size: 17px;"></i></a>
-            <a id="switch-commentBarrage" href="javascript:heo.switchCommentBarrage();" rel="external nofollow noreferrer" title="开关弹幕" draggable="false" data-pjax-state="external"><i class="haofont hao-icon-danmu"></i></a>
+            <a <?php /* if() */ ?> id="switch-commentBarrage" href="javascript:heo.switchCommentBarrage();" rel="external nofollow noreferrer" title="开关弹幕" draggable="false" data-pjax-state="external"><i class="haofont hao-icon-danmu"></i></a>
             <button id="go-up" type="button" title="回到顶部"><i class="haofont hao-icon-arrow-up"></i></button>
-            <a
+            <a <?php /* if() */ ?>
                sec:authorize="isAuthenticated()"
                title="编辑文章" >
                 <i class="haofont hao-icon-pencil"></i>
             </a>
         </div>
     </div>
-    <style>
+    <style <?php /* if() */ ?>>
         #rightside {
             display: none;
         }
@@ -33,6 +33,6 @@
         }
     </style>
 
-    <link
+    <link <?php /* if() */ ?>
           rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/read-mode.css">
 </th:block>

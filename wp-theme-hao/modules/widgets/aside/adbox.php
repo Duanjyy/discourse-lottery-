@@ -1,5 +1,5 @@
 <!-- 广告 -->
-<div class="card-widget">
+<div class="card-widget" <?php /* if() */ ?>>
     <div class="item-headline"><span>广告</span></div>
     <script async
             crossorigin="anonymous"></script>
@@ -12,7 +12,7 @@
 
 </div>
 
-<div class="card-widget">
+<div class="card-widget" <?php /* if() */ ?>>
     <div class="item-headline"><span></span></div>
     <a target="_blank">
         <img alt="自定义广告">

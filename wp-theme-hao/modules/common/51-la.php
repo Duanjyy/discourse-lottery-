@@ -1,5 +1,5 @@
 <!-- 51统计 -->
-<script>
+<script <?php /* if() */ ?>>
     !function (p) {
         "use strict";
         !function (t) {

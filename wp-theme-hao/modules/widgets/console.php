@@ -12,9 +12,10 @@
           <span class="author-content-item-title">最近评论</span>
         </div>
         <div class="aside-list">
-          <th:block>
+          <th:block <?php /* if() */ ?>>
             <!-- BUG：由于当前的列出所有评论API无过滤功能，非文章页的评论无法查询到页面信息，所以非文章评论跳转至首页-->
-            <div class="aside-list-item" <?php /* loop over comment,iterStat :  */ ?> >
+            <div class="aside-list-item" <?php /* loop */ ?>
+                 <?php /* if() */ ?> >
               <a class="thumbnail"  data-pjax-state="">
                 <img>
                 <div class="name"><span>stonewu</span></div>
@@ -33,7 +34,7 @@
               });
             </script>
           </th:block>
-          <span>正在加载中...</span></div>
+          <span <?php /* if() */ ?>>正在加载中...</span></div>
       </div>
     </div>
     <!-- 右侧展示 tag -->
@@ -45,7 +46,7 @@
         </div>
         <div class="card-tag-cloud">
           <a style="font-size:1em;color:#d3d3d3"
-             <?php /* loop over tag,iterStat :  */ ?>>
+             <?php /* loop */ ?>>
             <sup></sup>
           </a>
         </div>
@@ -54,8 +55,8 @@
       <div class="console-card history" onclick="heo.hideConsole()">
         <div class="item-headline"><i class="fas fa-archive"></i><span>文章</span></div>
         <ul class="card-archive-list">
-          <th:block <?php /* loop over archive :  */ ?>>
-            <li class="card-archive-list-item" <?php /* loop over month,monthStat :  */ ?>>
+          <th:block <?php /* loop */ ?>>
+            <li class="card-archive-list-item" <?php /* loop */ ?>>
               <a class="card-archive-list-link"
                  data-pjax-state="load"><span
                       class="card-archive-list-date">
@@ -73,7 +74,7 @@
     </div>
   </div>
 
-  <div class="console-card-group-reward">
+  <div class="console-card-group-reward" <?php /* if() */ ?>>
     <ul class="reward-all console-card">
       <li class="reward-item"><a
                                  rel="external nofollow noreferrer" target="_blank" draggable="false"><img
@@ -104,7 +105,7 @@
     <!--<div class="console-btn-item" id="assist-open" onclick="heo.hideConsole()" title="无障碍工具栏"><a-->
     <!--        class="assist-btn"><i class="fa-duotone fa-wheelchair"></i></a>-->
     <!--</div>-->
-    <div class="console-btn-item" id="consoleMusic" onclick="heo.musicToggle()" title="音乐开关">
+    <div <?php /* if() */ ?> class="console-btn-item" id="consoleMusic" onclick="heo.musicToggle()" title="音乐开关">
       <a class="music-switch" data-pjax-state="">
         <i class="haofont hao-icon-disc-fill"></i>
       </a>

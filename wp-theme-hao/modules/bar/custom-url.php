@@ -8,11 +8,11 @@
         <th:block>
 
             <div class="category-bar-item"
-                 <?php /* loop over customUrlItem :  */ ?>>
+                 <?php /* loop */ ?>>
                 <a></a>
             </div>
 
         </th:block>
     </div>
-    <a class="category-bar-more">更多</a>
+    <a class="category-bar-more" <?php get_template_part("modules/bar/more"); ?>>更多</a>
 </div>

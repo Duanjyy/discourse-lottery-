@@ -1,6 +1,7 @@
 <!-- 爱好 -->
 <div class="author-content" >
-    <div class="author-content-item game-lol">
+    <div class="author-content-item game-lol"
+         style="'background: url('+ @{} +') top / cover no-repeat'">
         <div class="card-content">
             <div class="author-content-item-tips">
 
@@ -13,7 +14,8 @@
             </div>
         </div>
     </div>
-    <div class="author-content-item game-wolf">
+    <div <?php /* if() */ ?> class="author-content-item game-wolf"
+         style="'background: url('+ @{} +') top / cover no-repeat'">
         <div class="card-content">
             <div class="author-content-item-tips">
 
@@ -23,12 +25,12 @@
             </div>
         </div>
     </div>
-    <div class="author-content-item comic-content">
+    <div <?php /* if() */ ?> class="author-content-item comic-content">
         <div class="card-content">
             <div class="author-content-item-tips"></div>
             <div class="author-content-item-title"></div>
             <div class="comic-box" >
-                <a  <?php /* loop over comic :  */ ?>
+                <a  <?php /* loop */ ?>
                     class="comic-item"
                     rel="external nofollow noreferrer" target="_blank" draggable="false">
                     <div class="comic-item-cover"><img

@@ -1,35 +1,52 @@
 <?php get_header(); ?>
 
+<th:block>
+    <th:block></th:block>
+</th:block>
+<th:block>
 
     <div class="page" id="body-wrap">
         <header class="not-top-img" id="page-header">
-            <?php get_template_part("modules/nav"); ?>
+            <?php get_template_part("modules/nav :: nav(title = '分类')"); ?>
         </header>
-        <main class="layout" id="content-inner">
-            <div id="category">
-                <div id="category-bar">
-                    <div class="category-bar-items" id="category-bar-items">
-                        <div class="category-bar-item" id="category-bar-home">
-                            <a href="/">首页</a>
-                        </div>
-                        <div class="category-bar-item"
-                             <?php /* loop over categoryItem :  */ ?>>
-                            <a></a>
+        <main class="layout hide-aside" id="content-inner">
+
+            <div id="page">
+                <h1 class="page-title" style="display: inline;">分类</h1>
+                <div <?php /* if() */ ?> class="category-lists">
+                    <div class="category-title is-center">分类 - <span class="category-amount">11</span></div>
+                    <div class="tag-cloud-list is-center">
+                        <a style="font-size: 1em;" <?php /* loop */ ?>>
+                            <span style="font-size: 22px;"
+                                  class="tags-punctuation"></span>
+
+                            <span class="tagsPageCount"></span></a>
+                    </div>
+                </div>
+                <th:block <?php /* if() */ ?>>
+                    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/libs/no3d/no3d.css">
+                    <div id="libCategories" >
+                        <div id="lib-cards" class="container" >
+                            <a <?php /* loop */ ?>>
+                                <card>
+                                    <h1 slot="header"></h1>
+                                    <p slot="content"></p>
+                                </card>
+                            </a>
                         </div>
                     </div>
-                    <!-- 跳转到分类页 -->
-                    <a class="category-bar-more" href="/categories">更多</a>
-                </div>
-                <!-- 文章 -->
-                <?php get_template_part("macro/post-list"); ?>
+                    <div>
+                        <script data-pjax src="<?php echo get_template_directory_uri(); ?>/assets/libs/vue/vue.min.js"></script>
+                        <script data-pjax src="<?php echo get_template_directory_uri(); ?>/assets/libs/no3d/no3d.min.js"></script>
+                    </div>
+                </th:block>
             </div>
-            <!-- sidebar -->
-            <?php get_template_part("modules/aside"); ?>
         </main>
-
         <!-- 底部 -->
-        <?php get_template_part("modules/footer"); ?>
+        <footer <?php get_template_part("modules/footer"); ?>
     </div>
+
+</th:block>
 
 
 <?php get_footer(); ?>

@@ -64,13 +64,13 @@
                 linksUrl: ,
                 linksNum: ,
             },
-            jQuery: [[<?php echo get_template_directory_uri(); ?>/assets/libs/jquery/jquery.min.js]],
+            jQuery: ,
             justifiedGallery: {
                 js: 'https://npm.elemecdn.com/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
                 css: 'https://npm.elemecdn.com/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
             },
             fancybox: {
-                js: [[<?php echo get_template_directory_uri(); ?>/assets/libs/fancybox/jquery.fancybox.min.js]],
+                js: ,
                 css: '/null'
             },
             comments: {

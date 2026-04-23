@@ -1,5 +1,5 @@
 <!-- 第一屏 -->
-<th:block>
+<th:block <?php /* if() */ ?>>
     <div id="greetingBox"></div>
     <style>
         #greetingBox {

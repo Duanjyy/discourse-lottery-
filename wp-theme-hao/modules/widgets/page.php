@@ -1,4 +1,3 @@
-<?php get_header(); ?>
 <!--
     分页模块
 
@@ -11,36 +10,38 @@
     <div class="pagination">
 
         <!-- 页码按钮 -->
-        <th:block>
+        <th:block <?php /* if() */ ?>>
             <a class="page-number" onclick="scrollToPost()"></a>
-            <span class="space">…</span>
+            <span class="space" <?php /* if() */ ?>>…</span>
         </th:block>
 
-        <th:block <?php /* loop over index: */ ?>>
-            <span class="page-number current"></span>
+        <th:block <?php /* loop */ ?>>
+            <span class="page-number current" <?php /* if( == ) */ ?>></span>
             <a class="page-number"
+               <?php /* if() */ ?>
                onclick="scrollToPost()"></a>
         </th:block>
 
-        <th:block>
-            <span class="space">…</span>
+        <th:block <?php /* if() */ ?>>
+            <span class="space" <?php /* if() */ ?>>…</span>
             <a class="page-number"
                onclick="scrollToPost()"></a>
         </th:block>
         <!-- 翻页按钮 -->
         <a class="extend prev" rel="prev"
+           <?php /* if() */ ?>
            onclick="scrollToPost()">
             <i class="haofont hao-icon-chevron-left fa-fw"></i>
             <div class="pagination_tips_prev">上页</div>
         </a>
 
         <a class="extend next"
-           rel="next"
+           rel="next" <?php /* if() */ ?>
            onclick="scrollToPost()">
             <div class="pagination_tips_next">下页</div>
             <i class="haofont hao-icon-chevron-right fa-fw"></i>
         </a>
-        <div class="toPageGroup">
+        <div <?php /* if() */ ?> class="toPageGroup">
             <input id="toPageText" maxlength="3" title="跳转到指定页面"
                    oninput="value=value.replace(/[^0-9]/g,'')"
                    onkeyup="if (this.value === '0') this.value = ''">
@@ -48,7 +49,7 @@
             </a>
         </div>
 
-        <script>
+        <script <?php /* if() */ ?>>
             function scrollToPost() {
                 if (document.querySelector(".pl-container")) {
                     setTimeout(() => {
@@ -64,5 +65,3 @@
 
     </div>
 </nav>
-
-<?php get_footer(); ?>

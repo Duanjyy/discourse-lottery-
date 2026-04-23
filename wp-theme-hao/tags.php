@@ -1,15 +1,20 @@
 <?php get_header(); ?>
 
 
+<th:block>
+    <th:block></th:block>
+</th:block>
+<th:block>
+
     <div class="page" id="body-wrap">
         <header class="not-top-img" id="page-header">
-            <?php get_template_part("modules/nav"); ?>
+            <?php get_template_part("modules/nav :: nav(title = '标签')"); ?>
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page"><h1 class="page-title" style="display: inline;">标签</h1>
                 <div class="tag-cloud-title is-center">标签 - <span class="tag-cloud-amount">0</span></div>
                 <div class="tag-cloud-list is-center">
-                    <a <?php /* loop over tagItem :  */ ?>>
+                    <a <?php /* loop */ ?> style="'font-size: 1em; color:' +  ">
                         <span class="tags-punctuation"></span>
 
                         <span class="tagsPageCount"></span>
@@ -19,8 +24,10 @@
             </div>
         </main>
         <!-- 底部 -->
-        <?php get_template_part("modules/footer"); ?>
+        <footer <?php get_template_part("modules/footer"); ?>
     </div>
+
+</th:block>
 
 
 <?php get_footer(); ?>

@@ -1,8 +1,10 @@
 <div class="card-widget heo-right-widget" id="card-wechat">
     <div id="flip-wrapper">
         <div id="flip-content">
-            <div class="face"></div>
-            <div class="back face"></div>
+            <div class="face"
+                 style="'background: url('+ @{} +') center center / 100% no-repeat;'"></div>
+            <div class="back face"
+                 style="'background: url('+ @{} +') center center / 100% no-repeat;'"></div>
         </div>
     </div>
 

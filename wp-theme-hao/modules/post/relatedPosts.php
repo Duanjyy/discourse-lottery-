@@ -1,16 +1,17 @@
 
 <!-- 阅读建议 -->
-<th:block>
-    <div class="relatedPosts">
+<th:block  <?php /* if() */ ?>>
+    <div class="relatedPosts" <?php /* if() */ ?>>
         <div class="headline">
             <i class="haofont hao-icon-cainixihuan" style="font-size: 1.1rem;"></i>
             <span>阅读建议</span>
         </div>
         <!-- 六篇文章 -->
-        <div class="relatedPosts-list">
+        <div <?php /* if() */ ?> class="relatedPosts-list">
             <!-- 建议阅读，这里可以自定义文章数量，然后遍历展示 -->
-            <th:block <?php /* loop over recommandPost,iterStat : */ ?>>
-                <div>
+            <th:block <?php /* loop */ ?>
+                      <?php /* if() */ ?>>
+                <div <?php /* if() */ ?>>
                     <a>
                         <img alt="cover" class="cover" id="preimg">
                         <div class="content is-center">
@@ -24,9 +25,10 @@
             </th:block>
         </div>
         <!-- 两篇文章 -->
-        <div class="relatedPosts-list">
-            <th:block <?php /* loop over recommandPost,iterStat : */ ?>>
-                <div>
+        <div <?php /* if() */ ?> class="relatedPosts-list">
+            <th:block <?php /* loop */ ?>
+                      <?php /* if() */ ?>>
+                <div <?php /* if() */ ?>>
                     <a>
                         <img class="cover" alt="cover">
                         <div class="content is-center">
@@ -39,8 +41,8 @@
             </th:block>
         </div>
     </div>
-    <link rel="stylesheet"
+    <link <?php /* if() */ ?> rel="stylesheet"
           href="<?php echo get_template_directory_uri(); ?>/assets/css/related-posts-six.css">
-    <link rel="stylesheet"
+    <link <?php /* if() */ ?> rel="stylesheet"
           href="<?php echo get_template_directory_uri(); ?>/assets/css/related-posts-two.css">
 </th:block>

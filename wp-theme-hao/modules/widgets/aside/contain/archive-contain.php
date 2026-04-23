@@ -4,9 +4,9 @@
 
     <div  class="item-headline"><a class="card-more-btn" href="/archives/" title="查看更多" data-pjax-state=""></a></div>
     <ul  class="card-archive-list">
-        <th:block <?php /* loop over archive,archiveStat :  */ ?>>
+        <th:block <?php /* loop */ ?>>
             <li class="card-archive-list-item"
-                <?php /* loop over month,monthIndex  :  */ ?>
+                <?php /* loop */ ?>
             ><a
                     class="card-archive-list-link"
                     data-pjax-state=""><span

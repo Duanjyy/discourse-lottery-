@@ -1,5 +1,5 @@
 <!-- 右键菜单 -->
-<div class="js-pjax">
+<div class="js-pjax"  <?php /* if() */ ?>>
     <div id="rightMenu">
         <div class="rightMenu-group rightMenu-small">
             <div class="rightMenu-item" id="menu-backward"><i class="haofont hao-icon-arrow-left"></i></div>
@@ -99,7 +99,7 @@
                 <i class="haofont hao-icon-copy"></i>
                 <span>复制地址</span>
             </div>
-            <div class="rightMenu-item" id="menu-commentBarrage"
+            <div <?php /* if() */ ?> class="rightMenu-item" id="menu-commentBarrage"
                  rel="external nofollow noreferrer" draggable="false" style="display: flex;">
                 <i class="haofont hao-icon-chat--fill" style="font-size: 19px;"></i>
                 <span class="menu-commentBarrage-text">关闭热评</span>
@@ -108,7 +108,7 @@
                 <i class="haofont hao-icon-moon-clear-fill" style="font-size: 19px;"></i>
                 <span class="menu-darkmode-text">深色模式</span>
             </div>
-            <div class="rightMenu-item" id="menu-translate">
+            <div <?php /* if() */ ?> class="rightMenu-item" id="menu-translate">
                 <i class="haofont hao-icon-fanti" style="font-size: 19px;"></i>
                 <span>轉為繁體</span>
             </div>

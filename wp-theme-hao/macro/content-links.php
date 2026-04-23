@@ -16,7 +16,7 @@
                     <i class="haofont hao-icon-link"></i>
                     <span class="banner-button-text">申请友链</span>
                 </a>
-                <a
+                <a <?php /* if() */ ?>
                    class="banner-button" href="javascript:LinkSubmitWidget.open()" rel="external nofollow">
                     <i class="haofont hao-icon-link"></i>
                     <span class="banner-button-text">申请友链</span>
@@ -24,9 +24,9 @@
             </div>
             <div class="tags-group-all nowrapMove">
                 <div class="tags-group-wrapper">
-                    <th:block <?php /* loop over group :  */ ?>>
-                        <th:block <?php /* loop over link,iterStat :  */ ?>>
-                            <div class="tags-group-icon-pair">
+                    <th:block <?php /* loop */ ?>>
+                        <th:block <?php /* loop */ ?> <?php /* if() */ ?>>
+                            <div class="tags-group-icon-pair" <?php /* if() */ ?>>
                                 <a class="tags-group-icon" target="_blank">
                                     <img>
                                 </a>
@@ -41,25 +41,26 @@
         </div>
 
         <!--互动友链-->
-        <?php get_template_part("macro/links-canvas"); ?>
+        <th:block />
 
         <div class="flink" id="article-container">
 
-            <th:block <?php /* loop over group,iterStat :  */ ?>>
+            <th:block <?php /* loop */ ?>>
 
-                <h2>
+                <h2 <?php /* if() */ ?>>
                     <a class="headerlink"></a>
                      ()
                 </h2>
 
-                <div class="flink-desc"></div>
+                <div class="flink-desc" <?php /* if() */ ?>></div>
 
                 <!-- 第一个，使用卡片展示 -->
-                <div
+                <div <?php /* if() */ ?>
                      class="site-card-group">
 
-                    <div class="site-card" <?php /* loop over link :  */ ?>>
-                        <span
+                    <div class="site-card" <?php /* loop */ ?>>
+                        <span <?php /* if() */ ?>
+                              style="'background-color:' + "
                               class="site-card-tag"></span>
 
                         <a class="img" target="_blank">
@@ -80,9 +81,11 @@
 
                 </div>
 
-                <div class="flink-list">
-                    <div class="flink-list-item" <?php /* loop over link :  */ ?>>
-                        <span
+                <div class="flink-list"
+                     <?php /* if() */ ?>>
+                    <div class="flink-list-item" <?php /* loop */ ?>>
+                        <span <?php /* if() */ ?>
+                              style="'background-color:' + "
                               class="site-card-tag"></span>
                         <a class="cf-friends-link" rel="external nofollow" target="_blank">
                             <img class="flink-avatar cf-friends-avatar">
@@ -95,8 +98,9 @@
                     </div>
                 </div>
 
-                <div class="flink-list mini">
-                    <div class="flink-list-item" <?php /* loop over link :  */ ?>>
+                <div class="flink-list mini"
+                     <?php /* if() */ ?>>
+                    <div class="flink-list-item" <?php /* loop */ ?>>
                         <a class="cf-friends-link" rel="external nofollow" target="_blank">
                             <img class="flink-avatar cf-friends-avatar">
                             <div class="img-alt is-center"></div>
@@ -110,7 +114,7 @@
 
             </th:block>
 
-            <th:block> </th:block>
+            <th:block <?php /* if() */ ?>> </th:block>
 
             <script>
                 var fdataUser = {
@@ -125,7 +129,7 @@
             </script>
             <script  src="<?php echo get_template_directory_uri(); ?>/assets/libs/fcircle/heo-fcircle3mini.js}"></script>
 
-            <th:block>
+            <th:block <?php /* if() */ ?>>
             </th:block>
 
         </div>

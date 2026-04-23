@@ -1,7 +1,7 @@
 <!-- 页脚模块 -->
 <footer id="footer" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <div id="heo-footer-bar">
+    <div id="heo-footer-bar" <?php /* if(${theme.config.footer.footer_bar.footer_bar_enable}) */ ?>>
         <div class="footer-logo"><th:block></th:block></div>
         <div class="footer-bar-description"></div>
         <a class="footer-bar-link" href="/" data-pjax-state="">了解更多</a>
@@ -10,33 +10,33 @@
     <!-- 社交链接，需要填入 href class title -->
     <div id="footer_deal">
         <th:block>
-            <a rel="external nofollow" target="_blank" <?php /* loop over socialMedia :  */ ?>>
-                <i></i>
-                <th:block></th:block>
+            <a rel="external nofollow" target="_blank" <?php /* loop */ ?>>
+                <i <?php /* if(${socialMedia.option_social_data == 'icon'  || #strings.isEmpty(socialMedia.option_social_data)}) */ ?>></i>
+                <th:block <?php /* if(${socialMedia.option_social_data == 'custom'}) */ ?>></th:block>
             </a>
         </th:block>
 
-        <img class="footer_mini_logo" title="返回顶部" onclick="btf.scrollToDest(0, 500)">
+        <img <?php /* if(${not #strings.isEmpty(theme.config.footer.social_media.centerImg)}) */ ?> class="footer_mini_logo" title="返回顶部" onclick="btf.scrollToDest(0, 500)">
 
         <th:block>
-            <a rel="external nofollow" target="_blank" <?php /* loop over socialMedia :  */ ?>>
-                <i></i>
-                <th:block></th:block>
+            <a rel="external nofollow" target="_blank" <?php /* loop */ ?>>
+                <i <?php /* if(${socialMedia.option_social_data == 'icon' || #strings.isEmpty(socialMedia.option_social_data)}) */ ?>></i>
+                <th:block <?php /* if(${socialMedia.option_social_data == 'custom'}) */ ?>></th:block>
             </a>
         </th:block>
     </div>
 
     <!-- 相关地址  -->
-    <th:block>
-        <div id="heo-footer">
-            <div class="footer-group" <?php /* loop over menuItem :  */ ?>>
+    <th:block <?php /* if(${not #strings.isEmpty(theme.config.footer.menu)}) */ ?>>
+        <div id="heo-footer" <?php /* if(${not #lists.isEmpty(footMenu.menuItems)}) */ ?>>
+            <div class="footer-group" <?php /* loop */ ?>>
                 <h3 class="footer-title"></h3>
                 <div class="footer-links">
-                    <a class="footer-item" <?php /* loop over childMenu :  */ ?>>
+                    <a class="footer-item" <?php /* loop */ ?>>
                     </a>
                 </div>
             </div>
-            <div class="footer-group">
+            <div <?php /* if(${theme.config.footer.footer_group.enable_footer_group}) */ ?> class="footer-group">
                 <div class="footer-title-group">
                     <h3 class="footer-title">友链</h3>
                     <a class="random-friends-btn" id="footer-random-friends-btn"
@@ -51,21 +51,23 @@
     <!-- 底部 banner -->
     <halo:footer />
 
-    <div class="copyright">
-        ©<?php echo get_theme_mod("hao_siteStartTime", "2023"); ?> -  By <?php bloginfo("name"); ?>
+    <div class="copyright"
+         <?php /* if(${not #strings.isEmpty(theme.config.basics.siteStartTime) && theme.config.footer.footerContent.style_one.owner_enable}) */ ?>>
+        ©<?php echo get_theme_mod("hao_siteStartTime", "2023"); ?> -  By [[<?php bloginfo("name"); ?>]]
     </div>
-    <div class="copyright">
-        ©<?php echo date("Y"); ?> By <?php bloginfo("name"); ?>
+    <div class="copyright"
+         <?php /* if(${#strings.isEmpty(theme.config.basics.siteStartTime) && theme.config.footer.footerContent.style_one.owner_enable}) */ ?>>
+        ©<?php echo date("Y"); ?> By [[<?php bloginfo("name"); ?>]]
     </div>
-    <div id="workboard"></div>
-    <p
+    <div <?php /* if(${theme.config.footer.footerContent.style_one.runtime_enable}) */ ?> id="workboard"></div>
+    <p <?php /* if(${theme.config.footer.footerContent.style_one.bdageitem_enable && not #lists.isEmpty(theme.config.footer.footerContent.style_one.bdageitem)}) */ ?>
        id="ghbdages" style="width:60%;margin: 0 auto 0;">
-        <a class="github-badge" <?php /* loop over data :  */ ?> target="_blank"
+        <a class="github-badge" <?php /* loop */ ?> target="_blank"
            style="margin-inline:5px">
             <img />
         </a>
     </p>
-    <span style="padding: 5px 5px;">
+    <span <?php /* if(${!theme.config.footer.footerContent.default_enable_group.default_enable}) */ ?> style="padding: 5px 5px;">
 
     </span>
 
@@ -77,67 +79,71 @@
         }
     </style>
 
-    <style>
+    <style
+            <?php /* if(${(theme.config.footer.footerContent.style_one.owner_enable
+            || (not #lists.isEmpty(theme.config.footer.footerContent.style_one.bdageitem) && theme.config.footer.footerContent.style_one.bdageitem_enable )
+            || theme.config.footer.footerContent.style_one.runtime_enable)
+        && theme.config.footer.footerContent.default_enable_group.default_enable}) */ ?>>
         #heo-footer {
             margin-bottom: 1rem;
         }
     </style>
 
-    <div id="footer-banner">
+    <div <?php /* if(${theme.config.footer.footerContent.default_enable_group.default_enable}) */ ?> id="footer-banner">
         <div class="footer-banner-links">
             <div class="footer-banner-left">
                 <div id="footer-banner-tips">
                     <div style="display: flex;flex-direction: row;align-items: center;">
-                        <th:block>
+                        <th:block <?php /* if(${not #strings.isEmpty(theme.config.basics.siteStartTime)}) */ ?>>
                             ©<?php echo get_theme_mod("hao_siteStartTime", "2023"); ?> - 
                         </th:block>
-                        <th:block>
+                        <th:block <?php /* if(${#strings.isEmpty(theme.config.basics.siteStartTime)}) */ ?>>
                             ©<?php echo date("Y"); ?>
                         </th:block>
-                        By <a class="footer-banner-link" href="/" target="_blank"><?php bloginfo("name"); ?></a>
+                        By <a class="footer-banner-link" href="/" target="_blank">[[<?php bloginfo("name"); ?>]]</a>
                     </div>
                 </div>
             </div>
             <div class="footer-banner-right">
                 
                 <!-- 又拍云 -->
-                <a
+                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'upyun_cloud'}) */ ?>
                    class="footer-banner-link cloud" href="https://www.upyun.com/"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
                     <span>本网站由</span>&nbsp;&nbsp;
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/upyun-5.png" alt="upyun" class="cloud-logo" />
+                    <img alt="upyun" class="cloud-logo" />
                     &nbsp;&nbsp;<span>提供CDN加速/云存储服务</span>
                 </a>
                 <!-- 阿里云 -->
-                <a
+                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'aliyun_cloud'}) */ ?>
                    class="footer-banner-link cloud" href="https://www.aliyun.com/"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
                     <span>本网站由</span>&nbsp;&nbsp;
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/aliyun.png" alt="aliyun_cloud" class="cloud-logo" />
+                    <img alt="aliyun_cloud" class="cloud-logo" />
                     &nbsp;&nbsp;<span>提供CDN加速/云存储服务</span>
                 </a>
                 <!-- 腾讯云 -->
-                <a
+                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'tencent_cloud'}) */ ?>
                    class="footer-banner-link cloud" href="https://cloud.tencent.com/"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
                     <span>本网站由</span>&nbsp;&nbsp;
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/tencent.png" alt="tencent_cloud" class="cloud-logo" />
+                    <img alt="tencent_cloud" class="cloud-logo" />
                     &nbsp;&nbsp;<span>提供CDN加速/云存储服务</span>
                 </a>
                 <!-- 华为云 -->
-                <a
+                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'huawei_cloud'}) */ ?>
                    class="footer-banner-link cloud" href="https://www.huaweicloud.com/"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
                     <span>本网站由</span>&nbsp;&nbsp;
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/huawei.png" alt="huawei_cloud" class="cloud-logo" />
+                    <img alt="huawei_cloud" class="cloud-logo" />
                     &nbsp;&nbsp;<span>提供CDN加速/云存储服务</span>
                 </a>
                 <!-- 自定义云服务信息 -->
-                <a
+                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'custom_cloud' && not #strings.isEmpty(theme.config.footer.footerContent.default_enable_group.yunzhichi_url)}) */ ?>
                    class="footer-banner-link cloud"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
@@ -147,24 +153,25 @@
                 </a>
                 
                 <!-- 订阅 需要 RSS 插件支持 -->
-                <a class="footer-banner-link" href="/rss.xml">订阅</a>
-                <a class="footer-banner-link" href="https://github.com/liuzhihang/halo-theme-hao">主题</a>
-                <a class="footer-banner-link" href="/about">关于</a>
-                <a
+                <a class="footer-banner-link" href="/rss.xml" <?php /* if(${pluginFinder.available('PluginFeed')} and ${theme.config.footer.footerContent.default_enable_group.dingyue}) */ ?>>订阅</a>
+                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.zhuti}) */ ?> class="footer-banner-link" href="https://github.com/liuzhihang/halo-theme-hao">主题</a>
+                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.about}) */ ?> class="footer-banner-link" href="/about">关于</a>
+                <a <?php /* if(${not #strings.isEmpty(theme.config.basics.icp) && theme.config.footer.footerContent.default_enable_group.icp_icon}) */ ?>
                    class="footer-banner-link" href="https://beian.miit.gov.cn/#/Integrated/index"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
-                    <span></span>
-                    <img alt="icp"/>
+                    <span <?php /* if(${not #strings.startsWith(theme.config.basics.icp, 'http')}) */ ?>></span>
+                    <img <?php /* if(${#strings.startsWith(theme.config.basics.icp, 'http')}) */ ?> alt="icp"/>
                 </a>
-                <a
+                <a <?php /* if(${not #strings.isEmpty(theme.config.basics.gongan) && theme.config.footer.footerContent.default_enable_group.gongwangan}) */ ?>
                    class="footer-banner-link" href="http://www.beian.gov.cn/portal/registerSystemInfo"
                    rel="noopener external nofollow noreferrer noopener"
                    target="_blank">
-                    <span></span>
-                    <img alt="gongan"/>
+                    <span <?php /* if(${not #strings.startsWith(theme.config.basics.gongan, 'http')}) */ ?>></span>
+                    <img <?php /* if(${#strings.startsWith(theme.config.basics.gongan, 'http')}) */ ?> alt="gongan"/>
                 </a>
-                <a class="footer-banner-link cc" title="cc协议">
+                <a class="footer-banner-link cc"
+                   <?php /* if(${not #strings.isEmpty(theme.config.basics.copyrightAgreement) && theme.config.footer.footerContent.default_enable_group.yingsi}) */ ?> title="cc协议">
                     <i class="haofont hao-icon-copyright-line"></i>
                     <i class="haofont hao-icon-creative-commons-by-line"></i>
                     <i class="haofont hao-icon-creative-commons-nc-line"></i>
@@ -176,7 +183,7 @@
 
 
     <!-- 右下角 snackbar 弹窗 -->
-    <div class="needEndHide" id="cookies-window">
+    <div <?php /* if(${theme.config.tool.snackbar.switch}) */ ?> class="needEndHide" id="cookies-window">
         <div class="cookies-window-title"></div>
         <div class="cookies-window-content"><span class="cookies-tip"></span>
             <a class="cookies-link" data-pjax-state=""><i
@@ -198,7 +205,7 @@
         }
     </style>
     
-    <th:block>
+    <th:block <?php /* if(${theme.config.top.global_background.enable_global_background_img}) */ ?>>
         <style>
             @media screen and (min-width: 1300px) {
                 #footer {

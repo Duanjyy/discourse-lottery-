@@ -1,5 +1,5 @@
 <!-- 座右铭 -->
-<div class="author-content">
+<div class="author-content"  <?php /* if(=='2') */ ?>>
     <div class="author-content-item maxim">
         <div class="author-content-item-tips">座右铭</div>
         <span class="maxim-title">

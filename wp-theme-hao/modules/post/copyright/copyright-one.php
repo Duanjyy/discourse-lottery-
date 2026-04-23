@@ -1,5 +1,5 @@
 <!-- 版权样式一 -->
-<th:block>
+<th:block <?php /* if() */ ?>>
     <!-- 版权声明 -->
     <div class="post-copyright">
         <div class="post-copyright__author_group">
@@ -16,8 +16,9 @@
         </div>
         <div class="post-tools" id="post-tools">
             <div class="post-tools-left">
-                <div class="rewardLeftButton">
-                    <div class="post-reward"
+                <div class="rewardLeftButton"
+                     <?php /* if() */ ?>>
+                    <div <?php /* if() */ ?> class="post-reward"
                          onclick="AddRewardMask()">
                         <div class="reward-button button--animated" title="打赏作者"><i
                                 class="haofont hao-icon-hand-heart-fill"></i> 打赏作者
@@ -44,12 +45,13 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="reward-link mode"><a
+                    <div <?php /* if() */ ?> class="reward-link mode"><a
                             class="reward-link-button"
                             data-pjax-state=""><i class="haofont hao-icon-plant-fill"></i>订阅</a></div>
                 </div>
-                <div class="shareRight">
-                    <div class="share-link mobile">
+                <div class="shareRight"
+                     <?php /* if() */ ?>>
+                    <div class="share-link mobile" <?php /* if() */ ?>>
                         <div class="share-qrcode">
                             <div class="share-button" title="使用手机访问这篇文章"><i
                                     class="haofont hao-icon-qrcode"></i>
@@ -62,19 +64,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="share-link weibo">
+                    <div class="share-link weibo" <?php /* if() */ ?>>
                         <a class="share-button" rel="noopener external nofollow noreferrer noopener" target="_blank"
                            title="分享到微博">
                             <i class="haofont hao-icon-weibo" style="font-size:22px"></i></a>
                     </div>
-                    <div class="share-link copyurl">
+                    <div class="share-link copyurl" <?php /* if() */ ?>>
                         <div class="share-button" id="post-share-url" onclick="rm.copyPageUrl()" title="复制链接"><i
                                 class="haofont hao-icon-link"></i></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div
+        <div <?php /* if(${not #strings.isEmpty(#annotations.get(post, 'copyrightEnable')) ?
+              #annotations.get(post, 'copyrightEnable') == 'true' : theme.config.post.copyrights.enable}) */ ?>
              class="post-copyright__notice">
             <span class="post-copyright-info">
             </span>
@@ -85,7 +88,7 @@
     <div class="post-tools-right">
         <div class="tag_share">
             <div class="post-meta__tag-list">
-                <a class="post-meta__tags" <?php /* loop over tag :  */ ?>>
+                <a class="post-meta__tags" <?php /* loop */ ?>>
                     <span class="tags-punctuation"></span>
 
                     <span class="tagsPageCount"></span>

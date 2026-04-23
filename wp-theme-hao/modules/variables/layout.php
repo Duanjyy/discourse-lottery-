@@ -50,7 +50,7 @@
     [data-theme=light] {
         --halo-search-widget-color-result-item-title : #4B5563
     }
-    [#]
+    [# <?php /* if() */ ?>]
         #aside-content #card-toc .toc-content a.toc-link:not(.active)  {
             opacity: 1;
             filter: blur(0px);

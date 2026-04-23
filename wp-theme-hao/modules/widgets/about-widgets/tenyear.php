@@ -1,4 +1,4 @@
-<div class="author-content">
+<div class="author-content" <?php /* if() */ ?>>
     <div class="create-site-post author-content-item single">
         <div class="author-content-item-tips"></div>
         <span class="author-content-item-title"></span>

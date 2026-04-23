@@ -1,5 +1,6 @@
 <!-- 动态标题 -->
-<script>
+<script
+        <?php /* if() */ ?>>
     var leaveTitle = '';
     var backTitle = '';
     var OriginTitile = "[()]"

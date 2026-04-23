@@ -2,19 +2,19 @@
 <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
 
 
-        <span>
-            <th:block/>
+        <span <?php /* if() */ ?>>
+            <th:block <?php get_template_part("modules/widgets/aside/contain/tags-contain"); ?> <?php /* if() */ ?>/>
 
             <hr>
         </span>
 
-    <span>
-            <?php get_template_part("modules/widgets/aside/contain/archive-contain"); ?>
+    <span <?php /* if() */ ?>>
+            <th:block <?php get_template_part("modules/widgets/aside/contain/archive-contain"); ?> />
 
             <hr>
         </span>
 
 
-    <?php get_template_part("modules/widgets/aside/contain/stat-contain"); ?>
+    <th:block <?php get_template_part("modules/widgets/aside/contain/stat-contain"); ?> />
 
 </div>

@@ -1,5 +1,6 @@
 <!-- loading页面 -->
-<th:block>
+<th:block
+          <?php /* if( and not ) */ ?>>
     <style type="text/css">
         #loading-box {
             -webkit-user-select: none;

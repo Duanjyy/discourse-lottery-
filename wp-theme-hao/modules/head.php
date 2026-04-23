@@ -1,11 +1,11 @@
 <!-- 公共的 head 部分，可以定义部分 links,scripts,styles -->
-
+<th:block>
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <meta content="telephone=no" name="format-detection">
     <meta content="var(--heo-card-bg)" name="theme-color">
-    <title <?php bloginfo("name"); ?>></title>
+    <title></title>
     <link rel="shortcut icon"/>
 
     <script src="<?php echo get_template_directory_uri(); ?>/assets/libs/jquery/jquery.min.js"></script>
@@ -18,7 +18,7 @@
 
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/zhheo/commentBarrage.css">
 
-    <style>
+    <style <?php /* if() */ ?>>
         *::-webkit-scrollbar-thumb {
             background-color: var(--heo-main);
             background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.4) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.4) 50%,rgba(255,255,255,.4) 75%,transparent 75%,transparent);
@@ -27,7 +27,7 @@
     </style>
 
     <!-- swiper 在瞬间滚动时会使用 -->
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/libs/swiper/swiper-bundle.min.css"/>
+    <link <?php /* if() */ ?> rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/libs/swiper/swiper-bundle.min.css"/>
     
     <!-- 右下角通知 -->
     <link href="<?php echo get_template_directory_uri(); ?>/assets/libs/node-snackbar/snackbar.min.css"
@@ -37,12 +37,12 @@
     />
 
     <!-- 代码块自动识别语言 -->
-    <?php get_template_part("modules/common/code"); ?>
+    <th:block <?php get_template_part("modules/common/code"); ?>
     <!--  代码块-->
-    <?php get_template_part("macro/prism-code"); ?>
+    <th:block <?php get_template_part("macro/prism-code"); ?>
 
     <!-- 页脚内容-样式一 -->
-    <?php get_template_part("modules/common/footer-style-one"); ?>
+    <th:block <?php get_template_part("modules/common/footer-style-one"); ?>
 
     <script>
         (win => {
@@ -156,22 +156,23 @@
 
     <!-- 动态加载条 -->
     <script data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"
-            src="<?php echo get_template_directory_uri(); ?>/assets/libs/pace/pace.min.js">
+            src="<?php echo get_template_directory_uri(); ?>/assets/libs/pace/pace.min.js"
+            <?php /* if() */ ?>>
     </script>
 
     <!-- 复制 https://githubfast.com/zenorocha/clipboard.js -->
     <script src="<?php echo get_template_directory_uri(); ?>/assets/libs/clipboard/clipboard.min.js"></script>
 
     <!-- 关于统计-->
-    <script src="<?php echo get_template_directory_uri(); ?>/assets/libs/countup/countup.js"></script>
+    <script <?php /* if() */ ?> src="<?php echo get_template_directory_uri(); ?>/assets/libs/countup/countup.js"></script>
 
     <!-- icon图标 -->
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/icon/iconfont.css">
 
-    <?php get_template_part("modules/variables/site-config"); ?>
+    <th:block <?php get_template_part("modules/variables/site-config"); ?> />
 
 
-
+</th:block>
 
     <script>
         var GLOBAL_CONFIG = {

@@ -5,10 +5,11 @@
     <div class="card-widget card-steam">
         <div id="flip-wrapper-card">
             <div id="flip-steam">
-                <div class="stimg">
+                <div class="stimg"
+                     style="'background:url('++') center center/100% no-repeat'">
 
                 </div>
-                <div class="back stimg"></div>
+                <div class="back stimg" style="'background:url(' + assets_link + '/images/blank.webp) center center/100% no-repeat'"></div>
             </div>
         </div>
     </div>

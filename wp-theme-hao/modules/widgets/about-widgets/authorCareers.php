@@ -8,7 +8,8 @@
             <div class="skills-style-group">
                 <div class="tags-group-all">
                     <!--  banners 使用默认值-->
-                    <div class="tags-group-wrapper">
+                    <div class="tags-group-wrapper"
+                         <?php /* if() */ ?>>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#989bf8">
                                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/AfterEffect.png"
@@ -144,14 +145,17 @@
                     </div>
 
                     <!--  banners 使用默认值-->
-                    <div class="tags-group-wrapper">
-                        <th:block <?php /* loop over tech,iterStat :  */ ?>>
-                            <div class="tags-group-icon-pair">
-                                <div class="tags-group-icon">
+                    <div class="tags-group-wrapper"
+                         <?php /* if() */ ?>>
+                        <th:block <?php /* loop */ ?>>
+                            <div class="tags-group-icon-pair" <?php /* if() */ ?>>
+                                <div class="tags-group-icon"
+                                     style="'background:' + ">
                                     <img>
                                 </div>
 
-                                <div class="tags-group-icon">
+                                <div class="tags-group-icon"
+                                     style="'background:' + ">
                                     <img>
                                 </div>
                             </div>
@@ -160,7 +164,8 @@
                 </div>
 
                 <!--  banners 使用默认值-->
-                <div class="skills-list">
+                <div class="skills-list"
+                     <?php /* if() */ ?>>
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#989bf8">
@@ -265,10 +270,11 @@
 
                     <div class="etc">...</div>
                 </div>
-                <div class="skills-list">
-                    <th:block <?php /* loop over tech :  */ ?>>
+                <div class="skills-list"
+                     <?php /* if() */ ?>>
+                    <th:block <?php /* loop */ ?>>
                         <div class="skill-info">
-                            <div class="skill-icon">
+                            <div class="skill-icon" style="'background:' + ">
                                 <img>
                             </div>
                             <div class="skill-name">
@@ -285,9 +291,10 @@
         <div class="card-content">
             <div class="author-content-item-tips">生涯</div>
             <span class="author-content-item-title">无限进步</span>
-            <div class="careers-group">
-                <div class="careers-item" <?php /* loop over tag :  */ ?>>
-                    <div class="circle"></div>
+            <div class="careers-group"
+                 <?php /* if() */ ?>>
+                <div class="careers-item" <?php /* loop */ ?>>
+                    <div class="circle" style="'background:' + "></div>
                     <div class="name"></div>
                 </div>
             </div>

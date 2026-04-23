@@ -1,9 +1,10 @@
-<div class="bbTimeList container" id="bbTimeList">
+<div class="bbTimeList container" id="bbTimeList"
+     <?php /* if() */ ?>>
 
     <i class="haofont hao-icon-logo-moment" onclick="" style="font-size: 1.3rem;" title="瞬间"></i>
 
     <!--   未安装插件   -->
-    <th:block>
+    <th:block <?php /* if(!) */ ?>>
         <div class="swiper-container swiper-no-swiping" id="bbtalk" tabindex="-1">
             <div class="swiper-wrapper" id="bber-talk"
                  onclick="location.href=location.href='https\:\/\/github.com/halo-sigs/plugin-moments'">
@@ -16,18 +17,19 @@
     </th:block>
 
     <!--   瞬间插件   -->
-    <th:block>
+    <th:block <?php /* if() */ ?>>
         <div class="swiper-container swiper-no-swiping" id="bbtalk" tabindex="-1">
-            <div class="swiper-wrapper" id="bber-talk" onclick="pjax.loadUrl('/moments')">
-                <th:block <?php /* loop over moment :  */ ?>>
-                    <div class="li-style swiper-slide">
+            <div class="swiper-wrapper" id="bber-talk" onclick="pjax.loadUrl('/moments')" <?php /* if() */ ?>>
+                <th:block <?php /* loop */ ?>>
+                    <div class="li-style swiper-slide"
+                         <?php /* if() */ ?>>
                     </div>
                 </th:block>
             </div>
         </div>
         <i class="bber-gotobb haofont hao-icon-circle-arrow-right" onclick="location.href='/moments'" title="查看全文"></i>
     </th:block>
-    <img class="climb"  id="climb"
+    <img <?php /* if( ) */ ?> class="climb"  id="climb"
          onclick="halo.changeMarginLeft(this)">
 
 </div>
