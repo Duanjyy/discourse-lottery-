@@ -7,48 +7,40 @@
     @param  isIndex    是否主页
     @param  _param     参数
  -->
-<nav id="pagination" th:fragment="page(path,pageInfo,isIndex,_param)">
-    <div class="pagination" th:with="paths = ${isIndex ? path+'/' : path}">
+<nav id="pagination">
+    <div class="pagination">
 
         <!-- 页码按钮 -->
-        <th:block th:if="${pageInfo.page > 3}">
-            <a class="page-number" th:href="${paths}" th:text="1" onclick="scrollToPost()"></a>
-            <span class="space" th:if="${pageInfo.page != 4}">…</span>
+        <th:block>
+            <a class="page-number" onclick="scrollToPost()"></a>
+            <span class="space">…</span>
         </th:block>
 
-        <th:block <?php /* loop over index:${#numbers.sequence(pageInfo.page-2,pageInfo.page+2)} */ ?>>
-            <span class="page-number current" th:if="${pageInfo.page} == ${index}" th:text="${pageInfo.page}"></span>
-            <a class="page-number" th:unless="${pageInfo.page == index}"
-               th:if="${index > 0 && index <= pageInfo.totalPages}"
-               th:href="${#strings.equals(index, '1') ? paths + _param : path+'/page/'+index  + _param}"
-               th:text="${index}"
+        <th:block <?php /* loop over index: */ ?>>
+            <span class="page-number current"></span>
+            <a class="page-number"
                onclick="scrollToPost()"></a>
         </th:block>
 
-        <th:block th:if="${pageInfo.totalPages - pageInfo.page > 2}">
-            <span class="space" th:if="${pageInfo.totalPages - pageInfo.page != 3}">…</span>
+        <th:block>
+            <span class="space">…</span>
             <a class="page-number"
-               th:href="${path+'/page/'+pageInfo.totalPages+_param}"
-               th:text="${pageInfo.totalPages}"
                onclick="scrollToPost()"></a>
         </th:block>
         <!-- 翻页按钮 -->
         <a class="extend prev" rel="prev"
-           th:if="${pageInfo.hasPrevious}"
-           th:href="${pageInfo.prevUrl}"
            onclick="scrollToPost()">
             <i class="haofont hao-icon-chevron-left fa-fw"></i>
             <div class="pagination_tips_prev">上页</div>
         </a>
 
         <a class="extend next"
-           rel="next" th:if="${pageInfo.hasNext}"
-           th:href="${pageInfo.nextUrl}"
+           rel="next"
            onclick="scrollToPost()">
             <div class="pagination_tips_next">下页</div>
             <i class="haofont hao-icon-chevron-right fa-fw"></i>
         </a>
-        <div th:if="${pageInfo.totalPages > 1}" class="toPageGroup">
+        <div class="toPageGroup">
             <input id="toPageText" maxlength="3" title="跳转到指定页面"
                    oninput="value=value.replace(/[^0-9]/g,'')"
                    onkeyup="if (this.value === '0') this.value = ''">
@@ -56,7 +48,7 @@
             </a>
         </div>
 
-        <script th:if="${theme.config.top.above.enable_above}">
+        <script>
             function scrollToPost() {
                 if (document.querySelector(".pl-container")) {
                     setTimeout(() => {
@@ -65,7 +57,7 @@
                 }
             }
         </script>
-        <script th:unless="${theme.config.top.above.enable_above}">
+        <script>
             function scrollToPost() {
             }
         </script>

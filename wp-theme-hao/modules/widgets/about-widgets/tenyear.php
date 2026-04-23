@@ -1,8 +1,8 @@
-<div class="author-content" th:if="${theme.config.about.tenyear.tenyear_enable}">
+<div class="author-content">
     <div class="create-site-post author-content-item single">
-        <div class="author-content-item-tips">[[${theme.config.about.tenyear.tenyear_tips}]]</div>
-        <span class="author-content-item-title">[[${theme.config.about.tenyear.tenyear_title}]]</span>
-        <p>[[${theme.config.about.tenyear.tenyear_content}]]</p>
+        <div class="author-content-item-tips"></div>
+        <span class="author-content-item-title"></span>
+        <p></p>
         <div class="timeline">
             <div class="progress"></div>
             <div class="past-time"></div>

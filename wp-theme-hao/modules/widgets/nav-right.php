@@ -4,21 +4,21 @@
     <!-- 功能都需要添加开关 -->
 
     <!-- 随机前往一个开往项目网站 -->
-    <div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站" th:if="${theme.config.nav.right.travelling}">
+    <div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站">
         <a class="site-page" href="https://www.travellings.cn/go.html"  rel="external nofollow"
            title="随机前往一个开往项目网站">
             <i class="haofont hao-icon-eicon_train-line"></i>
         </a>
     </div>
 
-    <div class="nav-button" id="randomPost_button" th:if="${theme.config.nav.right.article}">
+    <div class="nav-button" id="randomPost_button">
         <a class="site-page" href="javascript:void(0);" onclick="toRandomPost()" title="随机文章">
             <i class="haofont hao-icon-signal-tower-fill"></i>
         </a>
     </div>
 
     <!-- 切换模式 -->
-    <div class="nav-button" id="darkmode_button" th:if="${theme.config.nav.right.darkMode}">
+    <div class="nav-button" id="darkmode_button">
         <a class="console_switchbutton" href="javascript:void(0);"  onclick="navFn.switchDarkMode();" rel="external nofollow"
            title="切换模式 - 日夜交替，黑白互换。">
             <i class="haofont hao-icon-moon-clear-fill" style="font-size: 1rem;"></i>
@@ -26,19 +26,17 @@
     </div>
 
     <!-- 搜索使用搜索插件 -->
-    <div class="nav-button" id="search-button" th:if="${pluginFinder.available('PluginSearchWidget')}">
+    <div class="nav-button" id="search-button">
         <a class="site-page social-icon search" href="javascript:SearchWidget.open();" rel="external nofollow"
            title="站内搜索">
             <i class="haofont hao-icon-search--line"></i>
         </a>
     </div>
 
-    <div th:if="${theme.config.nav.right.navLogin}" class="console-button" tabindex="-1"
-         th:with="currentUser = ${contributorFinder.getContributor(#authentication.name)}">
+    <div class="console-button" tabindex="-1">
         <span class="site-page nav-login">
             <i sec:authorize="isAnonymous()" class="haofont hao-icon-zhanghao1 " style="font-size: 19.5px;"></i>
-            <img sec:authorize="isAuthenticated()"  th:src="${currentUser.avatar}"
-                 th:alt="${currentUser.displayName}"
+            <img sec:authorize="isAuthenticated()"
                  style=" width: 24px; height: 24px; border-radius: 9999px" />
         </span>
         <div class="back-menu-list-groups">
@@ -61,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div th:if="${theme.config.nav.right.console.consoleEnable}" class="nav-button" id="nav-console">
+    <div class="nav-button" id="nav-console">
         <a class="console_switchbutton" href="javascript:void(0);" onclick="heo.showConsole()" rel="external nofollow"
            title="显示中控台">
             <i class="haofont hao-icon-dashboard"></i>

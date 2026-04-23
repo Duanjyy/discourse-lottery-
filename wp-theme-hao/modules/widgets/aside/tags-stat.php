@@ -2,13 +2,13 @@
 <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
 
 
-        <span th:if="${theme.config.sidebar.tags_switch}">
-            <th:block th:replace="~{modules/widgets/aside/contain/tags-contain}" th:if="${theme.config.sidebar.tags_switch}"/>
+        <span>
+            <th:block/>
 
             <hr>
         </span>
 
-    <span th:if="${theme.config.sidebar.archive_switch}">
+    <span>
             <?php get_template_part("modules/widgets/aside/contain/archive-contain"); ?>
 
             <hr>

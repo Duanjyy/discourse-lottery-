@@ -1,10 +1,9 @@
-<div class="bbTimeList container" id="bbTimeList"
-     th:if="${theme.config.top.moment}">
+<div class="bbTimeList container" id="bbTimeList">
 
     <i class="haofont hao-icon-logo-moment" onclick="" style="font-size: 1.3rem;" title="瞬间"></i>
 
     <!--   未安装插件   -->
-    <th:block th:if="!${pluginFinder.available('PluginMoments')}">
+    <th:block>
         <div class="swiper-container swiper-no-swiping" id="bbtalk" tabindex="-1">
             <div class="swiper-wrapper" id="bber-talk"
                  onclick="location.href=location.href='https\:\/\/github.com/halo-sigs/plugin-moments'">
@@ -17,22 +16,18 @@
     </th:block>
 
     <!--   瞬间插件   -->
-    <th:block th:if="${pluginFinder.available('PluginMoments')}">
+    <th:block>
         <div class="swiper-container swiper-no-swiping" id="bbtalk" tabindex="-1">
-            <div class="swiper-wrapper" id="bber-talk" onclick="pjax.loadUrl('/moments')" th:if="${momentFinder}">
-                <th:block <?php /* loop over moment : ${momentFinder.listAll()} */ ?> th:with="content=${moment.spec.content}">
-                    <div class="li-style swiper-slide"
-                         th:if="${not #strings.isEmpty(content.raw)}"
-                         th:utext="${content.raw}">
+            <div class="swiper-wrapper" id="bber-talk" onclick="pjax.loadUrl('/moments')">
+                <th:block <?php /* loop over moment :  */ ?>>
+                    <div class="li-style swiper-slide">
                     </div>
                 </th:block>
             </div>
         </div>
         <i class="bber-gotobb haofont hao-icon-circle-arrow-right" onclick="location.href='/moments'" title="查看全文"></i>
     </th:block>
-    <img th:if="${theme.config.top.climb.climbEnable && theme.config.top.recentTop} " class="climb"  id="climb"
-         th:src="${isLazyload ? '' : theme.config.top.climb.climbImg}"
-         onclick="halo.changeMarginLeft(this)"
-         th:data-lazy-src="${ isLazyload ? theme.config.top.climb.climbImg : ''}">
+    <img class="climb"  id="climb"
+         onclick="halo.changeMarginLeft(this)">
 
 </div>

@@ -9,33 +9,21 @@
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page">
-                <div th:replace="~{macro/author-content :: author-content(background = ${singlePage.spec.cover},
-                        smallTitle = '评论',
-                        bigTitle = ${singlePage.spec.title},
-                        detail = ${singlePage.spec.excerpt.raw},
-                        buttonUrl = '',
-                        buttonTitle = '')}"></div>
+                <div></div>
                 <div id="comments-page">
-                    <th:block th:if="${#strings.equals(theme.config.comments.use, 'commentWidget') }"
-                              <?php /* loop over comment,iterStat : ${commentFinder.list(null, 1, 100)} */ ?> th:with="page = ${comment.spec.subjectRef.kind == 'Post' ? postFinder.getByName(comment.spec.subjectRef.name) :
-                        comment.spec.subjectRef.kind == 'SinglePage' && not #strings.contains('photos,links,moments', comment.spec.subjectRef.name) ? singlePageFinder.getByName(comment.spec.subjectRef.name) : null},
-                        url = ${page == null? '/' : page.status.permalink + '#comment-' + comment.metadata.name},
-                        article = ${page == null? '该文章/页面不存在' : page.spec.title}">
-                        <div class="comment-card" th:title="${comment.spec.content}"
-                             th:onclick="pjax.loadUrl([[${url}]])">
+                    <th:block
+                              <?php /* loop over comment,iterStat :  */ ?>>
+                        <div class="comment-card">
                             <div class="comment-info">
-                                <img th:with=" img =${#strings.isEmpty(comment.owner.avatar)? theme.config.sidebar.newcomment.providerMirror+'/avatar/'+comment.spec.owner.annotations['email-hash'] :comment.owner.avatar}"
-                                     th:alt="${comment.owner.displayName}" th:src="${isLazyload ? '' : img}"
-                                     th:data-lazy-src="${ isLazyload ? img : ''}" class="no-lightbox nolazyload avatar">
+                                <img class="no-lightbox nolazyload avatar">
                                 <div class="comment-information">
-                                    <span class="comment-user">[[${comment.owner.displayName}]]</span>
-                                    <span class="comment-time">[[${#dates.format(comment.metadata.creationTimestamp,
-                                        'yyyy-MM-dd HH:mm:ss')}]]</span>
+                                    <span class="comment-user"></span>
+                                    <span class="comment-time"></span>
                                 </div>
                             </div>
-                            <div class="comment-content">[[${comment.spec.content}]]
+                            <div class="comment-content">
                             </div>
-                            <div class="comment-article">[[${article}]]</div>
+                            <div class="comment-article"></div>
                         </div>
                     
 <?php get_footer(); ?>

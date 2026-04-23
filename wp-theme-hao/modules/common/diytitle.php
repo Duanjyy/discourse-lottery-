@@ -1,9 +1,8 @@
 <!-- 动态标题 -->
-<script
-        th:if="${theme.config.other.diytitle.diytitleEnable}">
-    var leaveTitle = '[[${theme.config.other.diytitle.leaveTitle}]]';
-    var backTitle = '[[${theme.config.other.diytitle.backTitle}]]';
-    var OriginTitile = "[(${siteTitle})]"
+<script>
+    var leaveTitle = '';
+    var backTitle = '';
+    var OriginTitile = "[()]"
     var titleTime
     document.addEventListener('visibilitychange', function () {
         if (document.hidden) {

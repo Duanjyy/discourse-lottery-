@@ -1,5 +1,5 @@
-<script th:if="${theme.config.footer.footerContent.style_one.runtime_enable}" async="async">(function () {
-    var grt = new Date("[[${#strings.arraySplit(theme.config.basics.siteStartTime, '-')[1]}]]/[[${#strings.arraySplit(theme.config.basics.siteStartTime, '-')[2]}]]/[[${#strings.arraySplit(theme.config.basics.siteStartTime, '-')[0]}]] 00:00:00"); //设置网站上线时间
+<script async="async">(function () {
+    var grt = new Date("//<?php echo get_theme_mod("hao_siteStartTime", "2023"); ?> 00:00:00"); //设置网站上线时间
     var now = new Date();
     var dnum;
     var hnum;
@@ -43,16 +43,16 @@
         let description = "";
         if (nowHour < 18 && nowHour >= 9) {
             // 如果是上班时间
-            img = "[(${theme.config.footer.footerContent.style_one.work_img})]";
-            description = "[(${theme.config.footer.footerContent.style_one.work_description})]";
+            img = "[()]";
+            description = "[()]";
         } else {
             // 如果是下班时间
-            img = "[(${theme.config.footer.footerContent.style_one.offduty_img})]";
-            description = "[(${theme.config.footer.footerContent.style_one.offduty_description})]";
+            img = "[()]";
+            description = "[()]";
         }
         if (document.getElementById("workboard")) {
-            currentTimeHtml =  `<img class="workSituationImg boardsign" src="${img}" alt="${description}" title="${description}">
-                <div id="runtimeTextTip"> 本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='haofont hao-icon-heartbeat' style='color:red'></i> <br> 旅行者 1 号当前距离地球 ${t} 千米，约为 ${n} 个天文单位 🚀 </div>`
+            currentTimeHtml =  `<img class="workSituationImg boardsign" src="" alt="" title="">
+                <div id="runtimeTextTip"> 本站居然运行了  天<span id='runtime'>  小时  分  秒 </span><i class='haofont hao-icon-heartbeat' style='color:red'></i> <br> 旅行者 1 号当前距离地球  千米，约为  个天文单位 🚀 </div>`
             document.getElementById("workboard").innerHTML = currentTimeHtml;
         }
     }

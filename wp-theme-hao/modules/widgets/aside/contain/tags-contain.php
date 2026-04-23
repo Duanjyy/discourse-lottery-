@@ -1,17 +1,14 @@
 <!-- 标签 -->
-<th:block
-          th:with="tags = ${tagFinder.list(1,theme.config.sidebar.tagQuantity)}">
+<th:block>
 
     <div class="item-headline"></div>
     <div class="card-tag-cloud">
-        <a class="tag-item" style="font-size:1em" <?php /* loop over tag,iterStat : ${tags} */ ?>
-           th:href="@{${tag.status.permalink}}"
-           th:title="${tag.spec.displayName}">
+        <a class="tag-item" style="font-size:1em" <?php /* loop over tag,iterStat :  */ ?>>
             <!-- 角标 -->
-            [[${tag.spec.displayName}]]<sup th:text="${tag.status.visiblePostCount}"></sup>
+            <sup></sup>
         </a>
     </div>
-    <script th:if="${theme.config.other.tagRandomColorEnable}">
+    <script>
         for (const tag of document.getElementsByClassName('tag-item')) {
             let randomColor ="#"+((1<<24)*Math.random()|0).toString(16);
             tag.style.color = randomColor;

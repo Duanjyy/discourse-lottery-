@@ -3,30 +3,18 @@
 <th:block  >
 
     <div  class="item-headline"><a class="card-more-btn" href="/archives/" title="查看更多" data-pjax-state=""></a></div>
-    <ul  class="card-archive-list"
-         th:with="archives = ${postFinder.archives(1,0)}, archivesQuantity = ${#conversions.convert(theme.config.sidebar.archivesQuantity, 'java.lang.Integer')}">
-        <th:block <?php /* loop over archive,archiveStat : ${archives.items} */ ?>>
+    <ul  class="card-archive-list">
+        <th:block <?php /* loop over archive,archiveStat :  */ ?>>
             <li class="card-archive-list-item"
-                <?php /* loop over month,monthIndex  : ${archive.months} */ ?>
+                <?php /* loop over month,monthIndex  :  */ ?>
             ><a
-                    class="card-archive-list-link" th:href="@{'/archives/'+${archive.year}+'/'+${month.month}}"
+                    class="card-archive-list-link"
                     data-pjax-state=""><span
-                    class="card-archive-list-date">[[${(month.month=='01') ? '一月' :
-                            (month.month == '02') ? "二月"  :
-                            (month.month == '03') ? "三月" :
-                            (month.month == '04') ? "四月" :
-                            (month.month == '05') ? "五月" :
-                            (month.month == '06') ? "六月" :
-                            (month.month == '07') ? "七月" :
-                            (month.month == '08') ? "八月" :
-                            (month.month == '09') ? "九月" :
-                            (month.month == '10') ? "十月" :
-                            (month.month == '11') ? "十一月" :
-                                          "十二月"}]] [[${archive.year}]]
+                    class="card-archive-list-date"> 
 
                         </span>
                 <div class="card-archive-list-count-group"><span
-                        class="card-archive-list-count">[[${month.posts.size()}]]</span><span
+                        class="card-archive-list-count"></span><span
                         class="card-archive-list-count-unit">篇</span></div>
             </a>
             </li>

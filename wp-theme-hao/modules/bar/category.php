@@ -6,16 +6,15 @@
             <a href="/">首页</a>
         </div>
 
-        <th:block th:with="categories = ${categoryFinder.listAll()}">
+        <th:block>
 
             <div class="category-bar-item"
-                 <?php /* loop over categoryItem : ${categories} */ ?>
-                 th:id="${categoryItem.spec.displayName}">
-                <a th:href="@{${categoryItem.status.permalink}}" th:text="${categoryItem.spec.displayName}"></a>
+                 <?php /* loop over categoryItem :  */ ?>>
+                <a></a>
             </div>
 
         </th:block>
     </div>
-    <a class="category-bar-more" th:replace="~{modules/bar/more}">更多</a>
+    <a class="category-bar-more">更多</a>
 </div>
 <?php get_footer(); ?>

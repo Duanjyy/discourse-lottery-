@@ -1,14 +1,12 @@
 <!-- 目录 -->
-<div class="card-widget card-categories"
-     th:with="categories =  ${categoryFinder.list(1, theme.config.sidebar.categoryQuantity)}">
+<div class="card-widget card-categories">
     <div class="item-headline"><i class="haofont hao-icon-folder-open"></i><span>分类</span></div>
     <div class="aside-list">
         <ul class="card-category-list">
-            <li class="card-category-list-item" <?php /* loop over category,iterStat : ${categories} */ ?>>
-                <a class="card-category-list-link" th:href="@{${category.status.permalink}}">
-                        <span class="card-category-list-name" th:text="${category.spec.displayName}"
-                              th:title="${category.spec.displayName}"></span>
-                    <span class="card-category-list-count" th:text="${category.status.visiblePostCount}"></span>
+            <li class="card-category-list-item" <?php /* loop over category,iterStat :  */ ?>>
+                <a class="card-category-list-link">
+                        <span class="card-category-list-name"></span>
+                    <span class="card-category-list-count"></span>
                 </a>
             </li>
         </ul>

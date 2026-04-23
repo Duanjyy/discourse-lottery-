@@ -1,47 +1,37 @@
 <!-- 爱好 -->
 <div class="author-content" >
-    <div class="author-content-item game-lol"
-         th:style="'background: url('+ @{${theme.config.about.game.game_bg}} +') top / cover no-repeat'">
+    <div class="author-content-item game-lol">
         <div class="card-content">
-            <div class="author-content-item-tips" th:text="${theme.config.about.game.game_tips}">
+            <div class="author-content-item-tips">
 
-            </div><span class="author-content-item-title"
-                        th:text="${theme.config.about.game.game_title}"></span>
+            </div><span class="author-content-item-title"></span>
             <div class="content-bottom">
                 <div class="icon-group">
                     <div class="loading-bar" role="presentation" aria-hidden="true"></div>
                 </div>
-                <div class="tips" th:text="${theme.config.about.game.game_uid}"></div>
+                <div class="tips"></div>
             </div>
         </div>
     </div>
-    <div th:if="${#strings.equals(theme.config.about.game2.game2_type, 'img')}" class="author-content-item game-wolf"
-         th:style="'background: url('+ @{${theme.config.about.game2.game2_bg}} +') top / cover no-repeat'">
+    <div class="author-content-item game-wolf">
         <div class="card-content">
-            <div class="author-content-item-tips" th:text="${theme.config.about.game2.game2_tips}">
+            <div class="author-content-item-tips">
 
-            </div><span class="author-content-item-title"
-                        th:text="${theme.config.about.game2.game2_title}"></span>
+            </div><span class="author-content-item-title"></span>
             <div class="content-bottom">
-                <div class="tips" th:text="${theme.config.about.game2.game2_uid}"></div>
+                <div class="tips"></div>
             </div>
         </div>
     </div>
-    <div th:if="${#strings.equals(theme.config.about.game2.game2_type, 'comic')}" class="author-content-item comic-content">
+    <div class="author-content-item comic-content">
         <div class="card-content">
-            <div class="author-content-item-tips" th:text="${theme.config.about.game2.game2_tips}"></div>
-            <div class="author-content-item-title" th:text="${theme.config.about.game2.game2_title}"></div>
+            <div class="author-content-item-tips"></div>
+            <div class="author-content-item-title"></div>
             <div class="comic-box" >
-                <a  <?php /* loop over comic : ${theme.config.about.game2.comic_list} */ ?>
+                <a  <?php /* loop over comic :  */ ?>
                     class="comic-item"
-                    th:href="${comic.url}"
-                    rel="external nofollow noreferrer" target="_blank" th:title="${comic.title}" draggable="false">
+                    rel="external nofollow noreferrer" target="_blank" draggable="false">
                     <div class="comic-item-cover"><img
-                            th:with="img = @{${comic.bg}}"
-
-                            th:src="${isLazyload ? '' : img}"
-                            th:data-lazy-src="${ isLazyload ? img : ''}"
-                            th:alt="${comic.title}"
                             draggable="false" >
                     </div>
                 </a>
@@ -57,7 +47,7 @@
             filter: drop-shadow(0 -500px 0 #ece5d8);
             width: 500px;
             height: 62.5px;
-            background: url([[${theme.config.about.game.loading_bar}]]) no-repeat left 100%;
+            background: url() no-repeat left 100%;
             background-size: 500px 62.5px;
             background-position-x: 0;
         }

@@ -1,27 +1,23 @@
 <!-- 导航栏左侧 -->
 <div id="blog_name" >
 
-    <th:block th:if="${not #strings.isEmpty(theme.config.nav.leftMenu) && theme.config.nav.menus.pc_leftMenu}"
-              th:with="leftMenu = ${menuFinder.getByName(theme.config.nav.leftMenu)}">
+    <th:block>
         <!-- 菜单栏左侧按钮，没有配置时，则不展示-->
-        <div class="back-home-button" tabindex="-1"
-             th:if="${not #lists.isEmpty(leftMenu)}">
+        <div class="back-home-button" tabindex="-1">
 
             <i class="back-home-button-icon haofont hao-icon-apps-fill" style="font-size: 1rem"></i>
             <div class="back-menu-list-groups">
-                <div class="back-menu-list-group" <?php /* loop over menuItem : ${leftMenu.menuItems} */ ?>>
+                <div class="back-menu-list-group" <?php /* loop over menuItem :  */ ?>>
                     <!-- 菜单必须有子项才会展示 -->
-                    <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
-                        <div class="back-menu-list-title" th:text="${menuItem.status.displayName}"></div>
+                    <th:block>
+                        <div class="back-menu-list-title"></div>
                         <div class="back-menu-list">
-                            <th:block <?php /* loop over childMenu : ${menuItem.children} */ ?>>
-                                <a class="back-menu-item" rel="external nofollow"
-                                   th:target="${childMenu.spec.target?.value}" th:href="@{${childMenu.status.href}}">
+                            <th:block <?php /* loop over childMenu :  */ ?>>
+                                <a class="back-menu-item" rel="external nofollow">
                                     <!-- icon 预留 -->
-                                    <img th:if="${!#strings.isEmpty(#annotations.getOrDefault(childMenu, 'icon', ''))}"
-                                         class="back-menu-item-icon"
-                                         th:src="${#annotations.getOrDefault(childMenu, 'icon', '')}">
-                                    <span class="back-menu-item-text" th:text="${childMenu.status.displayName}"></span>
+                                    <img
+                                         class="back-menu-item-icon">
+                                    <span class="back-menu-item-text"></span>
                                 </a>
                             </th:block>
                         </div>
@@ -34,6 +30,6 @@
     <!-- 返回主页 -->
     <!-- 这里可以指定使用什么作为图标，默认使用站点名称 -->
     <a href="/" id="site-name" title="返回博客主页">
-        <span th:utext="${#strings.isEmpty(theme.config.basics.siteTitle)} ? <?php bloginfo("name"); ?> : ${theme.config.basics.siteTitle}"></span>
+        <spanname"); ?> : "></span>
     </a>
 </div>

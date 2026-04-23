@@ -9,24 +9,17 @@
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page">
-                <div id="album" th:if="${#strings.equals(theme.config.photos.photosStyle, 'default')}">
-                    <div th:replace="~{macro/author-content :: author-content(background = ${singlePage.spec.cover},
-                        smallTitle = '相册集',
-                        bigTitle = ${singlePage.spec.title},
-                        detail = ${singlePage.spec.excerpt.raw},
-                        buttonUrl = '',
-                        buttonTitle = '')}"></div>
+                <div id="album">
+                    <div></div>
 
                     <div class="card-album">
-                        <th:block <?php /* loop over group : ${photoFinder.groupBy()} */ ?>>
-                            <div class="card" th:onclick="pjax.loadUrl([['/photos?group='+${group.metadata.name}]])">
+                        <th:block <?php /* loop over group :  */ ?>>
+                            <div class="card">
                                 <img class="card_cover"
-                                     th:src="${isLazyload ? '' : #annotations.get(group, 'cover')}"
-                                     th:data-lazy-src="${ isLazyload ? #annotations.get(group, 'cover') : ''}"
                                 >
                                 <div class="card__content">
-                                    <p class="card__category" th:text="${group.spec.displayName}"></p>
-                                    <h3 class="card__heading" th:text="${#annotations.get(group, 'description')}"></h3>
+                                    <p class="card__category"></p>
+                                    <h3 class="card__heading"></h3>
                                 </div>
                             </div>
                         

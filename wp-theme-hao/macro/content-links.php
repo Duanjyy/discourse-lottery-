@@ -1,22 +1,22 @@
-<th:block th:fragment="content-links(htmlType)">
+<th:block>
 
-    <th:block th:with="groups = ${linkFinder.groupBy()}">
+    <th:block>
         <div class="flink" id="banners">
             <div class="banners-title">
-                <div class="banners-title-small">[[${theme.config.link.smallTitle}]]</div>
-                <div class="banners-title-big">[[${theme.config.link.bigTitle}]]</div>
+                <div class="banners-title-small"></div>
+                <div class="banners-title-big"></div>
             </div>
             <div class="banner-button-group">
                 <a class="banner-button secondary" data-pjax-state="" onclick="travelling()">
                     <i class="haofont hao-icon-paper-plane1"></i>
                     <span class="banner-button-text">随机访问</span>
                 </a>
-                <a th:unless="${pluginFinder.available('link-submit')}"
+                <a
                         class="banner-button" href="#post-comment" rel="external nofollow">
                     <i class="haofont hao-icon-link"></i>
                     <span class="banner-button-text">申请友链</span>
                 </a>
-                <a th:if="${pluginFinder.available('link-submit')}"
+                <a
                    class="banner-button" href="javascript:LinkSubmitWidget.open()" rel="external nofollow">
                     <i class="haofont hao-icon-link"></i>
                     <span class="banner-button-text">申请友链</span>
@@ -24,23 +24,14 @@
             </div>
             <div class="tags-group-all nowrapMove">
                 <div class="tags-group-wrapper">
-                    <th:block <?php /* loop over group : ${groups} */ ?>>
-                        <th:block <?php /* loop over link,iterStat : ${group.links} */ ?> th:if="${group.links.size > 2}">
-                            <div class="tags-group-icon-pair" th:if="${iterStat.even}">
-                                <a class="tags-group-icon" target="_blank" th:href="${linkOdd.spec.url}"
-                                   th:title="${linkOdd.spec.displayName}"
-                                   th:with="linkOdd = ${group.links.get(iterStat.index - 1)}">
-                                    <img th:with=" img = @{${linkOdd.spec.logo}}"
-                                         th:src="${isLazyload ? '' : img}"
-                                         th:data-lazy-src="${ isLazyload ? img : ''}"
-                                         th:title="${linkOdd.spec.displayName}">
+                    <th:block <?php /* loop over group :  */ ?>>
+                        <th:block <?php /* loop over link,iterStat :  */ ?>>
+                            <div class="tags-group-icon-pair">
+                                <a class="tags-group-icon" target="_blank">
+                                    <img>
                                 </a>
-                                <a class="tags-group-icon" target="_blank" th:href="${linkEven.spec.url}"
-                                   th:title="${linkEven.spec.displayName}" th:with="linkEven = ${link}">
-                                    <img th:with="img = @{${linkEven.spec.logo}}"
-                                         th:src="${isLazyload ? '' : img}"
-                                         th:data-lazy-src="${ isLazyload ? img : ''}"
-                                         th:title="${linkEven.spec.displayName}">
+                                <a class="tags-group-icon" target="_blank">
+                                    <img>
                                 </a>
                             </div>
                         </th:block>
@@ -54,45 +45,34 @@
 
         <div class="flink" id="article-container">
 
-            <th:block <?php /* loop over group,iterStat : ${groups} */ ?>>
+            <th:block <?php /* loop over group,iterStat :  */ ?>>
 
-                <h2 th:if="${not #lists.isEmpty(group.spec.displayName)}">
-                    <a class="headerlink" th:href="'#'+${group.spec.displayName}+'-'+${group.links.size}"
-                       th:title="${group.spec.displayName}+ '('+${group.links.size}+')'"></a>
-                    [[${group.spec.displayName}]] ([[${group.links.size}]])
+                <h2>
+                    <a class="headerlink"></a>
+                     ()
                 </h2>
 
-                <div class="flink-desc" th:if="${not #strings.isEmpty(#annotations.get(group, 'description'))}">[[${#annotations.get(group, 'description')}]]</div>
+                <div class="flink-desc"></div>
 
                 <!-- 第一个，使用卡片展示 -->
-                <div th:if="${#strings.equals(#annotations.get(group, 'displayStyle'),'beautify') && not #lists.isEmpty(group.links)}"
+                <div
                      class="site-card-group">
 
-                    <div class="site-card" <?php /* loop over link : ${group.links} */ ?>>
-                        <span th:if="${not #strings.isEmpty(#annotations.get(link, 'label'))}"
-                              th:style="'background-color:' + ${#annotations.get(link,'labelColor')}"
-                              class="site-card-tag">[[${#annotations.get(link, 'label')}]]</span>
+                    <div class="site-card" <?php /* loop over link :  */ ?>>
+                        <span
+                              class="site-card-tag"></span>
 
-                        <a class="img" target="_blank" th:href="${link.spec.url}" th:title="${link.spec.displayName}">
-                            <img class="flink-avatar" style="pointer-events: none;" th:alt="${link.spec.displayName}"
-                                 th:with="img = @{${#strings.isEmpty(#annotations.get(link, 'siteshot')) ? link.spec.logo : #annotations.get(link,'siteshot') }}"
-
-                                 th:src="${isLazyload ? '' : img}"
-                                 th:data-lazy-src="${ isLazyload ? img : ''}">
+                        <a class="img" target="_blank">
+                            <img class="flink-avatar" style="pointer-events: none;">
                         </a>
 
-                        <a class="info cf-friends-link" target="_blank" th:href="${link.spec.url}"
-                           th:title="${link.spec.displayName}">
+                        <a class="info cf-friends-link" target="_blank">
                             <div class="site-card-avatar no-lightbox">
-                                <img class="flink-avatar cf-friends-avatar" th:alt="${link.spec.displayName}"
-
-                                     th:src="${isLazyload ? '' : link.spec.logo}"
-                                     th:data-lazy-src="${ isLazyload ? link.spec.logo : ''}">
+                                <img class="flink-avatar cf-friends-avatar">
                             </div>
                             <div class="site-card-text">
-                                <span class="title cf-friends-name" th:text="${link.spec.displayName}"></span>
-                                <span class="desc" th:text="${link.spec.description}"
-                                      th:title="${link.spec.description}"></span>
+                                <span class="title cf-friends-name"></span>
+                                <span class="desc"></span>
                             </div>
                         </a>
                     </div>
@@ -100,45 +80,29 @@
 
                 </div>
 
-                <div class="flink-list"
-                     th:if="${#strings.equals(#annotations.get(group, 'displayStyle'),'default') && not #lists.isEmpty(group.links)}">
-                    <div class="flink-list-item" <?php /* loop over link : ${group.links} */ ?>>
-                        <span th:if="${not #strings.isEmpty(#annotations.get(link, 'label'))}"
-                              th:style="'background-color:' + ${#annotations.get(link,'labelColor')}"
-                              class="site-card-tag">[[${#annotations.get(link, 'label')}]]</span>
-                        <a class="cf-friends-link" rel="external nofollow" target="_blank" th:href="${link.spec.url}"
-                           th:title="${link.spec.displayName}">
-                            <img class="flink-avatar cf-friends-avatar" th:alt="${link.spec.displayName}"
-
-                                 th:src="${isLazyload ? '' : link.spec.logo}"
-                                 th:data-lazy-src="${ isLazyload ? link.spec.logo : ''}">
+                <div class="flink-list">
+                    <div class="flink-list-item" <?php /* loop over link :  */ ?>>
+                        <span
+                              class="site-card-tag"></span>
+                        <a class="cf-friends-link" rel="external nofollow" target="_blank">
+                            <img class="flink-avatar cf-friends-avatar">
                             <div class="flink-item-info no-lightbox">
-                                <span class="flink-item-name cf-friends-name" th:text="${link.spec.displayName}"></span>
-                                <span class="flink-item-desc" th:text="${link.spec.description}"
-                                      th:title="${link.spec.description}"></span>
-                                <img
-                                     th:src="${isLazyload ? '' : link.spec.logo}"
-                                     th:data-lazy-src="${ isLazyload ? link.spec.logo : ''}">
+                                <span class="flink-item-name cf-friends-name"></span>
+                                <span class="flink-item-desc"></span>
+                                <img>
                             </div>
                         </a>
                     </div>
                 </div>
 
-                <div class="flink-list mini"
-                     th:if="${#strings.equals(#annotations.get(group, 'displayStyle'),'deprecated') && not #lists.isEmpty(group.links)}">
-                    <div class="flink-list-item" <?php /* loop over link : ${group.links} */ ?>>
-                        <a class="cf-friends-link" rel="external nofollow" target="_blank" th:href="${link.spec.url}"
-                           th:title="${link.spec.displayName}">
-                            <img class="flink-avatar cf-friends-avatar"
-
-                                 th:src="${isLazyload ? '' : link.spec.logo}"
-                                 th:data-lazy-src="${ isLazyload ? link.spec.logo : ''}"
-                                 th:alt="${link.spec.displayName}">
-                            <div class="img-alt is-center">[[${link.spec.displayName}]]</div>
+                <div class="flink-list mini">
+                    <div class="flink-list-item" <?php /* loop over link :  */ ?>>
+                        <a class="cf-friends-link" rel="external nofollow" target="_blank">
+                            <img class="flink-avatar cf-friends-avatar">
+                            <div class="img-alt is-center"></div>
                             <div class="flink-item-info">
-                                <span class="flink-item-name cf-friends-name">[[${link.spec.displayName}]]</span>
-                                <span class="flink-item-desc"
-                                      th:title="${link.spec.description}">[[${link.spec.description}]]</span>
+                                <span class="flink-item-name cf-friends-name"></span>
+                                <span class="flink-item-desc"></span>
                             </div>
                         </a>
                     </div>
@@ -146,13 +110,12 @@
 
             </th:block>
 
-            <th:block th:if="${not #strings.isEmpty(theme.config.link.linksArticle)}"
-                      th:utext="${theme.config.link.linksArticle}"> </th:block>
+            <th:block> </th:block>
 
             <script>
                 var fdataUser = {
                     jsonurl: '',
-                    apiurl: "[(${theme.config.fcircle.apiurl})]",
+                    apiurl: "[()]",
                     apipublicurl: '', //默认公共库
                     initnumber: 20,  //首次加载文章数
                     stepnumber: 20,  //更多加载文章数
@@ -162,7 +125,7 @@
             </script>
             <script  src="<?php echo get_template_directory_uri(); ?>/assets/libs/fcircle/heo-fcircle3mini.js}"></script>
 
-            <th:block th:if="${htmlType == 'page'}" th:utext="${singlePage.content.content}">
+            <th:block>
             </th:block>
 
         </div>

@@ -3,7 +3,7 @@
     
     <div class="page" id="body-wrap">
         <!-- 头部导航栏 -->
-        <header th:class="${theme.config.top.above.enable_above ? 'full_page' : 'not-top-img'}" id="page-header">
+        <header id="page-header">
             <?php get_template_part("modules/nav"); ?>
             <!-- 问候语 -->
             <?php get_template_part("modules/header/greeting"); ?>
@@ -16,11 +16,11 @@
             <!-- 置顶内容 -->
             <?php get_template_part("modules/recent-top"); ?>
         </div>
-        <main class="layout" id="content-inner" th:classappend="${theme.config.sidebar.location}">
+        <main class="layout" id="content-inner">
             <div class="recent-posts" id="recent-posts">
                 
                 <!-- 分类导航栏 -->
-                <div th:replace="~{'modules/bar/' + ${theme.config.layout.navs.nav}}"></div>
+                <div></div>
                 
                 <?php get_template_part("modules/post-list"); ?>
             

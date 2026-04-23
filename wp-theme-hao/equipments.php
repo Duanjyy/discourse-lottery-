@@ -8,37 +8,28 @@
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page">
-                <div  th:replace="~{macro/author-content :: author-content(background = ${theme.config.equipment.backgroundImg},
-                        smallTitle = ${theme.config.equipment.smallTitle},
-                        bigTitle = ${theme.config.equipment.bigTitle},
-                        detail = ${theme.config.equipment.detail},
-                        buttonUrl = '',
-                        buttonTitle = '')}" ></div>
-                <div id="equipment" th:if="${not #lists.isEmpty(groups)}">
-                    <th:block <?php /* loop over group : ${groups} */ ?>>
+                <div ></div>
+                <div id="equipment">
+                    <th:block <?php /* loop over group :  */ ?>>
                         <div class="equipment-item">
-                            <h2 class="equipment-item-title">[[${group.spec.displayName}]]</h2>
-                            <div class="equipment-item-description">[[${group.spec.description}]]</div>
-                            <div class="equipment-item-content" th:with="equipmentList = ${group.equipments}">
-                                <div class="equipment-item-content-item" <?php /* loop over equipment : ${equipmentList} */ ?>>
+                            <h2 class="equipment-item-title"></h2>
+                            <div class="equipment-item-description"></div>
+                            <div class="equipment-item-content">
+                                <div class="equipment-item-content-item" <?php /* loop over equipment :  */ ?>>
                                     <div class="equipment-item-content-item-cover">
-                                        <img class="equipment-item-content-item-image"
-                                             th:alt="${equipment.spec.displayName}"
-                                             th:src="${isLazyload ? '' : equipment.spec.cover}"
-                                             th:data-lazy-src="${ isLazyload ? equipment.spec.cover : ''}">
+                                        <img class="equipment-item-content-item-image">
                                     </div>
                                     <div class="equipment-item-content-item-info">
-                                        <div class="equipment-item-content-item-name"
-                                             th:onclick="rm.rightmenuCopyText([[${equipment.spec.displayName}]]);btf.snackbarShow('已复制装备名称');">
-                                            [[${equipment.spec.displayName}]]
+                                        <div class="equipment-item-content-item-name">
+                                            
                                         </div>
-                                        <div class="equipment-item-content-item-specification">[[${equipment.spec.specification}]]
+                                        <div class="equipment-item-content-item-specification">
                                         </div>
                                         <div class="equipment-item-content-item-description">
-                                            [[${equipment.spec.description}]]
+                                            
                                         </div>
                                         <div class="equipment-item-content-item-toolbar">
-                                            <a class="equipment-item-content-item-link" th:href="${equipment.spec.url}" target="_blank">详情</a>
+                                            <a class="equipment-item-content-item-link" target="_blank">详情</a>
                                         </div>
                                     </div>
                                 </div>

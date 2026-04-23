@@ -8,34 +8,27 @@
         <main class="layout" id="content-inner">
             <!-- archive -->
             <div id="archive">
-                <div class="article-sort-title">文章<sup>[[${siteStatsFinder.getStats().post}]]</sup></div>
-                <div class="article-sort" <?php /* loop over archive : ${archives.items} */ ?>
-                     th:with='postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,"?") ? theme.config.layout.postRandomImg+"&" : theme.config.layout.postRandomImg+"?"}'>
-                    <div class="article-sort-item year" th:text="${archive.year}"></div>
-                    <div class="article-sort" <?php /* loop over month : ${archive.months} */ ?>>
+                <div class="article-sort-title">文章<sup></sup></div>
+                <div class="article-sort" <?php /* loop over archive :  */ ?>
+                     th:with='postRandomImg='>
+                    <div class="article-sort-item year"></div>
+                    <div class="article-sort" <?php /* loop over month :  */ ?>>
                         <!-- 月份没有样式所以不显示 -->
-                        <!-- <div class="article-sort-item" th:text="${month.month}"></div> -->
-                        <div class="article-sort-item" <?php /* loop over post : ${month.posts} */ ?>>
-                            <a class="article-sort-item-img" th:href="@{<?php the_permalink(); ?>}"
-                               th:title="<?php the_title(); ?>">
-                                <img th:alt="<?php the_title(); ?>"
-                                     th:src="${#strings.isEmpty(post.spec.cover) ? postRandomImg+post.spec.title : thumbnail.gen(post.spec.cover, 's')}">
+                        <!-- <div class="article-sort-item"></div> -->
+                        <div class="article-sort-item" <?php /* loop over post :  */ ?>>
+                            <a class="article-sort-item-img">
+                                <img>
                             </a>
                             <div class="article-sort-item-info">
                                 <div class="article-sort-item-time"><i class="far fa-calendar-alt"></i>
-                                    <time class="post-meta-date-created"
-                                          th:attr="datetime=${#dates.format(post.spec.publishTime,'yyyy-MM-dd HH:mm:ss')}"
-                                          th:text="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}"
-                                          th:title="'创建于' + ${#dates.format(post.spec.publishTime,'yyyy-MM-dd HH:mm:ss')}">
+                                    <time class="post-meta-date-created">
                                     </time>
                                 </div>
-                                <a class="article-sort-item-title" onclick="window.event.cancelBubble=!0"
-                                   th:href="@{<?php the_permalink(); ?>}" th:text="<?php the_title(); ?>"
-                                   th:title="<?php the_title(); ?>"></a>
+                                <a class="article-sort-item-title" onclick="window.event.cancelBubble=!0"></a>
                                 <div class="article-sort-item-tags">
                                     <a class="article-meta__tags"
-                                       <?php /* loop over tag : ${post.tags} */ ?> th:href="@{${tag.status.permalink}}">
-                                        <span class="tags-punctuation">[[${tag.spec.displayName}]]</span>
+                                       <?php /* loop over tag :  */ ?>>
+                                        <span class="tags-punctuation"></span>
                                     </a>
                                     <span class="article-meta__link">•</span>
                                 </div>

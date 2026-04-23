@@ -12,23 +12,16 @@
           <span class="author-content-item-title">最近评论</span>
         </div>
         <div class="aside-list">
-          <th:block th:if="${#strings.equals(theme.config.comments.use, 'commentWidget') }">
+          <th:block>
             <!-- BUG：由于当前的列出所有评论API无过滤功能，非文章页的评论无法查询到页面信息，所以非文章评论跳转至首页-->
-            <div class="aside-list-item" <?php /* loop over comment,iterStat : ${commentFinder.list(null, 1, 20)} */ ?>
-                 th:with="page = ${comment.spec.subjectRef.kind == 'Post' ? postFinder.getByName(comment.spec.subjectRef.name) :
-                  comment.spec.subjectRef.kind == 'SinglePage' && not #strings.contains('photos,links,moments', comment.spec.subjectRef.name) ? singlePageFinder.getByName(comment.spec.subjectRef.name) : null},
-                  url = ${page == null? '/' : page.status.permalink + '#comment-' + comment.metadata.name}"
-                 th:if="${iterStat.index  < 6}" >
-              <a th:href="${url}" class="thumbnail"  data-pjax-state="">
-                <img th:with="img = ${#strings.isEmpty(comment.owner.avatar)?'https://cravatar.cn/avatar/?d=mp':comment.owner.avatar}"
-                     th:src="${isLazyload ? '' : img}"
-                     th:data-lazy-src="${ isLazyload ? img : ''}"
-                     th:alt="${comment.owner.displayName}">
+            <div class="aside-list-item" <?php /* loop over comment,iterStat :  */ ?> >
+              <a class="thumbnail"  data-pjax-state="">
+                <img>
                 <div class="name"><span>stonewu</span></div>
               </a>
               <div class="content">
-                <a class="comment" th:href="${url}" th:title="${comment.spec.content}" data-pjax-state="" th:text="${comment.spec.content}"></a>
-                <time th:datetime="${#dates.format(comment.metadata.creationTimestamp, 'yyyy-MM-dd HH:mm:ss')}"></time>
+                <a class="comment" data-pjax-state=""></a>
+                <time></time>
               </div>
             </div>
             <script data-pjax>
@@ -40,7 +33,7 @@
               });
             </script>
           </th:block>
-          <span th:if="${#strings.equals(theme.config.comments.use, 'Twikoo') }">正在加载中...</span></div>
+          <span>正在加载中...</span></div>
       </div>
     </div>
     <!-- 右侧展示 tag -->
@@ -50,38 +43,26 @@
           <div class="author-content-item-tips">标签</div>
           <span class="author-content-item-title">寻找感兴趣的领域</span>
         </div>
-        <div class="card-tag-cloud" th:with="tags = ${tagFinder.list(1,theme.config.sidebar.tagQuantity)}">
+        <div class="card-tag-cloud">
           <a style="font-size:1em;color:#d3d3d3"
-             <?php /* loop over tag,iterStat : ${tags} */ ?>
-             th:href="@{${tag.status.permalink}}">
-            [[${tag.spec.displayName}]]<sup th:text="${tag.status.visiblePostCount}"></sup>
+             <?php /* loop over tag,iterStat :  */ ?>>
+            <sup></sup>
           </a>
         </div>
       </div>
       <!-- 底部展示时间归档 -->
       <div class="console-card history" onclick="heo.hideConsole()">
         <div class="item-headline"><i class="fas fa-archive"></i><span>文章</span></div>
-        <ul class="card-archive-list" th:with="archives = ${postFinder.archives(1,0)}">
-          <th:block <?php /* loop over archive : ${archives.items} */ ?>>
-            <li class="card-archive-list-item" <?php /* loop over month,monthStat : ${archive.months} */ ?>>
-              <a class="card-archive-list-link" th:href="@{'/archives/'+${archive.year}+'/'+${month.month}}"
+        <ul class="card-archive-list">
+          <th:block <?php /* loop over archive :  */ ?>>
+            <li class="card-archive-list-item" <?php /* loop over month,monthStat :  */ ?>>
+              <a class="card-archive-list-link"
                  data-pjax-state="load"><span
                       class="card-archive-list-date">
-                  [[${(month.month=='01') ? '一月' :
-                            (month.month == '02') ? "二月"  :
-                            (month.month == '03') ? "三月" :
-                            (month.month == '04') ? "四月" :
-                            (month.month == '05') ? "五月" :
-                            (month.month == '06') ? "六月" :
-                            (month.month == '07') ? "七月" :
-                            (month.month == '08') ? "八月" :
-                            (month.month == '09') ? "九月" :
-                            (month.month == '10') ? "十月" :
-                            (month.month == '11') ? "十一月" :
-                                          "十二月"}]] [[${archive.year}]]
+                   
                 </span>
                 <div class="card-archive-list-count-group"><span
-                        class="card-archive-list-count">[[${month.posts.size()}]]</span>
+                        class="card-archive-list-count"></span>
                   <span class="card-archive-list-count-unit">篇</span>
                 </div>
               </a>
@@ -92,18 +73,16 @@
     </div>
   </div>
 
-  <div class="console-card-group-reward" th:if="${theme.config.aboutReward.reward.enable_reward}">
+  <div class="console-card-group-reward">
     <ul class="reward-all console-card">
-      <li class="reward-item"><a th:href="@{${theme.config.aboutReward.reward.wxPay}}"
+      <li class="reward-item"><a
                                  rel="external nofollow noreferrer" target="_blank" draggable="false"><img
-              class=" entered loaded" alt="微信"
-              th:src="${theme.config.aboutReward.reward.wxPay}"></a>
+              class=" entered loaded" alt="微信"></a>
         <div class="post-qr-code-desc">微信</div>
       </li>
-      <li class="reward-item"><a th:href="@{${theme.config.aboutReward.reward.alipay}}"
+      <li class="reward-item"><a
                                  rel="external nofollow noreferrer" target="_blank" draggable="false"><img
-              class=" entered loaded" alt="支付宝"
-              th:src="${theme.config.aboutReward.reward.alipay}"></a>
+              class=" entered loaded" alt="支付宝"></a>
         <div class="post-qr-code-desc">支付宝</div>
       </li>
     </ul>
@@ -125,7 +104,7 @@
     <!--<div class="console-btn-item" id="assist-open" onclick="heo.hideConsole()" title="无障碍工具栏"><a-->
     <!--        class="assist-btn"><i class="fa-duotone fa-wheelchair"></i></a>-->
     <!--</div>-->
-    <div th:if="${theme.config.tool.nav_music.nav_musicEnable}" class="console-btn-item" id="consoleMusic" onclick="heo.musicToggle()" title="音乐开关">
+    <div class="console-btn-item" id="consoleMusic" onclick="heo.musicToggle()" title="音乐开关">
       <a class="music-switch" data-pjax-state="">
         <i class="haofont hao-icon-disc-fill"></i>
       </a>

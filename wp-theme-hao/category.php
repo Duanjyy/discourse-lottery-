@@ -13,11 +13,8 @@
                             <a href="/">首页</a>
                         </div>
                         <div class="category-bar-item"
-                             th:classappend="${category.metadata.name == categoryItem.metadata.name} ? ' select'"
-                             <?php /* loop over categoryItem : ${categoryFinder.listAll()} */ ?>
-                             th:id="${categoryItem.spec.slug}">
-                            <a th:href="@{${categoryItem.status.permalink}}"
-                               th:text="${categoryItem.spec.displayName}"></a>
+                             <?php /* loop over categoryItem :  */ ?>>
+                            <a></a>
                         </div>
                     </div>
                     <!-- 跳转到分类页 -->

@@ -7,14 +7,11 @@
         </header>
         <main class="layout" id="content-inner">
             <div id="tag">
-                <div id="tag-page-tags" th:with="tags = ${tagFinder.listAll()}">
+                <div id="tag-page-tags">
                     <a style="font-size:1em;color:#3c228c"
-                       th:classappend="${tag.metadata.name == tagItem.metadata.name} ? 'select'"
-                       <?php /* loop over tagItem : ${tags} */ ?>
-                       th:href="@{${tagItem.status.permalink}}"
-                       th:id="${tagItem.spec.slug}">
-                        <span class="tags-punctuation">[[${tagItem.spec.displayName}]]</span>
-                        <span class="tagsPageCount" th:text="${tagItem.status.visiblePostCount}"></span>
+                       <?php /* loop over tagItem :  */ ?>>
+                        <span class="tags-punctuation"></span>
+                        <span class="tagsPageCount"></span>
                     </a>
                 </div>
                 <!-- 文章 -->

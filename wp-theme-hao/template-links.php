@@ -9,13 +9,9 @@
             <div id="page">
                 <?php get_template_part("macro/content-links"); ?>
 
-                <hr th:if="${theme.config.comments.use != 'commentWidget'}" />
+                <hr />
                 <!--/* 评论组件 */-->
-                <th:block
-                        th:replace="~{modules/comment :: comment(group = 'plugin.halo.run',
-                  kind = 'Plugin',
-                  name = ${pluginName},
-                  allowComment = ${theme.config.link.enable_comment == true})}"/>
+                <th:block/>
                 <style>
                     /*修复友链页面表情选择器无法显示完全的bug*/
                     .tk-submit {

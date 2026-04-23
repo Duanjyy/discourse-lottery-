@@ -7,18 +7,12 @@
         <header class="not-top-img" id="page-header">
             <?php get_template_part("modules/nav"); ?>
         </header>
-        <main class="layout" th:classappend="${not #lists.isEmpty(theme.config.sidebar.widgetss.pageWidget) ? '' : 'hide-aside'}" id="content-inner">
+        <main class="layout" id="content-inner">
             <div id="page">
-                <div  id="article-container"
-                      th:class="${ theme.config.code.enable_line || pluginFinder.available('PluginPrismJS') ? 'line-numbers' : ''}"
-                      th:utext="${singlePage.content.content}"></div>
+                <div  id="article-container"></div>
                 <hr>
                 <!--/* 评论组件 */-->
-                <th:block
-                        th:replace="~{modules/comment :: comment(group = 'content.halo.run',
-                  kind = 'SinglePage',
-                  name = ${singlePage.metadata.name},
-                  allowComment = ${singlePage.spec.allowComment})}"/>
+                <th:block/>
 
             </div>
 

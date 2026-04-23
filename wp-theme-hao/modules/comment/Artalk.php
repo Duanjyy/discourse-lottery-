@@ -1,5 +1,4 @@
-<th:block th:if="${#strings.equals(theme.config.comments.use, 'Artalk')
-  && not #strings.isEmpty(theme.config.comments.artalks.server)}">
+<th:block>
     <div class="js-pjax">
         <script src="<?php echo get_template_directory_uri(); ?>/assets/js/comment/artalk.js"></script>
         <input type="hidden" name="page-type" id="page-type" value="album">
@@ -19,15 +18,15 @@
                         
                         if (true) {
                             let name = 'src'
-                            if ([[${ isLazyload }]]) {
+                            if () {
                                 name = 'data-lazy-src'
                             }
-                            result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick}</span></div></a>`
+                            result += `<a href='' class='thumbnail'><img ='' alt=''><div class='name'><span></span></div></a>`
                         }
                         
                         result += `<div class='content'>
-                                <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
-                                <time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+                                <a class='comment' href='' title=''></a>
+                                <time datetime=""></time></div>
                                 </div>`
                     }
                 } else {
@@ -43,7 +42,7 @@
             const necommHtml = array => {
                 let result = ''
                 
-                const pagesize = [[${ theme.config.sidebar.newcomment.newcommentnumber }]];
+                const pagesize = ;
                 const defaultpagesize = 5;
                 const finalpagesize = pagesize <= 0 ? defaultpagesize : pagesize;
                 
@@ -57,12 +56,12 @@
                         
                         if (true) {
                             let name = 'src'
-                            if ([[${ isLazyload }]]) {
+                            if () {
                                 name = 'data-lazy-src'
                             }
                             result += `
-                            <a class="thumbnail" href="${array[i].url}">
-                                <img alt="dasda" ${name}="${array[i].avatar}">
+                            <a class="thumbnail" href="">
+                                <img alt="dasda" ="">
                             </a>
                         `
                         }
@@ -70,12 +69,12 @@
                         result += `
                         <div class="content">
                             <a class="comment" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;"
-                            href="${array[i].url}" title="${array[i].content}">
-                            ${array[i].content}
+                            href="" title="">
+                            
                             </a>
                             <div class="name">
-                                <span>${array[i].nick} / </span>
-                                <time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time>
+                                <span> / </span>
+                                <time datetime=""></time>
                             </div>
                         </div>
                     </div>
@@ -93,7 +92,7 @@
             
             let artalkUrl = '';
             const getArtalkUrl = () => {
-                fetch("[(${theme.config.comments.artalks.server})]" + 'api/v2/conf')
+                fetch("[()]" + 'api/v2/conf')
                         .then(response => response.json())
                         .then(d => {
                             artalkUrl = '/api/v2/stats/latest_comments'
@@ -118,7 +117,7 @@
                 }
                 // 兼容2.8以后版本的artalk接口
                 getArtalkUrl();
-                fetch("[(${theme.config.comments.artalks.server})]" + artalkUrl, statheaderList)
+                fetch("[()]" + artalkUrl, statheaderList)
                         .then(response => response.json())
                         .then(d => {
                             const artalk = d.data.map(function (e) {

@@ -1,25 +1,25 @@
 <!-- 声明一些公共信息 -->
-<script id="site-config" th:inline="javascript">
+<script id="site-config">
     var GLOBAL_CONFIG = {
         // 页面类型 index,page,post,tag,category
-        htmlType: [[${ htmlType }]],
-        postTitle: [[${ htmlType == 'post' ? post.spec.title : htmlType == 'page' ? singlePage.spec.title : ''}]],
-        isPost: [[${htmlType == 'post'}]],
-        isHome: [[${ htmlType == 'index'}]],
+        htmlType: ,
+        postTitle: ,
+        isPost: ,
+        isHome: ,
         copyright: undefined,
         lightbox: 'fancybox',
         lazyload: {
-            enable: [[${theme.config.other.vanillaLazyload.enable}]],
-            error: [[@{${theme.config.other.vanillaLazyload.errorImg}}]]
+            enable: ,
+            error: [[@{}]]
         },
-        isFriendLinksInFooter: [[${theme.config.footer.footer_group.enable_footer_group}]],
-        loadingBox: [[${theme.config.other.loadingBoxs.loadingBoxEnable}]],
-        loadProgressBar: [[${theme.config.other.loadingBoxs.loadProgressBar}]],
-        navMusicEnable: [[${theme.config.tool.nav_music.nav_musicEnable}]],
-        isMusic: [[${ htmlType == 'music'}]],
-        helloText: [[${#strings.listSplit(theme.config.sidebar.profile.helloText, ',')}]],
-        profileStyle: [[${theme.config.sidebar.profile.profileStyle}]],
-        rightMenuEnable: [[${theme.config.tool.rightMenu.rightMenuEnable}]],
+        isFriendLinksInFooter: ,
+        loadingBox: ,
+        loadProgressBar: ,
+        navMusicEnable: ,
+        isMusic: ,
+        helloText: ,
+        profileStyle: ,
+        rightMenuEnable: ,
         date_suffix: {
             just: '刚刚',
             min: '分钟前',
@@ -32,12 +32,12 @@
             cht_to_chs: "你已切换为简体",
             day_to_night: "你已切换为深色模式",
             night_to_day: "你已切换为浅色模式",
-            bgLight: "[(${theme.config.style.themeLightSkin})]",
-            bgDark: "[(${theme.config.style.themeDarkSkin})]",
+            bgLight: "[()]",
+            bgDark: "[()]",
             position: "top-center",
         },
         translate: {
-            defaultEncoding: [[${theme.config.style.translate.defaultEncoding}]],
+            defaultEncoding: ,
             translateDelay: 0,
             msgToTraditionalChinese: "繁",
             msgToSimplifiedChinese: "简",
@@ -45,24 +45,24 @@
             rightMenuMsgToSimplifiedChinese: "转为简体"
         },
         prism: {
-            enable: [[${ theme.config.code.enable }]],
-            enable_title: [[${ theme.config.code.enable_title }]],
-            enable_hr: [[${ theme.config.code.enable_hr }]],
-            enable_line: [[${ theme.config.code.enable_line }]],
-            enable_copy: [[${ theme.config.code.enable_copy }]],
-            enable_expander: [[${ theme.config.code.enable_expander }]],
-            prism_limit: Number([[${#strings.isEmpty(theme.config.code.height_limit) ? 300 : theme.config.code.height_limit}]]) + 30,
-            enable_height_limit: [[${theme.config.code.enable_height_limit}]]
+            enable: ,
+            enable_title: ,
+            enable_hr: ,
+            enable_line: ,
+            enable_copy: ,
+            enable_expander: ,
+            prism_limit: Number() + 30,
+            enable_height_limit: 
         },
         source: {
             power: {
-                powerLink: [[${theme.config.sidebar.power.powerLink}]],
-                showNum: [[${theme.config.sidebar.power.showNum}]],
-                username: [[${theme.config.sidebar.power.username}]]
+                powerLink: ,
+                showNum: ,
+                username: 
             },
             links: {
-                linksUrl: [[${ theme.config.link.linksUrl }]],
-                linksNum: [[${theme.config.footer.footer_group.num}]],
+                linksUrl: ,
+                linksNum: ,
             },
             jQuery: [[<?php echo get_template_directory_uri(); ?>/assets/libs/jquery/jquery.min.js]],
             justifiedGallery: {
@@ -74,60 +74,55 @@
                 css: '/null'
             },
             comments: {
-                use: [[${theme.config.comments.use}]],
-                maxBarrage: [[${ theme.config.comments.commentBarrageConfig.maxBarrage }]],
-                barrageTime: [[${ theme.config.comments.commentBarrageConfig.barrageTime }]],
-                mailMd5: "[(${theme.config.comments.commentBarrageConfig.mailMd5})]",
-                lazyload: [[${theme.config.comments.lazyload}]],
-                textarea: [[${ theme.config.comments.use == 'Twikoo' ? 'el-textarea__inner' :
-                                   theme.config.comments.use == 'Artalk' ? 'atk-textarea' :
-                                   theme.config.comments.use == 'Waline' ? 'wl-editor' : 'appearance-none' }]]
+                use: ,
+                maxBarrage: ,
+                barrageTime: ,
+                mailMd5: "[()]",
+                lazyload: ,
+                textarea: 
             },
             post: {
-                dynamicBackground: [[${ theme.config.post.dynamicBackground }]]
+                dynamicBackground: 
             },
             tool: {
-                switch: [[${ theme.config.tool.snackbar.switch }]]
+                switch: 
             },
             postAi: {
-                ai: [[${htmlType != 'post' || !theme.config.post.aiDescription.aiDescriptionEnable  ?  ''  :
-                                    theme.config.post.aiDescription.mode != 'local' && !theme.config.post.aiDescription.switchBtn ? '' :
-                                    post.spec.excerpt.autoGenerate ? '本地模式需要自己填写文章摘要' :
-                                    #strings.isEmpty(post.status.excerpt) ? '请填写文章摘要' : post.status.excerpt  }]],
-                randomNum: [[${theme.config.post.aiDescription.randomNum}]],
-                basicWordCount: [[${theme.config.post.aiDescription.basicWordCount}]],
-                btnLink: "[(${theme.config.post.aiDescription.btnLink})]",
-                gptName: "[(${theme.config.post.aiDescription.gptName})]",
-                modeName: [[${theme.config.post.aiDescription.mode}]],
-                switchBtn: [[${theme.config.post.aiDescription.switchBtn}]],
-                keys: "[(${theme.config.post.aiDescription.key})]",
-                Referers: "[(${theme.config.post.aiDescription.Referer})]",
+                ai: ,
+                randomNum: ,
+                basicWordCount: ,
+                btnLink: "[()]",
+                gptName: "[()]",
+                modeName: ,
+                switchBtn: ,
+                keys: "[()]",
+                Referers: "[()]",
             },
             img: {
-                src: [[${isLazyload ? 'data-lazy-src' : 'src' }]]
+                src: 
             },
             twikoo: {
-                js: [[${not #strings.isEmpty(theme.config.comments.twikoos.js) ? theme.config.comments.twikoos.js : assets_link +'/libs/twikoo/twikoo.all.min.js' }]],
-                twikooUrl: "[(${theme.config.comments.twikoos.envId})]",
-                accessToken: "[(${theme.config.comments.twikoos.accessToken})]",
+                js: ,
+                twikooUrl: "[()]",
+                accessToken: "[()]",
             },
             artalk: {
-                js: [[${not #strings.isEmpty(theme.config.comments.artalks.artalkJs) ? theme.config.comments.artalks.artalkJs : assets_link +'/libs/artalk/Artalk.js' }]],
-                css: [[${not #strings.isEmpty(theme.config.comments.artalks.artalkCss) ? theme.config.comments.artalks.artalkCss : assets_link +'/libs/artalk/Artalk.css' }]],
-                artalkUrl: "[(${theme.config.comments.artalks.server})]",
-                siteName: "[(${theme.config.comments.artalks.siteName})]",
+                js: ,
+                css: ,
+                artalkUrl: "[()]",
+                siteName: "[()]",
             },
             waline: {
-                js: [[${not #strings.isEmpty(theme.config.comments.walines.walinesJs) ? theme.config.comments.walines.walinesJs : 'https://cdn.cbd.int/@waline/client@2.15.7/dist/waline.js' }]],
-                serverURL: "[(${theme.config.comments.walines.serverURL})]",
-                locale: [[${not #strings.isEmpty(theme.config.comments.walines.locale) ? theme.config.comments.walines.locale : '' }]]
+                js: ,
+                serverURL: "[()]",
+                locale: 
             },
             footer: {
-                default_enable: [[${theme.config.footer.footerContent.default_enable_group.default_enable}]]
+                default_enable: 
             },
             about: {
-                rewardList: [[${theme.config.aboutReward.reward_list}]],
-                rewardAmount: [[${theme.config.aboutReward.rewardNumber}]]
+                rewardList: ,
+                rewardAmount: 
             }
         }
     };

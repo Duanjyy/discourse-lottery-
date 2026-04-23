@@ -1,5 +1,5 @@
 <!-- 51统计 -->
-<script th:if="${ not #strings.isEmpty(theme.config.about.LingQueMonitorID)}">
+<script>
     !function (p) {
         "use strict";
         !function (t) {
@@ -24,8 +24,8 @@
                 r.parentNode.insertBefore(n, r)
         }()
     }({
-        id: "[[${theme.config.about.LingQueMonitorID}]]",
-        ck: "[[${theme.config.about.LingQueMonitorID}]]",
+        id: "",
+        ck: "",
         hashMode: true
     });
 </script>

@@ -1,21 +1,15 @@
 <div class="card-widget card-recent-post" th:with='
-    postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,"?") ? theme.config.layout.postRandomImg+"&" : theme.config.layout.postRandomImg+"?"}'>
+    postRandomImg='>
     <div class="item-headline"><i class="haofont hao-icon-eicon_map-2-line1"></i><span>热门文章</span></div>
     <div class="aside-list">
         <!-- 热门文章，用户可以自定义展示数量 -->
-        <div class="aside-list-item" <?php /* loop over post : ${postFinder.list({page: 1, size: theme.config.sidebar.recentPost, sort: {'stats.visit,desc'}})} */ ?>>
-            <a class="thumbnail" th:href="@{<?php the_permalink(); ?>}" th:title="<?php the_title(); ?>">
-                <img th:alt="<?php the_title(); ?>"
-                     th:with="img = ${#strings.isEmpty(post.spec.cover) ? postRandomImg+post.spec.title : thumbnail.gen(post.spec.cover, 's')}"
-
-                     th:src="${isLazyload ? '' : img}"
-                     th:data-lazy-src="${ isLazyload ? img : ''}">
+        <div class="aside-list-item" <?php /* loop over post : })} */ ?>>
+            <a class="thumbnail">
+                <img>
             </a>
             <div class="content">
-                <a class="title" th:href="@{<?php the_permalink(); ?>}" th:text="<?php the_title(); ?>" th:title="<?php the_title(); ?>"></a>
-                <time th:attr="datetime=${#dates.format(post.spec.publishTime, 'yyyy-MM-dd HH:mm:ss')}"
-                      th:text="${#dates.format(post.spec.publishTime,'yyyy-MM-dd HH:mm:ss')}"
-                      th:title="${#dates.format(post.spec.publishTime,'yyyy-MM-dd HH:mm:ss')}">
+                <a class="title"></a>
+                <time>
                 </time>
             </div>
         </div>

@@ -1,6 +1,5 @@
 
-<th:block  th:if="${#strings.equals(theme.config.comments.use, 'Twikoo') &&
-not #strings.isEmpty(theme.config.comments.twikoos.envId)}">
+<th:block>
     <div class="js-pjax">
         <script src="<?php echo get_template_directory_uri(); ?>/assets/js/comment/twikoo.js"></script>
     </div>
@@ -10,7 +9,7 @@ not #strings.isEmpty(theme.config.comments.twikoos.envId)}">
             const getComment = () => {
                 const runTwikoo = () => {
                     twikoo.getRecentComments({
-                        envId: "[(${theme.config.comments.twikoos.envId})]",
+                        envId: "[()]",
                         region: '',
                         pageSize: 20,
                         includeReply: true
@@ -58,15 +57,15 @@ not #strings.isEmpty(theme.config.comments.twikoos.envId)}">
 
                         if (true) {
                             let name = 'src'
-                            if([[${isLazyload}]]){
+                            if(){
                                 name = 'data-lazy-src'
                             }
-                            result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick}</span></div></a>`
+                            result += `<a href='' class='thumbnail'><img ='' alt=''><div class='name'><span></span></div></a>`
                         }
 
                         result += `<div class='content'>
-                                <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
-                                <time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+                                <a class='comment' href='' title=''></a>
+                                <time datetime=""></time></div>
                                 </div>`
                     }
                 } else {
@@ -82,7 +81,7 @@ not #strings.isEmpty(theme.config.comments.twikoos.envId)}">
             const necommHtml = array => {
                 let result = ''
 
-                const pagesize = [[${theme.config.sidebar.newcomment.newcommentnumber}]];
+                const pagesize = ;
                 const defaultpagesize = 5;
                 const finalpagesize = pagesize <= 0 ? defaultpagesize : pagesize;
 
@@ -96,12 +95,12 @@ not #strings.isEmpty(theme.config.comments.twikoos.envId)}">
 
                         if (true) {
                             let name = 'src'
-                            if([[${isLazyload}]]){
+                            if(){
                                 name = 'data-lazy-src'
                             }
                             result += `
-                            <a class="thumbnail" href="${array[i].url}">
-                                <img alt="dasda" ${name}="${array[i].avatar}">
+                            <a class="thumbnail" href="">
+                                <img alt="dasda" ="">
                             </a>
                         `
                         }
@@ -109,12 +108,12 @@ not #strings.isEmpty(theme.config.comments.twikoos.envId)}">
                         result += `
                         <div class="content">
                             <a class="comment" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;"
-                            href="${array[i].url}" title="${array[i].content}">
-                            ${array[i].content}
+                            href="" title="">
+                            
                             </a>
                             <div class="name">
-                                <span>${array[i].nick} / </span>
-                                <time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time>
+                                <span> / </span>
+                                <time datetime=""></time>
                             </div>
                         </div>
                     </div>

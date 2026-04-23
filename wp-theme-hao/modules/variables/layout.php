@@ -1,16 +1,16 @@
-<style type="text/css" th:inline="css">
+<style type="text/css">
     [data-theme=light] {
-        --heo-theme: [(${theme.config.style.themeLightSkin})] !important;
-        --heo-theme-op: [(${theme.config.style.themeLightSkin})]23 !important;
-        --heo-theme-op-deep: [(${theme.config.style.themeLightSkin})]dd !important;
-        --heo-theme-none: [(${theme.config.style.themeLightSkin})]00 !important;
+        --heo-theme: [()] !important;
+        --heo-theme-op: [()]23 !important;
+        --heo-theme-op-deep: [()]dd !important;
+        --heo-theme-none: [()]00 !important;
     }
 
     [data-theme=dark] {
-        --heo-theme: [(${theme.config.style.themeDarkSkin})] !important;
-        --heo-theme-op: [(${theme.config.style.themeDarkSkin})]23 !important;
-        --heo-theme-op-deep: [(${theme.config.style.themeDarkSkin})]dd !important;
-        --heo-theme-none: [(${theme.config.style.themeDarkSkin})]00 !important;
+        --heo-theme: [()] !important;
+        --heo-theme-op: [()]23 !important;
+        --heo-theme-op-deep: [()]dd !important;
+        --heo-theme-none: [()]00 !important;
     }
 
     :root {
@@ -50,7 +50,7 @@
     [data-theme=light] {
         --halo-search-widget-color-result-item-title : #4B5563
     }
-    [# th:if="${!theme.config.post.opacity}"]
+    [#]
         #aside-content #card-toc .toc-content a.toc-link:not(.active)  {
             opacity: 1;
             filter: blur(0px);

@@ -3,15 +3,12 @@
 <div >
     <div class="item-headline-music"><i class="haofont hao-icon-music"></i><span>音乐天地</span></div>
 
-    <div class="card-widget card-music"
-         th:attr="onclick='javascript:window.open(\''+ ${theme.config.sidebar.music.musicUrl} +'\')'">
+    <div class="card-widget card-music">
         <div id="flip-wrapper-card">
             <div id="flip-music">
-                <div class="msimg"
-                     th:style="'background:url('+${theme.config.sidebar.music.lightMsimg}+') center center/100% no-repeat'">
+                <div class="msimg">
                 </div>
-                <div class="back msimg"
-                     th:style="'background:url('+${theme.config.sidebar.music.lightBackMsimg}+') center center/100% no-repeat'">
+                <div class="back msimg">
                 </div>
             </div>
         </div>
@@ -19,11 +16,11 @@
     </div>
     <style>
         [data-theme=dark] #aside-content #flip-wrapper-card #flip-music .msimg {
-            background: url("[(${theme.config.sidebar.music.darkMsimg})]") center center/100% no-repeat !important
+            background: url("[()]") center center/100% no-repeat !important
         }
 
         [data-theme=dark] #aside-content #flip-wrapper-card #flip-music .back.msimg {
-            background: url("[(${theme.config.sidebar.music.darkBackMsimg})]") center center/100% no-repeat !important
+            background: url("[()]") center center/100% no-repeat !important
         }
     </style>
 

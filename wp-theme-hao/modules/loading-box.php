@@ -1,6 +1,5 @@
 <!-- loading页面 -->
-<th:block
-          th:if="${theme.config.other.loadingBoxs.loadingBoxEnable} and not ${#strings.isEmpty(theme.config.other.loadingBoxs.loadingBoxImg)}">
+<th:block>
     <style type="text/css">
         #loading-box {
             -webkit-user-select: none;
@@ -79,7 +78,7 @@
     </style>
     <div id="loading-box" onclick="heo.hideLoading()">
         <div class="loading-bg">
-            <img class="loading-img" style="border-radius: 50%;" th:src="${theme.config.other.loadingBoxs.loadingBoxImg}">
+            <img class="loading-img" style="border-radius: 50%;">
             <div class="loading-image-dot"></div>
         </div>
     </div>

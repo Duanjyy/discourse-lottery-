@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="content">
-        <h1>[[${theme.config.about.helloAbout}]]</h1>
+        <h1></h1>
     </div>
     <style>
         .hello-about {

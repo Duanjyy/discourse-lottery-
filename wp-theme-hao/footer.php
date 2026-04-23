@@ -32,15 +32,15 @@
     <!-- 评论 -->
     
         
-        <script th:if="${theme.config.comments.visitorMail.visitorMailEnable}">var visitorMail = "[(${theme.config.comments.visitorMail.mail})]";</script>
+        <script>var visitorMail = "[()]";</script>
     
     
     <!--音乐-->
-    <script>var meting_api = "[(${theme.config.tool.nav_music.meting_api})]"; </script>
+    <script>var meting_api = "[()]"; </script>
     
     <!-- 深色模式下添加粒子效果canvas -->
-    <canvas th:if="${theme.config.style.universe}" id="universe" width="1312" height="880"></canvas>
-    <script th:if="${theme.config.style.universe}" async="" src="<?php echo get_template_directory_uri(); ?>/assets/libs/canvas/dark.js"></script>
+    <canvas id="universe" width="1312" height="880"></canvas>
+    <script async="" src="<?php echo get_template_directory_uri(); ?>/assets/libs/canvas/dark.js"></script>
     
     <!-- https://davidshimjs.github.io/qrcodejs/ 生成二维码 -->
     <!-- 应该是文章页分享使用 -->
@@ -65,19 +65,15 @@
     <script src="<?php echo get_template_directory_uri(); ?>/assets/libs/pjax/pjax.min.js"></script>
     
     <!-- swiper 在瞬间滚动时会使用 -->
-    <script th:if="${theme.config.top.moment}" data-pjax
+    <script data-pjax
             src="<?php echo get_template_directory_uri(); ?>/assets/libs/swiper/swiper-bundle.min.js"></script>
     
     <!-- 右键菜单 -->
-    <script th:if="${theme.config.tool.rightMenu.rightMenuEnable}"
+    <script
             src="<?php echo get_template_directory_uri(); ?>/assets/zhheo/rightmenu.js"></script>
     
     <!-- 评论弹幕 -->
-    <script th:if="${ ( ( not #strings.isEmpty(theme.config.comments.twikoos.envId)  && not #strings.isEmpty(theme.config.comments.twikoos.accessToken) ) ||
-        ( not #strings.isEmpty(theme.config.comments.artalks.server) && not #strings.isEmpty(theme.config.comments.artalks.siteName)) ||
-          (#strings.equals(theme.config.comments.use, 'Waline') && not #strings.isEmpty(theme.config.comments.walines.serverURL)) )
-        && theme.config.comments.commentBarrageConfig.commentBarrageEnable
-        && theme.config.comments.commentsEnable}" data-pjax=""
+    <script data-pjax=""
             src="<?php echo get_template_directory_uri(); ?>/assets/zhheo/commentBarrage.js"></script>
     
     <!-- Tocbot 目录生成 start -->

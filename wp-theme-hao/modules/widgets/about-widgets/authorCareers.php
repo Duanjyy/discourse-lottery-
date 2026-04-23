@@ -8,8 +8,7 @@
             <div class="skills-style-group">
                 <div class="tags-group-all">
                     <!--  banners 使用默认值-->
-                    <div class="tags-group-wrapper"
-                         th:if="${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'default')}">
+                    <div class="tags-group-wrapper">
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#989bf8">
                                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/AfterEffect.png"
@@ -145,23 +144,15 @@
                     </div>
 
                     <!--  banners 使用默认值-->
-                    <div class="tags-group-wrapper"
-                         th:if="${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'techStack')}"
-                         th:with="techs = ${theme.config.top.BannerLeft.techStack}">
-                        <th:block <?php /* loop over tech,iterStat : ${techs} */ ?>>
-                            <div class="tags-group-icon-pair" th:if="${iterStat.odd}">
-                                <div class="tags-group-icon"
-                                     th:style="'background:' + ${techOdd.background}"
-                                     th:with="techOdd = ${techs.get(iterStat.index - 1)}">
-                                    <img th:src="@{${techOdd.url}}"
-                                         th:title="${techOdd.name}">
+                    <div class="tags-group-wrapper">
+                        <th:block <?php /* loop over tech,iterStat :  */ ?>>
+                            <div class="tags-group-icon-pair">
+                                <div class="tags-group-icon">
+                                    <img>
                                 </div>
 
-                                <div class="tags-group-icon"
-                                     th:style="'background:' + ${techEven.background}"
-                                     th:with="techEven = ${tech}">
-                                    <img th:src="@{${techEven.url}}"
-                                         th:title="${techEven.name}">
+                                <div class="tags-group-icon">
+                                    <img>
                                 </div>
                             </div>
                         </th:block>
@@ -169,9 +160,7 @@
                 </div>
 
                 <!--  banners 使用默认值-->
-                <div class="skills-list"
-                     th:if="${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'default')}"
-                     th:with="techs = ${theme.config.top.BannerLeft.techStack}">
+                <div class="skills-list">
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#989bf8">
@@ -276,16 +265,14 @@
 
                     <div class="etc">...</div>
                 </div>
-                <div class="skills-list"
-                     th:if="${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'techStack')}"
-                     th:with="techs = ${theme.config.top.BannerLeft.techStack}">
-                    <th:block <?php /* loop over tech : ${techs} */ ?>>
+                <div class="skills-list">
+                    <th:block <?php /* loop over tech :  */ ?>>
                         <div class="skill-info">
-                            <div class="skill-icon" th:style="'background:' + ${tech.background}">
-                                <img th:src="@{${tech.url}}" th:title="${tech.name}">
+                            <div class="skill-icon">
+                                <img>
                             </div>
                             <div class="skill-name">
-                                <span>[[${tech.name}]]</span>
+                                <span></span>
                             </div>
                         </div>
                     </th:block>
@@ -297,18 +284,14 @@
     <div class="author-content-item careers">
         <div class="card-content">
             <div class="author-content-item-tips">生涯</div>
-            <span class="author-content-item-title"
-                  th:text="${theme.config.about.authorCareers.authorCareersTitle}">无限进步</span>
-            <div class="careers-group"
-                 th:if="${not #lists.isEmpty(theme.config.about.authorCareers.authorCareersTags)}"
-                 th:with="careersTags = ${theme.config.about.authorCareers.authorCareersTags}">
-                <div class="careers-item" <?php /* loop over tag : ${careersTags} */ ?>>
-                    <div class="circle" th:style="'background:' + ${tag.background}"></div>
-                    <div class="name" th:text="${tag.desc}"></div>
+            <span class="author-content-item-title">无限进步</span>
+            <div class="careers-group">
+                <div class="careers-item" <?php /* loop over tag :  */ ?>>
+                    <div class="circle"></div>
+                    <div class="name"></div>
                 </div>
             </div>
-            <img alt="生涯" class="author-content-img"
-                 th:src="@{${#strings.isEmpty(theme.config.about.authorCareers.authorCareersBackground) ?  assets_link + '/images/hao-logo.jpg' : theme.config.about.authorCareers.authorCareersBackground}}">
+            <img alt="生涯" class="author-content-img">
         </div>
     </div>
 </div>

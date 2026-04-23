@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html  
-      th:replace="~{modules/layouts/layout :: layout(content = ~{::content}, htmlType = 'page',title = ${singlePage.spec.title + ' | ' + site.title}, head = ~{::head})}">
-<th:block th:fragment="head">
-    <th:block th:replace="~{modules/common/open-graph :: open-graph(_title = ${singlePage.spec.title},
-                _permalink = ${singlePage.status.permalink},
-                _cover = ${singlePage.spec.cover},
-                _excerpt = ${singlePage.status.excerpt},
-                _type = 'website')}"></th:block>
+<html>
+<th:block>
+    <th:block></th:block>
 </th:block>
-<th:block th:fragment="content">
+<th:block>
 
     <div class="page" id="body-wrap">
         <header class="not-top-img" id="page-header">
@@ -21,11 +16,7 @@
                 <?php get_template_part("macro/content-links"); ?>
                 <hr/>
                 <!--/* 评论组件 */-->
-                <th:block
-                        th:replace="~{modules/comment :: comment(group = 'content.halo.run',
-                  kind = 'SinglePage',
-                  name = ${singlePage.metadata.name},
-                  allowComment = ${singlePage.spec.allowComment})}"/>
+                <th:block/>
             </div>
         </main>
         <!-- 底部 -->

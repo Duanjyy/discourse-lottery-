@@ -1,13 +1,12 @@
-<th:block th:if="${theme.config.top.above.enable_above}">
+<th:block>
     <div class="pl-container">
-        <th:block th:if="!${theme.config.top.above.enable_above_video}">
+        <th:block>
             <div class="pl-img pl-blur pl-visible"></div>
             <div class="pl-img pl-visible"></div>
             <video class="video"></video>
         </th:block>
-        <th:block th:if="${theme.config.top.above.enable_above_video}">
-            <video class="index-video" id="index-video" autoplay=""
-                   th:src="${theme.config.top.above.index_video}" loop="" muted="" playsinline=""
+        <th:block>
+            <video class="index-video" id="index-video" autoplay="" loop="" muted="" playsinline=""
                    webkit-playsinline=""
                    style="display:block;object-fit:cover;width:100%;height:100%;pointer-events:none;">
             </video>
@@ -15,7 +14,7 @@
     </div>
 
     <div id="site-info">
-        <h1 id="site-title">[[<?php bloginfo("name"); ?>]]</h1>
+        <h1 id="site-title"><?php bloginfo("name"); ?></h1>
         <div id="site-subtitle">
             <span id="subtitle"></span>
             <span class="typed-cursor" aria-hidden="true"></span>
@@ -198,13 +197,13 @@
         }
 
         .pl-img {
-            background-image: url([[${theme.config.top.above.index_img}]]);
+            background-image: url();
 
         }
 
         @media screen and (max-width: 768px) {
             .pl-img {
-                background-image: url([[${theme.config.top.above.phone_index_img}]]);
+                background-image: url();
             }
         }
 
@@ -236,13 +235,13 @@
             }
         }
     </style>
-    <script th:inline="javascript">
+    <script>
         function subtitleType() {
-            if([[${theme.config.top.above.enable_typed_random}]]){
+            if(){
                 fetch("https://v1.hitokoto.cn").then((t => t.json())).then((t => {
                     {
                         const e = "出自 " + t.from;
-                        const n = [[${theme.config.top.above.typed}]].map((item) => {
+                        const n = .map((item) => {
                             return item.realNode.text;
                         });
                         n.push(t.hitokoto, e), window.typed = new Typed("#subtitle", {
@@ -255,7 +254,7 @@
                     }
                 }))
             }else{
-                const n = [[${theme.config.top.above.typed}]].map((item) => {
+                const n = .map((item) => {
                     return item.realNode.text;
                 });
                 window.typed = new Typed("#subtitle", {

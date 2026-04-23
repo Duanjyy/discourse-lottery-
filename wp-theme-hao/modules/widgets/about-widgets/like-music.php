@@ -1,34 +1,29 @@
 <!-- 关注偏好&音乐偏好 -->
 <div class="author-content" >
 
-    <div class="author-content-item like-technology"
-         th:style="'background: url('+ @{${theme.config.about.like.like_bg}} +') top / cover no-repeat;'">
+    <div class="author-content-item like-technology">
         <div class="card-content">
-            <div class="author-content-item-tips" th:text="${theme.config.about.like.like_tips}">
+            <div class="author-content-item-tips">
 
             </div>
-            <span class="author-content-item-title"
-                  th:text="${theme.config.about.like.like_title}"></span>
+            <span class="author-content-item-title"></span>
             <div class="content-bottom">
-                <div class="tips" th:text="${theme.config.about.like.like_bottom}"></div>
+                <div class="tips"></div>
             </div>
         </div>
     </div>
 
-    <div class="author-content-item like-music"
-         th:style="'background: url('+ @{${theme.config.about.music.music_bg}} +') top / cover no-repeat'">
+    <div class="author-content-item like-music">
         <div class="card-content">
-            <div class="author-content-item-tips" th:text="${theme.config.about.music.music_tips}">
+            <div class="author-content-item-tips">
 
             </div>
-            <span class="author-content-item-title"
-                  th:text="${theme.config.about.music.music_title}"></span>
+            <span class="author-content-item-title"></span>
             <div class="content-bottom">
-                <div class="tips">跟 [[<?php bloginfo("name"); ?>]] 一起欣赏更多音乐</div>
+                <div class="tips">跟 <?php bloginfo("name"); ?> 一起欣赏更多音乐</div>
             </div>
-            <div th:if="${not #strings.isEmpty(theme.config.about.music.music_link)}" class="banner-button-group">
+            <div class="banner-button-group">
                 <a class="banner-button"
-                   th:href="${theme.config.about.music.music_link}"
                    target="_blank"
                    rel="noopener nofollow">
                     <i class="haofont hao-icon-circle-arrow-up-right-1"></i>

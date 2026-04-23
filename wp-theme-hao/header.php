@@ -6,12 +6,10 @@
 <head>
     <?php get_template_part("modules/head"); ?>
     <?php wp_head(); ?>
-    <link th:if="${#strings.equals(theme.config.comments.use, 'Waline')
-    && not #strings.isEmpty(theme.config.comments.walines.serverURL)}"
-          rel="stylesheet"
-          th:href="${not #strings.isEmpty(theme.config.comments.walines.walinesCss) ? theme.config.comments.walines.walinesCss : 'https://cdn.cbd.int/@waline/client@2.15.7/dist/waline.css' }">
+    <link
+          rel="stylesheet">
     <!--  解决 katex pjax问题 -->
-    <script th:if="${pluginFinder.available('plugin-katex')}" defer=""
+    <script defer=""
             src="/plugins/plugin-katex/assets/static/katex.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/assets/js/custom.js"></script>
     
@@ -28,16 +26,14 @@
 
 <!-- 网站背景 -->
 <div id="web_bg">
-    <div th:if="${theme.config.top.global_background.enable_global_background_img}">
-        <img th:if="${theme.config.top.global_background.enable_global_background_above_video == false}"
+    <div>
+        <img
              class="global_background_img"
-             th:src="${theme.config.top.global_background.global_background_img}"
         />
-        <video th:if="${theme.config.top.global_background.enable_global_background_above_video}"
+        <video
                class="index-video"
                id="index-video"
                autoplay=""
-               th:src="${theme.config.top.global_background.global_background_video}"
                loop=""
                muted=""
                playsinline=""
@@ -74,15 +70,11 @@
     </style>
 
 
-<script th:if="${not #lists.isEmpty(postFinder.listAll())}"
-        th:inline="javascript"
-    th:with="allPostList=${postFinder.listAll()},
-    randomIndex=${T(java.lang.Math).floor(T(java.lang.Math).random()*#lists.size(allPostList))},
-    postPermalink=${allPostList[randomIndex].status.permalink}"
+<script
 >
     function toRandomPost() {
         // 随机跳转全站的一篇文章
-        let permalink = /*[[${postPermalink}]]*/ "/";
+        let permalink = /**/ "/";
         
         // 当前窗口打开
         //window.location.href = permalink;

@@ -10,23 +10,21 @@
                 <span>显示模式</span>
             </a>
         </div>
-        <th:block th:if="${not #strings.isEmpty(theme.config.nav.leftMenu) && theme.config.nav.menus.phone_leftMenu}"
-                  th:with="leftMenu = ${menuFinder.getByName(theme.config.nav.leftMenu)}">
+        <th:block>
             <div class="back-menu-list-groups">
-                <div class="back-menu-list-group" <?php /* loop over menuItem : ${leftMenu.menuItems} */ ?>>
+                <div class="back-menu-list-group" <?php /* loop over menuItem :  */ ?>>
 
-                    <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
+                    <th:block>
                         <!-- 菜单必须有子项才会展示 -->
-                        <div class="back-menu-list-title" th:text="${menuItem.status.displayName}"></div>
+                        <div class="back-menu-list-title"></div>
                         <div class="back-menu-list">
-                            <th:block <?php /* loop over childMenu : ${menuItem.children} */ ?>>
+                            <th:block <?php /* loop over childMenu :  */ ?>>
                                 <a class="back-menu-item" rel="external nofollow"
-                                   target="_blank" th:href="@{${childMenu.status.href}}">
+                                   target="_blank">
                                     <!-- icon -->
-                                    <img th:if="${!#strings.isEmpty(#annotations.getOrDefault(childMenu, 'icon', ''))}"
-                                         class="back-menu-item-icon"
-                                         th:src="${#annotations.getOrDefault(childMenu, 'icon', '')}">
-                                    <span class="back-menu-item-text" th:text="${childMenu.status.displayName}"></span>
+                                    <img
+                                         class="back-menu-item-icon">
+                                    <span class="back-menu-item-text"></span>
                                 </a>
                             </th:block>
                         </div>
@@ -36,28 +34,27 @@
 
             </div>
         </th:block>
-        <th:block th:if="${not #lists.isEmpty(menuFinder.getPrimary().menuItems) && theme.config.nav.menus.phone_menu}"
+        <th:block
         >
             <div class="menus_items">
-                <div class="menus_item" <?php /* loop over menuItem : ${menuFinder.getPrimary().menuItems} */ ?>>
-                    <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
+                <div class="menus_item" <?php /* loop over menuItem :  */ ?>>
+                    <th:block>
                         <a class="site-page" href="javascript:void(0);" rel="external nofollow">
-                            <span th:text="${menuItem.status.displayName}"></span>
+                            <span></span>
                         </a>
-                        <th:block th:if="${not #lists.isEmpty(menuItem.children)}">
+                        <th:block>
                             <ul class="menus_item_child">
-                                <li <?php /* loop over childMenu : ${menuItem.children} */ ?>>
-                                    <a class="site-page child" th:href="@{${childMenu.status.href}}">
-                                        <th:block th:if="${!theme.config.nav.menus.enable_ali_iconfont_symbol_header}">
-                                            <i th:if="${!#strings.isEmpty(#annotations.getOrDefault(childMenu, 'icon', ''))}"
-                                               th:class="${#annotations.getOrDefault(childMenu, 'icon', '')}"></i>
+                                <li <?php /* loop over childMenu :  */ ?>>
+                                    <a class="site-page child">
+                                        <th:block>
+                                            <i></i>
                                         </th:block>
-                                        <th:block th:if="${theme.config.nav.menus.enable_ali_iconfont_symbol_header}">
+                                        <th:block>
                                             <svg class="ali_icon" aria-hidden="true">
-                                                <use th:href="${#annotations.getOrDefault(childMenu, 'icon','jiewen joe-icon-zuzhijiagou')}"></use>
+                                                <use></use>
                                             </svg>
                                         </th:block>
-                                        <span th:text="${childMenu.status.displayName}"></span>
+                                        <span></span>
                                     </a>
                                 </li>
                             </ul>
@@ -67,15 +64,12 @@
             </div>
         </th:block>
         <span class="sidebar-menu-item-title">标签</span>
-        <div class="card-widget card-tags card-archives card-webinfo card-allinfo"
-             th:with="tags = ${tagFinder.list(1,theme.config.sidebar.tagQuantity)}">
+        <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
             <div class="item-headline"></div>
             <div class="card-tag-cloud">
-                <a class="tag-item" style="font-size:1em" <?php /* loop over tag,iterStat : ${tags} */ ?>
-                   th:href="@{${tag.status.permalink}}"
-                   th:title="${tag.spec.displayName}">
+                <a class="tag-item" style="font-size:1em" <?php /* loop over tag,iterStat :  */ ?>>
                     <!-- 角标 -->
-                    [[${tag.spec.displayName}]]<sup th:text="${tag.status.visiblePostCount}"></sup>
+                    <sup></sup>
                 </a>
             </div>
         </div>

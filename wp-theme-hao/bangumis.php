@@ -352,19 +352,19 @@
                         <a class="bangumi-tab" id="bangumi-tab1" href="javascript:;" rel="external" target="_self"
                            onclick="return false" data-pjax-state="">
                             想看
-                            ([[${bangumiFinder.getDataTotal(1,1)}]])</a>
+                            ()</a>
                         <a class="bangumi-tab bangumi-active" id="bangumi-tab2" href="javascript:;" rel="external"
                            target="_self" onclick="return false" data-pjax-state="">
                             在看
-                            ([[${bangumiFinder.getDataTotal(1,2)}]])</a>
+                            ()</a>
                         <a class="bangumi-tab" id="bangumi-tab3" href="javascript:;" rel="external" target="_self"
                            onclick="return false" data-pjax-state="">
                             已看
-                            ([[${bangumiFinder.getDataTotal(1,3)}]])</a>
+                            ()</a>
                     </div>
                     <div>
                         <div id="bangumi-item1" class="bangumi-hide">
-                            <th:block <?php /* loop over bangumi : ${bangumiFinder.getBiliDataAll(1,1)} */ ?>>
+                            <th:block <?php /* loop over bangumi :  */ ?>>
                                 <?php get_template_part("macro/bangumi-item"); ?>
                             
 <?php get_footer(); ?>

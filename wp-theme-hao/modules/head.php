@@ -6,8 +6,7 @@
     <meta content="telephone=no" name="format-detection">
     <meta content="var(--heo-card-bg)" name="theme-color">
     <title <?php bloginfo("name"); ?>></title>
-    <link rel="shortcut icon"
-          th:href="@{${#strings.isEmpty(site.favicon) ? assets_link + '/images/hao-logo.jpg' : site.favicon}}"/>
+    <link rel="shortcut icon"/>
 
     <script src="<?php echo get_template_directory_uri(); ?>/assets/libs/jquery/jquery.min.js"></script>
 
@@ -19,7 +18,7 @@
 
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/zhheo/commentBarrage.css">
 
-    <style th:if="${theme.config.other.scrollbarLinearGradientEnable}">
+    <style>
         *::-webkit-scrollbar-thumb {
             background-color: var(--heo-main);
             background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.4) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.4) 50%,rgba(255,255,255,.4) 75%,transparent 75%,transparent);
@@ -28,7 +27,7 @@
     </style>
 
     <!-- swiper 在瞬间滚动时会使用 -->
-    <link th:if="${theme.config.top.moment}" rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/libs/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/libs/swiper/swiper-bundle.min.css"/>
     
     <!-- 右下角通知 -->
     <link href="<?php echo get_template_directory_uri(); ?>/assets/libs/node-snackbar/snackbar.min.css"
@@ -139,9 +138,9 @@
             } else if (t === 'light') activateLightMode()
             else activateDarkMode()
 
-            if("[[${theme.config.style.colorScheme}]]" === 'dark')
+            if("" === 'dark')
                 activateDarkMode()
-            if("[[${theme.config.style.colorScheme}]]" === 'light')
+            if("" === 'light')
                 activateLightMode()
 
             const asideStatus = saveToLocal.get('aside-status')
@@ -157,15 +156,14 @@
 
     <!-- 动态加载条 -->
     <script data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"
-            src="<?php echo get_template_directory_uri(); ?>/assets/libs/pace/pace.min.js"
-            th:if="${theme.config.other.loadingBoxs.loadProgressBar}">
+            src="<?php echo get_template_directory_uri(); ?>/assets/libs/pace/pace.min.js">
     </script>
 
     <!-- 复制 https://githubfast.com/zenorocha/clipboard.js -->
     <script src="<?php echo get_template_directory_uri(); ?>/assets/libs/clipboard/clipboard.min.js"></script>
 
     <!-- 关于统计-->
-    <script th:if="${#strings.contains(theme.config.about.widget_list,'statistics-map')}" src="<?php echo get_template_directory_uri(); ?>/assets/libs/countup/countup.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/assets/libs/countup/countup.js"></script>
 
     <!-- icon图标 -->
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/icon/iconfont.css">

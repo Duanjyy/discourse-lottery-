@@ -1,18 +1,13 @@
 <!DOCTYPE html>
-<html 
-    th:replace="~{modules/layouts/layout :: layout(content = ~{::content}, htmlType = 'page',title = '朋友圈 | ' + <?php bloginfo("name"); ?>, head = ~{::head})}">
+<htmlname"); ?>, head = ~{::head})}">
 
-<th:block th:fragment="head">
-    <th:block th:replace="~{modules/common/open-graph :: open-graph(_title = '朋友圈',
-                _permalink = '/moments',
-                _cover = '',
-                _excerpt = '友链朋友圈 - 发现更多精彩内容',
-                _type = 'website')}"></th:block>
+<th:block>
+    <th:block></th:block>
     <!-- 分离CSS文件 -->
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/fmoments.css}" data-pjax>
 </th:block>
 
-<th:block th:fragment="content">
+<th:block>
     <div class="page" id="body-wrap">
         <!-- 头部导航栏 -->
         <header class="not-top-img" id="page-header">
@@ -141,7 +136,7 @@
         <?php get_template_part("modules/footer"); ?>
 
         <!-- 资源检查和动态加载脚本 -->
-        <script data-pjax th:inline="javascript">
+        <script data-pjax>
             // 资源动态加载器
             window.MomentsResourceLoader = {
                 // 检查CSS是否已加载
@@ -188,7 +183,7 @@
 
                         link.onerror = () => {
                             console.error('Failed to load CSS:', href);
-                            reject(new Error(`Failed to load CSS: ${href}`));
+                            reject(new Error(`Failed to load CSS: `));
                         };
 
                         document.head.appendChild(link);
@@ -215,7 +210,7 @@
 
                         script.onerror = () => {
                             console.error('Failed to load JS:', src);
-                            reject(new Error(`Failed to load JS: ${src}`));
+                            reject(new Error(`Failed to load JS: `));
                         };
 
                         document.head.appendChild(script);
@@ -246,13 +241,13 @@
             };
         </script>
         <!-- 初始化脚本 -->
-        <script data-pjax th:inline="javascript">
+        <script data-pjax>
             // 朋友圈配置
             // 从主题设置获取
             window.fmomentsConfig = {
-                apiUrl: /*[[${theme.config.link.fmomentsApiUrl}]]*/ '/apis/api.friend.moony.la/v1alpha1/friendposts',
-                pageSize: /*[[${theme.config.link.fmomentsPageSize}]]*/ 12,
-                errorImg: /*[[${theme.config.other.error_404.background}]]*/ '/assets/images/404.gif'
+                apiUrl: /**/ '/apis/api.friend.moony.la/v1alpha1/friendposts',
+                pageSize: /**/ 12,
+                errorImg: /**/ '/assets/images/404.gif'
             };
 
             // 全局初始化状态追踪

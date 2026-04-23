@@ -1,18 +1,18 @@
-<div class="author-content" th:if="${theme.config.aboutReward.aboutRewardEnable}"
+<div class="author-content"
      xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="author-content-item single reward" id="about-reward">
         <div class="author-content-item-tips">致谢</div>
-        <span class="author-content-item-title">[[${theme.config.aboutReward.title}]]</span>
+        <span class="author-content-item-title"></span>
         <div class="author-content-item-description">
-            [[${theme.config.aboutReward.content}]]
+            
         </div>
 
-        <div th:if="${theme.config.aboutReward.reward.enable_reward}" class="about-reward">
+        <div class="about-reward">
             <div id="con"></div>
             <div id="TA-con" onclick="heo.rewardShowConsole()">
                 <div id="text-con">
                     <div id="linght"></div>
-                    <div id="TA">[[${theme.config.aboutReward.reward.name}]]</div>
+                    <div id="TA"></div>
                 </div>
             </div>
             <div id="tube-con">
@@ -54,53 +54,51 @@
                     </svg>
                 </div>
 
-                <th:block th:if="not ${pluginFinder.available('plugin-afdian')}">
-                    <p id="people">共<b>[[${theme.config.aboutReward.reward_list.size()}]]</b>人</p>
+                <th:block>
+                    <p id="people">共<b></b>人</p>
                 </th:block>
-                <th:block th:if="${pluginFinder.available('plugin-afdian')}">
-                    <p id="people">共<b>[[${theme.config.aboutReward.reward_list.size()}+${afdianFinder
-                        .listAllSponsor().data.list.size()}]]</b>人</p>
+                <th:block>
+                    <p id="people">共<b></b>人</p>
                 </th:block>
 
             </div>
         </div>
-        <div class="reward-list-all" th:if="${not #lists.isEmpty(theme.config.aboutReward.reward_list)}"
-             th:with="authorRewardList = ${theme.config.aboutReward.reward_list}">
+        <div class="reward-list-all">
 
-            <div class="reward-list-item" <?php /* loop over authorReward : ${authorRewardList} */ ?>>
-                <div th:if="${not #strings.isEmpty(authorReward.avatar)}">
+            <div class="reward-list-item" <?php /* loop over authorReward :  */ ?>>
+                <div>
                     <div>
                         <div class="reward-list-item-avatar">
-                            <img th:src="${authorReward.avatar}" th:alt="${authorReward.name}">
+                            <img>
                         </div>
                         <div style="z-index:20;float: left;" class="reward-list-item-avatar-group">
-                            <div class="reward-list-item-name">[[${authorReward.name}]]</div>
+                            <div class="reward-list-item-name"></div>
                         </div>
                     </div>
                     <div class="reward-list-bottom-group">
-                        <div th:if="${#conversions.convert(authorReward.amount, 'java.math.BigDecimal') < #conversions.convert(theme.config.aboutReward.rewardNumber, 'java.math.BigDecimal')}"
+                        <div
                              class="reward-list-item-money">¥
-                            [[${authorReward.amount}]]
+                            
                         </div>
-                        <div th:if="${#conversions.convert(authorReward.amount, 'java.math.BigDecimal') >= #conversions.convert(theme.config.aboutReward.rewardNumber, 'java.math.BigDecimal')}"
+                        <div
                              class="reward-list-item-money"
-                             style="background: var(--heo-vip);">¥ [[${authorReward.amount}]]
+                             style="background: var(--heo-vip);">¥ 
                         </div>
-                        <time class="datatime reward-list-item-time">[[${authorReward.datatime}]]</time>
+                        <time class="datatime reward-list-item-time"></time>
                     </div>
                 </div>
-                <div th:if="${#strings.isEmpty(authorReward.avatar)}">
-                    <div class="reward-list-item-name">[[${authorReward.name}]]</div>
+                <div>
+                    <div class="reward-list-item-name"></div>
                     <div class="reward-list-bottom-group">
-                        <div th:if="${#conversions.convert(authorReward.amount, 'java.math.BigDecimal') < #conversions.convert(theme.config.aboutReward.rewardNumber, 'java.math.BigDecimal')}"
+                        <div
                              class="reward-list-item-money">¥
-                            [[${authorReward.amount}]]
+                            
                         </div>
-                        <div th:if="${#conversions.convert(authorReward.amount, 'java.math.BigDecimal') >= #conversions.convert(theme.config.aboutReward.rewardNumber, 'java.math.BigDecimal')}"
+                        <div
                              class="reward-list-item-money"
-                             style="background: var(--heo-vip);">¥ [[${authorReward.amount}]]
+                             style="background: var(--heo-vip);">¥ 
                         </div>
-                        <time class="datatime reward-list-item-time">[[${authorReward.datatime}]]</time>
+                        <time class="datatime reward-list-item-time"></time>
                     </div>
                 </div>
 
@@ -108,31 +106,30 @@
 
         </div>
 
-        <th:block th:if="${pluginFinder.available('plugin-afdian')}">
+        <th:block>
             <a href="https://afdian.com/a/carolcoral" target="_blank"><span class="sponar_afdian">爱发电</span></a>
-            <div class="reward-list-all" th:if="${not #lists.isEmpty(afdianFinder.listAllSponsor())}"
-                 th:with="authorRewardList = ${afdianFinder.listAllSponsor().data.list}">
-                <div class="reward-list-item" <?php /* loop over authorReward : ${authorRewardList} */ ?>>
-                    <div th:if="${not #strings.isEmpty(authorReward.user.avatar)}">
+            <div class="reward-list-all">
+                <div class="reward-list-item" <?php /* loop over authorReward :  */ ?>>
+                    <div>
                         <div>
                             <div class="reward-list-item-avatar">
-                                <img th:src="${authorReward.user.avatar}" th:alt="${authorReward.user.name}">
+                                <img>
                             </div>
                             <div style="z-index:20;float: left;" class="reward-list-item-avatar-group">
-                                <div class="reward-list-item-name">[[${authorReward.user.name}]]</div>
+                                <div class="reward-list-item-name"></div>
                             </div>
                         </div>
                         <div class="reward-list-bottom-group">
-                            <div th:if="${#conversions.convert(authorReward.all_sum_amount, 'java.math.BigDecimal') < #conversions.convert(afdianFinder.getRewardNumber(), 'java.math.BigDecimal')}"
+                            <div
                                  class="reward-list-item-money">¥
-                                [[${authorReward.all_sum_amount}]]
+                                
                             </div>
-                            <div th:if="${#conversions.convert(authorReward.all_sum_amount, 'java.math.BigDecimal') >= #conversions.convert(afdianFinder.getRewardNumber(), 'java.math.BigDecimal')}"
+                            <div
                                  class="reward-list-item-money"
-                                 style="background: var(--heo-vip);">¥ [[${authorReward.all_sum_amount}]]
+                                 style="background: var(--heo-vip);">¥ 
                             </div>
                             <time class="datatime reward-list-item-time">
-                                [[${afdianFinder.parseTime(authorReward.last_pay_time)}]]
+                                
                             </time>
                         </div>
                     </div>

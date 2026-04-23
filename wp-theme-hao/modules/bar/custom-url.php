@@ -5,15 +5,14 @@
             <a href="/">首页</a>
         </div>
 
-        <th:block th:with="customUrls = ${theme.config.layout.navs.navCustomUrl}">
+        <th:block>
 
             <div class="category-bar-item"
-                 <?php /* loop over customUrlItem : ${customUrls} */ ?>
-                 th:id="${customUrlItem.title}">
-                <a th:href="@{${customUrlItem.url}}" th:text="${customUrlItem.title}"></a>
+                 <?php /* loop over customUrlItem :  */ ?>>
+                <a></a>
             </div>
 
         </th:block>
     </div>
-    <a class="category-bar-more" th:replace="~{modules/bar/more}">更多</a>
+    <a class="category-bar-more">更多</a>
 </div>

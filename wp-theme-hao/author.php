@@ -6,7 +6,7 @@
         <header class="not-top-img" id="page-header">
             <?php get_template_part("modules/nav"); ?>
         </header>
-        <main class="layout" id="content-inner" th:classappend="${theme.config.sidebar.location}">
+        <main class="layout" id="content-inner">
             <div class="recent-posts" id="recent-posts">
                 <?php get_template_part("modules/post-list"); ?>
             </div>

@@ -1,5 +1,5 @@
 <!-- 第一屏 -->
-<th:block th:if="${theme.config.other.greeting.enable_greeting}">
+<th:block>
     <div id="greetingBox"></div>
     <style>
         #greetingBox {
@@ -31,9 +31,9 @@
             top: 0
         }
     </style>
-    <script th:inline="javascript">
+    <script>
         (() => {
-            const greeting = [[${theme.config.other.greeting.setting}]].map((itme) => {
+            const greeting = .map((itme) => {
                 return itme.realNode
             })
             let e = greeting.length !== 0 ? greeting : [

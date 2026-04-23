@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh-CN" >
-<th:block th:fragment="open-graph(_title,_permalink,_cover,_excerpt,_type)">
+<th:block>
     <!-- Open Graph Start -->
-    <meta property="og:site_name" th:content="<?php bloginfo("name"); ?>" />
-    <meta property="og:type" th:content="${_type}" />
-    <meta property="og:title" th:content="${_title}" />
-    <meta property="og:url" th:content="|${site.url}${_permalink}|" />
-    <th:block
-            th:with="description = ${ not #strings.isEmpty(_excerpt) ? _excerpt : not #strings.isEmpty(site.seo.description) ? site.seo.description: _title},
-                     image=${not #strings.isEmpty(_cover) ? _cover : not #strings.isEmpty(site.logo) ? site.logo :'null'}">
-        <meta property="og:description" th:content="${description}" />
-        <meta property="og:image" th:content="${image}" />
+    <meta property="og:site_name"name"); ?>" />
+    <meta property="og:type" />
+    <meta property="og:title" />
+    <meta property="og:url" />
+    <th:block>
+        <meta property="og:description" />
+        <meta property="og:image" />
     </th:block>
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" th:content="${_title}" />
-    <meta name="twitter:url" th:content="|${site.url}${_permalink}|" />
-    <th:block th:with="description = ${ not #strings.isEmpty(_excerpt) ? _excerpt : not #strings.isEmpty(site.seo.description) ? site.seo.description: _title},
-    image=${not #strings.isEmpty(_cover) ? _cover : not #strings.isEmpty(site.logo) ? site.logo :'null'}">
-        <meta name="twitter:description" th:content="${description}" />
-        <meta name="twitter:image" th:content="${image}" />
+    <meta name="twitter:title" />
+    <meta name="twitter:url" />
+    <th:block>
+        <meta name="twitter:description" />
+        <meta name="twitter:image" />
     </th:block>
 
     <!-- Open Graph End -->

@@ -1,58 +1,46 @@
 
 <!-- 阅读建议 -->
-<th:block  th:if="${not #lists.isEmpty(post.categories)}" th:with="recommendQuantity = ${theme.config.post.recommendQuantity},
-recommandPosts = ${postFinder.listByCategory(1,recommendQuantity == 'six' ? 7 : recommendQuantity == 'two' ? 3 : 1,post.categories.get(0).metadata.name)},
-containsTitle = ${#strings.contains(recommandPosts,post.spec.title)},
-postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,'?') ? theme.config.layout.postRandomImg+'&' : theme.config.layout.postRandomImg+'?'}">
-    <div class="relatedPosts" th:if="${recommandPosts.total>1}">
+<th:block>
+    <div class="relatedPosts">
         <div class="headline">
             <i class="haofont hao-icon-cainixihuan" style="font-size: 1.1rem;"></i>
             <span>阅读建议</span>
         </div>
         <!-- 六篇文章 -->
-        <div th:if="${#strings.equals(recommendQuantity, 'six')}" class="relatedPosts-list">
+        <div class="relatedPosts-list">
             <!-- 建议阅读，这里可以自定义文章数量，然后遍历展示 -->
-            <th:block <?php /* loop over recommandPost,iterStat :${recommandPosts} */ ?>
-                      th:if="${not #strings.equals(post.spec.title, recommandPost.spec.title)}">
-                <div th:if="${!containsTitle ? iterStat.index <6 : true}">
-                    <a th:href="@{${recommandPost.status.permalink}}" th:title="${recommandPost.spec.title}">
-                        <img alt="cover" class="cover" id="preimg"
-                             th:with="img = ${#strings.isEmpty(recommandPost.spec.cover) ? postRandomImg+recommandPost.spec.title : thumbnail.gen(recommandPost.spec.cover, 'm')}"
-                             th:src="${isLazyload ? '' : img}"
-                             th:data-lazy-src="${ isLazyload ? img : ''}">
+            <th:block <?php /* loop over recommandPost,iterStat : */ ?>>
+                <div>
+                    <a>
+                        <img alt="cover" class="cover" id="preimg">
                         <div class="content is-center">
                             <div class="date" style="color: white"><i class="far fa-calendar-alt fa-fw"></i>
-                                [[${#dates.format(recommandPost.spec.publishTime,'yyyy-MM-dd')}]]
+                                
                             </div>
-                            <div class="title" style="color: white" th:text="${recommandPost.spec.title}"></div>
+                            <div class="title" style="color: white"></div>
                         </div>
                     </a>
                 </div>
             </th:block>
         </div>
         <!-- 两篇文章 -->
-        <div th:if="${#strings.equals(recommendQuantity, 'two')}" class="relatedPosts-list">
-            <th:block <?php /* loop over recommandPost,iterStat :${recommandPosts} */ ?>
-                      th:if="${not #strings.equals(post.spec.title, recommandPost.spec.title)}">
-                <div th:if="${!containsTitle ? iterStat.index <2 : true}">
-                    <a th:href="@{${recommandPost.status.permalink}}" th:title="${recommandPost.spec.title}">
-                        <img class="cover" alt="cover"
-                             th:with="img = ${#strings.isEmpty(recommandPost.spec.cover) ? postRandomImg+recommandPost.spec.title : thumbnail.gen(recommandPost.spec.cover, 'm')}"
-
-                             th:src="${isLazyload ? '' : img}"
-                             th:data-lazy-src="${ isLazyload ? img : ''}">
+        <div class="relatedPosts-list">
+            <th:block <?php /* loop over recommandPost,iterStat : */ ?>>
+                <div>
+                    <a>
+                        <img class="cover" alt="cover">
                         <div class="content is-center">
                             <div class="date"><i class="far fa-calendar-alt fa-fw"></i>
-                                [[${#dates.format(recommandPost.spec.publishTime,'yyyy-MM-dd')}]]</div>
-                            <div class="title" th:text="${recommandPost.spec.title}"></div>
+                                </div>
+                            <div class="title"></div>
                         </div>
                     </a>
                 </div>
             </th:block>
         </div>
     </div>
-    <link th:if="${#strings.equals(recommendQuantity, 'six')}" rel="stylesheet"
+    <link rel="stylesheet"
           href="<?php echo get_template_directory_uri(); ?>/assets/css/related-posts-six.css">
-    <link th:if="${#strings.equals(recommendQuantity, 'two')}" rel="stylesheet"
+    <link rel="stylesheet"
           href="<?php echo get_template_directory_uri(); ?>/assets/css/related-posts-two.css">
 </th:block>

@@ -1,4 +1,4 @@
-<th:block th:fragment="links-canvas(groups)" th:if="${theme.config.link.linksCanvas && not #lists.isEmpty(groups)}" >
+<th:block >
 
     <style>
         #iframe {
@@ -60,11 +60,11 @@
             </button>
         </div>
     </div>
-    <script th:inline="javascript">
+    <script>
         function refreshFrame() {
             document.getElementById('iframe').contentWindow.location.reload(true);
         }
-        const group = [[${ groups }]]
+        const group = 
         const logos = group.flatMap((item) => {
             return item.links
         }).flatMap((item) => {

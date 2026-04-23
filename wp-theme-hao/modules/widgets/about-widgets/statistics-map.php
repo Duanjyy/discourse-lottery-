@@ -22,38 +22,28 @@
     <div class="author-content-item-group column mapAndInfo">
         <div class="author-content-item map single">
             <span class="map-title">我现在住在
-                <b>[[${theme.config.about.map.StrengthenTitle}]]</b>
+                <b></b>
             </span>
         </div>
-        <div class="author-content-item selfInfo single"
-             th:if="${not #lists.isEmpty(theme.config.about.map.authorInfo)}"
-             th:with="texts = ${theme.config.about.map.authorInfo}">
-            <div th:if="${theme.config.about.map.authorInfo.size()}>'0'">
-                <span class="selfInfo-title"
-                      th:text="${texts[0].authorInfoTitle}">生于</span><span
+        <div class="author-content-item selfInfo single">
+            <div>
+                <span class="selfInfo-title">生于</span><span
                     class="selfInfo-content"
-                    id="selfInfo-content-year" th:style="'color:' + ${texts[0].authorInfoColor}"
-                    th:text="${texts[0].authorInfoContent}">2000</span>
+                    id="selfInfo-content-year">2000</span>
             </div>
-            <div th:if="${theme.config.about.map.authorInfo.size()}>'1'">
-                <span class="selfInfo-title"
-                      th:text="${texts[1].authorInfoTitle}">太原理工大学</span><span
-                    class="selfInfo-content"
-                    th:style="'color:' + ${texts[1].authorInfoColor}"
-                    th:text="${texts[1].authorInfoContent}">计算机科学</span>
+            <div>
+                <span class="selfInfo-title">太原理工大学</span><span
+                    class="selfInfo-content">计算机科学</span>
             </div>
-            <div th:if="${theme.config.about.map.authorInfo.size()}>'2'">
-                <span class="selfInfo-title"
-                      th:text="${texts[2].authorInfoTitle}">现在职业</span><span
-                    class="selfInfo-content"
-                    th:style="'color:' + ${texts[2].authorInfoColor}"
-                    th:text="${texts[2].authorInfoContent}">BI工程师</span>
+            <div>
+                <span class="selfInfo-title">现在职业</span><span
+                    class="selfInfo-content">BI工程师</span>
             </div>
         </div>
     </div>
     <style>
         .author-content-item.map {
-            background: url([[${theme.config.about.map.background}]]) no-repeat center;
+            background: url() no-repeat center;
             min-height: 160px;
             max-height: 400px;
             position: relative;
@@ -65,7 +55,7 @@
         }
         
         [data-theme=dark] .author-content-item.map {
-            background: url([[${theme.config.about.map.backgroundDark}]]) no-repeat center;
+            background: url() no-repeat center;
             background-size: 100%;
         }
         
@@ -113,7 +103,7 @@
     <script defer>
         // 链接替换即可，不需要后面的参数
         function initAboutPage() {
-            fetch("https://v6-widget.51.la/v6/[[${theme.config.about.LingQueMonitorID}]]/quote.js")
+            fetch("https://v6-widget.51.la/v6//quote.js")
                     .then(res => res.text())
                     .then(data => {
                         let title = ["最近活跃", "今日人数", "今日访问", "昨日人数", "昨日访问", "本月访问", "总访问量"];
