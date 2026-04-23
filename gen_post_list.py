@@ -1,4 +1,7 @@
-<?php
+import os
+
+def generate_post_list():
+    content = """<?php
 // WP loop for post list
 if ( have_posts() ) :
     $count = 0;
@@ -90,3 +93,8 @@ else :
     echo '<p>没有找到任何文章。</p>';
 endif;
 ?>
+"""
+    with open('/workspace/wp-theme-hao/modules/post-list.php', 'w', encoding='utf-8') as f:
+        f.write(content)
+
+generate_post_list()

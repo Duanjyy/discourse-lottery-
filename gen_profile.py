@@ -1,4 +1,7 @@
-<?php
+import os
+
+def fix_profile():
+    content = """<?php
 // User profile widget in sidebar
 $author_id = 1; // Default admin
 $author_name = get_the_author_meta('display_name', $author_id);
@@ -32,3 +35,8 @@ if (!$avatar_url) {
         </a>
     </div>
 </div>
+"""
+    with open('/workspace/wp-theme-hao/modules/widgets/aside/profile.php', 'w', encoding='utf-8') as f:
+        f.write(content)
+
+fix_profile()

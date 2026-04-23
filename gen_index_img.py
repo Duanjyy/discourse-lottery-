@@ -1,4 +1,7 @@
-<?php
+import os
+
+def fix_banner():
+    content = """<?php
 // Default index-img module
 // We'll use get_theme_mod or standard fallback for the site's top banner.
 $bg_url = get_theme_mod('hao_top_background_img', 'https://picsum.photos/1920/1080?random=1');
@@ -26,3 +29,8 @@ $site_desc = get_bloginfo('description');
         background-repeat: no-repeat;
     }
 </style>
+"""
+    with open('/workspace/wp-theme-hao/modules/header/index-img.php', 'w', encoding='utf-8') as f:
+        f.write(content)
+
+fix_banner()
