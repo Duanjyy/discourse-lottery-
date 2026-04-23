@@ -20,7 +20,7 @@
                     <span th:text="${childMenu.status.displayName}"></span>
                 </a>
                 <!--递归调用-->
-                <?php get_template_part("modules/widgets/nav-menu"); ?>
+                <?php /* recursive menu call removed */ ?>
             </div>
         </div>
     </th:block>
@@ -56,7 +56,7 @@
                 <span th:text="${menuItem.status.displayName}"></span>
             </a>
             <!--递归调用-->
-            <?php get_template_part("modules/widgets/nav-menu"); ?>
+            <?php /* recursive menu call removed */ ?>
             
             <style type="text/css">
                 .ali_icon {
