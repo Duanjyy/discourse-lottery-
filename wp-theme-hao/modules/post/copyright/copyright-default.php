@@ -65,7 +65,7 @@
         <div class="post-tools-right">
             <div class="tag_share">
                 <div class="post-meta__tag-list">
-                    <a class="post-meta__tags" <?php if (have_posts()) : while (have_posts()) : the_post(); ?> th:href="@{${tag.status.permalink}}">
+                    <a class="post-meta__tags" <?php /* loop */ ?> th:href="@{${tag.status.permalink}}">
                         <span class="tags-punctuation">[[${tag.spec.displayName}]]</span>
 
                         <span class="tagsPageCount" th:text="${tag.status.visiblePostCount}"></span>

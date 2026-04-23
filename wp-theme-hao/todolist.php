@@ -29,13 +29,13 @@
 
 
                     <div id="todolist-left-container">
-                        <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                        <th:block <?php /* loop */ ?>>
                             <div id="todolist-left" <?php /* if(${#strings.equals(todo.seat, 'left')}) */ ?>>
                                 <div class="todolist-item">
                                     <h3 class="todolist-title">[[${todo.class_name}]]</h3>
                                     <ul class="todolist-ul">
                                         <th:block <?php /* if(${not #lists.isEmpty(todo.todo_list)}) */ ?>
-                                                  <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                                                  <?php /* loop */ ?>>
                                             <li th:class="${data.completed ? 'achieve' : ''}">
                                                 <i style="font-size: 19px;margin-right: 5px;"
                                                    th:class="${data.completed ? 'haofont  hao-icon-check-circle' : 'haofont hao-icon-yuan'}">
@@ -48,13 +48,13 @@
                         </th:block>
                     </div>
                     <div id="todolist-right-container">
-                        <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                        <th:block <?php /* loop */ ?>>
                             <div id="todolist-right" <?php /* if(${#strings.equals(todo.seat, 'right')}) */ ?>>
                                 <div class="todolist-item">
                                     <h3 class="todolist-title">[[${todo.class_name}]]</h3>
                                     <ul>
                                         <th:block <?php /* if(${not #lists.isEmpty(todo.todo_list)}) */ ?>
-                                                  <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                                                  <?php /* loop */ ?>>
                                             <li th:class="${data.completed ? 'achieve' : ''}">
                                                 <i style="font-size: 19px;margin-right: 5px;"
                                                    th:class="${data.completed ? 'haofont  hao-icon-check-circle' : 'haofont hao-icon-yuan'}">

@@ -24,12 +24,12 @@
                         buttonUrl = '',
                         buttonTitle = '')}" ></div>
                 <div id="equipment" <?php /* if(${not #lists.isEmpty(groups)}) */ ?>>
-                    <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                    <th:block <?php /* loop */ ?>>
                         <div class="equipment-item">
                             <h2 class="equipment-item-title">[[${group.spec.displayName}]]</h2>
                             <div class="equipment-item-description">[[${group.spec.description}]]</div>
                             <div class="equipment-item-content" th:with="equipmentList = ${group.equipments}">
-                                <div class="equipment-item-content-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                                <div class="equipment-item-content-item" <?php /* loop */ ?>>
                                     <div class="equipment-item-content-item-cover">
                                         <img class="equipment-item-content-item-image"
                                              th:alt="${equipment.spec.displayName}"

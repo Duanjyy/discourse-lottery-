@@ -9,12 +9,12 @@
 
             <i class="back-home-button-icon haofont hao-icon-apps-fill" style="font-size: 1rem"></i>
             <div class="back-menu-list-groups">
-                <div class="back-menu-list-group" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                <div class="back-menu-list-group" <?php /* loop */ ?>>
                     <!-- 菜单必须有子项才会展示 -->
                     <th:block <?php /* if(${not #lists.isEmpty(menuItem.children)}) */ ?>>
                         <div class="back-menu-list-title" th:text="${menuItem.status.displayName}"></div>
                         <div class="back-menu-list">
-                            <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                            <th:block <?php /* loop */ ?>>
                                 <a class="back-menu-item" rel="external nofollow"
                                    th:target="${childMenu.spec.target?.value}" th:href="@{${childMenu.status.href}}">
                                     <!-- icon 预留 -->

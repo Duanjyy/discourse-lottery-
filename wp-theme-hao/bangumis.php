@@ -373,7 +373,7 @@
                     </div>
                     <div>
                         <div id="bangumi-item1" class="bangumi-hide">
-                            <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                            <th:block <?php /* loop */ ?>>
                                 <th:block th:replace="~{macro/bangumi-item :: bangumi-item(${bangumi.spec})}"/>
                             </th:block>
                             <div class="bangumi-pagination">
@@ -389,7 +389,7 @@
                             </div>
                         </div>
                         <div id="bangumi-item2" class="bangumi-show">
-                            <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                            <th:block <?php /* loop */ ?>>
                                 <th:block th:replace="~{macro/bangumi-item :: bangumi-item(${bangumi.spec})}"/>
                             </th:block>
                             <div class="bangumi-pagination">
@@ -405,7 +405,7 @@
                             </div>
                         </div>
                         <div id="bangumi-item3" class="bangumi-hide">
-                            <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                            <th:block <?php /* loop */ ?>>
                                 <th:block th:replace="~{macro/bangumi-item :: bangumi-item(${bangumi.spec})}"/>
                             </th:block>
                             <div class="bangumi-pagination">

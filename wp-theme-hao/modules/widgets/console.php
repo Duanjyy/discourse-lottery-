@@ -14,7 +14,7 @@
         <div class="aside-list">
           <th:block <?php /* if(${#strings.equals(theme.config.comments.use, 'commentWidget') }) */ ?>>
             <!-- BUG：由于当前的列出所有评论API无过滤功能，非文章页的评论无法查询到页面信息，所以非文章评论跳转至首页-->
-            <div class="aside-list-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <div class="aside-list-item" <?php /* loop */ ?>
                  th:with="page = ${comment.spec.subjectRef.kind == 'Post' ? postFinder.getByName(comment.spec.subjectRef.name) :
                   comment.spec.subjectRef.kind == 'SinglePage' && not #strings.contains('photos,links,moments', comment.spec.subjectRef.name) ? singlePageFinder.getByName(comment.spec.subjectRef.name) : null},
                   url = ${page == null? '/' : page.status.permalink + '#comment-' + comment.metadata.name}"
@@ -52,7 +52,7 @@
         </div>
         <div class="card-tag-cloud" th:with="tags = ${tagFinder.list(1,theme.config.sidebar.tagQuantity)}">
           <a style="font-size:1em;color:#d3d3d3"
-             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+             <?php /* loop */ ?>
              th:href="@{${tag.status.permalink}}">
             [[${tag.spec.displayName}]]<sup th:text="${tag.status.visiblePostCount}"></sup>
           </a>
@@ -62,8 +62,8 @@
       <div class="console-card history" onclick="heo.hideConsole()">
         <div class="item-headline"><i class="fas fa-archive"></i><span>文章</span></div>
         <ul class="card-archive-list" th:with="archives = ${postFinder.archives(1,0)}">
-          <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
-            <li class="card-archive-list-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+          <th:block <?php /* loop */ ?>>
+            <li class="card-archive-list-item" <?php /* loop */ ?>>
               <a class="card-archive-list-link" th:href="@{'/archives/'+${archive.year}+'/'+${month.month}}"
                  data-pjax-state="load"><span
                       class="card-archive-list-date">

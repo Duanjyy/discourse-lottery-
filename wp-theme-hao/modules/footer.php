@@ -10,7 +10,7 @@
     <!-- 社交链接，需要填入 href class title -->
     <div id="footer_deal">
         <th:block th:with="socialMedias = ${theme.config.footer.social_media.socialMediaLeft}">
-            <a th:class="${socialMedia.option_social_data == 'custom' ? 'custom_socials' : 'deal_link'}" rel="external nofollow" target="_blank" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <a th:class="${socialMedia.option_social_data == 'custom' ? 'custom_socials' : 'deal_link'}" rel="external nofollow" target="_blank" <?php /* loop */ ?>
                th:href="${socialMedia.url}" th:title="${socialMedia.name}">
                 <i <?php /* if(${socialMedia.option_social_data == 'icon'  || #strings.isEmpty(socialMedia.option_social_data)}) */ ?>
                    th:class="${socialMedia.icon}"></i>
@@ -23,7 +23,7 @@
              th:data-lazy-src="${ isLazyload ? img : ''}" title="返回顶部" onclick="btf.scrollToDest(0, 500)">
 
         <th:block th:with="socialMedias = ${theme.config.footer.social_media.socialMediaRight}">
-            <a th:class="${socialMedia.option_social_data == 'custom' ? 'custom_socials' : 'deal_link'}" rel="external nofollow" target="_blank" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <a th:class="${socialMedia.option_social_data == 'custom' ? 'custom_socials' : 'deal_link'}" rel="external nofollow" target="_blank" <?php /* loop */ ?>
                th:href="${socialMedia.url}" th:title="${socialMedia.name}">
                 <i <?php /* if(${socialMedia.option_social_data == 'icon' || #strings.isEmpty(socialMedia.option_social_data)}) */ ?>
                    th:class="${socialMedia.icon}"></i>
@@ -36,10 +36,10 @@
     <th:block <?php /* if(${not #strings.isEmpty(theme.config.footer.menu)}) */ ?>
               th:with="footMenu = ${menuFinder.getByName(theme.config.footer.menu)}">
         <div id="heo-footer" <?php /* if(${not #lists.isEmpty(footMenu.menuItems)}) */ ?>>
-            <div class="footer-group" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+            <div class="footer-group" <?php /* loop */ ?>>
                 <h3 class="footer-title" th:text="${menuItem.status.displayName}"></h3>
                 <div class="footer-links">
-                    <a class="footer-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                    <a class="footer-item" <?php /* loop */ ?>
                        th:href="@{${childMenu.status.href}}" th:target="${childMenu.spec.target?.value}"
                        th:text="${childMenu.status.displayName}">
                     </a>
@@ -73,7 +73,7 @@
     <p <?php /* if(${theme.config.footer.footerContent.style_one.bdageitem_enable && not #lists.isEmpty(theme.config.footer.footerContent.style_one.bdageitem)}) */ ?>
        th:with="bdageitem = ${theme.config.footer.footerContent.style_one.bdageitem}"
        id="ghbdages" style="width:60%;margin: 0 auto 0;">
-        <a class="github-badge" <?php if (have_posts()) : while (have_posts()) : the_post(); ?> target="_blank" th:href="@{${data.link}}"
+        <a class="github-badge" <?php /* loop */ ?> target="_blank" th:href="@{${data.link}}"
            style="margin-inline:5px" th:title="${data.message}">
             <img th:with=" img = @{${data.shields}}" th:src="${isLazyload ? '' : img}"
                  th:data-lazy-src="${ isLazyload ? img : ''}" th:alt="${data.message}" />

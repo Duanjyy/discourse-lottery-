@@ -179,7 +179,7 @@
             <div class="tags-group-wrapper"
                  <?php /* if(${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'techStack')}) */ ?>
                  th:with="techs = ${theme.config.top.BannerLeft.techStack}">
-                <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                <th:block <?php /* loop */ ?>>
                     <div class="tags-group-icon-pair" <?php /* if(${iterStat.odd}) */ ?>>
                         <div class="tags-group-icon" th:style="'background:' + ${techOdd.background}"
                              th:with="techOdd = ${techs.get(iterStat.index - 1)}">

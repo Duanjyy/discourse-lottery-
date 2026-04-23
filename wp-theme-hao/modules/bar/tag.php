@@ -8,7 +8,7 @@
         <th:block th:with="tags = ${tagFinder.listAll()}">
 
             <div class="category-bar-item"
-                 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                 <?php /* loop */ ?>
                  th:id="${tagItem.spec.displayName}">
                 <a th:href="@{${tagItem.status.permalink}}" th:text="${tagItem.spec.displayName}"></a>
             </div>

@@ -4,7 +4,7 @@
     <div class="item-headline"><i class="haofont hao-icon-folder-open"></i><span>分类</span></div>
     <div class="aside-list">
         <ul class="card-category-list">
-            <li class="card-category-list-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+            <li class="card-category-list-item" <?php /* loop */ ?>>
                 <a class="card-category-list-link" th:href="@{${category.status.permalink}}">
                         <span class="card-category-list-name" th:text="${category.spec.displayName}"
                               th:title="${category.spec.displayName}"></span>

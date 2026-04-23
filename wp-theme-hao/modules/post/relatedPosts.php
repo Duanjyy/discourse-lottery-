@@ -12,7 +12,7 @@ postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,'?') ? theme
         <!-- 六篇文章 -->
         <div <?php /* if(${#strings.equals(recommendQuantity, 'six')}) */ ?> class="relatedPosts-list">
             <!-- 建议阅读，这里可以自定义文章数量，然后遍历展示 -->
-            <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <th:block <?php /* loop */ ?>
                       <?php /* if(${not #strings.equals(post.spec.title, recommandPost.spec.title)}) */ ?>>
                 <div <?php /* if(${!containsTitle ? iterStat.index <6 : true}) */ ?>>
                     <a th:href="@{${recommandPost.status.permalink}}" th:title="${recommandPost.spec.title}">
@@ -32,7 +32,7 @@ postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,'?') ? theme
         </div>
         <!-- 两篇文章 -->
         <div <?php /* if(${#strings.equals(recommendQuantity, 'two')}) */ ?> class="relatedPosts-list">
-            <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <th:block <?php /* loop */ ?>
                       <?php /* if(${not #strings.equals(post.spec.title, recommandPost.spec.title)}) */ ?>>
                 <div <?php /* if(${!containsTitle ? iterStat.index <2 : true}) */ ?>>
                     <a th:href="@{${recommandPost.status.permalink}}" th:title="${recommandPost.spec.title}">

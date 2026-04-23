@@ -21,7 +21,7 @@
                 <div <?php /* if(${#strings.equals(theme.config.categories.use, 'default')}) */ ?> class="category-lists">
                     <div class="category-title is-center">分类 - <span class="category-amount">11</span></div>
                     <div class="tag-cloud-list is-center">
-                        <a style="font-size: 1em;" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                        <a style="font-size: 1em;" <?php /* loop */ ?>
                            th:href="@{${categoryItem.status.permalink}}" th:id="${categoryItem.spec.displayName}">
                             <span style="font-size: 22px;"
                                   class="tags-punctuation">[[${categoryItem.spec.displayName}]]</span>
@@ -33,7 +33,7 @@
                     <link rel="stylesheet" th:href="${assets_link + '/libs/no3d/no3d.css'}">
                     <div id="libCategories" >
                         <div id="lib-cards" class="container" >
-                            <a <?php if (have_posts()) : while (have_posts()) : the_post(); ?> th:href="@{${categoryItem.status.permalink}}" th:id="${categoryItem.spec.displayName}">
+                            <a <?php /* loop */ ?> th:href="@{${categoryItem.status.permalink}}" th:id="${categoryItem.spec.displayName}">
                                 <card th:data-image="${categoryItem.spec.cover}">
                                     <h1 slot="header">[[${categoryItem.spec.displayName}]]</h1>
                                     <p slot="content">[[${categoryItem.spec.description}]]</p>

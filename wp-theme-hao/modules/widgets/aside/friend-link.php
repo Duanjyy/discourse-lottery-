@@ -5,14 +5,14 @@
     <div class="card-friend-link-container"
          <?php /* if(${pluginFinder.available('PluginLinks')}) */ ?>
          th:with="groups = ${linkFinder.groupBy()}">
-        <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+        <th:block <?php /* loop */ ?>>
             <details <?php /* if(${#annotations.get(group, 'displayStyle') != 'deprecated' &&  not #strings.isEmpty(#annotations.get(group, 'displayStyle'))  && not #lists.isEmpty(group.links)}) */ ?>
                      class="card-friend-class-name">
                 <summary class="card-friend-class-desc" th:title="${#annotations.get(group, 'description')}">
                     <sapn>[[${group.spec.displayName}]]</sapn>
                     <sapn>[[${group.links.size}]]</sapn>
                 </summary>
-                <a <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                <a <?php /* loop */ ?>
                    class="card-friend-item online-friend-link" th:href="${link.spec.url}" th:title="${link.spec.displayName}"
                    target="_blank"><img class="no-lightbox card-friend-avatar"
 
@@ -31,7 +31,7 @@
                     <sapn>[[${group.spec.displayName}]]</sapn>
                     <sapn>[[${group.links.size}]]</sapn>
                 </summary>
-                <a <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                <a <?php /* loop */ ?>
                    class="card-friend-item offline-friend-link" th:href="${link.spec.url}" th:title="${link.spec.displayName}"
                    target="_blank"><img class="no-lightbox card-friend-avatar"
 

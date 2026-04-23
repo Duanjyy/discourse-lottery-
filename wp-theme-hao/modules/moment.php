@@ -20,7 +20,7 @@
     <th:block <?php /* if(${pluginFinder.available('PluginMoments')}) */ ?>>
         <div class="swiper-container swiper-no-swiping" id="bbtalk" tabindex="-1">
             <div class="swiper-wrapper" id="bber-talk" onclick="pjax.loadUrl('/moments')" <?php /* if(${momentFinder}) */ ?>>
-                <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?> th:with="content=${moment.spec.content}">
+                <th:block <?php /* loop */ ?> th:with="content=${moment.spec.content}">
                     <div class="li-style swiper-slide"
                          <?php /* if(${not #strings.isEmpty(content.raw)}) */ ?>
                          th:utext="${content.raw}">

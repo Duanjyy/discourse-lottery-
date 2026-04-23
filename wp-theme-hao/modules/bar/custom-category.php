@@ -5,9 +5,9 @@
             <a href="/">首页</a>
         </div>
 
-        <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+        <th:block <?php /* loop */ ?>>
             <div class="category-bar-item"
-                 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                 <?php /* loop */ ?>
                  th:id="${categoryItem.spec.displayName}">
                 <a th:href="@{${categoryItem.status.permalink}}" th:text="${categoryItem.spec.displayName}"></a>
             </div>

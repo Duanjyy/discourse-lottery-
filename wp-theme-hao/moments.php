@@ -27,7 +27,7 @@
                 <div id="bber">
                     <section class="timeline page-1">
                         <ul class="list" id="waterfall">
-                            <li class="item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                            <li class="item" <?php /* loop */ ?>
                                 th:with="content=${moment.spec.content}">
                                 <div class="bber-content">
                                     <div class="datacont" <?php /* if(${not #strings.isEmpty(content.html)}) */ ?>
@@ -36,7 +36,7 @@
                                     <th:block <?php /* if(${not #lists.isEmpty(content.medium)}) */ ?>>
                                         <div class="bber-container-img"
                                              <?php /* if(${#strings.contains(content.medium,'PHOTO')}) */ ?>>
-                                            <img <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                                            <img <?php /* loop */ ?>
                                                  <?php /* if(${momentItem.type.name == 'PHOTO'}) */ ?>
                                                  th:src="${isLazyload ? '' : momentItem.url}"
                                                  th:data-lazy-src="${ isLazyload ? momentItem.url : ''}" title="瞬间配图">
@@ -44,7 +44,7 @@
                                             <div class="bber-content-noimg"></div>
                                             <div class="bber-content-noimg"></div>
                                         </div>
-                                        <div <?php if (have_posts()) : while (have_posts()) : the_post(); ?> class="bber-music"
+                                        <div <?php /* loop */ ?> class="bber-music"
                                              <?php /* if(${momentItem.type.name == 'VIDEO'}) */ ?>>
                                             <video th:src="${momentItem.url}"></video>
                                         </div>

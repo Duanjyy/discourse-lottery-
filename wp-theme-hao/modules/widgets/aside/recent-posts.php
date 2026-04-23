@@ -3,7 +3,7 @@
     <div class="item-headline"><i class="haofont hao-icon-eicon_map-2-line1"></i><span>最近发布</span></div>
     <div class="aside-list">
         <!-- 最新文章，用户可以自定义展示数量 -->
-        <div class="aside-list-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+        <div class="aside-list-item" <?php /* loop */ ?>>
             <a class="thumbnail" th:href="@{<?php the_permalink(); ?>}" th:title="<?php the_title(); ?>">
                 <img th:alt="<?php the_title(); ?>"
                      th:with="img = ${#strings.isEmpty(post.spec.cover) ? postRandomImg+post.spec.title : thumbnail.gen(post.spec.cover, 's')}"

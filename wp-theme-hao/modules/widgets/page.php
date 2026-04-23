@@ -15,7 +15,7 @@
             <span class="space" <?php /* if(${pageInfo.page != 4}) */ ?>>…</span>
         </th:block>
 
-        <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+        <th:block <?php /* loop */ ?>>
             <span class="page-number current" <?php /* if(${pageInfo.page} == ${index}) */ ?> th:text="${pageInfo.page}"></span>
             <a class="page-number" th:unless="${pageInfo.page == index}"
                <?php /* if(${index > 0 && index <= pageInfo.totalPages}) */ ?>

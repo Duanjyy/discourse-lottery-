@@ -38,7 +38,7 @@
              <?php /* if(${not #lists.isEmpty(theme.config.sidebar.profile.socialMedia)}) */ ?>
              th:with="socialMedias = ${theme.config.sidebar.profile.socialMedia}">
 
-            <a class="social-icon" rel="external nofollow" target="_blank" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <a class="social-icon" rel="external nofollow" target="_blank" <?php /* loop */ ?>
                th:href="${socialMedia.url}" th:title="${socialMedia.name}">
                 <i th:class="${socialMedia.icon}"></i>
             </a>
@@ -167,7 +167,7 @@
                      <?php /* if(${not #lists.isEmpty(theme.config.sidebar.profile.socialMedia)}) */ ?>
                      th:with="socialMedias = ${theme.config.sidebar.profile.socialMedia}">
                     <a class="social-icon" rel="external nofollow" target="_blank"
-                       <?php if (have_posts()) : while (have_posts()) : the_post(); ?> th:href="${socialMedia.url}"
+                       <?php /* loop */ ?> th:href="${socialMedia.url}"
                        th:title="${socialMedia.name}">
                         <i th:class="${socialMedia.icon}"></i>
                     </a>

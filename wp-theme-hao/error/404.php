@@ -33,7 +33,7 @@
                 <div class="aside-list-group"
                      th:with='topGroupPosts = ${postFinder.list(1,6)},
                 postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,"?") ? theme.config.layout.postRandomImg+"&" : theme.config.layout.postRandomImg+"?"}'>
-                    <div <?php if (have_posts()) : while (have_posts()) : the_post(); ?> class="aside-list-item">
+                    <div <?php /* loop */ ?> class="aside-list-item">
                         <a class="thumbnail div_border"
                            th:href="@{<?php the_permalink(); ?>}"
                            th:title="<?php the_title(); ?>"><img

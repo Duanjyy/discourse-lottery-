@@ -67,7 +67,7 @@
         <div class="reward-list-all" <?php /* if(${not #lists.isEmpty(theme.config.aboutReward.reward_list)}) */ ?>
              th:with="authorRewardList = ${theme.config.aboutReward.reward_list}">
 
-            <div class="reward-list-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+            <div class="reward-list-item" <?php /* loop */ ?>>
                 <div <?php /* if(${not #strings.isEmpty(authorReward.avatar)}) */ ?>>
                     <div>
                         <div class="reward-list-item-avatar">
@@ -112,7 +112,7 @@
             <a href="https://afdian.com/a/carolcoral" target="_blank"><span class="sponar_afdian">爱发电</span></a>
             <div class="reward-list-all" <?php /* if(${not #lists.isEmpty(afdianFinder.listAllSponsor())}) */ ?>
                  th:with="authorRewardList = ${afdianFinder.listAllSponsor().data.list}">
-                <div class="reward-list-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                <div class="reward-list-item" <?php /* loop */ ?>>
                     <div <?php /* if(${not #strings.isEmpty(authorReward.user.avatar)}) */ ?>>
                         <div>
                             <div class="reward-list-item-avatar">

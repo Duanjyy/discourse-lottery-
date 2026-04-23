@@ -130,7 +130,7 @@
                                                      style="text-align:center;border-bottom:#ddd 1px solid;border-left:#ddd 1px solid;padding-bottom:20px;background-color:#eee;margin:15px 0;padding-left:20px;padding-right:20px;border-top:#ddd 1px solid;border-right:#ddd 1px solid;padding-top:20px"
                                                      th:with="message = ${theme.config.envelope_comment.message_list}">
 
-                                                    <div <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>[[${data}]]</div>
+                                                    <div <?php /* loop */ ?>>[[${data}]]</div>
 
                                                 </div>
                                                 <div class="bottomcontent" style="text-align:center;margin-top:40px">

@@ -32,7 +32,7 @@
             <div class="author-content-item-tips" th:text="${theme.config.about.game2.game2_tips}"></div>
             <div class="author-content-item-title" th:text="${theme.config.about.game2.game2_title}"></div>
             <div class="comic-box" >
-                <a  <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                <a  <?php /* loop */ ?>
                     class="comic-item"
                     th:href="${comic.url}"
                     rel="external nofollow noreferrer" target="_blank" th:title="${comic.title}" draggable="false">

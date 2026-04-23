@@ -3,7 +3,7 @@
      th:with='topGroupPosts = ${postFinder.list(1,6)},
     postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,"?") ? theme.config.layout.postRandomImg+"&" : theme.config.layout.postRandomImg+"?"}'>
     <div class="recent-post-group">
-        <div class="recent-post-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+        <div class="recent-post-item" <?php /* loop */ ?>
              <?php /* if(${#strings.equals(theme.config.top.BannerRight.recommendPost, 'latest')}) */ ?>>
 
             <div class="post_cover" th:classappend="${iter.index % 2 == 0 ? 'left_radius' : 'right_radius'}">
@@ -23,7 +23,7 @@
             </div>
         </div>
         <!-- 自定义的文章右上角的推荐文章 -->
-        <div class="recent-post-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+        <div class="recent-post-item" <?php /* loop */ ?>
              <?php /* if(${#strings.equals(theme.config.top.BannerRight.recommendPost, 'custom') && not #strings.isEmpty(cuscomPost.post) }) */ ?>>
             <th:block th:with="post = ${postFinder.getByName(cuscomPost.post)}">
                 <div class="post_cover" th:classappend="${iter.index % 2 == 0 ? 'left_radius' : 'right_radius'}">

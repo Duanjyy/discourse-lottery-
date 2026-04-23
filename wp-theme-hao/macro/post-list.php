@@ -7,7 +7,7 @@
                         ${theme.config.layout.post.postLocation} + ' ' +
                         (${iStat.even} ? 'even' : 'odd') + ' ' +
                         (${post.spec.pinned} ? 'pinned-post-item' : '')"
-             th:attr="onclick='pjax.loadUrl(\''+ @{<?php the_permalink(); ?>} +'\')'" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+             th:attr="onclick='pjax.loadUrl(\''+ @{<?php the_permalink(); ?>} +'\')'" <?php /* loop */ ?>>
 
             <div class="post_cover left_radius">
                 <a th:attr="title=<?php the_title(); ?>" th:href="@{<?php the_permalink(); ?>}">
@@ -22,7 +22,7 @@
                     <div class="recent-post-info-top-tips">
                         <!-- 类别非空时 -->
                         <th:block <?php /* if(${not #lists.isEmpty(post.categories)}) */ ?>>
-                            <span <?php if (have_posts()) : while (have_posts()) : the_post(); ?> th:href="@{${category.status.permalink}}"
+                            <span <?php /* loop */ ?> th:href="@{${category.status.permalink}}"
                                   th:text="${category.spec.displayName}" th:title="${category.spec.displayName}"
                                   class="original"></span>
                         </th:block>
@@ -40,7 +40,7 @@
                     <th:block <?php /* if(${not #lists.isEmpty(post.tags)}) */ ?>>
                         <span class="article-meta tags">
                             <a class="article-meta__tags" event.cancelbubble onclick="window.event.cancelBubble=!0"
-                               <?php if (have_posts()) : while (have_posts()) : the_post(); ?> th:href="@{${tag.status.permalink}}"
+                               <?php /* loop */ ?> th:href="@{${tag.status.permalink}}"
                                th:title="${tag.spec.displayName}">
                                 <span class="tags-punctuation">[[${#strings.trim(tag.spec.displayName)}]]</span>
                             </a>

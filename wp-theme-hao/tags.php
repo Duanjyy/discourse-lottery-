@@ -19,7 +19,7 @@
             <div id="page"><h1 class="page-title" style="display: inline;">标签</h1>
                 <div class="tag-cloud-title is-center">标签 - <span class="tag-cloud-amount">0</span></div>
                 <div class="tag-cloud-list is-center">
-                    <a <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                    <a <?php /* loop */ ?>
                        th:href="@{${tagItem.status.permalink}}"
                        th:id="${tagItem.spec.displayName}" th:style="'font-size: 1em; color:' + ${tagItem.spec.color} ">
                         <span class="tags-punctuation">[[${tagItem.spec.displayName}]]</span>

@@ -26,7 +26,7 @@
                         buttonTitle = '')}"></div>
                 <div id="comments-page">
                     <th:block <?php /* if(${#strings.equals(theme.config.comments.use, 'commentWidget') }) */ ?>
-                              <?php if (have_posts()) : while (have_posts()) : the_post(); ?> th:with="page = ${comment.spec.subjectRef.kind == 'Post' ? postFinder.getByName(comment.spec.subjectRef.name) :
+                              <?php /* loop */ ?> th:with="page = ${comment.spec.subjectRef.kind == 'Post' ? postFinder.getByName(comment.spec.subjectRef.name) :
                         comment.spec.subjectRef.kind == 'SinglePage' && not #strings.contains('photos,links,moments', comment.spec.subjectRef.name) ? singlePageFinder.getByName(comment.spec.subjectRef.name) : null},
                         url = ${page == null? '/' : page.status.permalink + '#comment-' + comment.metadata.name},
                         article = ${page == null? '该文章/页面不存在' : page.spec.title}">

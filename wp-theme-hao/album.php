@@ -27,7 +27,7 @@
                         buttonTitle = '')}"></div>
 
                     <div class="card-album">
-                        <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                        <th:block <?php /* loop */ ?>>
                             <div class="card" th:onclick="pjax.loadUrl([['/photos?group='+${group.metadata.name}]])">
                                 <img class="card_cover"
                                      th:src="${isLazyload ? '' : #annotations.get(group, 'cover')}"
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                         </th:block>
-                        <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                        <th:block <?php /* loop */ ?>>
                             <div class="album-content-nocover"></div>
                         </th:block>
                     </div>
@@ -47,7 +47,7 @@
                 <div class="gallery-groups" <?php /* if(${#strings.equals(theme.config.photos.photosStyle, 'one')}) */ ?>>
                     <h2 style="text-align:center;">[[${theme.config.photos.bigTitle}]]</h2>
                     <div class="gallery-group-main">
-                        <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                        <th:block <?php /* loop */ ?>>
                             <figure class="gallery-group no-lightbox">
                                 <img class="gallery-group-img no-lightbox"
                                      th:src="${isLazyload ? '' : #annotations.get(group, 'cover')}"

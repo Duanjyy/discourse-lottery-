@@ -26,7 +26,7 @@
                         <div class="author-tag-left"
                              <?php /* if(${not #lists.isEmpty(theme.config.about.author_info_left_tags)}) */ ?>
                              th:with="authorTags = ${theme.config.about.author_info_left_tags}">
-                            <span class="author-tag" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                            <span class="author-tag" <?php /* loop */ ?>
                                   th:text="${authorTag}"></span>
                         </div>
                         <div class="author-img">
@@ -42,7 +42,7 @@
                         <div class="author-tag-right"
                              <?php /* if(${not #lists.isEmpty(theme.config.about.author_info_right_tags)}) */ ?>
                              th:with="authorTags = ${theme.config.about.author_info_right_tags}">
-                            <span class="author-tag" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                            <span class="author-tag" <?php /* loop */ ?>
                                   th:text="${authorTag}"></span>
                         </div>
                     </div>

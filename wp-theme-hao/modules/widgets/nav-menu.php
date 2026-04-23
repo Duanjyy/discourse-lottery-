@@ -4,7 +4,7 @@
         <!-- 子菜单 -->
         <div class="menus_item_child"
              th:classappend="${#annotations.get(menuItem,'isVertical')=='1'?'vertical_nav':''}">
-            <div class="recursion_menus_item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+            <div class="recursion_menus_item" <?php /* loop */ ?>>
                 <a class="site-page child" th:target="${childMenu.spec.target?.value}"
                    th:href="@{${childMenu.status.href}}">
                     <th:block <?php /* if(${theme.config.nav.menus.enable_ali_iconfont_symbol_header}) */ ?>>
@@ -32,7 +32,7 @@
     <div class="menus_items">
         
         <!-- 第一层仅展示使用，不做跳转 -->
-        <div class="menus_item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+        <div class="menus_item" <?php /* loop */ ?>>
             
             <!-- javascript:void(0);" -->
             <a class="site-page" rel="external nofollow"

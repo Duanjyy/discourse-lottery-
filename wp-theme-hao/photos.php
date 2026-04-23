@@ -18,7 +18,7 @@
         <main class="layout hide-aside" id="content-inner">
             <div id="page">
                 <th:block <?php /* if(${#strings.equals(theme.config.photos.photosStyle, 'default')}) */ ?>>
-                    <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                    <th:block <?php /* loop */ ?>>
                         <th:block
                                 <?php /* if(${#strings.equals(group.metadata.name, param.group) && not #strings.isEmpty(param.group)}) */ ?>
                                 th:with="description = ${#annotations.get(group, 'description')},
@@ -66,7 +66,7 @@
                         <section class="page-1 loadings">
                             <div class="type-gallery ">
                                 <div class="gallery">
-                                    <div class="fj-gallery-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                                    <div class="fj-gallery-item" <?php /* loop */ ?>>
                                         <div <?php /* if(${theme.config.photos.tagEnable}) */ ?> class="tag-address">
                                             [[${photo.spec.displayName}]]</div>
                                         <img th:src="${photo.spec.url}" th:alt="${photo.spec.description}"
@@ -84,7 +84,7 @@
                 </th:block>
 
                 <div class="gallery-groups" <?php /* if(${#strings.equals(theme.config.photos.photosStyle, 'one')}) */ ?>>
-                    <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                    <th:block <?php /* loop */ ?>>
                         <h1 style="margin: 8px 0px 20px" <?php /* if(${#strings.equals(group.metadata.name, param.group) && not #strings.isEmpty(param.group) }) */ ?>>
                             [[${group.spec.displayName}]]
                         </h1>
@@ -96,7 +96,7 @@
                         <section class="page-1 loadings">
                             <div class="type-gallery ">
                                 <div class="gallery">
-                                    <div class="fj-gallery-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                                    <div class="fj-gallery-item" <?php /* loop */ ?>>
                                         <div <?php /* if(${theme.config.photos.tagEnable}) */ ?> class="tag-address">
                                             [[${photo.spec.displayName}]]</div>
                                         <img th:src="${photo.spec.url}" th:alt="${photo.spec.description}"

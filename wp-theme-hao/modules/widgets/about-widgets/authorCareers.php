@@ -148,7 +148,7 @@
                     <div class="tags-group-wrapper"
                          <?php /* if(${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'techStack')}) */ ?>
                          th:with="techs = ${theme.config.top.BannerLeft.techStack}">
-                        <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                        <th:block <?php /* loop */ ?>>
                             <div class="tags-group-icon-pair" <?php /* if(${iterStat.odd}) */ ?>>
                                 <div class="tags-group-icon"
                                      th:style="'background:' + ${techOdd.background}"
@@ -279,7 +279,7 @@
                 <div class="skills-list"
                      <?php /* if(${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'techStack')}) */ ?>
                      th:with="techs = ${theme.config.top.BannerLeft.techStack}">
-                    <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                    <th:block <?php /* loop */ ?>>
                         <div class="skill-info">
                             <div class="skill-icon" th:style="'background:' + ${tech.background}">
                                 <img th:src="@{${tech.url}}" th:title="${tech.name}">
@@ -302,7 +302,7 @@
             <div class="careers-group"
                  <?php /* if(${not #lists.isEmpty(theme.config.about.authorCareers.authorCareersTags)}) */ ?>
                  th:with="careersTags = ${theme.config.about.authorCareers.authorCareersTags}">
-                <div class="careers-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                <div class="careers-item" <?php /* loop */ ?>>
                     <div class="circle" th:style="'background:' + ${tag.background}"></div>
                     <div class="name" th:text="${tag.desc}"></div>
                 </div>

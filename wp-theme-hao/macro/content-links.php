@@ -24,8 +24,8 @@
             </div>
             <div class="tags-group-all nowrapMove">
                 <div class="tags-group-wrapper">
-                    <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
-                        <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?> <?php /* if(${group.links.size > 2}) */ ?>>
+                    <th:block <?php /* loop */ ?>>
+                        <th:block <?php /* loop */ ?> <?php /* if(${group.links.size > 2}) */ ?>>
                             <div class="tags-group-icon-pair" <?php /* if(${iterStat.even}) */ ?>>
                                 <a class="tags-group-icon" target="_blank" th:href="${linkOdd.spec.url}"
                                    th:title="${linkOdd.spec.displayName}"
@@ -54,7 +54,7 @@
 
         <div class="flink" id="article-container">
 
-            <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+            <th:block <?php /* loop */ ?>>
 
                 <h2 <?php /* if(${not #lists.isEmpty(group.spec.displayName)}) */ ?>>
                     <a class="headerlink" th:href="'#'+${group.spec.displayName}+'-'+${group.links.size}"
@@ -68,7 +68,7 @@
                 <div <?php /* if(${#strings.equals(#annotations.get(group, 'displayStyle'),'beautify') && not #lists.isEmpty(group.links)}) */ ?>
                      class="site-card-group">
 
-                    <div class="site-card" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                    <div class="site-card" <?php /* loop */ ?>>
                         <span <?php /* if(${not #strings.isEmpty(#annotations.get(link, 'label'))}) */ ?>
                               th:style="'background-color:' + ${#annotations.get(link,'labelColor')}"
                               class="site-card-tag">[[${#annotations.get(link, 'label')}]]</span>
@@ -102,7 +102,7 @@
 
                 <div class="flink-list"
                      <?php /* if(${#strings.equals(#annotations.get(group, 'displayStyle'),'default') && not #lists.isEmpty(group.links)}) */ ?>>
-                    <div class="flink-list-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                    <div class="flink-list-item" <?php /* loop */ ?>>
                         <span <?php /* if(${not #strings.isEmpty(#annotations.get(link, 'label'))}) */ ?>
                               th:style="'background-color:' + ${#annotations.get(link,'labelColor')}"
                               class="site-card-tag">[[${#annotations.get(link, 'label')}]]</span>
@@ -126,7 +126,7 @@
 
                 <div class="flink-list mini"
                      <?php /* if(${#strings.equals(#annotations.get(group, 'displayStyle'),'deprecated') && not #lists.isEmpty(group.links)}) */ ?>>
-                    <div class="flink-list-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                    <div class="flink-list-item" <?php /* loop */ ?>>
                         <a class="cf-friends-link" rel="external nofollow" target="_blank" th:href="${link.spec.url}"
                            th:title="${link.spec.displayName}">
                             <img class="flink-avatar cf-friends-avatar"

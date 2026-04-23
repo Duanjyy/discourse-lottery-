@@ -8,7 +8,7 @@
         <th:block th:with="customUrls = ${theme.config.layout.navs.navCustomUrl}">
 
             <div class="category-bar-item"
-                 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                 <?php /* loop */ ?>
                  th:id="${customUrlItem.title}">
                 <a th:href="@{${customUrlItem.url}}" th:text="${customUrlItem.title}"></a>
             </div>

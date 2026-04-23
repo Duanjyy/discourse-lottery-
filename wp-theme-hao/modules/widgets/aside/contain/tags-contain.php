@@ -4,7 +4,7 @@
 
     <div class="item-headline"></div>
     <div class="card-tag-cloud">
-        <a class="tag-item" style="font-size:1em" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+        <a class="tag-item" style="font-size:1em" <?php /* loop */ ?>
            th:href="@{${tag.status.permalink}}"
            th:title="${tag.spec.displayName}">
             <!-- 角标 -->

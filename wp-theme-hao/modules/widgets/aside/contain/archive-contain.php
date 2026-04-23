@@ -5,9 +5,9 @@
     <div  class="item-headline"><a class="card-more-btn" href="/archives/" title="查看更多" data-pjax-state=""></a></div>
     <ul  class="card-archive-list"
          th:with="archives = ${postFinder.archives(1,0)}, archivesQuantity = ${#conversions.convert(theme.config.sidebar.archivesQuantity, 'java.lang.Integer')}">
-        <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+        <th:block <?php /* loop */ ?>>
             <li class="card-archive-list-item"
-                <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                <?php /* loop */ ?>
             ><a
                     class="card-archive-list-link" th:href="@{'/archives/'+${archive.year}+'/'+${month.month}}"
                     data-pjax-state=""><span

@@ -18,13 +18,13 @@
             <!-- archive -->
             <div id="archive">
                 <div class="article-sort-title">文章<sup>[[${siteStatsFinder.getStats().post}]]</sup></div>
-                <div class="article-sort" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                <div class="article-sort" <?php /* loop */ ?>
                      th:with='postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,"?") ? theme.config.layout.postRandomImg+"&" : theme.config.layout.postRandomImg+"?"}'>
                     <div class="article-sort-item year" th:text="${archive.year}"></div>
-                    <div class="article-sort" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                    <div class="article-sort" <?php /* loop */ ?>>
                         <!-- 月份没有样式所以不显示 -->
                         <!-- <div class="article-sort-item" th:text="${month.month}"></div> -->
-                        <div class="article-sort-item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                        <div class="article-sort-item" <?php /* loop */ ?>>
                             <a class="article-sort-item-img" th:href="@{<?php the_permalink(); ?>}"
                                th:title="<?php the_title(); ?>">
                                 <img th:alt="<?php the_title(); ?>"
@@ -43,7 +43,7 @@
                                    th:title="<?php the_title(); ?>"></a>
                                 <div class="article-sort-item-tags">
                                     <a class="article-meta__tags"
-                                       <?php if (have_posts()) : while (have_posts()) : the_post(); ?> th:href="@{${tag.status.permalink}}">
+                                       <?php /* loop */ ?> th:href="@{${tag.status.permalink}}">
                                         <span class="tags-punctuation">[[${tag.spec.displayName}]]</span>
                                     </a>
                                     <span class="article-meta__link">•</span>

@@ -13,13 +13,13 @@
         <th:block <?php /* if(${not #strings.isEmpty(theme.config.nav.leftMenu) && theme.config.nav.menus.phone_leftMenu}) */ ?>
                   th:with="leftMenu = ${menuFinder.getByName(theme.config.nav.leftMenu)}">
             <div class="back-menu-list-groups">
-                <div class="back-menu-list-group" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                <div class="back-menu-list-group" <?php /* loop */ ?>>
 
                     <th:block <?php /* if(${not #lists.isEmpty(menuItem.children)}) */ ?>>
                         <!-- 菜单必须有子项才会展示 -->
                         <div class="back-menu-list-title" th:text="${menuItem.status.displayName}"></div>
                         <div class="back-menu-list">
-                            <th:block <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                            <th:block <?php /* loop */ ?>>
                                 <a class="back-menu-item" rel="external nofollow"
                                    target="_blank" th:href="@{${childMenu.status.href}}">
                                     <!-- icon -->
@@ -39,14 +39,14 @@
         <th:block <?php /* if(${not #lists.isEmpty(menuFinder.getPrimary().menuItems) && theme.config.nav.menus.phone_menu}) */ ?>
         >
             <div class="menus_items">
-                <div class="menus_item" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                <div class="menus_item" <?php /* loop */ ?>>
                     <th:block <?php /* if(${not #lists.isEmpty(menuItem.children)}) */ ?>>
                         <a class="site-page" href="javascript:void(0);" rel="external nofollow">
                             <span th:text="${menuItem.status.displayName}"></span>
                         </a>
                         <th:block <?php /* if(${not #lists.isEmpty(menuItem.children)}) */ ?>>
                             <ul class="menus_item_child">
-                                <li <?php if (have_posts()) : while (have_posts()) : the_post(); ?>>
+                                <li <?php /* loop */ ?>>
                                     <a class="site-page child" th:href="@{${childMenu.status.href}}">
                                         <th:block <?php /* if(${!theme.config.nav.menus.enable_ali_iconfont_symbol_header}) */ ?>>
                                             <i <?php /* if(${!#strings.isEmpty(#annotations.getOrDefault(childMenu, 'icon', ''))}) */ ?>
@@ -71,7 +71,7 @@
              th:with="tags = ${tagFinder.list(1,theme.config.sidebar.tagQuantity)}">
             <div class="item-headline"></div>
             <div class="card-tag-cloud">
-                <a class="tag-item" style="font-size:1em" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                <a class="tag-item" style="font-size:1em" <?php /* loop */ ?>
                    th:href="@{${tag.status.permalink}}"
                    th:title="${tag.spec.displayName}">
                     <!-- 角标 -->

@@ -8,7 +8,7 @@
         <th:block th:with="categories = ${categoryFinder.listAll()}">
 
             <div class="category-bar-item"
-                 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                 <?php /* loop */ ?>
                  th:id="${categoryItem.spec.displayName}">
                 <a th:href="@{${categoryItem.status.permalink}}" th:text="${categoryItem.spec.displayName}"></a>
             </div>

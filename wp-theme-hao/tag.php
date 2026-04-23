@@ -19,7 +19,7 @@
                 <div id="tag-page-tags" th:with="tags = ${tagFinder.listAll()}">
                     <a style="font-size:1em;color:#3c228c"
                        th:classappend="${tag.metadata.name == tagItem.metadata.name} ? 'select'"
-                       <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                       <?php /* loop */ ?>
                        th:href="@{${tagItem.status.permalink}}"
                        th:id="${tagItem.spec.slug}">
                         <span class="tags-punctuation">[[${tagItem.spec.displayName}]]</span>

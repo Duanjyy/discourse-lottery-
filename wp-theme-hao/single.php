@@ -38,7 +38,7 @@
                                 not #strings.isEmpty(theme.config.post.copyrights.originalUrl) ? theme.config.post.copyrights.reprintUrl : '#'}}"
                             >转载</a>
                         </th:block>
-                        <span class="post-meta-categories" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                        <span class="post-meta-categories" <?php /* loop */ ?>
                               <?php /* if(${not #lists.isEmpty(post.categories)}) */ ?>>
                             <a class="post-meta-categories" th:href="@{${category.status.permalink}}"
                                th:text="${category.spec.displayName}" th:title="${category.spec.displayName}">
@@ -46,7 +46,7 @@
                         </span>
                         <div class="tag_share" <?php /* if(${not #lists.isEmpty(post.tags)}) */ ?>>
                             <div class="post-meta__tag-list">
-                                <a class="post-meta__tags" <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+                                <a class="post-meta__tags" <?php /* loop */ ?>
                                    th:href="@{${tag.status.permalink}}"
                                    th:title="${tag.spec.displayName}">
                                     <span class="tags-name tags-punctuation">[[${tag.spec.displayName}]]</span>
