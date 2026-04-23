@@ -13,7 +13,7 @@
             <div id="page">
                 <th:block />
 
-                <hr <?php /* if() */ ?> />
+                <hr <?php /* if() */ ?>
                 <!--/* 评论组件 */-->
                 <th:block/>
                 <style>

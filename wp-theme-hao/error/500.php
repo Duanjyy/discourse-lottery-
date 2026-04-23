@@ -39,7 +39,7 @@
                                 th:src=''></a>
                         <div class="content">
                             <a class="title" href="<?php echo esc_url("<?php the_permalink(); ?>"); ?>"
-                               data-pjax-state="">[[<?php the_title(); ?>]]</a>
+                               data-pjax-state=""></a>
                             <!-- <time datetime="2023-06-08T04:08:22.000Z" title="创建 2023-06-08 12:08:22">2023-06-08</time> -->
                         </div>
                     </div>

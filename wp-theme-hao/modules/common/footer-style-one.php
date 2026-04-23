@@ -1,4 +1,4 @@
-<script <?php /* if(${theme.config.footer.footerContent.style_one.runtime_enable}) */ ?> async="async">(function () {
+<script async="async">(function () {
     var grt = new Date("//<?php echo get_theme_mod("hao_siteStartTime", "2023"); ?> 00:00:00"); //设置网站上线时间
     var now = new Date();
     var dnum;
@@ -43,12 +43,12 @@
         let description = "";
         if (nowHour < 18 && nowHour >= 9) {
             // 如果是上班时间
-            img = "[(${theme.config.footer.footerContent.style_one.work_img})]";
-            description = "[(${theme.config.footer.footerContent.style_one.work_description})]";
+            img = "";
+            description = "";
         } else {
             // 如果是下班时间
-            img = "[(${theme.config.footer.footerContent.style_one.offduty_img})]";
-            description = "[(${theme.config.footer.footerContent.style_one.offduty_description})]";
+            img = "";
+            description = "";
         }
         if (document.getElementById("workboard")) {
             currentTimeHtml =  `<img class="workSituationImg boardsign" src="${img}" alt="${description}" title="${description}">

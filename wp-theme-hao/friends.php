@@ -137,7 +137,7 @@
         </main>
 
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?> />
+        <footer <?php get_template_part("modules/footer"); ?>
 
         <!-- 资源检查和动态加载脚本 -->
         <script data-pjax>
@@ -223,8 +223,8 @@
 
                 // 加载所有必需的资源
                 loadRequiredResources: async function () {
-                    const cssPath = /*[[@{/assets/css/fmoments.css}]]*/ '/assets/css/fmoments.css';
-                    const jsPath = /*[[@{/assets/js/fmoments.js}]]*/ '/assets/js/fmoments.js';
+                    const cssPath = /**/ '/assets/css/fmoments.css';
+                    const jsPath = /**/ '/assets/js/fmoments.js';
 
                     try {
                         // console.log('Checking and loading required resources...');

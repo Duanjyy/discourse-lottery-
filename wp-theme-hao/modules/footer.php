@@ -51,14 +51,11 @@
     <!-- 底部 banner -->
     <halo:footer />
 
-    <div class="copyright"
-         <?php /* if(${not #strings.isEmpty(theme.config.basics.siteStartTime) && theme.config.footer.footerContent.style_one.owner_enable}) */ ?>>
-        ©<?php echo get_theme_mod("hao_siteStartTime", "2023"); ?> -  By [[<?php bloginfo("name"); ?>]]
+    
+    <div class="copyright">
+        ©<?php echo get_theme_mod("hao_siteStartTime", "2023"); ?> - <?php echo date("Y"); ?> By <?php bloginfo("name"); ?>
     </div>
-    <div class="copyright"
-         <?php /* if(${#strings.isEmpty(theme.config.basics.siteStartTime) && theme.config.footer.footerContent.style_one.owner_enable}) */ ?>>
-        ©<?php echo date("Y"); ?> By [[<?php bloginfo("name"); ?>]]
-    </div>
+    
     <div <?php /* if(${theme.config.footer.footerContent.style_one.runtime_enable}) */ ?> id="workboard"></div>
     <p <?php /* if(${theme.config.footer.footerContent.style_one.bdageitem_enable && not #lists.isEmpty(theme.config.footer.footerContent.style_one.bdageitem)}) */ ?>
        id="ghbdages" style="width:60%;margin: 0 auto 0;">
@@ -100,84 +97,28 @@
                         <th:block <?php /* if(${#strings.isEmpty(theme.config.basics.siteStartTime)}) */ ?>>
                             ©<?php echo date("Y"); ?>
                         </th:block>
-                        By <a class="footer-banner-link" href="/" target="_blank">[[<?php bloginfo("name"); ?>]]</a>
+                        By <a class="footer-banner-link" href="/" target="_blank"><?php bloginfo("name"); ?></a>
                     </div>
                 </div>
             </div>
+            
             <div class="footer-banner-right">
-                
-                <!-- 又拍云 -->
-                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'upyun_cloud'}) */ ?>
-                   class="footer-banner-link cloud" href="https://www.upyun.com/"
-                   rel="noopener external nofollow noreferrer noopener"
-                   target="_blank">
+                <a class="footer-banner-link cloud" href="https://www.aliyun.com/" rel="noopener external nofollow noreferrer noopener" target="_blank">
                     <span>本网站由</span>&nbsp;&nbsp;
-                    <img alt="upyun" class="cloud-logo" />
+                    <img alt="aliyun" src="<?php echo get_template_directory_uri(); ?>/assets/images/footer/aliyun.png" class="cloud-logo" />
                     &nbsp;&nbsp;<span>提供CDN加速/云存储服务</span>
                 </a>
-                <!-- 阿里云 -->
-                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'aliyun_cloud'}) */ ?>
-                   class="footer-banner-link cloud" href="https://www.aliyun.com/"
-                   rel="noopener external nofollow noreferrer noopener"
-                   target="_blank">
-                    <span>本网站由</span>&nbsp;&nbsp;
-                    <img alt="aliyun_cloud" class="cloud-logo" />
-                    &nbsp;&nbsp;<span>提供CDN加速/云存储服务</span>
-                </a>
-                <!-- 腾讯云 -->
-                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'tencent_cloud'}) */ ?>
-                   class="footer-banner-link cloud" href="https://cloud.tencent.com/"
-                   rel="noopener external nofollow noreferrer noopener"
-                   target="_blank">
-                    <span>本网站由</span>&nbsp;&nbsp;
-                    <img alt="tencent_cloud" class="cloud-logo" />
-                    &nbsp;&nbsp;<span>提供CDN加速/云存储服务</span>
-                </a>
-                <!-- 华为云 -->
-                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'huawei_cloud'}) */ ?>
-                   class="footer-banner-link cloud" href="https://www.huaweicloud.com/"
-                   rel="noopener external nofollow noreferrer noopener"
-                   target="_blank">
-                    <span>本网站由</span>&nbsp;&nbsp;
-                    <img alt="huawei_cloud" class="cloud-logo" />
-                    &nbsp;&nbsp;<span>提供CDN加速/云存储服务</span>
-                </a>
-                <!-- 自定义云服务信息 -->
-                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.yunzhichi && theme.config.footer.footerContent.default_enable_group.yunzhichi_list == 'custom_cloud' && not #strings.isEmpty(theme.config.footer.footerContent.default_enable_group.yunzhichi_url)}) */ ?>
-                   class="footer-banner-link cloud"
-                   rel="noopener external nofollow noreferrer noopener"
-                   target="_blank">
-                    <span>本网站由</span>&nbsp;&nbsp;
-                    <img alt="custom_cloud" class="cloud-logo"/>
-                    &nbsp;&nbsp;<span>提供CDN加速/云存储服务</span>
-                </a>
-                
-                <!-- 订阅 需要 RSS 插件支持 -->
-                <a class="footer-banner-link" href="/rss.xml" <?php /* if(${pluginFinder.available('PluginFeed')} and ${theme.config.footer.footerContent.default_enable_group.dingyue}) */ ?>>订阅</a>
-                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.zhuti}) */ ?> class="footer-banner-link" href="https://github.com/liuzhihang/halo-theme-hao">主题</a>
-                <a <?php /* if(${theme.config.footer.footerContent.default_enable_group.about}) */ ?> class="footer-banner-link" href="/about">关于</a>
-                <a <?php /* if(${not #strings.isEmpty(theme.config.basics.icp) && theme.config.footer.footerContent.default_enable_group.icp_icon}) */ ?>
-                   class="footer-banner-link" href="https://beian.miit.gov.cn/#/Integrated/index"
-                   rel="noopener external nofollow noreferrer noopener"
-                   target="_blank">
-                    <span <?php /* if(${not #strings.startsWith(theme.config.basics.icp, 'http')}) */ ?>></span>
-                    <img <?php /* if(${#strings.startsWith(theme.config.basics.icp, 'http')}) */ ?> alt="icp"/>
-                </a>
-                <a <?php /* if(${not #strings.isEmpty(theme.config.basics.gongan) && theme.config.footer.footerContent.default_enable_group.gongwangan}) */ ?>
-                   class="footer-banner-link" href="http://www.beian.gov.cn/portal/registerSystemInfo"
-                   rel="noopener external nofollow noreferrer noopener"
-                   target="_blank">
-                    <span <?php /* if(${not #strings.startsWith(theme.config.basics.gongan, 'http')}) */ ?>></span>
-                    <img <?php /* if(${#strings.startsWith(theme.config.basics.gongan, 'http')}) */ ?> alt="gongan"/>
-                </a>
-                <a class="footer-banner-link cc"
-                   <?php /* if(${not #strings.isEmpty(theme.config.basics.copyrightAgreement) && theme.config.footer.footerContent.default_enable_group.yingsi}) */ ?> title="cc协议">
+                <a class="footer-banner-link" href="/rss.xml">订阅</a>
+                <a class="footer-banner-link" href="https://github.com/liuzhihang/halo-theme-hao">主题</a>
+                <a class="footer-banner-link" href="/about">关于</a>
+                <a class="footer-banner-link cc" title="cc协议">
                     <i class="haofont hao-icon-copyright-line"></i>
                     <i class="haofont hao-icon-creative-commons-by-line"></i>
                     <i class="haofont hao-icon-creative-commons-nc-line"></i>
                     <i class="haofont hao-icon-creative-commons-nd-line"></i>
                 </a>
             </div>
+    
         </div>
     </div>
 

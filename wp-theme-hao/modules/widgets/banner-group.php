@@ -4,7 +4,7 @@
         <div class="tags-group-all">
             <!--  banners 使用默认值-->
             <div class="tags-group-wrapper"
-                 <?php /* if() */ ?>>
+                 >
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#989bf8">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/AfterEffect.png"
@@ -149,9 +149,9 @@
             
             <!--  banners 使用默认值-->
             <div class="tags-group-wrapper"
-                 <?php /* if() */ ?>>
+                 >
                 <th:block <?php /* loop */ ?>>
-                    <div class="tags-group-icon-pair" <?php /* if() */ ?>>
+                    <div class="tags-group-icon-pair" >
                         <div class="tags-group-icon" style="'background:' + ">
                             <img>
                         </div>
@@ -164,23 +164,23 @@
             </div>
         </div>
         <div class="banners-title">
-            <th:block <?php /* if() */ ?>></th:block>
+            <th:block ></th:block>
             <div class="banners-title-small"
-                 <?php /* if() */ ?>></div>
+                 ></div>
         </div>
-        <div class="banners-link" <?php /* if() */ ?>>
-            <div <?php /* if() */ ?>>
+        <div class="banners-link" >
+            <div >
                 <a class="banners-link-btn blb-hot">
-                    <i <?php /* if() */ ?>></i>
-                    <img <?php /* if() */ ?>
+                    <i ></i>
+                    <img 
                          alt="icon"/>
                     <div class="banners-link-title"></div>
                 </a>
             </div>
-            <div <?php /* if() */ ?>>
+            <div >
                 <a class="banners-link-btn blb-top">
-                    <i <?php /* if() */ ?>></i>
-                    <img <?php /* if() */ ?>
+                    <i ></i>
+                    <img 
                          alt="icon"/>
                     <div class="banners-link-title"></div>
                 </a>
@@ -190,27 +190,27 @@
     </div>
     
     <!-- category -->
-    <div class="categoryGroup" <?php /* if() */ ?>>
-        <th:block <?php /* if() */ ?>>
-            <div class="categoryItem" <?php /* if() */ ?>>
+    <div class="categoryGroup" >
+        <th:block >
+            <div class="categoryItem" >
                 <a class="categoryButton CB1 bikan">
                     <span class="categoryButtonText"></span>
-                    <i <?php /* if() */ ?>></i>
-                    <img <?php /* if() */ ?>
+                    <i ></i>
+                    <img 
                          alt="icon"/>
                 </a>
             </div>
-            <div class="categoryItem" <?php /* if() */ ?>>
+            <div class="categoryItem" >
                 <a class="categoryButton remen">
                     <span class="categoryButtonText"></span>
-                    <i <?php /* if() */ ?>></i>
-                    <img <?php /* if() */ ?>
+                    <i ></i>
+                    <img 
                          alt="icon"/>
                 </a>
             </div>
         </th:block>
     </div>
-    <th:block <?php /* if() */ ?>>
+    <th:block >
         <style>
             a.categoryButton.bikan {
                 background: linear-gradient(to right, , );
@@ -236,7 +236,7 @@
         </style>
     
     </th:block>
-    <th:block <?php /* if() */ ?>>
+    <th:block >
         <style>
             a.categoryButton.remen {
                 background: linear-gradient(to right, , );

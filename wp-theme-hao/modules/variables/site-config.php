@@ -10,7 +10,7 @@
         lightbox: 'fancybox',
         lazyload: {
             enable: ,
-            error: [[@{}]]
+            error: 
         },
         isFriendLinksInFooter: ,
         loadingBox: ,

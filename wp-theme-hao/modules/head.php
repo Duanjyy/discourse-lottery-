@@ -34,7 +34,6 @@
           media="print"
           onload='this.media="all"'
           rel="stylesheet"
-    />
 
     <!-- 代码块自动识别语言 -->
     <th:block <?php get_template_part("modules/common/code"); ?>
@@ -169,7 +168,7 @@
     <!-- icon图标 -->
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/icon/iconfont.css">
 
-    <th:block <?php get_template_part("modules/variables/site-config"); ?> />
+    <th:block <?php get_template_part("modules/variables/site-config"); ?>
 
 
 </th:block>

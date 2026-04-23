@@ -86,7 +86,7 @@
         </div>
         <div class="post-copyright__type">
             <span class="post-copyright-info" id="post-copyright-url">
-                <a href="javascript:window.location.href;">[[<?php the_title(); ?>]]</a>
+                <a href="javascript:window.location.href;"></a>
             </span>
             <button class="post-copyright-copybtn" onclick="rm.copyPageUrl()">
                 <i class="haofont hao-icon-paste"></i>

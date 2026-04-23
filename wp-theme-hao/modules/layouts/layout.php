@@ -28,7 +28,7 @@
     <div <?php /* if() */ ?>>
         <img <?php /* if() */ ?>
              class="global_background_img"
-        />
+
         <video <?php /* if() */ ?>
                class="index-video"
                id="index-video"

@@ -232,7 +232,7 @@
                 <th:block <?php get_template_part("modules/comment :: comment(group = 'content.halo.run',
                   kind = 'SinglePage',
                   name = 'photos',
-                  allowComment = true)"); ?> />
+                  allowComment = true)"); ?>
             </div>
 
         </main>

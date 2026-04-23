@@ -3,18 +3,18 @@
 
 
         <span <?php /* if() */ ?>>
-            <th:block <?php get_template_part("modules/widgets/aside/contain/tags-contain"); ?> <?php /* if() */ ?>/>
+            <th:block <?php get_template_part("modules/widgets/aside/contain/tags-contain"); ?> <?php /* if() */ ?>
 
             <hr>
         </span>
 
     <span <?php /* if() */ ?>>
-            <th:block <?php get_template_part("modules/widgets/aside/contain/archive-contain"); ?> />
+            <th:block <?php get_template_part("modules/widgets/aside/contain/archive-contain"); ?>
 
             <hr>
         </span>
 
 
-    <th:block <?php get_template_part("modules/widgets/aside/contain/stat-contain"); ?> />
+    <th:block <?php get_template_part("modules/widgets/aside/contain/stat-contain"); ?>
 
 </div>

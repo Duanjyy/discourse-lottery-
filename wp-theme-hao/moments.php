@@ -56,7 +56,7 @@
                 </div>
                 <div id="bber-tips" style="color: var(--heo-secondtext);">- 只展示最近30条短文 -</div>
                 <script>heo.reflashEssayWaterFall();</script>
-                <hr <?php /* if() */ ?> />
+                <hr <?php /* if() */ ?>
                 <!--/* 评论组件 */-->
                 <th:block />
             </div>
