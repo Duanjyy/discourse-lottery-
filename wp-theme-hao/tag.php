@@ -1,25 +1,16 @@
-<!DOCTYPE html>
-<html 
-      th:replace="~{modules/layouts/layout :: layout(content = ~{::content}, htmlType = 'tag',title = ${'标签' + ': ' + tag.spec.displayName + ' | ' + site.title}, head = ~{::head})}">
-<th:block th:fragment="head">
-    <th:block th:replace="~{modules/common/open-graph :: open-graph(_title = ${tag.spec.displayName},
-                _permalink = ${tag.status.permalink},
-                _cover = ${tag.spec.cover},
-                _excerpt = ${site.seo.description},
-                _type = 'website')}"></th:block>
-</th:block>
-<th:block th:fragment="content">
+<?php get_header(); ?>
+
 
     <div class="page" id="body-wrap">
         <header class="not-top-img" id="page-header">
-            <nav th:replace="~{modules/nav :: nav(title = ${'标签'+ ': ' + tag.spec.displayName})}"></nav>
+            <?php get_template_part("modules/nav"); ?>
         </header>
         <main class="layout" id="content-inner">
             <div id="tag">
                 <div id="tag-page-tags" th:with="tags = ${tagFinder.listAll()}">
                     <a style="font-size:1em;color:#3c228c"
                        th:classappend="${tag.metadata.name == tagItem.metadata.name} ? 'select'"
-                       <?php /* loop */ ?>
+                       <?php /* loop over tagItem : ${tags} */ ?>
                        th:href="@{${tagItem.status.permalink}}"
                        th:id="${tagItem.spec.slug}">
                         <span class="tags-punctuation">[[${tagItem.spec.displayName}]]</span>
@@ -27,16 +18,15 @@
                     </a>
                 </div>
                 <!-- 文章 -->
-                <th:block th:replace="~{macro/post-list :: post-list(${'/tags/'+tag.spec.slug})}" />
+                <?php get_template_part("macro/post-list"); ?>
             </div>
             <!-- sidebar -->
-            <div th:replace="~{modules/aside :: aside(${theme.config.sidebar.widgetss.tagWidget})}"></div>
+            <?php get_template_part("modules/aside"); ?>
         </main>
 
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>/>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
 
-</html>
+<?php get_footer(); ?>

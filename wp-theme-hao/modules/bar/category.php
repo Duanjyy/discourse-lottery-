@@ -1,3 +1,4 @@
+<?php get_header(); ?>
 <!-- 目录条 -->
 <div id="category-bar">
     <div class="category-bar-items" id="category-bar-items">
@@ -8,12 +9,13 @@
         <th:block th:with="categories = ${categoryFinder.listAll()}">
 
             <div class="category-bar-item"
-                 <?php /* loop */ ?>
+                 <?php /* loop over categoryItem : ${categories} */ ?>
                  th:id="${categoryItem.spec.displayName}">
                 <a th:href="@{${categoryItem.status.permalink}}" th:text="${categoryItem.spec.displayName}"></a>
             </div>
 
         </th:block>
     </div>
-    <a class="category-bar-more" <?php get_template_part("modules/bar/more"); ?>>更多</a>
+    <a class="category-bar-more" th:replace="~{modules/bar/more}">更多</a>
 </div>
+<?php get_footer(); ?>

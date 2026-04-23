@@ -1,20 +1,20 @@
 
 <!-- 阅读建议 -->
-<th:block  <?php /* if(${not #lists.isEmpty(post.categories)}) */ ?> th:with="recommendQuantity = ${theme.config.post.recommendQuantity},
+<th:block  th:if="${not #lists.isEmpty(post.categories)}" th:with="recommendQuantity = ${theme.config.post.recommendQuantity},
 recommandPosts = ${postFinder.listByCategory(1,recommendQuantity == 'six' ? 7 : recommendQuantity == 'two' ? 3 : 1,post.categories.get(0).metadata.name)},
 containsTitle = ${#strings.contains(recommandPosts,post.spec.title)},
 postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,'?') ? theme.config.layout.postRandomImg+'&' : theme.config.layout.postRandomImg+'?'}">
-    <div class="relatedPosts" <?php /* if(${recommandPosts.total>1}) */ ?>>
+    <div class="relatedPosts" th:if="${recommandPosts.total>1}">
         <div class="headline">
             <i class="haofont hao-icon-cainixihuan" style="font-size: 1.1rem;"></i>
             <span>阅读建议</span>
         </div>
         <!-- 六篇文章 -->
-        <div <?php /* if(${#strings.equals(recommendQuantity, 'six')}) */ ?> class="relatedPosts-list">
+        <div th:if="${#strings.equals(recommendQuantity, 'six')}" class="relatedPosts-list">
             <!-- 建议阅读，这里可以自定义文章数量，然后遍历展示 -->
-            <th:block <?php /* loop */ ?>
-                      <?php /* if(${not #strings.equals(post.spec.title, recommandPost.spec.title)}) */ ?>>
-                <div <?php /* if(${!containsTitle ? iterStat.index <6 : true}) */ ?>>
+            <th:block <?php /* loop over recommandPost,iterStat :${recommandPosts} */ ?>
+                      th:if="${not #strings.equals(post.spec.title, recommandPost.spec.title)}">
+                <div th:if="${!containsTitle ? iterStat.index <6 : true}">
                     <a th:href="@{${recommandPost.status.permalink}}" th:title="${recommandPost.spec.title}">
                         <img alt="cover" class="cover" id="preimg"
                              th:with="img = ${#strings.isEmpty(recommandPost.spec.cover) ? postRandomImg+recommandPost.spec.title : thumbnail.gen(recommandPost.spec.cover, 'm')}"
@@ -31,10 +31,10 @@ postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,'?') ? theme
             </th:block>
         </div>
         <!-- 两篇文章 -->
-        <div <?php /* if(${#strings.equals(recommendQuantity, 'two')}) */ ?> class="relatedPosts-list">
-            <th:block <?php /* loop */ ?>
-                      <?php /* if(${not #strings.equals(post.spec.title, recommandPost.spec.title)}) */ ?>>
-                <div <?php /* if(${!containsTitle ? iterStat.index <2 : true}) */ ?>>
+        <div th:if="${#strings.equals(recommendQuantity, 'two')}" class="relatedPosts-list">
+            <th:block <?php /* loop over recommandPost,iterStat :${recommandPosts} */ ?>
+                      th:if="${not #strings.equals(post.spec.title, recommandPost.spec.title)}">
+                <div th:if="${!containsTitle ? iterStat.index <2 : true}">
                     <a th:href="@{${recommandPost.status.permalink}}" th:title="${recommandPost.spec.title}">
                         <img class="cover" alt="cover"
                              th:with="img = ${#strings.isEmpty(recommandPost.spec.cover) ? postRandomImg+recommandPost.spec.title : thumbnail.gen(recommandPost.spec.cover, 'm')}"
@@ -51,8 +51,8 @@ postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,'?') ? theme
             </th:block>
         </div>
     </div>
-    <link <?php /* if(${#strings.equals(recommendQuantity, 'six')}) */ ?> rel="stylesheet"
-          th:href="${assets_link + '/css/related-posts-six.css' + theme_version}">
-    <link <?php /* if(${#strings.equals(recommendQuantity, 'two')}) */ ?> rel="stylesheet"
-          th:href="${assets_link + '/css/related-posts-two.css' + theme_version}">
+    <link th:if="${#strings.equals(recommendQuantity, 'six')}" rel="stylesheet"
+          href="<?php echo get_template_directory_uri(); ?>/assets/css/related-posts-six.css">
+    <link th:if="${#strings.equals(recommendQuantity, 'two')}" rel="stylesheet"
+          href="<?php echo get_template_directory_uri(); ?>/assets/css/related-posts-two.css">
 </th:block>

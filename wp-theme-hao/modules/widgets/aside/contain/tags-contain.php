@@ -4,14 +4,14 @@
 
     <div class="item-headline"></div>
     <div class="card-tag-cloud">
-        <a class="tag-item" style="font-size:1em" <?php /* loop */ ?>
+        <a class="tag-item" style="font-size:1em" <?php /* loop over tag,iterStat : ${tags} */ ?>
            th:href="@{${tag.status.permalink}}"
            th:title="${tag.spec.displayName}">
             <!-- 角标 -->
             [[${tag.spec.displayName}]]<sup th:text="${tag.status.visiblePostCount}"></sup>
         </a>
     </div>
-    <script <?php /* if(${theme.config.other.tagRandomColorEnable}) */ ?>>
+    <script th:if="${theme.config.other.tagRandomColorEnable}">
         for (const tag of document.getElementsByClassName('tag-item')) {
             let randomColor ="#"+((1<<24)*Math.random()|0).toString(16);
             tag.style.color = randomColor;

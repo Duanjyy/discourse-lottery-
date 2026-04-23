@@ -1,5 +1,5 @@
 <!-- 版权样式一 -->
-<th:block <?php /* if(${#strings.equals(theme.config.post.copyrightsStyle, 'one')}) */ ?>>
+<th:block th:if="${#strings.equals(theme.config.post.copyrightsStyle, 'one')}">
     <!-- 版权声明 -->
     <div class="post-copyright">
         <div class="post-copyright__author_group">
@@ -18,8 +18,8 @@
         <div class="post-tools" id="post-tools">
             <div class="post-tools-left">
                 <div class="rewardLeftButton"
-                     <?php /* if(${theme.config.aboutReward.reward.enable_reward_wz || theme.config.post.post_edit.enable_post_edit}) */ ?>>
-                    <div <?php /* if(${theme.config.aboutReward.reward.enable_reward_wz}) */ ?> class="post-reward"
+                     th:if="${theme.config.aboutReward.reward.enable_reward_wz || theme.config.post.post_edit.enable_post_edit}">
+                    <div th:if="${theme.config.aboutReward.reward.enable_reward_wz}" class="post-reward"
                          onclick="AddRewardMask()">
                         <div class="reward-button button--animated" title="打赏作者"><i
                                 class="haofont hao-icon-hand-heart-fill"></i> 打赏作者
@@ -48,13 +48,13 @@
                             </ul>
                         </div>
                     </div>
-                    <div <?php /* if(${theme.config.post.post_edit.enable_post_edit}) */ ?> class="reward-link mode"><a
+                    <div th:if="${theme.config.post.post_edit.enable_post_edit}" class="reward-link mode"><a
                             class="reward-link-button" th:href="@{${theme.config.post.post_edit.post_edit_url}}"
                             data-pjax-state=""><i class="haofont hao-icon-plant-fill"></i>订阅</a></div>
                 </div>
                 <div class="shareRight"
-                     <?php /* if(${theme.config.post.share_right.mobile_edit  || theme.config.post.share_right.weibo_edit || theme.config.post.share_right.copyurl_edit}) */ ?>>
-                    <div class="share-link mobile" <?php /* if(${theme.config.post.share_right.mobile_edit}) */ ?>>
+                     th:if="${theme.config.post.share_right.mobile_edit  || theme.config.post.share_right.weibo_edit || theme.config.post.share_right.copyurl_edit}">
+                    <div class="share-link mobile" th:if="${theme.config.post.share_right.mobile_edit}">
                         <div class="share-qrcode">
                             <div class="share-button" title="使用手机访问这篇文章"><i
                                     class="haofont hao-icon-qrcode"></i>
@@ -67,21 +67,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="share-link weibo" <?php /* if(${theme.config.post.share_right.weibo_edit}) */ ?>>
+                    <div class="share-link weibo" th:if="${theme.config.post.share_right.weibo_edit}">
                         <a class="share-button" rel="noopener external nofollow noreferrer noopener" target="_blank"
                            th:href="'https://service.weibo.com/share/share.php?title=' + <?php the_title(); ?>"
                            title="分享到微博">
                             <i class="haofont hao-icon-weibo" style="font-size:22px"></i></a>
                     </div>
-                    <div class="share-link copyurl" <?php /* if(${theme.config.post.share_right.copyurl_edit}) */ ?>>
+                    <div class="share-link copyurl" th:if="${theme.config.post.share_right.copyurl_edit}">
                         <div class="share-button" id="post-share-url" onclick="rm.copyPageUrl()" title="复制链接"><i
                                 class="haofont hao-icon-link"></i></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div <?php /* if(${not #strings.isEmpty(#annotations.get(post, 'copyrightEnable')) ?
-              #annotations.get(post, 'copyrightEnable') == 'true' : theme.config.post.copyrights.enable}) */ ?>
+        <div th:if="${not #strings.isEmpty(#annotations.get(post, 'copyrightEnable')) ?
+              #annotations.get(post, 'copyrightEnable') == 'true' : theme.config.post.copyrights.enable}"
              class="post-copyright__notice">
             <span class="post-copyright-info"
                   th:utext="${#strings.equals(#annotations.getOrDefault(post, 'copyrightType','original'),'reprint') ?
@@ -94,7 +94,7 @@
     <div class="post-tools-right">
         <div class="tag_share">
             <div class="post-meta__tag-list">
-                <a class="post-meta__tags" <?php /* loop */ ?> th:href="@{${tag.status.permalink}}">
+                <a class="post-meta__tags" <?php /* loop over tag : ${post.tags} */ ?> th:href="@{${tag.status.permalink}}">
                     <span class="tags-punctuation">[[${tag.spec.displayName}]]</span>
 
                     <span class="tagsPageCount" th:text="${tag.status.visiblePostCount}"></span>
@@ -102,5 +102,5 @@
             </div>
         </div>
     </div>
-    <link rel="stylesheet" th:href="${assets_link + '/css/post-copyright-one.css' + theme_version}">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/post-copyright-one.css">
 </th:block>

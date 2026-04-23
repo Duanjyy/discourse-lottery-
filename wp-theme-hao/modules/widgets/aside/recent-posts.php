@@ -3,7 +3,7 @@
     <div class="item-headline"><i class="haofont hao-icon-eicon_map-2-line1"></i><span>最近发布</span></div>
     <div class="aside-list">
         <!-- 最新文章，用户可以自定义展示数量 -->
-        <div class="aside-list-item" <?php /* loop */ ?>>
+        <div class="aside-list-item" <?php /* loop over post : ${postFinder.list({page: 1, size: theme.config.sidebar.recentPost, sort: {'spec.publishTime,desc'}})} */ ?>>
             <a class="thumbnail" th:href="@{<?php the_permalink(); ?>}" th:title="<?php the_title(); ?>">
                 <img th:alt="<?php the_title(); ?>"
                      th:with="img = ${#strings.isEmpty(post.spec.cover) ? postRandomImg+post.spec.title : thumbnail.gen(post.spec.cover, 's')}"

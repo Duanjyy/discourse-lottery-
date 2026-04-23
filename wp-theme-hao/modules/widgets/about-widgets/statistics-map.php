@@ -26,23 +26,23 @@
             </span>
         </div>
         <div class="author-content-item selfInfo single"
-             <?php /* if(${not #lists.isEmpty(theme.config.about.map.authorInfo)}) */ ?>
+             th:if="${not #lists.isEmpty(theme.config.about.map.authorInfo)}"
              th:with="texts = ${theme.config.about.map.authorInfo}">
-            <div <?php /* if(${theme.config.about.map.authorInfo.size()}>'0') */ ?>>
+            <div th:if="${theme.config.about.map.authorInfo.size()}>'0'">
                 <span class="selfInfo-title"
                       th:text="${texts[0].authorInfoTitle}">生于</span><span
                     class="selfInfo-content"
                     id="selfInfo-content-year" th:style="'color:' + ${texts[0].authorInfoColor}"
                     th:text="${texts[0].authorInfoContent}">2000</span>
             </div>
-            <div <?php /* if(${theme.config.about.map.authorInfo.size()}>'1') */ ?>>
+            <div th:if="${theme.config.about.map.authorInfo.size()}>'1'">
                 <span class="selfInfo-title"
                       th:text="${texts[1].authorInfoTitle}">太原理工大学</span><span
                     class="selfInfo-content"
                     th:style="'color:' + ${texts[1].authorInfoColor}"
                     th:text="${texts[1].authorInfoContent}">计算机科学</span>
             </div>
-            <div <?php /* if(${theme.config.about.map.authorInfo.size()}>'2') */ ?>>
+            <div th:if="${theme.config.about.map.authorInfo.size()}>'2'">
                 <span class="selfInfo-title"
                       th:text="${texts[2].authorInfoTitle}">现在职业</span><span
                     class="selfInfo-content"

@@ -12,13 +12,13 @@
 
     <div class="page" id="body-wrap">
         <header class="not-top-img" id="page-header">
-            <nav th:replace="~{modules/nav :: nav(title = ${singlePage.spec.title})}"></nav>
-            <link rel="stylesheet" type="text/css" th:href="${assets_link + '/libs/fcircle/heo-fcircle3.css'}">
+            <?php get_template_part("modules/nav"); ?>
+            <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/assets/libs/fcircle/heo-fcircle3.css">
 
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page">
-                <th:block th:replace="~{macro/content-links :: content-links(${htmlType})}" />
+                <?php get_template_part("macro/content-links"); ?>
                 <hr/>
                 <!--/* 评论组件 */-->
                 <th:block
@@ -29,7 +29,7 @@
             </div>
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>/>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
 </th:block>

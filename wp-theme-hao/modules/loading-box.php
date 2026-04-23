@@ -1,6 +1,6 @@
 <!-- loading页面 -->
 <th:block
-          <?php /* if(${theme.config.other.loadingBoxs.loadingBoxEnable} and not ${#strings.isEmpty(theme.config.other.loadingBoxs.loadingBoxImg)}) */ ?>>
+          th:if="${theme.config.other.loadingBoxs.loadingBoxEnable} and not ${#strings.isEmpty(theme.config.other.loadingBoxs.loadingBoxImg)}">
     <style type="text/css">
         #loading-box {
             -webkit-user-select: none;

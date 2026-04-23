@@ -5,14 +5,14 @@
             <a href="/">首页</a>
         </div>
 
-        <th:block <?php /* loop */ ?>>
+        <th:block <?php /* loop over navTag : ${theme.config.layout.navs.navTag} */ ?>>
             <div class="category-bar-item"
-                 <?php /* loop */ ?>
+                 <?php /* loop over tagItem : ${tagFinder.getByName(navTag)} */ ?>
                  th:id="${tagItem.spec.displayName}">
                 <a th:href="@{${tagItem.status.permalink}}" th:text="${tagItem.spec.displayName}"></a>
             </div>
         </th:block>
 
     </div>
-    <a class="category-bar-more" <?php get_template_part("modules/bar/more"); ?>>更多</a>
+    <a class="category-bar-more" th:replace="~{modules/bar/more}">更多</a>
 </div>

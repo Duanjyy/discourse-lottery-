@@ -3,16 +3,16 @@
     <div class="item-headline"><i class="haofont hao-icon-tongxunlu07"
                                   style="font-size: 0.9rem;font-weight: 700;"></i><span>通讯录</span></div>
     <div class="card-friend-link-container"
-         <?php /* if(${pluginFinder.available('PluginLinks')}) */ ?>
+         th:if="${pluginFinder.available('PluginLinks')}"
          th:with="groups = ${linkFinder.groupBy()}">
-        <th:block <?php /* loop */ ?>>
-            <details <?php /* if(${#annotations.get(group, 'displayStyle') != 'deprecated' &&  not #strings.isEmpty(#annotations.get(group, 'displayStyle'))  && not #lists.isEmpty(group.links)}) */ ?>
+        <th:block <?php /* loop over group,iterStat : ${groups} */ ?>>
+            <details th:if="${#annotations.get(group, 'displayStyle') != 'deprecated' &&  not #strings.isEmpty(#annotations.get(group, 'displayStyle'))  && not #lists.isEmpty(group.links)}"
                      class="card-friend-class-name">
                 <summary class="card-friend-class-desc" th:title="${#annotations.get(group, 'description')}">
                     <sapn>[[${group.spec.displayName}]]</sapn>
                     <sapn>[[${group.links.size}]]</sapn>
                 </summary>
-                <a <?php /* loop */ ?>
+                <a <?php /* loop over link : ${group.links} */ ?>
                    class="card-friend-item online-friend-link" th:href="${link.spec.url}" th:title="${link.spec.displayName}"
                    target="_blank"><img class="no-lightbox card-friend-avatar"
 
@@ -25,13 +25,13 @@
                     </div>
                 </a>
             </details>
-            <details <?php /* if(${#strings.equals(#annotations.get(group, 'displayStyle'),'deprecated') && not #lists.isEmpty(group.links)}) */ ?>
+            <details th:if="${#strings.equals(#annotations.get(group, 'displayStyle'),'deprecated') && not #lists.isEmpty(group.links)}"
                      class="card-friend-class-name">
                 <summary class="card-friend-class-desc" th:title="${#annotations.get(group, 'description')}">
                     <sapn>[[${group.spec.displayName}]]</sapn>
                     <sapn>[[${group.links.size}]]</sapn>
                 </summary>
-                <a <?php /* loop */ ?>
+                <a <?php /* loop over link : ${group.links} */ ?>
                    class="card-friend-item offline-friend-link" th:href="${link.spec.url}" th:title="${link.spec.displayName}"
                    target="_blank"><img class="no-lightbox card-friend-avatar"
 

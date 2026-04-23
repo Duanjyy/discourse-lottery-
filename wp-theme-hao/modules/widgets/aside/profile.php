@@ -3,7 +3,7 @@
 <div class="card-widget card-info" >
 
     <!-- 默认 -->
-    <th:block <?php /* if(${#strings.equals(theme.config.sidebar.profile.profileStyle, 'default')}) */ ?>>
+    <th:block th:if="${#strings.equals(theme.config.sidebar.profile.profileStyle, 'default')}">
         <!-- 描述信息 -->
         <div class="card-content" th:style="|background-image: url(${theme.config.sidebar.profile.backgroundImg});|">
             <div class="card-info-avatar is-center">
@@ -16,9 +16,9 @@
                          th:src="${isLazyload ? '' : img}"
                          th:data-lazy-src="${ isLazyload ? img : ''}">
                 </div>
-                <div class="author-info__name" <?php /* if(${#strings.isEmpty(theme.config.sidebar.profile.profileName)}) */ ?>
+                <div class="author-info__name" th:if="${#strings.isEmpty(theme.config.sidebar.profile.profileName)}"
                      th:text="<?php bloginfo("name"); ?>"></div>
-                <div class="author-info__name" <?php /* if(${not #strings.isEmpty(theme.config.sidebar.profile.profileName)}) */ ?>
+                <div class="author-info__name" th:if="${not #strings.isEmpty(theme.config.sidebar.profile.profileName)}"
                      th:text="${theme.config.sidebar.profile.profileName}"></div>
                 <div class="author-info__description" th:utext="${theme.config.sidebar.profile.profileDesc}">
 
@@ -35,10 +35,10 @@
         </div>
 
         <div class="card-info-social-icons is-center"
-             <?php /* if(${not #lists.isEmpty(theme.config.sidebar.profile.socialMedia)}) */ ?>
+             th:if="${not #lists.isEmpty(theme.config.sidebar.profile.socialMedia)}"
              th:with="socialMedias = ${theme.config.sidebar.profile.socialMedia}">
 
-            <a class="social-icon" rel="external nofollow" target="_blank" <?php /* loop */ ?>
+            <a class="social-icon" rel="external nofollow" target="_blank" <?php /* loop over socialMedia : ${socialMedias} */ ?>
                th:href="${socialMedia.url}" th:title="${socialMedia.name}">
                 <i th:class="${socialMedia.icon}"></i>
             </a>
@@ -131,7 +131,7 @@
 
 
     <!-- 样式一 -->
-    <th:block <?php /* if(${#strings.equals(theme.config.sidebar.profile.profileStyle, 'one')}) */ ?>>
+    <th:block th:if="${#strings.equals(theme.config.sidebar.profile.profileStyle, 'one')}">
 
 
         <div class="card-content">
@@ -158,16 +158,16 @@
             <div class="author-info__description_group" th:utext="${theme.config.sidebar.profile.profileDesc}">
             </div>
             <div class="author-info__bottom-group">
-                <a <?php /* if(${not #strings.isEmpty(theme.config.sidebar.profile.profileName)}) */ ?>
+                <a th:if="${not #strings.isEmpty(theme.config.sidebar.profile.profileName)}"
                    class="author-info__bottom-group-left" href="/about" data-pjax-state="">
                     <div class="author-info__name">[[${theme.config.sidebar.profile.profileName}]]</div>
                     <div class="author-info__desc">[[${theme.config.sidebar.profile.desc}]]</div>
                 </a>
                 <div class="card-info-social-icons is-center"
-                     <?php /* if(${not #lists.isEmpty(theme.config.sidebar.profile.socialMedia)}) */ ?>
+                     th:if="${not #lists.isEmpty(theme.config.sidebar.profile.socialMedia)}"
                      th:with="socialMedias = ${theme.config.sidebar.profile.socialMedia}">
                     <a class="social-icon" rel="external nofollow" target="_blank"
-                       <?php /* loop */ ?> th:href="${socialMedia.url}"
+                       <?php /* loop over socialMedia : ${socialMedias} */ ?> th:href="${socialMedia.url}"
                        th:title="${socialMedia.name}">
                         <i th:class="${socialMedia.icon}"></i>
                     </a>

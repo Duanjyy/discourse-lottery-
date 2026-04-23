@@ -1,3 +1,4 @@
+<?php get_header(); ?>
 <!-- 音乐卡片 -->
 <div >
     <div class="item-headline-music"><i class="haofont hao-icon-music"></i><span>音乐天地</span></div>
@@ -27,3 +28,4 @@
     </style>
 
 </div>
+<?php get_footer(); ?>

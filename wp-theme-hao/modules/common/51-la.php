@@ -1,5 +1,5 @@
 <!-- 51统计 -->
-<script <?php /* if(${ not #strings.isEmpty(theme.config.about.LingQueMonitorID)}) */ ?>>
+<script th:if="${ not #strings.isEmpty(theme.config.about.LingQueMonitorID)}">
     !function (p) {
         "use strict";
         !function (t) {

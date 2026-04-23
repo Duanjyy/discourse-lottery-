@@ -2,19 +2,19 @@
 <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
 
 
-        <span <?php /* if(${theme.config.sidebar.tags_switch}) */ ?>>
-            <th:block <?php get_template_part("modules/widgets/aside/contain/tags-contain"); ?> <?php /* if(${theme.config.sidebar.tags_switch}) */ ?>/>
+        <span th:if="${theme.config.sidebar.tags_switch}">
+            <th:block th:replace="~{modules/widgets/aside/contain/tags-contain}" th:if="${theme.config.sidebar.tags_switch}"/>
 
             <hr>
         </span>
 
-    <span <?php /* if(${theme.config.sidebar.archive_switch}) */ ?>>
-            <th:block <?php get_template_part("modules/widgets/aside/contain/archive-contain"); ?> />
+    <span th:if="${theme.config.sidebar.archive_switch}">
+            <?php get_template_part("modules/widgets/aside/contain/archive-contain"); ?>
 
             <hr>
         </span>
 
 
-    <th:block <?php get_template_part("modules/widgets/aside/contain/stat-contain"); ?> />
+    <?php get_template_part("modules/widgets/aside/contain/stat-contain"); ?>
 
 </div>

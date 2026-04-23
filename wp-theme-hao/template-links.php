@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html 
-      th:replace="~{modules/layouts/layout :: layout(content = ~{::content}, htmlType = 'links',title = ${'友链' + ' | ' + site.title}, head = ~{::head})}">
-<th:block th:fragment="head">
-    <th:block th:replace="~{modules/common/open-graph :: open-graph(_title = '友链',
-                _permalink = '/links',
-                _cover = ${theme.config.other.opengraph.image},
-                _excerpt = ${site.seo.description},
-                _type = 'website')}"></th:block>
-</th:block>
-<th:block th:fragment="content">
+<?php get_header(); ?>
+
     <div class="page" id="body-wrap">
         <header class="not-top-img" id="page-header">
-            <nav <?php get_template_part("modules/nav :: nav(title = '友链')"); ?>></nav>
-            <link rel="stylesheet" type="text/css" th:href="${assets_link + '/libs/fcircle/heo-fcircle3.css'}">
+            <?php get_template_part("modules/nav"); ?>
+            <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/assets/libs/fcircle/heo-fcircle3.css">
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page">
-                <th:block th:replace="~{macro/content-links :: content-links(${htmlType})}" />
+                <?php get_template_part("macro/content-links"); ?>
 
-                <hr <?php /* if(${theme.config.comments.use != 'commentWidget'}) */ ?> />
+                <hr th:if="${theme.config.comments.use != 'commentWidget'}" />
                 <!--/* 评论组件 */-->
                 <th:block
                         th:replace="~{modules/comment :: comment(group = 'plugin.halo.run',
@@ -34,9 +25,8 @@
             </div>
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>/>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
 
-</html>
+<?php get_footer(); ?>

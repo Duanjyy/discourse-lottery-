@@ -1,4 +1,4 @@
-<th:block th:fragment="links-canvas(groups)" <?php /* if(${theme.config.link.linksCanvas && not #lists.isEmpty(groups)}) */ ?> >
+<th:block th:fragment="links-canvas(groups)" th:if="${theme.config.link.linksCanvas && not #lists.isEmpty(groups)}" >
 
     <style>
         #iframe {

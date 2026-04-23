@@ -26,7 +26,7 @@
             <div class="content-bottom">
                 <div class="tips">跟 [[<?php bloginfo("name"); ?>]] 一起欣赏更多音乐</div>
             </div>
-            <div <?php /* if(${not #strings.isEmpty(theme.config.about.music.music_link)}) */ ?> class="banner-button-group">
+            <div th:if="${not #strings.isEmpty(theme.config.about.music.music_link)}" class="banner-button-group">
                 <a class="banner-button"
                    th:href="${theme.config.about.music.music_link}"
                    target="_blank"

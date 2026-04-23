@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html  
-      th:replace="~{modules/layouts/layout :: layout(content = ~{::content}, htmlType = 'music',title = ${singlePage.spec.title + ' | ' + site.title}, head = ~{::head})}">
-<th:block th:fragment="head">
-    <th:block th:replace="~{modules/common/open-graph :: open-graph(_title = ${singlePage.spec.title},
-                _permalink = ${singlePage.status.permalink},
-                _cover = ${singlePage.spec.cover},
-                _excerpt = ${singlePage.status.excerpt},
-                _type = 'website')}"></th:block>
-</th:block>
-<th:block th:fragment="content">
+<?php get_header(); ?>
+
 
     <div class="page" id="body-wrap">
         <!-- 头部导航栏 -->
         <header class="not-top-img" id="page-header">
-            <nav <?php get_template_part("modules/nav :: nav(title = '音乐馆')"); ?>></nav>
+            <?php get_template_part("modules/nav"); ?>
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page">
@@ -32,14 +23,13 @@
             </div>
 
 
-            <link rel="stylesheet" th:href="${assets_link + '/libs/aplayer/music.css'}" >
+            <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/libs/aplayer/music.css" >
 
 
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>/>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
 
-</html>
+<?php get_footer(); ?>

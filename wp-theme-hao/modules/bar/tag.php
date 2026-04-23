@@ -1,3 +1,4 @@
+<?php get_header(); ?>
 <!-- 目录条，这里使用和 category-bar 同样的 css -->
 <div id="category-bar">
     <div class="category-bar-items" id="category-bar-items">
@@ -8,12 +9,14 @@
         <th:block th:with="tags = ${tagFinder.listAll()}">
 
             <div class="category-bar-item"
-                 <?php /* loop */ ?>
+                 <?php /* loop over tagItem : ${tags} */ ?>
                  th:id="${tagItem.spec.displayName}">
                 <a th:href="@{${tagItem.status.permalink}}" th:text="${tagItem.spec.displayName}"></a>
             </div>
 
         </th:block>
     </div>
-    <a class="category-bar-more" <?php get_template_part("modules/bar/more"); ?>>更多</a>
+    <a class="category-bar-more" th:replace="~{modules/bar/more}">更多</a>
 </div>
+
+<?php get_footer(); ?>

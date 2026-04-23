@@ -12,13 +12,13 @@
           <span class="author-content-item-title">最近评论</span>
         </div>
         <div class="aside-list">
-          <th:block <?php /* if(${#strings.equals(theme.config.comments.use, 'commentWidget') }) */ ?>>
+          <th:block th:if="${#strings.equals(theme.config.comments.use, 'commentWidget') }">
             <!-- BUG：由于当前的列出所有评论API无过滤功能，非文章页的评论无法查询到页面信息，所以非文章评论跳转至首页-->
-            <div class="aside-list-item" <?php /* loop */ ?>
+            <div class="aside-list-item" <?php /* loop over comment,iterStat : ${commentFinder.list(null, 1, 20)} */ ?>
                  th:with="page = ${comment.spec.subjectRef.kind == 'Post' ? postFinder.getByName(comment.spec.subjectRef.name) :
                   comment.spec.subjectRef.kind == 'SinglePage' && not #strings.contains('photos,links,moments', comment.spec.subjectRef.name) ? singlePageFinder.getByName(comment.spec.subjectRef.name) : null},
                   url = ${page == null? '/' : page.status.permalink + '#comment-' + comment.metadata.name}"
-                 <?php /* if(${iterStat.index  < 6}) */ ?> >
+                 th:if="${iterStat.index  < 6}" >
               <a th:href="${url}" class="thumbnail"  data-pjax-state="">
                 <img th:with="img = ${#strings.isEmpty(comment.owner.avatar)?'https://cravatar.cn/avatar/?d=mp':comment.owner.avatar}"
                      th:src="${isLazyload ? '' : img}"
@@ -40,7 +40,7 @@
               });
             </script>
           </th:block>
-          <span <?php /* if(${#strings.equals(theme.config.comments.use, 'Twikoo') }) */ ?>>正在加载中...</span></div>
+          <span th:if="${#strings.equals(theme.config.comments.use, 'Twikoo') }">正在加载中...</span></div>
       </div>
     </div>
     <!-- 右侧展示 tag -->
@@ -52,7 +52,7 @@
         </div>
         <div class="card-tag-cloud" th:with="tags = ${tagFinder.list(1,theme.config.sidebar.tagQuantity)}">
           <a style="font-size:1em;color:#d3d3d3"
-             <?php /* loop */ ?>
+             <?php /* loop over tag,iterStat : ${tags} */ ?>
              th:href="@{${tag.status.permalink}}">
             [[${tag.spec.displayName}]]<sup th:text="${tag.status.visiblePostCount}"></sup>
           </a>
@@ -62,8 +62,8 @@
       <div class="console-card history" onclick="heo.hideConsole()">
         <div class="item-headline"><i class="fas fa-archive"></i><span>文章</span></div>
         <ul class="card-archive-list" th:with="archives = ${postFinder.archives(1,0)}">
-          <th:block <?php /* loop */ ?>>
-            <li class="card-archive-list-item" <?php /* loop */ ?>>
+          <th:block <?php /* loop over archive : ${archives.items} */ ?>>
+            <li class="card-archive-list-item" <?php /* loop over month,monthStat : ${archive.months} */ ?>>
               <a class="card-archive-list-link" th:href="@{'/archives/'+${archive.year}+'/'+${month.month}}"
                  data-pjax-state="load"><span
                       class="card-archive-list-date">
@@ -92,7 +92,7 @@
     </div>
   </div>
 
-  <div class="console-card-group-reward" <?php /* if(${theme.config.aboutReward.reward.enable_reward}) */ ?>>
+  <div class="console-card-group-reward" th:if="${theme.config.aboutReward.reward.enable_reward}">
     <ul class="reward-all console-card">
       <li class="reward-item"><a th:href="@{${theme.config.aboutReward.reward.wxPay}}"
                                  rel="external nofollow noreferrer" target="_blank" draggable="false"><img
@@ -125,7 +125,7 @@
     <!--<div class="console-btn-item" id="assist-open" onclick="heo.hideConsole()" title="无障碍工具栏"><a-->
     <!--        class="assist-btn"><i class="fa-duotone fa-wheelchair"></i></a>-->
     <!--</div>-->
-    <div <?php /* if(${theme.config.tool.nav_music.nav_musicEnable}) */ ?> class="console-btn-item" id="consoleMusic" onclick="heo.musicToggle()" title="音乐开关">
+    <div th:if="${theme.config.tool.nav_music.nav_musicEnable}" class="console-btn-item" id="consoleMusic" onclick="heo.musicToggle()" title="音乐开关">
       <a class="music-switch" data-pjax-state="">
         <i class="haofont hao-icon-disc-fill"></i>
       </a>

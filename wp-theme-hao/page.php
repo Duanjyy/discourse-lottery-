@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html  
-      th:replace="~{modules/layouts/layout :: layout(content = ~{::content}, htmlType = 'page',title = ${singlePage.spec.title + ' | ' + site.title}, head = ~{::head})}">
-<th:block th:fragment="head">
-    <th:block th:replace="~{modules/common/open-graph :: open-graph(_title = ${singlePage.spec.title},
-                _permalink = ${singlePage.status.permalink},
-                _cover = ${singlePage.spec.cover},
-                _excerpt = ${singlePage.status.excerpt},
-                _type = 'website')}"></th:block>
-</th:block>
-<th:block th:fragment="content">
+<?php get_header(); ?>
+
 
     <div class="page" id="body-wrap">
 
         <!-- 头部导航栏 -->
         <header class="not-top-img" id="page-header">
-            <nav th:replace="~{modules/nav :: nav(title = ${singlePage.spec.title})}"></nav>
+            <?php get_template_part("modules/nav"); ?>
         </header>
         <main class="layout" th:classappend="${not #lists.isEmpty(theme.config.sidebar.widgetss.pageWidget) ? '' : 'hide-aside'}" id="content-inner">
             <div id="page">
@@ -32,14 +23,12 @@
             </div>
 
             <!-- 侧栏 -->
-            <div th:replace="~{modules/aside :: aside(${theme.config.sidebar.widgetss.pageWidget})}"></div>
+            <?php get_template_part("modules/aside"); ?>
 
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>/>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
 
-</html>
-
+<?php get_footer(); ?>

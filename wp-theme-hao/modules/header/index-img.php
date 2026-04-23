@@ -1,11 +1,11 @@
-<th:block <?php /* if(${theme.config.top.above.enable_above}) */ ?>>
+<th:block th:if="${theme.config.top.above.enable_above}">
     <div class="pl-container">
-        <th:block <?php /* if(!${theme.config.top.above.enable_above_video}) */ ?>>
+        <th:block th:if="!${theme.config.top.above.enable_above_video}">
             <div class="pl-img pl-blur pl-visible"></div>
             <div class="pl-img pl-visible"></div>
             <video class="video"></video>
         </th:block>
-        <th:block <?php /* if(${theme.config.top.above.enable_above_video}) */ ?>>
+        <th:block th:if="${theme.config.top.above.enable_above_video}">
             <video class="index-video" id="index-video" autoplay=""
                    th:src="${theme.config.top.above.index_video}" loop="" muted="" playsinline=""
                    webkit-playsinline=""
@@ -23,7 +23,7 @@
     </div>
     <div id="scroll-down"><i class="haofont hao-icon-angle-down scroll-down-effects"></i></div>
 
-    <link rel="stylesheet" th:href="${assets_link + '/css/fullPage.css' + theme_version}">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/fullPage.css">
 
     <style>
         #site-title {

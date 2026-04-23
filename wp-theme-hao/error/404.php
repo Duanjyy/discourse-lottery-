@@ -11,7 +11,7 @@
             <!-- 头部导航栏 -->
             <div>
                 <header class="not-top-img" id="page-header">
-                    <nav <?php get_template_part("modules/nav :: nav(title = '404')"); ?>></nav>
+                    <?php get_template_part("modules/nav"); ?>
                 </header>
             </div>
             <div id="error-wrap">
@@ -33,7 +33,7 @@
                 <div class="aside-list-group"
                      th:with='topGroupPosts = ${postFinder.list(1,6)},
                 postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,"?") ? theme.config.layout.postRandomImg+"&" : theme.config.layout.postRandomImg+"?"}'>
-                    <div <?php /* loop */ ?> class="aside-list-item">
+                    <div <?php /* loop over post : ${topGroupPosts} */ ?> class="aside-list-item">
                         <a class="thumbnail div_border"
                            th:href="@{<?php the_permalink(); ?>}"
                            th:title="<?php the_title(); ?>"><img
@@ -52,7 +52,7 @@
         
         </div>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>/>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 </th:block>
 

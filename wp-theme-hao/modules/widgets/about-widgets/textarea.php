@@ -1,5 +1,5 @@
 <!-- 座右铭 -->
-<div class="author-content"  <?php /* if(${theme.config.about.textarea.size()}=='2') */ ?> th:with="texts = ${theme.config.about.textarea}">
+<div class="author-content"  th:if="${theme.config.about.textarea.size()}=='2'" th:with="texts = ${theme.config.about.textarea}">
     <div class="author-content-item maxim">
         <div class="author-content-item-tips" th:text="${texts[0].tittle}">座右铭</div>
         <span class="maxim-title">

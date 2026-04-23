@@ -7,7 +7,7 @@
         <div class="content-bottom">
             <div class="tips" th:text="${detail}"></div>
         </div>
-        <div class="banner-button-group" <?php /* if(${not #strings.isEmpty(buttonUrl)}) */ ?>>
+        <div class="banner-button-group" th:if="${not #strings.isEmpty(buttonUrl)}">
             <a class="banner-button" target="_blank" th:href="${buttonUrl}">
                 <i class="haofont hao-icon-circle-arrow-right"></i>
                 <span class="banner-button-text" th:text="${buttonTitle}"></span>

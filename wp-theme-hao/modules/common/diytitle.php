@@ -1,6 +1,6 @@
 <!-- 动态标题 -->
 <script
-        <?php /* if(${theme.config.other.diytitle.diytitleEnable}) */ ?>>
+        th:if="${theme.config.other.diytitle.diytitleEnable}">
     var leaveTitle = '[[${theme.config.other.diytitle.leaveTitle}]]';
     var backTitle = '[[${theme.config.other.diytitle.backTitle}]]';
     var OriginTitile = "[(${siteTitle})]"

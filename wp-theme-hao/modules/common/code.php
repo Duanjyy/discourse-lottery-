@@ -1,6 +1,6 @@
 <th:block >
     <!-- 解决 pjax问题  自动识别语言-->
-    <th:block <?php /* if(${pluginFinder.available('PluginPrismJS')}) */ ?>>
+    <th:block th:if="${pluginFinder.available('PluginPrismJS')}">
         <script src="/plugins/PluginPrismJS/assets/static/highlight.js/highlight.min.js"></script>
 
 
@@ -16,7 +16,7 @@
     </th:block>
 
     <!-- 自动识别语言 -->
-    <th:block <?php /* if(${theme.config.code.enable}) */ ?>>
+    <th:block th:if="${theme.config.code.enable}">
         <script th:src="${assets_link+'/libs/prism/highlight.min.js'}"></script>
 
 

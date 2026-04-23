@@ -1,30 +1,21 @@
-<!DOCTYPE html>
-<html 
-      th:replace="~{modules/layouts/layout :: layout(content = ~{::content}, htmlType = 'archive',title = ${'文章归档' + ' | ' + site.title}, head = ~{::head})}">
-<th:block th:fragment="head">
-    <th:block th:replace="~{modules/common/open-graph :: open-graph(_title = '文章归档',
-                _permalink = '/archives',
-                _cover = ${theme.config.other.opengraph.image},
-                _excerpt = ${site.seo.description},
-                _type = 'website')}"></th:block>
-</th:block>
-<th:block th:fragment="content">
+<?php get_header(); ?>
+
 
     <div class="page" id="body-wrap">
         <header class="not-top-img" id="page-header">
-            <nav <?php get_template_part("modules/nav :: nav(title = '文章归档')"); ?>></nav>
+            <?php get_template_part("modules/nav"); ?>
         </header>
         <main class="layout" id="content-inner">
             <!-- archive -->
             <div id="archive">
                 <div class="article-sort-title">文章<sup>[[${siteStatsFinder.getStats().post}]]</sup></div>
-                <div class="article-sort" <?php /* loop */ ?>
+                <div class="article-sort" <?php /* loop over archive : ${archives.items} */ ?>
                      th:with='postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,"?") ? theme.config.layout.postRandomImg+"&" : theme.config.layout.postRandomImg+"?"}'>
                     <div class="article-sort-item year" th:text="${archive.year}"></div>
-                    <div class="article-sort" <?php /* loop */ ?>>
+                    <div class="article-sort" <?php /* loop over month : ${archive.months} */ ?>>
                         <!-- 月份没有样式所以不显示 -->
                         <!-- <div class="article-sort-item" th:text="${month.month}"></div> -->
-                        <div class="article-sort-item" <?php /* loop */ ?>>
+                        <div class="article-sort-item" <?php /* loop over post : ${month.posts} */ ?>>
                             <a class="article-sort-item-img" th:href="@{<?php the_permalink(); ?>}"
                                th:title="<?php the_title(); ?>">
                                 <img th:alt="<?php the_title(); ?>"
@@ -43,7 +34,7 @@
                                    th:title="<?php the_title(); ?>"></a>
                                 <div class="article-sort-item-tags">
                                     <a class="article-meta__tags"
-                                       <?php /* loop */ ?> th:href="@{${tag.status.permalink}}">
+                                       <?php /* loop over tag : ${post.tags} */ ?> th:href="@{${tag.status.permalink}}">
                                         <span class="tags-punctuation">[[${tag.spec.displayName}]]</span>
                                     </a>
                                     <span class="article-meta__link">•</span>
@@ -53,15 +44,14 @@
                     </div>
                 </div>
                 <!-- 分页 -->
-                <div th:replace="~{modules/widgets/page :: page('/archives',${archives},false,'')}"></div>
+                <?php get_template_part("modules/widgets/page"); ?>
             </div>
             <!-- sidebar -->
-            <div th:replace="~{modules/aside :: aside(${theme.config.sidebar.widgetss.indexWidget})}"></div>
+            <?php get_template_part("modules/aside"); ?>
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>/>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
 
-</html>
+<?php get_footer(); ?>

@@ -1,15 +1,16 @@
+<?php get_header(); ?>
 <!-- 最新评论 -->
 <div class="card-widget card-recent-post" >
-    <a <?php /* if(${not #strings.isEmpty(theme.config.sidebar.newcomment.newcommentUrl)}) */ ?>
+    <a th:if="${not #strings.isEmpty(theme.config.sidebar.newcomment.newcommentUrl)}"
        th:onclick="pjax.loadUrl([[${theme.config.sidebar.newcomment.newcommentUrl}]])"
        title="查看更多"
        class="card-more-btn"
        style="cursor:pointer" draggable="false"><i class="haofont hao-icon-chevron-right"></i></a>
     <div class="item-headline"><i class="haofont hao-icon-chat--fill" style="font-size: 19px;"></i><span>最新评论</span></div>
     <div class="aside-list" id="newcomm">
-        <th:block <?php /* if(${#strings.equals(theme.config.comments.use, 'commentWidget') }) */ ?>
+        <th:block th:if="${#strings.equals(theme.config.comments.use, 'commentWidget') }"
                   th:with="newcommentnumber = ${#conversions.convert(theme.config.sidebar.newcomment.newcommentnumber, 'java.lang.Integer') >= 0 ?  theme.config.sidebar.newcomment.newcommentnumber : 5}">
-            <div <?php /* loop */ ?> class="aside-list-item"
+            <div <?php /* loop over comment,iterStat : ${commentFinder.list(null, 1, newcommentnumber)} */ ?> class="aside-list-item"
                  th:with="page = ${comment.spec.subjectRef.kind == 'Post' ? postFinder.getByName(comment.spec.subjectRef.name) :
                 comment.spec.subjectRef.kind == 'SinglePage' && not #strings.contains('photos,links,moments,equipment', comment.spec.subjectRef.name) ? singlePageFinder.getByName(comment.spec.subjectRef.name) : null},
                 url = ${page == null? '/' : page.status.permalink + '#comment-' + comment.metadata.name}">
@@ -36,3 +37,5 @@
         </th:block>
     </div>
 </div>
+
+<?php get_footer(); ?>

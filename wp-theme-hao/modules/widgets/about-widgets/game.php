@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div <?php /* if(${#strings.equals(theme.config.about.game2.game2_type, 'img')}) */ ?> class="author-content-item game-wolf"
+    <div th:if="${#strings.equals(theme.config.about.game2.game2_type, 'img')}" class="author-content-item game-wolf"
          th:style="'background: url('+ @{${theme.config.about.game2.game2_bg}} +') top / cover no-repeat'">
         <div class="card-content">
             <div class="author-content-item-tips" th:text="${theme.config.about.game2.game2_tips}">
@@ -27,12 +27,12 @@
             </div>
         </div>
     </div>
-    <div <?php /* if(${#strings.equals(theme.config.about.game2.game2_type, 'comic')}) */ ?> class="author-content-item comic-content">
+    <div th:if="${#strings.equals(theme.config.about.game2.game2_type, 'comic')}" class="author-content-item comic-content">
         <div class="card-content">
             <div class="author-content-item-tips" th:text="${theme.config.about.game2.game2_tips}"></div>
             <div class="author-content-item-title" th:text="${theme.config.about.game2.game2_title}"></div>
             <div class="comic-box" >
-                <a  <?php /* loop */ ?>
+                <a  <?php /* loop over comic : ${theme.config.about.game2.comic_list} */ ?>
                     class="comic-item"
                     th:href="${comic.url}"
                     rel="external nofollow noreferrer" target="_blank" th:title="${comic.title}" draggable="false">

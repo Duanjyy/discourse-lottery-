@@ -7,7 +7,7 @@
                         ${theme.config.layout.post.postLocation} + ' ' +
                         (${iStat.even} ? 'even' : 'odd') + ' ' +
                         (${post.spec.pinned} ? 'pinned-post-item' : '')"
-             th:attr="onclick='pjax.loadUrl(\''+ @{<?php the_permalink(); ?>} +'\')'" <?php /* loop */ ?>>
+             th:attr="onclick='pjax.loadUrl(\''+ @{<?php the_permalink(); ?>} +'\')'" <?php /* loop over post,iStat : ${postItems} */ ?>>
 
             <div class="post_cover left_radius">
                 <a th:attr="title=<?php the_title(); ?>" th:href="@{<?php the_permalink(); ?>}">
@@ -21,8 +21,8 @@
                 <div class="recent-post-info-top">
                     <div class="recent-post-info-top-tips">
                         <!-- 类别非空时 -->
-                        <th:block <?php /* if(${not #lists.isEmpty(post.categories)}) */ ?>>
-                            <span <?php /* loop */ ?> th:href="@{${category.status.permalink}}"
+                        <th:block th:if="${not #lists.isEmpty(post.categories)}">
+                            <span <?php /* loop over category : ${post.categories} */ ?> th:href="@{${category.status.permalink}}"
                                   th:text="${category.spec.displayName}" th:title="${category.spec.displayName}"
                                   class="original"></span>
                         </th:block>
@@ -37,10 +37,10 @@
 
                 <div class="article-meta-wrap">
                     <!-- tag -->
-                    <th:block <?php /* if(${not #lists.isEmpty(post.tags)}) */ ?>>
+                    <th:block th:if="${not #lists.isEmpty(post.tags)}">
                         <span class="article-meta tags">
                             <a class="article-meta__tags" event.cancelbubble onclick="window.event.cancelBubble=!0"
-                               <?php /* loop */ ?> th:href="@{${tag.status.permalink}}"
+                               <?php /* loop over tag : ${post.tags} */ ?> th:href="@{${tag.status.permalink}}"
                                th:title="${tag.spec.displayName}">
                                 <span class="tags-punctuation">[[${#strings.trim(tag.spec.displayName)}]]</span>
                             </a>
@@ -50,15 +50,15 @@
                     <span class="post-meta-date"
                           th:with="days=${(new java.util.Date().getTime()-post.spec.publishTime.toEpochMilli())/86400000}">
                         <i class="far fa-calendar-alt"></i>
-                        <time style="display: inline;" th:datetime="${post.spec.publishTime}" <?php /* if(${days > 30}) */ ?>
+                        <time style="display: inline;" th:datetime="${post.spec.publishTime}" th:if="${days > 30}"
                               th:text="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}"
                               th:title="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}+创建">
                         </time>
                         <time style="display: inline;" th:datetime="${post.spec.publishTime}"
-                              <?php /* if(${days <= 30 && days > 0}) */ ?> th:text="${days}+天前"
+                              th:if="${days <= 30 && days > 0}" th:text="${days}+天前"
                               th:title="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}+创建">
                         </time>
-                        <time style="display: inline;" th:datetime="${post.spec.publishTime}" <?php /* if(${days == 0}) */ ?>
+                        <time style="display: inline;" th:datetime="${post.spec.publishTime}" th:if="${days == 0}"
                               th:text="最近" th:title="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}+创建">
                         </time>
                     </span>
@@ -66,7 +66,7 @@
             </div>
         </div>
         <!-- 分页 -->
-        <div th:replace="~{modules/widgets/page :: page(${_path},${posts},false,'')}"></div>
+        <?php get_template_part("modules/widgets/page"); ?>
 
     </div>
 </th:block>

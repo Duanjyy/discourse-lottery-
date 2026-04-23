@@ -1,4 +1,4 @@
-<th:block <?php /* if(${theme.config.code.enable}) */ ?>>
+<th:block th:if="${theme.config.code.enable}">
     <link rel="preload" as="style" onload="this.rel='stylesheet'"
           th:href="${assets_link+'/libs/prism/prism.min.css'}">
     <link rel="preload" as="style" onload="this.rel='stylesheet'"

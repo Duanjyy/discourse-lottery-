@@ -1,5 +1,5 @@
 <!-- 第一屏 -->
-<th:block <?php /* if(${theme.config.other.greeting.enable_greeting}) */ ?>>
+<th:block th:if="${theme.config.other.greeting.enable_greeting}">
     <div id="greetingBox"></div>
     <style>
         #greetingBox {

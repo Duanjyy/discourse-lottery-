@@ -1,4 +1,6 @@
+<?php get_header(); ?>
 <!-- 标签 -->
 <div class="card-widget card-tags">
-    <th:block <?php get_template_part("modules/widgets/aside/contain/tags-contain"); ?>/>
+    <?php get_template_part("modules/widgets/aside/contain/tags-contain"); ?>
 </div>
+<?php get_footer(); ?>

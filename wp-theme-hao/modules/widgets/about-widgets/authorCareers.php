@@ -9,136 +9,136 @@
                 <div class="tags-group-all">
                     <!--  banners 使用默认值-->
                     <div class="tags-group-wrapper"
-                         <?php /* if(${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'default')}) */ ?>>
+                         th:if="${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'default')}">
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#989bf8">
-                                <img th:src="${assets_link + '/images/icons/AfterEffect.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/AfterEffect.png"
                                      title="AfterEffect">
                             </div>
                             <div class="tags-group-icon" style="background:#fff">
-                                <img th:src="${assets_link + '/images/icons/Sketch.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Sketch.png"
                                      title="Sketch">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#57b6e6">
-                                <img th:src="${assets_link + '/images/icons/Docker.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Docker.png"
                                      title="Docker">
                             </div>
                             <div class="tags-group-icon" style="background:#4082c3">
-                                <img th:src="${assets_link + '/images/icons/Photoshop.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Photoshop.png"
                                      title="Photoshop">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#fff">
-                                <img th:src="${assets_link + '/images/icons/FinalCutPro.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/FinalCutPro.png"
                                      title="FinalCutPro">
                             </div>
                             <div class="tags-group-icon" style="background:#fff">
-                                <img th:src="${assets_link + '/images/icons/Python.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Python.png"
                                      title="Python">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#eb6840">
-                                <img th:src="${assets_link + '/images/icons/Swift.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Swift.png"
                                      title="Swift">
                             </div>
                             <div class="tags-group-icon" style="background:#8f55ba">
-                                <img th:src="${assets_link + '/images/icons/Principle.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Principle.png"
                                      title="Principle">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#f29e39">
-                                <img th:src="${assets_link + '/images/icons/illustrator.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/illustrator.png"
                                      title="illustrator">
                             </div>
                             <div class="tags-group-icon" style="background:#2c51db">
-                                <img th:src="${assets_link + '/images/icons/CSS3.png'}" title="CSS3">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/CSS3.png" title="CSS3">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#f7cb4f">
-                                <img th:src="${assets_link + '/images/icons/JS.png'}" title="JS">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/JS.png" title="JS">
                             </div>
                             <div class="tags-group-icon" style="background:#e9572b">
-                                <img th:src="${assets_link + '/images/icons/HTML.png'}" title="HTML">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/HTML.png" title="HTML">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#df5b40">
-                                <img th:src="${assets_link + '/images/icons/Git.webp'}" title="Git">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Git.webp" title="Git">
                             </div>
                             <div class="tags-group-icon" style="background:#e65164">
-                                <img th:src="${assets_link + '/images/icons/Apifox.webp'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Apifox.webp"
                                      title="Apifox">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#989bf8">
-                                <img th:src="${assets_link + '/images/icons/AfterEffect.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/AfterEffect.png"
                                      title="AfterEffect">
                             </div>
                             <div class="tags-group-icon" style="background:#fff">
-                                <img th:src="${assets_link + '/images/icons/Sketch.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Sketch.png"
                                      title="Sketch">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#57b6e6">
-                                <img th:src="${assets_link + '/images/icons/Docker.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Docker.png"
                                      title="Docker">
                             </div>
                             <div class="tags-group-icon" style="background:#4082c3">
-                                <img th:src="${assets_link + '/images/icons/Photoshop.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Photoshop.png"
                                      title="Photoshop">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#fff">
-                                <img th:src="${assets_link + '/images/icons/FinalCutPro.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/FinalCutPro.png"
                                      title="FinalCutPro">
                             </div>
                             <div class="tags-group-icon" style="background:#fff">
-                                <img th:src="${assets_link + '/images/icons/Python.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Python.png"
                                      title="Python">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#eb6840">
-                                <img th:src="${assets_link + '/images/icons/Swift.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Swift.png"
                                      title="Swift">
                             </div>
                             <div class="tags-group-icon" style="background:#8f55ba">
-                                <img th:src="${assets_link + '/images/icons/Principle.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Principle.png"
                                      title="Principle">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#f29e39">
-                                <img th:src="${assets_link + '/images/icons/illustrator.png'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/illustrator.png"
                                      title="illustrator">
                             </div>
                             <div class="tags-group-icon" style="background:#2c51db">
-                                <img th:src="${assets_link + '/images/icons/CSS3.png'}" title="CSS3">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/CSS3.png" title="CSS3">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#f7cb4f">
-                                <img th:src="${assets_link + '/images/icons/JS.png'}" title="JS">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/JS.png" title="JS">
                             </div>
                             <div class="tags-group-icon" style="background:#e9572b">
-                                <img th:src="${assets_link + '/images/icons/HTML.png'}" title="HTML">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/HTML.png" title="HTML">
                             </div>
                         </div>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#df5b40">
-                                <img th:src="${assets_link + '/images/icons/Git.webp'}" title="Git">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Git.webp" title="Git">
                             </div>
                             <div class="tags-group-icon" style="background:#e65164">
-                                <img th:src="${assets_link + '/images/icons/Apifox.webp'}"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Apifox.webp"
                                      title="Apifox">
                             </div>
                         </div>
@@ -146,10 +146,10 @@
 
                     <!--  banners 使用默认值-->
                     <div class="tags-group-wrapper"
-                         <?php /* if(${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'techStack')}) */ ?>
+                         th:if="${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'techStack')}"
                          th:with="techs = ${theme.config.top.BannerLeft.techStack}">
-                        <th:block <?php /* loop */ ?>>
-                            <div class="tags-group-icon-pair" <?php /* if(${iterStat.odd}) */ ?>>
+                        <th:block <?php /* loop over tech,iterStat : ${techs} */ ?>>
+                            <div class="tags-group-icon-pair" th:if="${iterStat.odd}">
                                 <div class="tags-group-icon"
                                      th:style="'background:' + ${techOdd.background}"
                                      th:with="techOdd = ${techs.get(iterStat.index - 1)}">
@@ -170,12 +170,12 @@
 
                 <!--  banners 使用默认值-->
                 <div class="skills-list"
-                     <?php /* if(${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'default')}) */ ?>
+                     th:if="${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'default')}"
                      th:with="techs = ${theme.config.top.BannerLeft.techStack}">
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#989bf8">
-                            <img th:src="${assets_link + '/images/icons/AfterEffect.png'}"
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/AfterEffect.png"
                                  title="AfterEffect">
                         </div>
                         <div class="skill-name"><span>AfterEffect</span></div>
@@ -183,28 +183,28 @@
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#ffffff">
-                            <img th:src="${assets_link + '/images/icons/Sketch.png'}" title="Sketch">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Sketch.png" title="Sketch">
                         </div>
                         <div class="skill-name"><span>Sketch</span></div>
                     </div>
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#57b6e6">
-                            <img th:src="${assets_link + '/images/icons/Docker.png'}" title="Docker">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Docker.png" title="Docker">
                         </div>
                         <div class="skill-name"><span>Docker</span></div>
                     </div>
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#4082c3">
-                            <img th:src="${assets_link + '/images/icons/Photoshop.png'}" title="Photoshop">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Photoshop.png" title="Photoshop">
                         </div>
                         <div class="skill-name"><span>Photoshop</span></div>
                     </div>
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#ffffff">
-                            <img th:src="${assets_link + '/images/icons/FinalCutPro.png'}"
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/FinalCutPro.png"
                                  title="FinalCutPro">
                         </div>
                         <div class="skill-name"><span>FinalCutPro</span></div>
@@ -212,28 +212,28 @@
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#ffffff">
-                            <img th:src="${assets_link + '/images/icons/Python.png'}" title="Python">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Python.png" title="Python">
                         </div>
                         <div class="skill-name"><span>Python</span></div>
                     </div>
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#eb6840">
-                            <img th:src="${assets_link + '/images/icons/Swift.png'}" title="Swift">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Swift.png" title="Swift">
                         </div>
                         <div class="skill-name"><span>Swift</span></div>
                     </div>
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#8f55ba">
-                            <img th:src="${assets_link + '/images/icons/Principle.png'}" title="Principle">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Principle.png" title="Principle">
                         </div>
                         <div class="skill-name"><span>Principle</span></div>
                     </div>
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#f29e39">
-                            <img th:src="${assets_link + '/images/icons/illustrator.png'}"
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/illustrator.png"
                                  title="illustrator">
                         </div>
                         <div class="skill-name"><span>illustrator</span></div>
@@ -241,35 +241,35 @@
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#2c51db">
-                            <img th:src="${assets_link + '/images/icons/CSS3.png'}" title="CSS3">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/CSS3.png" title="CSS3">
                         </div>
                         <div class="skill-name"><span>CSS3</span></div>
                     </div>
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#f7cb4f">
-                            <img th:src="${assets_link + '/images/icons/JS.png'}" title="JS">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/JS.png" title="JS">
                         </div>
                         <div class="skill-name"><span>JS</span></div>
                     </div>
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#e9572b">
-                            <img th:src="${assets_link + '/images/icons/HTML.png'}" title="HTML">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/HTML.png" title="HTML">
                         </div>
                         <div class="skill-name"><span>HTML</span></div>
                     </div>
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#df5b40">
-                            <img th:src="${assets_link + '/images/icons/Git.webp'}" title="Git">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Git.webp" title="Git">
                         </div>
                         <div class="skill-name"><span>Git</span></div>
                     </div>
 
                     <div class="skill-info">
                         <div class="skill-icon" style="background:#1f1f1f">
-                            <img th:src="${assets_link + '/images/icons/Apifox.webp'}" title="Apifox">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/Apifox.webp" title="Apifox">
                         </div>
                         <div class="skill-name"><span>Apifox</span></div>
                     </div>
@@ -277,9 +277,9 @@
                     <div class="etc">...</div>
                 </div>
                 <div class="skills-list"
-                     <?php /* if(${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'techStack')}) */ ?>
+                     th:if="${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'techStack')}"
                      th:with="techs = ${theme.config.top.BannerLeft.techStack}">
-                    <th:block <?php /* loop */ ?>>
+                    <th:block <?php /* loop over tech : ${techs} */ ?>>
                         <div class="skill-info">
                             <div class="skill-icon" th:style="'background:' + ${tech.background}">
                                 <img th:src="@{${tech.url}}" th:title="${tech.name}">
@@ -300,9 +300,9 @@
             <span class="author-content-item-title"
                   th:text="${theme.config.about.authorCareers.authorCareersTitle}">无限进步</span>
             <div class="careers-group"
-                 <?php /* if(${not #lists.isEmpty(theme.config.about.authorCareers.authorCareersTags)}) */ ?>
+                 th:if="${not #lists.isEmpty(theme.config.about.authorCareers.authorCareersTags)}"
                  th:with="careersTags = ${theme.config.about.authorCareers.authorCareersTags}">
-                <div class="careers-item" <?php /* loop */ ?>>
+                <div class="careers-item" <?php /* loop over tag : ${careersTags} */ ?>>
                     <div class="circle" th:style="'background:' + ${tag.background}"></div>
                     <div class="name" th:text="${tag.desc}"></div>
                 </div>

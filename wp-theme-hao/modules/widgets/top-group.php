@@ -3,8 +3,8 @@
      th:with='topGroupPosts = ${postFinder.list(1,6)},
     postRandomImg=${#strings.contains(theme.config.layout.postRandomImg,"?") ? theme.config.layout.postRandomImg+"&" : theme.config.layout.postRandomImg+"?"}'>
     <div class="recent-post-group">
-        <div class="recent-post-item" <?php /* loop */ ?>
-             <?php /* if(${#strings.equals(theme.config.top.BannerRight.recommendPost, 'latest')}) */ ?>>
+        <div class="recent-post-item" <?php /* loop over post,iter : ${topGroupPosts} */ ?>
+             th:if="${#strings.equals(theme.config.top.BannerRight.recommendPost, 'latest')}">
 
             <div class="post_cover" th:classappend="${iter.index % 2 == 0 ? 'left_radius' : 'right_radius'}">
                 <a th:href="@{<?php the_permalink(); ?>}" th:title="<?php the_title(); ?>">
@@ -23,8 +23,8 @@
             </div>
         </div>
         <!-- 自定义的文章右上角的推荐文章 -->
-        <div class="recent-post-item" <?php /* loop */ ?>
-             <?php /* if(${#strings.equals(theme.config.top.BannerRight.recommendPost, 'custom') && not #strings.isEmpty(cuscomPost.post) }) */ ?>>
+        <div class="recent-post-item" <?php /* loop over cuscomPost,iter : ${theme.config.top.BannerRight.recommendPostCustom} */ ?>
+             th:if="${#strings.equals(theme.config.top.BannerRight.recommendPost, 'custom') && not #strings.isEmpty(cuscomPost.post) }">
             <th:block th:with="post = ${postFinder.getByName(cuscomPost.post)}">
                 <div class="post_cover" th:classappend="${iter.index % 2 == 0 ? 'left_radius' : 'right_radius'}">
                     <a th:href="@{<?php the_permalink(); ?>}" th:title="<?php the_title(); ?>">
@@ -46,7 +46,7 @@
     </div>
 
     <!-- 今日推荐 -->
-    <div class="todayCard" id="todayCard" <?php /* if(${theme.config.top.BannerRight.todayRecommend}) */ ?>
+    <div class="todayCard" id="todayCard" th:if="${theme.config.top.BannerRight.todayRecommend}"
          th:attr="onclick='javascript:window.open(\''+ ${theme.config.top.BannerRight.todayRecommendContent.todayRecommendUrl} +'\')'">
         <div class="todayCard-info">
             <div class="todayCard-tips"

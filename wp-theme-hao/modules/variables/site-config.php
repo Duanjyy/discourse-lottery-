@@ -64,13 +64,13 @@
                 linksUrl: [[${ theme.config.link.linksUrl }]],
                 linksNum: [[${theme.config.footer.footer_group.num}]],
             },
-            jQuery: [[${assets_link + '/libs/jquery/jquery.min.js'}]],
+            jQuery: [[<?php echo get_template_directory_uri(); ?>/assets/libs/jquery/jquery.min.js]],
             justifiedGallery: {
                 js: 'https://npm.elemecdn.com/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
                 css: 'https://npm.elemecdn.com/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
             },
             fancybox: {
-                js: [[${assets_link + '/libs/fancybox/jquery.fancybox.min.js'}]],
+                js: [[<?php echo get_template_directory_uri(); ?>/assets/libs/fancybox/jquery.fancybox.min.js]],
                 css: '/null'
             },
             comments: {

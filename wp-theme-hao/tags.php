@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html  
-      th:replace="~{modules/layouts/layout :: layout(content = ~{::content},htmlType = 'tag',title = ${'标签' + ' | ' + site.title}, head = ~{::head})}">
+<?php get_header(); ?>
 
-<th:block th:fragment="head">
-    <th:block th:replace="~{modules/common/open-graph :: open-graph(_title = '标签',
-                _permalink = '/tags',
-                _cover = ${theme.config.other.opengraph.image},
-                _excerpt = ${site.seo.description},
-                _type = 'website')}"></th:block>
-</th:block>
-<th:block th:fragment="content">
 
     <div class="page" id="body-wrap">
         <header class="not-top-img" id="page-header">
-            <nav <?php get_template_part("modules/nav :: nav(title = '标签')"); ?>></nav>
+            <?php get_template_part("modules/nav"); ?>
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page"><h1 class="page-title" style="display: inline;">标签</h1>
                 <div class="tag-cloud-title is-center">标签 - <span class="tag-cloud-amount">0</span></div>
                 <div class="tag-cloud-list is-center">
-                    <a <?php /* loop */ ?>
+                    <a <?php /* loop over tagItem : ${tagFinder.listAll()} */ ?>
                        th:href="@{${tagItem.status.permalink}}"
                        th:id="${tagItem.spec.displayName}" th:style="'font-size: 1em; color:' + ${tagItem.spec.color} ">
                         <span class="tags-punctuation">[[${tagItem.spec.displayName}]]</span>
@@ -31,9 +21,8 @@
             </div>
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>/>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
 
-</html>
+<?php get_footer(); ?>

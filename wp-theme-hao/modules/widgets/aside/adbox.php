@@ -1,5 +1,5 @@
 <!-- 广告 -->
-<div class="card-widget" <?php /* if(${theme.config.sidebar.adbox.adType=='google'}) */ ?>>
+<div class="card-widget" th:if="${theme.config.sidebar.adbox.adType=='google'}">
     <div class="item-headline"><span>广告</span></div>
     <script async th:src="${'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + theme.config.sidebar.adbox.ad_google.ad_client}"
             crossorigin="anonymous"></script>
@@ -16,7 +16,7 @@
 
 </div>
 
-<div class="card-widget" <?php /* if(${theme.config.sidebar.adbox.adType=='customAd'}) */ ?>>
+<div class="card-widget" th:if="${theme.config.sidebar.adbox.adType=='customAd'}">
     <div class="item-headline"><span th:text="${theme.config.sidebar.adbox.ad_custom.ad_title}"></span></div>
     <a th:href="${theme.config.sidebar.adbox.ad_custom.ad_redirect_url}" target="_blank">
         <img th:src="${theme.config.sidebar.adbox.ad_custom.ad_pic_url}" alt="自定义广告">

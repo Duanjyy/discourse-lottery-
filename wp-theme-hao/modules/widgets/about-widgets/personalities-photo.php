@@ -5,10 +5,10 @@
     <div class="author-content-item personalities" th:with="personality = ${theme.config.about.personalities}">
         <div class="author-content-item-tips">性格</div>
 
-        <th:block <?php /* if(${personality == 'infp'}) */ ?>>
+        <th:block th:if="${personality == 'infp'}">
             <span class="author-content-item-title">调停者</span>
             <div class="title2" style="color: #33a474;">INFP</div>
-            <div class="image"><img th:src="${assets_link + '/images/infp.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/infp.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -17,10 +17,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'intj'}) */ ?>>
+        <th:block th:if="${personality == 'intj'}">
             <span class="author-content-item-title">建筑师</span>
             <div class="title2" style="color: #88619a;">INTJ</div>
-            <div class="image"><img th:src="${assets_link + '/images/intj.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/intj.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -29,10 +29,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'intp'}) */ ?>>
+        <th:block th:if="${personality == 'intp'}">
             <span class="author-content-item-title">逻辑学家</span>
             <div class="title2" style="color: #88619a;">INTP</div>
-            <div class="image"><img th:src="${assets_link + '/images/intp.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/intp.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -41,10 +41,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'entj'}) */ ?>>
+        <th:block th:if="${personality == 'entj'}">
             <span class="author-content-item-title">指挥官</span>
             <div class="title2" style="color: #88619a;">ENTJ</div>
-            <div class="image"><img th:src="${assets_link + '/images/entj.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/entj.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -53,10 +53,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'entp'}) */ ?>>
+        <th:block th:if="${personality == 'entp'}">
             <span class="author-content-item-title">辩论家</span>
             <div class="title2" style="color: #88619a;">ENTP</div>
-            <div class="image"><img th:src="${assets_link + '/images/entp.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/entp.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -65,10 +65,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'enfj'}) */ ?>>
+        <th:block th:if="${personality == 'enfj'}">
             <span class="author-content-item-title">主人公</span>
             <div class="title2" style="color: #33a474;">ENFJ</div>
-            <div class="image"><img th:src="${assets_link + '/images/enfj.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/enfj.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -77,10 +77,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'enfp'}) */ ?>>
+        <th:block th:if="${personality == 'enfp'}">
             <span class="author-content-item-title">竞选者</span>
             <div class="title2" style="color: #33a474;">ENFP</div>
-            <div class="image"><img th:src="${assets_link + '/images/enfp.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/enfp.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -89,10 +89,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'estj'}) */ ?>>
+        <th:block th:if="${personality == 'estj'}">
             <span class="author-content-item-title">总经理</span>
             <div class="title2" style="color: #4298b4;">ESTJ</div>
-            <div class="image"><img th:src="${assets_link + '/images/estj.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/estj.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -101,10 +101,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'estp'}) */ ?>>
+        <th:block th:if="${personality == 'estp'}">
             <span class="author-content-item-title">企业家</span>
             <div class="title2" style="color: #e4ae3a;">ESTP</div>
-            <div class="image"><img th:src="${assets_link + '/images/estp.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/estp.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -113,10 +113,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'esfj'}) */ ?>>
+        <th:block th:if="${personality == 'esfj'}">
             <span class="author-content-item-title">执政官</span>
             <div class="title2" style="color: #4298b4;">ESFJ</div>
-            <div class="image"><img th:src="${assets_link + '/images/esfj.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/esfj.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -125,10 +125,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'esfp'}) */ ?>>
+        <th:block th:if="${personality == 'esfp'}">
             <span class="author-content-item-title">表演者</span>
             <div class="title2" style="color: #e4ae3a;">ESFP</div>
-            <div class="image"><img th:src="${assets_link + '/images/esfp.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/esfp.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -137,10 +137,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'infj'}) */ ?>>
+        <th:block th:if="${personality == 'infj'}">
             <span class="author-content-item-title">提倡者</span>
             <div class="title2" style="color: #33a474;">INFJ</div>
-            <div class="image"><img th:src="${assets_link + '/images/infj.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/infj.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -149,10 +149,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'istj'}) */ ?>>
+        <th:block th:if="${personality == 'istj'}">
             <span class="author-content-item-title">物流师</span>
             <div class="title2" style="color: #4298b4;">ISTJ</div>
-            <div class="image"><img th:src="${assets_link + '/images/istj.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/istj.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -161,10 +161,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'istp'}) */ ?>>
+        <th:block th:if="${personality == 'istp'}">
             <span class="author-content-item-title">鉴赏家</span>
             <div class="title2" style="color: #e4ae3a;">ISTP</div>
-            <div class="image"><img th:src="${assets_link + '/images/istp.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/istp.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -173,10 +173,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'isfj'}) */ ?>>
+        <th:block th:if="${personality == 'isfj'}">
             <span class="author-content-item-title">守卫者</span>
             <div class="title2" style="color: #4298b4;">ISFJ</div>
-            <div class="image"><img th:src="${assets_link + '/images/isfj.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/isfj.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>
@@ -185,10 +185,10 @@
             </div>
         </th:block>
 
-        <th:block <?php /* if(${personality == 'isfp'}) */ ?>>
+        <th:block th:if="${personality == 'isfp'}">
             <span class="author-content-item-title">探险家</span>
             <div class="title2" style="color: #e4ae3a;">ISFP</div>
-            <div class="image"><img th:src="${assets_link + '/images/isfp.svg'}" style="transform: rotateY(180deg);">
+            <div class="image"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/isfp.svg" style="transform: rotateY(180deg);">
             </div>
             <div class="post-tips">在 <a href="https://www.16personalities.com/" rel="noopener nofollow"
                                          target="_blank">16personalities</a>

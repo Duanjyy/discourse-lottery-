@@ -9,7 +9,7 @@
          (${iStat.even} ? 'even' : 'odd') + ' ' +
          (${post.spec.pinned} ? 'pinned-post-item' : '')"
          th:attr="onclick='pjax.loadUrl(\''+ @{<?php the_permalink(); ?>} +'\')'"
-         <?php /* loop */ ?>>
+         <?php /* loop over post,iStat : ${postItems} */ ?>>
         <div class="post_cover left_radius">
             <a th:attr="title=<?php the_title(); ?>" th:href="@{<?php the_permalink(); ?>}">
                 <img class="post_bg"
@@ -22,10 +22,10 @@
         <div class="recent-post-info">
             <div class="recent-post-info-top">
                 <div class="recent-post-info-top-tips">
-                    <span class="sticky-warp sticky" <?php /* if(${post.spec.pinned}) */ ?>>置顶</span></span>
+                    <span class="sticky-warp sticky" th:if="${post.spec.pinned}">置顶</span></span>
                     <!-- 类别非空时 -->
-                    <th:block <?php /* if(${not #lists.isEmpty(post.categories)}) */ ?>>
-                        <span <?php /* loop */ ?> th:href="@{${category.status.permalink}}"
+                    <th:block th:if="${not #lists.isEmpty(post.categories)}">
+                        <span <?php /* loop over category : ${post.categories} */ ?> th:href="@{${category.status.permalink}}"
                               th:text="${category.spec.displayName}" th:title="${category.spec.displayName}"
                               class="original"></span>
                     </th:block>
@@ -43,11 +43,11 @@
             
             <div class="article-meta-wrap">
                 <!-- tag -->
-                <th:block <?php /* if(${not #lists.isEmpty(post.tags)}) */ ?>>
+                <th:block th:if="${not #lists.isEmpty(post.tags)}">
                     <span class="article-meta tags">
                         <a class="article-meta__tags" event.cancelbubble
                            onclick="window.event.cancelBubble=!0"
-                           <?php /* loop */ ?>
+                           <?php /* loop over tag : ${post.tags} */ ?>
                            th:href="@{${tag.status.permalink}}"
                            th:title="${tag.spec.displayName}">
                             <span class="tags-punctuation">[[${#strings.trim(tag.spec.displayName)}]]</span>
@@ -59,19 +59,19 @@
                     <i class="far fa-calendar-alt"></i>
                     <time style="display: inline;"
                           th:datetime="${post.spec.publishTime}"
-                          <?php /* if(${days > 30}) */ ?>
+                          th:if="${days > 30}"
                           th:text="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}"
                           th:title="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}+创建">
                     </time>
                     <time style="display: inline;"
                           th:datetime="${post.spec.publishTime}"
-                          <?php /* if(${days <= 30 && days > 0}) */ ?>
+                          th:if="${days <= 30 && days > 0}"
                           th:text="${days}+天前"
                           th:title="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}+创建">
                     </time>
                     <time style="display: inline;"
                           th:datetime="${post.spec.publishTime}"
-                          <?php /* if(${days == 0}) */ ?>
+                          th:if="${days == 0}"
                           th:text="最近"
                           th:title="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}+创建">
                     </time>
@@ -81,7 +81,7 @@
         </div>
         
         <!-- 文章卡片擦亮效果 -->
-        <style <?php /* if(${theme.config.layout.articleCardPolish}) */ ?>>
+        <style th:if="${theme.config.layout.articleCardPolish}">
             #recent-posts > .recent-post-item:not(a)::before {
                 content: "";
                 position: absolute;
@@ -102,6 +102,6 @@
     </div>
     
     <!-- 分页 -->
-    <div th:replace="~{modules/widgets/page :: page('',${posts},true,'')}"></div>
+    <?php get_template_part("modules/widgets/page"); ?>
 
 </th:block>

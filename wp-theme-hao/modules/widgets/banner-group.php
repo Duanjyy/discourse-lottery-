@@ -4,171 +4,171 @@
         <div class="tags-group-all">
             <!--  banners 使用默认值-->
             <div class="tags-group-wrapper"
-                 <?php /* if(${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'default')}) */ ?>>
+                 th:if="${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'default')}">
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#989bf8">
-                        <img th:with=" img = ${assets_link + '/images/icons/AfterEffect.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/AfterEffect.png"
                              th:src="${img}"
                              title="AfterEffect">
                     </div>
                     <div class="tags-group-icon" style="background:#fff">
-                        <img th:with=" img = ${assets_link + '/images/icons/Sketch.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Sketch.png"
                              th:src="${img}"
                              title="Sketch">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#57b6e6">
-                        <img th:with=" img = ${assets_link + '/images/icons/Docker.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Docker.png"
                              th:src="${img}"
                              title="Docker">
                     </div>
                     <div class="tags-group-icon" style="background:#4082c3">
-                        <img th:with=" img = ${assets_link + '/images/icons/Photoshop.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Photoshop.png"
                              th:src="${img}"
                              title="Photoshop">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#fff">
-                        <img th:with=" img = ${assets_link + '/images/icons/FinalCutPro.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/FinalCutPro.png"
                              th:src="${img}"
                              title="FinalCutPro">
                     </div>
                     <div class="tags-group-icon" style="background:#fff">
-                        <img th:with=" img = ${assets_link + '/images/icons/Python.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Python.png"
                              th:src="${img}"
                              title="Python">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#eb6840">
-                        <img th:with=" img = ${assets_link + '/images/icons/Swift.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Swift.png"
                              th:src="${img}"
                              title="Swift">
                     </div>
                     <div class="tags-group-icon" style="background:#8f55ba">
-                        <img th:with=" img = ${assets_link + '/images/icons/Principle.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Principle.png"
                              th:src="${img}"
                              title="Principle">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#f29e39">
-                        <img th:with=" img = ${assets_link + '/images/icons/illustrator.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/illustrator.png"
                              th:src="${img}"
                              title="illustrator">
                     </div>
                     <div class="tags-group-icon" style="background:#2c51db">
-                        <img th:with=" img = ${assets_link + '/images/icons/CSS3.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/CSS3.png"
                              th:src="${img}"
                              title="CSS3">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#f7cb4f">
-                        <img th:with=" img = ${assets_link + '/images/icons/JS.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/JS.png"
                              th:src="${img}"
                              title="JS">
                     </div>
                     <div class="tags-group-icon" style="background:#e9572b">
-                        <img th:with=" img = ${assets_link + '/images/icons/HTML.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/HTML.png"
                              th:src="${img}"
                              title="HTML">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#df5b40">
-                        <img th:with=" img = ${assets_link + '/images/icons/Git.webp'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Git.webp"
                              th:src="${img}"
                              title="Git">
                     </div>
                     <div class="tags-group-icon" style="background:#e65164">
-                        <img th:with=" img = ${assets_link + '/images/icons/Apifox.webp'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Apifox.webp"
                              th:src="${img}"
                              title="Apifox">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#989bf8">
-                        <img th:with=" img = ${assets_link + '/images/icons/AfterEffect.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/AfterEffect.png"
                              th:src="${img}"
                              title="AfterEffect">
                     </div>
                     <div class="tags-group-icon" style="background:#fff">
-                        <img th:with=" img = ${assets_link + '/images/icons/Sketch.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Sketch.png"
                              th:src="${img}"
                              title="Sketch">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#57b6e6">
-                        <img th:with=" img = ${assets_link + '/images/icons/Docker.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Docker.png"
                              th:src="${img}"
                              title="Docker">
                     </div>
                     <div class="tags-group-icon" style="background:#4082c3">
-                        <img th:with=" img = ${assets_link + '/images/icons/Photoshop.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Photoshop.png"
                              th:src="${img}"
                              title="Photoshop">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#fff">
-                        <img th:with=" img = ${assets_link + '/images/icons/FinalCutPro.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/FinalCutPro.png"
                              th:src="${img}"
                              title="FinalCutPro">
                     </div>
                     <div class="tags-group-icon" style="background:#fff">
-                        <img th:with=" img = ${assets_link + '/images/icons/Python.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Python.png"
                              th:src="${img}"
                              title="Python">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#eb6840">
-                        <img th:with=" img = ${assets_link + '/images/icons/Swift.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Swift.png"
                              th:src="${img}"
                              title="Swift">
                     </div>
                     <div class="tags-group-icon" style="background:#8f55ba">
-                        <img th:with=" img = ${assets_link + '/images/icons/Principle.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Principle.png"
                              th:src="${img}"
                              title="Principle">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#f29e39">
-                        <img th:with=" img = ${assets_link + '/images/icons/illustrator.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/illustrator.png"
                              th:src="${img}"
                              title="illustrator">
                     </div>
                     <div class="tags-group-icon" style="background:#2c51db">
-                        <img th:with=" img = ${assets_link + '/images/icons/CSS3.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/CSS3.png"
                              th:src="${img}"
                              title="CSS3">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#f7cb4f">
-                        <img th:with=" img = ${assets_link + '/images/icons/JS.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/JS.png"
                              th:src="${img}"
                              title="JS">
                     </div>
                     <div class="tags-group-icon" style="background:#e9572b">
-                        <img th:with=" img = ${assets_link + '/images/icons/HTML.png'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/HTML.png"
                              th:src="${img}"
                              title="HTML">
                     </div>
                 </div>
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#df5b40">
-                        <img th:with=" img = ${assets_link + '/images/icons/Git.webp'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Git.webp"
                              th:src="${img}"
                              title="Git">
                     </div>
                     <div class="tags-group-icon" style="background:#e65164">
-                        <img th:with=" img = ${assets_link + '/images/icons/Apifox.webp'}"
+                        <img th:with=" img = <?php echo get_template_directory_uri(); ?>/assets/images/icons/Apifox.webp"
                              th:src="${img}"
                              title="Apifox">
                     </div>
@@ -177,10 +177,10 @@
             
             <!--  banners 使用默认值-->
             <div class="tags-group-wrapper"
-                 <?php /* if(${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'techStack')}) */ ?>
+                 th:if="${#strings.equals(theme.config.top.BannerLeft.bannersBackground, 'techStack')}"
                  th:with="techs = ${theme.config.top.BannerLeft.techStack}">
-                <th:block <?php /* loop */ ?>>
-                    <div class="tags-group-icon-pair" <?php /* if(${iterStat.odd}) */ ?>>
+                <th:block <?php /* loop over tech,iterStat : ${techs} */ ?>>
+                    <div class="tags-group-icon-pair" th:if="${iterStat.odd}">
                         <div class="tags-group-icon" th:style="'background:' + ${techOdd.background}"
                              th:with="techOdd = ${techs.get(iterStat.index - 1)}">
                             <img th:with=" img = @{${techOdd.url}}" th:src="${img}"
@@ -197,26 +197,26 @@
             </div>
         </div>
         <div class="banners-title">
-            <th:block <?php /* if(${not #strings.isEmpty(theme.config.top.BannerLeft.bannersTitleBig)}) */ ?>
+            <th:block th:if="${not #strings.isEmpty(theme.config.top.BannerLeft.bannersTitleBig)}"
                       th:utext="${theme.config.top.BannerLeft.bannersTitleBig}"></th:block>
             <div class="banners-title-small"
-                 <?php /* if(${not #strings.isEmpty(theme.config.top.BannerLeft.bannersTitleSmall)}) */ ?>
+                 th:if="${not #strings.isEmpty(theme.config.top.BannerLeft.bannersTitleSmall)}"
                  th:utext="${theme.config.top.BannerLeft.bannersTitleSmall}"></div>
         </div>
-        <div class="banners-link" <?php /* if(${not #lists.isEmpty(theme.config.top.BannerLeft.categoryGroup)}) */ ?>
+        <div class="banners-link" th:if="${not #lists.isEmpty(theme.config.top.BannerLeft.categoryGroup)}"
              th:with="groups = ${theme.config.top.BannerLeft.categoryGroup}">
-            <div <?php /* if(${#lists.size(theme.config.top.BannerLeft.categoryGroup) >= 1}) */ ?>>
+            <div th:if="${#lists.size(theme.config.top.BannerLeft.categoryGroup) >= 1}">
                 <a class="banners-link-btn blb-hot" th:href="@{${groups[0].url}}">
-                    <i <?php /* if(${not #strings.startsWith(groups[0].icon, 'http')}) */ ?> th:class="${groups[0].icon}"></i>
-                    <img <?php /* if(${#strings.startsWith(groups[0].icon, 'http')}) */ ?> th:src="@{${groups[0].icon}}"
+                    <i th:if="${not #strings.startsWith(groups[0].icon, 'http')}" th:class="${groups[0].icon}"></i>
+                    <img th:if="${#strings.startsWith(groups[0].icon, 'http')}" th:src="@{${groups[0].icon}}"
                          alt="icon"/>
                     <div class="banners-link-title">[[${groups[0].title}]]</div>
                 </a>
             </div>
-            <div <?php /* if(${#lists.size(theme.config.top.BannerLeft.categoryGroup) > 1}) */ ?>>
+            <div th:if="${#lists.size(theme.config.top.BannerLeft.categoryGroup) > 1}">
                 <a class="banners-link-btn blb-top" th:href="@{${groups[1].url}}">
-                    <i <?php /* if(${not #strings.startsWith(groups[1].icon, 'http')}) */ ?> th:class="${groups[1].icon}"></i>
-                    <img <?php /* if(${#strings.startsWith(groups[1].icon, 'http')}) */ ?> th:src="@{${groups[1].icon}}"
+                    <i th:if="${not #strings.startsWith(groups[1].icon, 'http')}" th:class="${groups[1].icon}"></i>
+                    <img th:if="${#strings.startsWith(groups[1].icon, 'http')}" th:src="@{${groups[1].icon}}"
                          alt="icon"/>
                     <div class="banners-link-title">[[${groups[1].title}]]</div>
                 </a>
@@ -226,28 +226,28 @@
     </div>
     
     <!-- category -->
-    <div class="categoryGroup" <?php /* if(${not #lists.isEmpty(theme.config.top.BannerLeft.categoryGroup)}) */ ?>>
-        <th:block <?php /* if(${not #lists.isEmpty(theme.config.top.BannerLeft.categoryGroup)}) */ ?>
+    <div class="categoryGroup" th:if="${not #lists.isEmpty(theme.config.top.BannerLeft.categoryGroup)}">
+        <th:block th:if="${not #lists.isEmpty(theme.config.top.BannerLeft.categoryGroup)}"
                   th:with="groups = ${theme.config.top.BannerLeft.categoryGroup}">
-            <div class="categoryItem" <?php /* if(${#lists.size(theme.config.top.BannerLeft.categoryGroup) >= 1}) */ ?>>
+            <div class="categoryItem" th:if="${#lists.size(theme.config.top.BannerLeft.categoryGroup) >= 1}">
                 <a class="categoryButton CB1 bikan" th:href="@{${groups[0].url}}">
                     <span class="categoryButtonText">[[${groups[0].title}]]</span>
-                    <i <?php /* if(${not #strings.startsWith(groups[0].icon, 'http')}) */ ?> th:class="${groups[0].icon}"></i>
-                    <img <?php /* if(${#strings.startsWith(groups[0].icon, 'http')}) */ ?> th:src="@{${groups[0].icon}}"
+                    <i th:if="${not #strings.startsWith(groups[0].icon, 'http')}" th:class="${groups[0].icon}"></i>
+                    <img th:if="${#strings.startsWith(groups[0].icon, 'http')}" th:src="@{${groups[0].icon}}"
                          alt="icon"/>
                 </a>
             </div>
-            <div class="categoryItem" <?php /* if(${#lists.size(theme.config.top.BannerLeft.categoryGroup) > 1}) */ ?>>
+            <div class="categoryItem" th:if="${#lists.size(theme.config.top.BannerLeft.categoryGroup) > 1}">
                 <a class="categoryButton remen" th:href="@{${groups[1].url}}">
                     <span class="categoryButtonText">[[${groups[1].title}]]</span>
-                    <i <?php /* if(${not #strings.startsWith(groups[1].icon, 'http')}) */ ?> th:class="${groups[1].icon}"></i>
-                    <img <?php /* if(${#strings.startsWith(groups[1].icon, 'http')}) */ ?> th:src="@{${groups[1].icon}}"
+                    <i th:if="${not #strings.startsWith(groups[1].icon, 'http')}" th:class="${groups[1].icon}"></i>
+                    <img th:if="${#strings.startsWith(groups[1].icon, 'http')}" th:src="@{${groups[1].icon}}"
                          alt="icon"/>
                 </a>
             </div>
         </th:block>
     </div>
-    <th:block <?php /* if(${#lists.size(theme.config.top.BannerLeft.categoryGroup) >= 1}) */ ?>
+    <th:block th:if="${#lists.size(theme.config.top.BannerLeft.categoryGroup) >= 1}"
               th:with="groups = ${theme.config.top.BannerLeft.categoryGroup}">
         <style>
             a.categoryButton.bikan {
@@ -274,7 +274,7 @@
         </style>
     
     </th:block>
-    <th:block <?php /* if(${#lists.size(theme.config.top.BannerLeft.categoryGroup) > 1}) */ ?>
+    <th:block th:if="${#lists.size(theme.config.top.BannerLeft.categoryGroup) > 1}"
               th:with="groups = ${theme.config.top.BannerLeft.categoryGroup}">
         <style>
             a.categoryButton.remen {

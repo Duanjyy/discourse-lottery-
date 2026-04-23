@@ -16,7 +16,7 @@
                     <i class="haofont hao-icon-link"></i>
                     <span class="banner-button-text">申请友链</span>
                 </a>
-                <a <?php /* if(${pluginFinder.available('link-submit')}) */ ?>
+                <a th:if="${pluginFinder.available('link-submit')}"
                    class="banner-button" href="javascript:LinkSubmitWidget.open()" rel="external nofollow">
                     <i class="haofont hao-icon-link"></i>
                     <span class="banner-button-text">申请友链</span>
@@ -24,9 +24,9 @@
             </div>
             <div class="tags-group-all nowrapMove">
                 <div class="tags-group-wrapper">
-                    <th:block <?php /* loop */ ?>>
-                        <th:block <?php /* loop */ ?> <?php /* if(${group.links.size > 2}) */ ?>>
-                            <div class="tags-group-icon-pair" <?php /* if(${iterStat.even}) */ ?>>
+                    <th:block <?php /* loop over group : ${groups} */ ?>>
+                        <th:block <?php /* loop over link,iterStat : ${group.links} */ ?> th:if="${group.links.size > 2}">
+                            <div class="tags-group-icon-pair" th:if="${iterStat.even}">
                                 <a class="tags-group-icon" target="_blank" th:href="${linkOdd.spec.url}"
                                    th:title="${linkOdd.spec.displayName}"
                                    th:with="linkOdd = ${group.links.get(iterStat.index - 1)}">
@@ -50,26 +50,26 @@
         </div>
 
         <!--互动友链-->
-        <th:block th:replace="~{macro/links-canvas :: links-canvas(${groups})}" />
+        <?php get_template_part("macro/links-canvas"); ?>
 
         <div class="flink" id="article-container">
 
-            <th:block <?php /* loop */ ?>>
+            <th:block <?php /* loop over group,iterStat : ${groups} */ ?>>
 
-                <h2 <?php /* if(${not #lists.isEmpty(group.spec.displayName)}) */ ?>>
+                <h2 th:if="${not #lists.isEmpty(group.spec.displayName)}">
                     <a class="headerlink" th:href="'#'+${group.spec.displayName}+'-'+${group.links.size}"
                        th:title="${group.spec.displayName}+ '('+${group.links.size}+')'"></a>
                     [[${group.spec.displayName}]] ([[${group.links.size}]])
                 </h2>
 
-                <div class="flink-desc" <?php /* if(${not #strings.isEmpty(#annotations.get(group, 'description'))}) */ ?>>[[${#annotations.get(group, 'description')}]]</div>
+                <div class="flink-desc" th:if="${not #strings.isEmpty(#annotations.get(group, 'description'))}">[[${#annotations.get(group, 'description')}]]</div>
 
                 <!-- 第一个，使用卡片展示 -->
-                <div <?php /* if(${#strings.equals(#annotations.get(group, 'displayStyle'),'beautify') && not #lists.isEmpty(group.links)}) */ ?>
+                <div th:if="${#strings.equals(#annotations.get(group, 'displayStyle'),'beautify') && not #lists.isEmpty(group.links)}"
                      class="site-card-group">
 
-                    <div class="site-card" <?php /* loop */ ?>>
-                        <span <?php /* if(${not #strings.isEmpty(#annotations.get(link, 'label'))}) */ ?>
+                    <div class="site-card" <?php /* loop over link : ${group.links} */ ?>>
+                        <span th:if="${not #strings.isEmpty(#annotations.get(link, 'label'))}"
                               th:style="'background-color:' + ${#annotations.get(link,'labelColor')}"
                               class="site-card-tag">[[${#annotations.get(link, 'label')}]]</span>
 
@@ -101,9 +101,9 @@
                 </div>
 
                 <div class="flink-list"
-                     <?php /* if(${#strings.equals(#annotations.get(group, 'displayStyle'),'default') && not #lists.isEmpty(group.links)}) */ ?>>
-                    <div class="flink-list-item" <?php /* loop */ ?>>
-                        <span <?php /* if(${not #strings.isEmpty(#annotations.get(link, 'label'))}) */ ?>
+                     th:if="${#strings.equals(#annotations.get(group, 'displayStyle'),'default') && not #lists.isEmpty(group.links)}">
+                    <div class="flink-list-item" <?php /* loop over link : ${group.links} */ ?>>
+                        <span th:if="${not #strings.isEmpty(#annotations.get(link, 'label'))}"
                               th:style="'background-color:' + ${#annotations.get(link,'labelColor')}"
                               class="site-card-tag">[[${#annotations.get(link, 'label')}]]</span>
                         <a class="cf-friends-link" rel="external nofollow" target="_blank" th:href="${link.spec.url}"
@@ -125,8 +125,8 @@
                 </div>
 
                 <div class="flink-list mini"
-                     <?php /* if(${#strings.equals(#annotations.get(group, 'displayStyle'),'deprecated') && not #lists.isEmpty(group.links)}) */ ?>>
-                    <div class="flink-list-item" <?php /* loop */ ?>>
+                     th:if="${#strings.equals(#annotations.get(group, 'displayStyle'),'deprecated') && not #lists.isEmpty(group.links)}">
+                    <div class="flink-list-item" <?php /* loop over link : ${group.links} */ ?>>
                         <a class="cf-friends-link" rel="external nofollow" target="_blank" th:href="${link.spec.url}"
                            th:title="${link.spec.displayName}">
                             <img class="flink-avatar cf-friends-avatar"
@@ -146,7 +146,7 @@
 
             </th:block>
 
-            <th:block <?php /* if(${not #strings.isEmpty(theme.config.link.linksArticle)}) */ ?>
+            <th:block th:if="${not #strings.isEmpty(theme.config.link.linksArticle)}"
                       th:utext="${theme.config.link.linksArticle}"> </th:block>
 
             <script>
@@ -162,7 +162,7 @@
             </script>
             <script  src="<?php echo get_template_directory_uri(); ?>/assets/libs/fcircle/heo-fcircle3mini.js}"></script>
 
-            <th:block <?php /* if(${htmlType == 'page'}) */ ?> th:utext="${singlePage.content.content}">
+            <th:block th:if="${htmlType == 'page'}" th:utext="${singlePage.content.content}">
             </th:block>
 
         </div>

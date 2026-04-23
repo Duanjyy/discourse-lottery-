@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html 
-      th:replace="~{modules/layouts/layout :: layout(content = ~{::content}, htmlType = 'equipments',title = ${title + ' | ' + site.title}, head = ~{::head},_title = ${title})}">
-<th:block th:fragment="head">
-    <th:block th:replace="~{modules/common/open-graph :: open-graph(_title = ${_title},
-                _permalink = '/equipments',
-                _cover = ${theme.config.other.opengraph.image},
-                _excerpt = ${site.seo.description},
-                _type = 'website')}"></th:block>
-</th:block>
-<th:block th:fragment="content">
+<?php get_header(); ?>
+
     <div class="page" id="body-wrap">
 
         <!-- 头部导航栏 -->
         <header class="not-top-img" id="page-header">
-            <nav th:replace="~{modules/nav :: nav(title = ${_title})}"></nav>
+            <?php get_template_part("modules/nav"); ?>
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page">
@@ -23,13 +14,13 @@
                         detail = ${theme.config.equipment.detail},
                         buttonUrl = '',
                         buttonTitle = '')}" ></div>
-                <div id="equipment" <?php /* if(${not #lists.isEmpty(groups)}) */ ?>>
-                    <th:block <?php /* loop */ ?>>
+                <div id="equipment" th:if="${not #lists.isEmpty(groups)}">
+                    <th:block <?php /* loop over group : ${groups} */ ?>>
                         <div class="equipment-item">
                             <h2 class="equipment-item-title">[[${group.spec.displayName}]]</h2>
                             <div class="equipment-item-description">[[${group.spec.description}]]</div>
                             <div class="equipment-item-content" th:with="equipmentList = ${group.equipments}">
-                                <div class="equipment-item-content-item" <?php /* loop */ ?>>
+                                <div class="equipment-item-content-item" <?php /* loop over equipment : ${equipmentList} */ ?>>
                                     <div class="equipment-item-content-item-cover">
                                         <img class="equipment-item-content-item-image"
                                              th:alt="${equipment.spec.displayName}"
@@ -53,17 +44,5 @@
                                 </div>
                             </div>
                         </div>
-                    </th:block>
-                </div>
-            </div>
-        </main>
-        <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>/>
-        <!-- 卡片顶部气泡效果 -->
-        <script <?php /* if(${theme.config.other.bubbleEnable}) */ ?> async data-pjax
-                th:src="${assets_link + '/libs/canvas/bubble.js'}"></script>
-    </div>
-
-</th:block>
-
-</html>
+                    
+<?php get_footer(); ?>
