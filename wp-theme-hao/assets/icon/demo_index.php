@@ -1143,7 +1143,7 @@
           </blockquote>
           <p>Unicode 使用步骤如下：</p>
           <h3 id="-font-face">第一步：拷贝项目下面生成的 <code>@font-face</code></h3>
-<pre><code class="language-css"
+<pre><code class="language-css">
 >@font-face {
   font-family: 'haofont';
   src: url('iconfont.eot?t=1708243411223'); /* IE9 */
@@ -1155,7 +1155,7 @@
 }
 </code></pre>
           <h3 id="-iconfont-">第二步：定义使用 iconfont 的样式</h3>
-<pre><code class="language-css"
+<pre><code class="language-css">
 >.haofont {
   font-family: "haofont" !important;
   font-size: 16px;
@@ -1166,7 +1166,7 @@
 </code></pre>
           <h3 id="-">第三步：挑选相应图标并获取字体编码，应用于页面</h3>
 <pre>
-<code class="language-html"
+<code class="language-html">
 >&lt;span class="haofont"&gt;&amp;#x33;&lt;/span&gt;
 </code></pre>
           <blockquote>

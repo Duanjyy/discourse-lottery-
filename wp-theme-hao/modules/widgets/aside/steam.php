@@ -6,7 +6,7 @@
         <div id="flip-wrapper-card">
             <div id="flip-steam">
                 <div class="stimg"
-                     style="'background:url('++') center center/100% no-repeat'">
+ style="'background:url('++') center center/100% no-repeat'">
 
                 </div>
                 <div class="back stimg" style="'background:url(' + assets_link + '/images/blank.webp) center center/100% no-repeat'"></div>

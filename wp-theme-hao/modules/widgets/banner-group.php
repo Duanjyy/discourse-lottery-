@@ -3,8 +3,8 @@
     <div id="banners">
         <div class="tags-group-all">
             <!--  banners 使用默认值-->
-            <div class="tags-group-wrapper"
-                 >
+            <div class="tags-group-wrapper">
+
                 <div class="tags-group-icon-pair">
                     <div class="tags-group-icon" style="background:#989bf8">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/AfterEffect.png"
@@ -148,9 +148,9 @@
             </div>
             
             <!--  banners 使用默认值-->
-            <div class="tags-group-wrapper"
-                 >
-                <th:block <?php /* loop */ ?>>
+            <div class="tags-group-wrapper">
+
+
                     <div class="tags-group-icon-pair" >
                         <div class="tags-group-icon" style="'background:' + ">
                             <img>
@@ -160,29 +160,25 @@
                             <img>
                         </div>
                     </div>
-                </th:block>
+                
             </div>
         </div>
         <div class="banners-title">
-            <th:block ></th:block>
-            <div class="banners-title-small"
+            
+            <div class="banners-title-small">
                  ></div>
         </div>
         <div class="banners-link" >
             <div >
-                <a class="banners-link-btn blb-hot">
-                    <i ></i>
-                    <img 
-                         alt="icon"/>
-                    <div class="banners-link-title"></div>
+                <a class="banners-link-btn blb-hot" href="/">
+                    <i class="haofont hao-icon-fire"></i>
+                    <span class="banners-link-title">热门文章</span>
                 </a>
             </div>
             <div >
-                <a class="banners-link-btn blb-top">
-                    <i ></i>
-                    <img 
-                         alt="icon"/>
-                    <div class="banners-link-title"></div>
+                <a class="banners-link-btn blb-top" href="/">
+                    <i class="haofont hao-icon-thumbs-up"></i>
+                    <span class="banners-link-title">推荐阅读</span>
                 </a>
             </div>
         
@@ -191,39 +187,39 @@
     
     <!-- category -->
     <div class="categoryGroup" >
-        <th:block >
+        
             <div class="categoryItem" >
-                <a class="categoryButton CB1 bikan">
-                    <span class="categoryButtonText"></span>
+                <a class="categoryButton CB1 bikan" href="/">
+                    <span class="categoryButtonText">精选必看</span>
                     <i ></i>
                     <img 
                          alt="icon"/>
                 </a>
             </div>
             <div class="categoryItem" >
-                <a class="categoryButton remen">
-                    <span class="categoryButtonText"></span>
+                <a class="categoryButton remen" href="/">
+                    <span class="categoryButtonText">热门文章</span>
                     <i ></i>
                     <img 
                          alt="icon"/>
                 </a>
             </div>
-        </th:block>
+        
     </div>
-    <th:block >
+    
         <style>
             a.categoryButton.bikan {
-                background: linear-gradient(to right, , );
+                background: linear-gradient(to right, #49b1f5, #5bc0de);
                 background-size: 200%;
             }
             
             [data-theme=dark] a.categoryButton.bikan {
-                background: linear-gradient(to right, , );
+                background: linear-gradient(to right, #49b1f5, #5bc0de);
                 background-size: 200%;
             }
             
             .banners-link-btn.blb-hot {
-                background: linear-gradient(to right, , );
+                background: linear-gradient(to right, #49b1f5, #5bc0de);
                 background-size: 200%
             }
             
@@ -235,16 +231,16 @@
             }
         </style>
     
-    </th:block>
-    <th:block >
+    
+    
         <style>
             a.categoryButton.remen {
-                background: linear-gradient(to right, , );
+                background: linear-gradient(to right, #49b1f5, #5bc0de);
                 background-size: 200%;
             }
             
             [data-theme=dark] a.categoryButton.remen {
-                background: linear-gradient(to right, , );
+                background: linear-gradient(to right, #49b1f5, #5bc0de);
                 background-size: 200%;
             }
             
@@ -256,11 +252,11 @@
             }
             
             .banners-link-btn.blb-top {
-                background: linear-gradient(to right, , );
+                background: linear-gradient(to right, #49b1f5, #5bc0de);
                 background-size: 200%
             }
         </style>
     
-    </th:block>
+    
 
 </div>

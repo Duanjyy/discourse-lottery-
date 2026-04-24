@@ -54,12 +54,10 @@
                     </svg>
                 </div>
 
-                <th:block <?php /* if(not ) */ ?>>
                     <p id="people">共<b></b>人</p>
-                </th:block>
-                <th:block <?php /* if() */ ?>>
+
                     <p id="people">共<b></b>人</p>
-                </th:block>
+                
 
             </div>
         </div>
@@ -106,7 +104,6 @@
 
         </div>
 
-        <th:block <?php /* if() */ ?>>
             <a href="https://afdian.com/a/carolcoral" target="_blank"><span class="sponar_afdian">爱发电</span></a>
             <div class="reward-list-all" <?php /* if() */ ?>>
                 <div class="reward-list-item" <?php /* loop */ ?>>
@@ -135,7 +132,7 @@
                     </div>
                 </div>
             </div>
-        </th:block>
+        
 
     </div>
 </div>

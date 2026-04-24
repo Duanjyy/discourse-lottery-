@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
 
     <div class="page" id="body-wrap">
 
@@ -18,40 +18,40 @@
 
 
                     <div id="todolist-left-container">
-                        <th:block <?php /* loop */ ?>>
+
                             <div id="todolist-left" <?php /* if() */ ?>>
                                 <div class="todolist-item">
                                     <h3 class="todolist-title"></h3>
                                     <ul class="todolist-ul">
-                                        <th:block <?php /* if() */ ?>
+                                        
                                                   <?php /* loop */ ?>>
                                             <li>
                                                 <i style="font-size: 19px;margin-right: 5px;">
                                                 </i>
                                             </li>
-                                        </th:block>
+                                        
                                     </ul>
                                 </div>
                             </div>
-                        </th:block>
+                        
                     </div>
                     <div id="todolist-right-container">
-                        <th:block <?php /* loop */ ?>>
+
                             <div id="todolist-right" <?php /* if() */ ?>>
                                 <div class="todolist-item">
                                     <h3 class="todolist-title"></h3>
                                     <ul>
-                                        <th:block <?php /* if() */ ?>
+                                        
                                                   <?php /* loop */ ?>>
                                             <li>
                                                 <i style="font-size: 19px;margin-right: 5px;">
                                                 </i>
                                             </li>
-                                        </th:block>
+                                        
                                     </ul>
                                 </div>
                             </div>
-                        </th:block>
+                        
                     </div>
 
 
@@ -152,19 +152,19 @@
                     }
                 </style>
 
-                <th:block/>
+                
             </div>
 
 
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
         <!-- 卡片顶部气泡效果 -->
         <script <?php /* if() */ ?> async data-pjax
                 src="<?php echo get_template_directory_uri(); ?>/assets/libs/canvas/bubble.js"></script>
     </div>
 
-</th:block>
+
 
 
 <?php get_footer(); ?>

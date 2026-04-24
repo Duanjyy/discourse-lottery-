@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
 
     <div class="page" id="body-wrap">
 
@@ -15,7 +15,7 @@
             <div id="page">
                 <div></div>
                 <div id="comments-page">
-                    <th:block <?php /* if() */ ?>
+                    
                               <?php /* loop */ ?>>
                         <div class="comment-card">
                             <div class="comment-info">
@@ -29,10 +29,10 @@
                             </div>
                             <div class="comment-article"></div>
                         </div>
-                    </th:block>
+                    
 
                 </div>
-                <th:block <?php /* if() */ ?>>
+
                     <script data-pjax>
                         var postsData = ;
                         var pageData = ;
@@ -189,7 +189,7 @@
                             return content
                         }
                     </script>
-                </th:block>
+                
 
                 <style>
                     #comments-page {
@@ -336,13 +336,13 @@
 
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
         <!-- 卡片顶部气泡效果 -->
         <script <?php /* if() */ ?> async data-pjax
                 src="<?php echo get_template_directory_uri(); ?>/assets/libs/canvas/bubble.js"></script>
     </div>
 
-</th:block>
+
 
 
 <?php get_footer(); ?>

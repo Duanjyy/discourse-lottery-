@@ -1,4 +1,4 @@
-<th:block <?php /* if() */ ?>>
+
     <link rel="preload" as="style" onload="this.rel='stylesheet'"
           href="<?php echo get_template_directory_uri(); ?>/assets/libs/prism/prism.min.css">
     <link rel="preload" as="style" onload="this.rel='stylesheet'"
@@ -17,4 +17,3 @@
         }
     </style>
 
-</th:block>

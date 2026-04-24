@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
 
     <div class="page" id="body-wrap">
         <!-- 头部导航栏 -->
@@ -12,12 +12,11 @@
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page">
-                <th:block <?php /* if() */ ?>>
-                    <th:block <?php /* loop */ ?>>
-                        <th:block
-                                <?php /* if() */ ?>>
+
+
+
                             <div class="author-content author-content-item essayPage single"
-                                 style="'background:url('++') left 28% / cover no-repeat !important;'">
+ style="'background:url('++') left 28% / cover no-repeat !important;'">
                                 <div class="card-content">
                                     <div class="author-content-item-tips">相册集</div>
                                     <span class="author-content-item-title"></span>
@@ -32,11 +31,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </th:block>
-                    </th:block>
-                    <th:block <?php /* if() */ ?>>
+
                         <div class="author-content author-content-item essayPage single"
-                             style="'background:url('++') left 28% / cover no-repeat !important;'">
+ style="'background:url('++') left 28% / cover no-repeat !important;'">
                             <div class="card-content">
                                 <div class="author-content-item-tips">相册集</div>
                                 <span class="author-content-item-title">全部</span>
@@ -51,7 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                    </th:block>
+                    
                     <div id="article-container">
                         <section class="page-1 loadings">
                             <div class="type-gallery ">
@@ -67,20 +64,20 @@
                         </section>
                     </div>
                     <!-- 分页 -->
-                    <th:block>
+                    
                         <div></div>
-                    </th:block>
-                </th:block>
+                    
+                
 
                 <div class="gallery-groups" <?php /* if() */ ?>>
-                    <th:block <?php /* loop */ ?>>
+
                         <h1 style="margin: 8px 0px 20px" <?php /* if() */ ?>>
                             
                         </h1>
                         <h1 style="margin: 8px 0px 20px" <?php /* if() */ ?>>
                             全部
                         </h1>
-                    </th:block>
+                    
                     <div id="article-container">
                         <section class="page-1 loadings">
                             <div class="type-gallery ">
@@ -96,9 +93,9 @@
                         </section>
                     </div>
                     <!-- 分页 -->
-                    <th:block>
+                    
                         <div></div>
-                    </th:block>
+                    
                 </div>
 
                 <style>
@@ -229,7 +226,7 @@
                     }
                 </style>
                 <!--/* 评论组件 */-->
-                <th:block <?php get_template_part("modules/comment :: comment(group = 'content.halo.run',
+                <?php get_template_part("modules/comment :: comment(group = 'content.halo.run',
                   kind = 'SinglePage',
                   name = 'photos',
                   allowComment = true)"); ?>
@@ -237,13 +234,13 @@
 
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
         <!-- 卡片顶部气泡效果 -->
         <script <?php /* if() */ ?> async data-pjax
                 src="<?php echo get_template_directory_uri(); ?>/assets/libs/canvas/bubble.js"></script>
     </div>
 
-</th:block>
+
 
 
 <?php get_footer(); ?>

@@ -1,4 +1,3 @@
-<th:block <?php /* if() */ ?> >
 
     <style>
         #iframe {
@@ -73,4 +72,3 @@
         localStorage.setItem('logos', JSON.stringify(logos))
     </script>
 
-</th:block>

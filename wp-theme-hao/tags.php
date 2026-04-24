@@ -1,10 +1,10 @@
 <?php get_header(); ?>
 
 
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
 
     <div class="page" id="body-wrap">
         <header class="not-top-img" id="page-header">
@@ -24,10 +24,10 @@
             </div>
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
+
 
 
 <?php get_footer(); ?>

@@ -1,5 +1,5 @@
 <!-- 公共的 head 部分，可以定义部分 links,scripts,styles -->
-<th:block>
+
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width,initial-scale=1" name="viewport">
@@ -36,12 +36,12 @@
           rel="stylesheet"
 
     <!-- 代码块自动识别语言 -->
-    <th:block <?php get_template_part("modules/common/code"); ?>
+    <?php get_template_part("modules/common/code"); ?>
     <!--  代码块-->
-    <th:block <?php get_template_part("macro/prism-code"); ?>
+    <?php get_template_part("macro/prism-code"); ?>
 
     <!-- 页脚内容-样式一 -->
-    <th:block <?php get_template_part("modules/common/footer-style-one"); ?>
+    <?php get_template_part("modules/common/footer-style-one"); ?>
 
     <script>
         (win => {
@@ -168,10 +168,10 @@
     <!-- icon图标 -->
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/icon/iconfont.css">
 
-    <th:block <?php get_template_part("modules/variables/site-config"); ?>
+    <?php get_template_part("modules/variables/site-config"); ?>
 
 
-</th:block>
+
 
     <script>
         var GLOBAL_CONFIG = {

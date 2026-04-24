@@ -1,10 +1,10 @@
 <!-- 通讯录 -->
 <div class="card-widget card-friend-link">
     <div class="item-headline"><i class="haofont hao-icon-tongxunlu07"
-                                  style="font-size: 0.9rem;font-weight: 700;"></i><span>通讯录</span></div>
-    <div class="card-friend-link-container"
+ style="font-size: 0.9rem;font-weight: 700;"></i><span>通讯录</span></div>
+    <div class="card-friend-link-container">
          <?php /* if() */ ?>>
-        <th:block <?php /* loop */ ?>>
+
             <details <?php /* if() */ ?>
                      class="card-friend-class-name">
                 <summary class="card-friend-class-desc">
@@ -36,7 +36,7 @@
                 </a>
             </details>
 
-        </th:block>
+        
 
     </div>
 

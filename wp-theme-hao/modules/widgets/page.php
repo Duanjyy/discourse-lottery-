@@ -10,23 +10,19 @@
     <div class="pagination">
 
         <!-- 页码按钮 -->
-        <th:block <?php /* if() */ ?>>
+
             <a class="page-number" onclick="scrollToPost()"></a>
             <span class="space" <?php /* if() */ ?>>…</span>
-        </th:block>
 
-        <th:block <?php /* loop */ ?>>
             <span class="page-number current" <?php /* if( == ) */ ?>></span>
-            <a class="page-number"
+            <a class="page-number">
                <?php /* if() */ ?>
                onclick="scrollToPost()"></a>
-        </th:block>
 
-        <th:block <?php /* if() */ ?>>
             <span class="space" <?php /* if() */ ?>>…</span>
-            <a class="page-number"
+            <a class="page-number">
                onclick="scrollToPost()"></a>
-        </th:block>
+        
         <!-- 翻页按钮 -->
         <a class="extend prev" rel="prev"
            <?php /* if() */ ?>
@@ -35,7 +31,7 @@
             <div class="pagination_tips_prev">上页</div>
         </a>
 
-        <a class="extend next"
+        <a class="extend next">
            rel="next" <?php /* if() */ ?>
            onclick="scrollToPost()">
             <div class="pagination_tips_next">下页</div>

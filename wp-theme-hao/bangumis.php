@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
     <div class="page" id="body-wrap">
 
         <!-- 头部导航栏 -->
@@ -368,9 +368,7 @@
                     </div>
                     <div>
                         <div id="bangumi-item1" class="bangumi-hide">
-                            <th:block <?php /* loop */ ?>>
-                                <th:block/>
-                            </th:block>
+
                             <div class="bangumi-pagination">
                                 <a class="bangumi-button bangumi-firstpage" href="javascript:;" target="_self"
                                    onclick="return false" data-pjax-state=""> 首页</a>
@@ -384,9 +382,7 @@
                             </div>
                         </div>
                         <div id="bangumi-item2" class="bangumi-show">
-                            <th:block <?php /* loop */ ?>>
-                                <th:block/>
-                            </th:block>
+
                             <div class="bangumi-pagination">
                                 <a class="bangumi-button bangumi-firstpage" href="javascript:;" target="_self"
                                    onclick="return false" data-pjax-state=""> 首页</a>
@@ -400,9 +396,7 @@
                             </div>
                         </div>
                         <div id="bangumi-item3" class="bangumi-hide">
-                            <th:block <?php /* loop */ ?>>
-                                <th:block/>
-                            </th:block>
+
                             <div class="bangumi-pagination">
                                 <a class="bangumi-button bangumi-firstpage" href="javascript:;" target="_self"
                                    onclick="return false" data-pjax-state=""> 首页</a>
@@ -519,8 +513,7 @@
                 </div>
                 <hr>
                 <!--/* 评论组件 */-->
-                <th:block
-                        <?php get_template_part("modules/comment :: comment(group = 'content.halo.run',
+                <?php get_template_part("modules/comment :: comment(group = 'content.halo.run',
                   kind = 'SinglePage',
                   name = 'bangumis',
                   allowComment = true)"); ?>
@@ -529,10 +522,10 @@
 
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
+
 
 
 <?php get_footer(); ?>

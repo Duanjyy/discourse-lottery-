@@ -1,6 +1,4 @@
 
-<th:block  <?php /* if(${#strings.equals(theme.config.comments.use, 'Waline')
-  && not #strings.isEmpty(theme.config.comments.walines.serverURL)}) */ ?>>
     <div class="js-pjax">
         <script src="<?php echo get_template_directory_uri(); ?>/assets/js/comment/waline.js"></script>
     </div>
@@ -136,4 +134,3 @@
 
 
     </script>
-</th:block>

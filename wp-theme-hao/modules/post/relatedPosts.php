@@ -1,6 +1,6 @@
 
 <!-- 阅读建议 -->
-<th:block  <?php /* if() */ ?>>
+
     <div class="relatedPosts" <?php /* if() */ ?>>
         <div class="headline">
             <i class="haofont hao-icon-cainixihuan" style="font-size: 1.1rem;"></i>
@@ -9,7 +9,7 @@
         <!-- 六篇文章 -->
         <div <?php /* if() */ ?> class="relatedPosts-list">
             <!-- 建议阅读，这里可以自定义文章数量，然后遍历展示 -->
-            <th:block <?php /* loop */ ?>
+            
                       <?php /* if() */ ?>>
                 <div <?php /* if() */ ?>>
                     <a>
@@ -22,11 +22,11 @@
                         </div>
                     </a>
                 </div>
-            </th:block>
+            
         </div>
         <!-- 两篇文章 -->
         <div <?php /* if() */ ?> class="relatedPosts-list">
-            <th:block <?php /* loop */ ?>
+            
                       <?php /* if() */ ?>>
                 <div <?php /* if() */ ?>>
                     <a>
@@ -38,11 +38,10 @@
                         </div>
                     </a>
                 </div>
-            </th:block>
+            
         </div>
     </div>
     <link <?php /* if() */ ?> rel="stylesheet"
           href="<?php echo get_template_directory_uri(); ?>/assets/css/related-posts-six.css">
     <link <?php /* if() */ ?> rel="stylesheet"
           href="<?php echo get_template_directory_uri(); ?>/assets/css/related-posts-two.css">
-</th:block>

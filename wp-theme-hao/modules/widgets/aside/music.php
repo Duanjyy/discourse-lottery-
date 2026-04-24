@@ -6,10 +6,10 @@
         <div id="flip-wrapper-card">
             <div id="flip-music">
                 <div class="msimg"
-                     style="'background:url('++') center center/100% no-repeat'">
+ style="'background:url('++') center center/100% no-repeat'">
                 </div>
                 <div class="back msimg"
-                     style="'background:url('++') center center/100% no-repeat'">
+ style="'background:url('++') center center/100% no-repeat'">
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@
           <span class="author-content-item-title">最近评论</span>
         </div>
         <div class="aside-list">
-          <th:block <?php /* if() */ ?>>
+
             <!-- BUG：由于当前的列出所有评论API无过滤功能，非文章页的评论无法查询到页面信息，所以非文章评论跳转至首页-->
             <div class="aside-list-item" <?php /* loop */ ?>
                  <?php /* if() */ ?> >
@@ -33,7 +33,7 @@
                 })
               });
             </script>
-          </th:block>
+          
           <span <?php /* if() */ ?>>正在加载中...</span></div>
       </div>
     </div>
@@ -45,7 +45,7 @@
           <span class="author-content-item-title">寻找感兴趣的领域</span>
         </div>
         <div class="card-tag-cloud">
-          <a style="font-size:1em;color:#d3d3d3"
+          <a style="font-size:1em;color:#d3d3d3">
              <?php /* loop */ ?>>
             <sup></sup>
           </a>
@@ -55,9 +55,9 @@
       <div class="console-card history" onclick="heo.hideConsole()">
         <div class="item-headline"><i class="fas fa-archive"></i><span>文章</span></div>
         <ul class="card-archive-list">
-          <th:block <?php /* loop */ ?>>
+
             <li class="card-archive-list-item" <?php /* loop */ ?>>
-              <a class="card-archive-list-link"
+              <a class="card-archive-list-link">
                  data-pjax-state="load"><span
                       class="card-archive-list-date">
                    
@@ -68,7 +68,7 @@
                 </div>
               </a>
             </li>
-          </th:block>
+          
         </ul>
       </div>
     </div>

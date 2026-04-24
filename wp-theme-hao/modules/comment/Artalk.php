@@ -1,5 +1,4 @@
-<th:block <?php /* if(${#strings.equals(theme.config.comments.use, 'Artalk')
-  && not #strings.isEmpty(theme.config.comments.artalks.server)}) */ ?>>
+
     <div class="js-pjax">
         <script src="<?php echo get_template_directory_uri(); ?>/assets/js/comment/artalk.js"></script>
         <input type="hidden" name="page-type" id="page-type" value="album">
@@ -231,4 +230,4 @@
     
     </style>
 
-</th:block>
+

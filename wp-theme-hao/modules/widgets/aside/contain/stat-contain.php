@@ -1,6 +1,6 @@
 <!-- 侧边栏站点信息统计 -->
 
-<th:block>
+
 
     <!--    <div class="item-headline"><i class="haofont icon-icon-sidebar-scxmtj"></i><span>统计</span></div>-->
     <div class="webinfo">
@@ -41,4 +41,4 @@
             <div class="item-count">606.7k</div>
         </div> -->
     </div>
-</th:block>
+

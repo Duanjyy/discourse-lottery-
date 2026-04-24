@@ -4,7 +4,7 @@
 <!-- head 中自定义的  -->
 
 <head>
-    <th:block/>
+    
     <link <?php /* if(${#strings.equals(theme.config.comments.use, 'Waline')
     && not #strings.isEmpty(theme.config.comments.walines.serverURL)}) */ ?>
           rel="stylesheet">
@@ -12,16 +12,13 @@
     <script <?php /* if() */ ?> defer=""
             src="/plugins/plugin-katex/assets/static/katex.min.js"></script>
     <script src="<?php echo get_template_directory_uri(); ?>/assets/js/custom.js"></script>
-    <th:block <?php /* if() */ ?>>
-        <th:block/>
-    </th:block>
 
 </head>
 
 <body>
 
 <!-- loading 页面 -->
-<th:block <?php get_template_part("modules/loading-box"); ?>
+<?php get_template_part("modules/loading-box"); ?>
 
 <!-- 网站背景 -->
 <div id="web_bg">
@@ -42,7 +39,6 @@
     </div>
 </div>
 
-<th:block <?php /* if() */ ?>>
     <style>
         @media screen and (min-width: 1300px) {
             .global_background_img {
@@ -67,10 +63,10 @@
         }
     
     </style>
-</th:block>
+
 
 <script <?php /* if() */ ?>
->
+
     function toRandomPost() {
         // 随机跳转全站的一篇文章
         let permalink = /**/ "/";
@@ -87,24 +83,24 @@
 <div id="an_music_bg"></div>
 
 <!-- 控制台 -->
-<div <?php get_template_part("modules/widgets/console"); ?>
+<?php get_template_part("modules/widgets/console"); ?>
 
-<div <?php get_template_part("modules/sidebar"); ?>
+<?php get_template_part("modules/sidebar"); ?>
 
 <!-- 左下角音乐 -->
-<th:block <?php /* if() */ ?>>
-    <div <?php get_template_part("modules/widgets/nav-music"); ?>
-</th:block>
+
+    <?php get_template_part("modules/widgets/nav-music"); ?>
+
 
 <!-- 内容 -->
-<th:block></th:block>
+
 
 
 <!-- todo 右下角悬浮操作按钮 -->
-<th:block <?php get_template_part("modules/widgets/rightside"); ?>
+<?php get_template_part("modules/widgets/rightside"); ?>
 
 
-<div <?php get_template_part("modules/widgets/right-menu"); ?>
+<?php get_template_part("modules/widgets/right-menu"); ?>
 
 <div>
     <script src="<?php echo get_template_directory_uri(); ?>/assets/js/utils.js"></script>
@@ -124,14 +120,13 @@
     
     <div class="js-pjax">
         <!-- 动态标题 -->
-        <script <?php get_template_part("modules/common/diytitle"); ?>
+        <?php get_template_part("modules/common/diytitle"); ?>
     </div>
     
     <!-- 评论 -->
-    <th:block <?php /* if() */ ?>>
-        <th:block></th:block>
+
         <script <?php /* if() */ ?>>var visitorMail = "[()]";</script>
-    </th:block>
+    
     
     <!--音乐-->
     <script>var meting_api = "[()]"; </script>
@@ -179,10 +174,10 @@
             src="<?php echo get_template_directory_uri(); ?>/assets/zhheo/commentBarrage.js"></script>
     
     <!-- Tocbot 目录生成 start -->
-    <th:block <?php get_template_part("modules/common/toc-bot"); ?>
+    <?php get_template_part("modules/common/toc-bot"); ?>
     
     <!-- 51统计 -->
-    <th:block <?php get_template_part("modules/common/51-la"); ?>
+    <?php get_template_part("modules/common/51-la"); ?>
     
     <script>
         let pjaxSelectors = ['title', '#config-diff', '#body-wrap', '#rightside-config-hide', '#rightside-config-show', '.js-pjax', '#site-config']
@@ -270,7 +265,7 @@
 </div>
 
 <!-- 根据配置设置 css 变量值，全局 css 通过变量值进行处理 -->
-<th:block <?php get_template_part("'modules/variables/layout'"); ?>></th:block>
+<?php get_template_part("'modules/variables/layout'"); ?>>
 
 <script data-pjax="">
     

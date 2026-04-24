@@ -1,5 +1,5 @@
 <!-- 第一屏 -->
-<th:block <?php /* if() */ ?>>
+
     <div id="greetingBox"></div>
     <style>
         #greetingBox {
@@ -89,4 +89,3 @@
             }), 3e3)
         })()
     </script>
-</th:block>

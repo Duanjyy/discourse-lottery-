@@ -5,7 +5,7 @@
             crossorigin="anonymous"></script>
     <!-- 广告2 -->
     <ins class="adsbygoogle"
-         style="display:block"></ins>
+ style="display:block"></ins>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>

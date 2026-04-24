@@ -3,13 +3,13 @@
     <div class="cursor" style="translate: none; rotate: none; scale: none; transform: translate(721px,180px);"></div>
     <div class="shapes">
         <div class="shape shape-1"
-             style="translate: none; rotate: none; scale: none; transform: translate(721px,180px);">
+ style="translate: none; rotate: none; scale: none; transform: translate(721px,180px);">
         </div>
         <div class="shape shape-2"
-             style="translate: none; rotate: none; scale: none; transform: translate(721px,180px);">
+ style="translate: none; rotate: none; scale: none; transform: translate(721px,180px);">
         </div>
         <div class="shape shape-3"
-             style="translate: none; rotate: none; scale: none; transform: translate(721px,180px);">
+ style="translate: none; rotate: none; scale: none; transform: translate(721px,180px);">
         </div>
     </div>
     <div class="content">

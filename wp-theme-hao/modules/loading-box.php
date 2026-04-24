@@ -1,6 +1,5 @@
 <!-- loading页面 -->
-<th:block
-          <?php /* if( and not ) */ ?>>
+
     <style type="text/css">
         #loading-box {
             -webkit-user-select: none;
@@ -100,4 +99,4 @@
         }, 3000)
     </script>
 
-</th:block>
+

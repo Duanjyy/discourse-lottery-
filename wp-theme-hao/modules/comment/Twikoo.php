@@ -1,6 +1,4 @@
 
-<th:block  <?php /* if(${#strings.equals(theme.config.comments.use, 'Twikoo') &&
-not #strings.isEmpty(theme.config.comments.twikoos.envId)}) */ ?>>
     <div class="js-pjax">
         <script src="<?php echo get_template_directory_uri(); ?>/assets/js/comment/twikoo.js"></script>
     </div>
@@ -147,4 +145,3 @@ not #strings.isEmpty(theme.config.comments.twikoos.envId)}) */ ?>>
             document.addEventListener('pjax:complete', newestCommentInit)
         })</script>
 
-</th:block>

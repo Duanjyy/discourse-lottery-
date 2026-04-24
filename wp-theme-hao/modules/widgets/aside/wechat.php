@@ -2,9 +2,9 @@
     <div id="flip-wrapper">
         <div id="flip-content">
             <div class="face"
-                 style="'background: url('+ @{} +') center center / 100% no-repeat;'"></div>
+ style="'background: url('+ @{} +') center center / 100% no-repeat;'"></div>
             <div class="back face"
-                 style="'background: url('+ @{} +') center center / 100% no-repeat;'"></div>
+ style="'background: url('+ @{} +') center center / 100% no-repeat;'"></div>
         </div>
     </div>
 

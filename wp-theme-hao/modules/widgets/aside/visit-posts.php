@@ -4,11 +4,11 @@
     <div class="aside-list">
         <!-- 热门文章，用户可以自定义展示数量 -->
         <div class="aside-list-item" <?php /* loop */ ?>>
-            <a class="thumbnail" href="<?php echo esc_url("<?php the_permalink(); ?>"); ?>">
+            <a class="thumbnail" href="<?php the_permalink(); ?>">
                 <img>
             </a>
             <div class="content">
-                <a class="title" href="<?php echo esc_url("<?php the_permalink(); ?>"); ?>"></a>
+                <a class="title" href="<?php the_permalink(); ?>"></a>
                 <time>
                 </time>
             </div>

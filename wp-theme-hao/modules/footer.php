@@ -2,32 +2,32 @@
 <footer id="footer" xmlns:th="http://www.w3.org/1999/xhtml">
 
     <div id="heo-footer-bar" <?php /* if(${theme.config.footer.footer_bar.footer_bar_enable}) */ ?>>
-        <div class="footer-logo"><th:block></th:block></div>
+        <div class="footer-logo"></div>
         <div class="footer-bar-description"></div>
         <a class="footer-bar-link" href="/" data-pjax-state="">了解更多</a>
     </div>
 
     <!-- 社交链接，需要填入 href class title -->
     <div id="footer_deal">
-        <th:block>
+        
             <a rel="external nofollow" target="_blank" <?php /* loop */ ?>>
                 <i <?php /* if(${socialMedia.option_social_data == 'icon'  || #strings.isEmpty(socialMedia.option_social_data)}) */ ?>></i>
-                <th:block <?php /* if(${socialMedia.option_social_data == 'custom'}) */ ?>></th:block>
+
             </a>
-        </th:block>
+        
 
         <img <?php /* if(${not #strings.isEmpty(theme.config.footer.social_media.centerImg)}) */ ?> class="footer_mini_logo" title="返回顶部" onclick="btf.scrollToDest(0, 500)">
 
-        <th:block>
+        
             <a rel="external nofollow" target="_blank" <?php /* loop */ ?>>
                 <i <?php /* if(${socialMedia.option_social_data == 'icon' || #strings.isEmpty(socialMedia.option_social_data)}) */ ?>></i>
-                <th:block <?php /* if(${socialMedia.option_social_data == 'custom'}) */ ?>></th:block>
+
             </a>
-        </th:block>
+        
     </div>
 
     <!-- 相关地址  -->
-    <th:block <?php /* if(${not #strings.isEmpty(theme.config.footer.menu)}) */ ?>>
+
         <div id="heo-footer" <?php /* if(${not #lists.isEmpty(footMenu.menuItems)}) */ ?>>
             <div class="footer-group" <?php /* loop */ ?>>
                 <h3 class="footer-title"></h3>
@@ -47,7 +47,7 @@
             </div>
         </div>
 
-    </th:block>
+    
     <!-- 底部 banner -->
     <halo:footer />
 
@@ -91,12 +91,11 @@
             <div class="footer-banner-left">
                 <div id="footer-banner-tips">
                     <div style="display: flex;flex-direction: row;align-items: center;">
-                        <th:block <?php /* if(${not #strings.isEmpty(theme.config.basics.siteStartTime)}) */ ?>>
+
                             ©<?php echo get_theme_mod("hao_siteStartTime", "2023"); ?> - 
-                        </th:block>
-                        <th:block <?php /* if(${#strings.isEmpty(theme.config.basics.siteStartTime)}) */ ?>>
+
                             ©<?php echo date("Y"); ?>
-                        </th:block>
+                        
                         By <a class="footer-banner-link" href="/" target="_blank"><?php bloginfo("name"); ?></a>
                     </div>
                 </div>
@@ -145,8 +144,7 @@
             height: 32px;
         }
     </style>
-    
-    <th:block <?php /* if(${theme.config.top.global_background.enable_global_background_img}) */ ?>>
+
         <style>
             @media screen and (min-width: 1300px) {
                 #footer {
@@ -166,7 +164,7 @@
             }
         
         </style>
-    </th:block>
+    
     
 </footer>
 

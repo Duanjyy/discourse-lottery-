@@ -2,7 +2,7 @@
 <div class="author-content" >
 
     <div class="author-content-item like-technology"
-         style="'background: url('+ @{} +') top / cover no-repeat;'">
+ style="'background: url('+ @{} +') top / cover no-repeat;'">
         <div class="card-content">
             <div class="author-content-item-tips">
 
@@ -15,7 +15,7 @@
     </div>
 
     <div class="author-content-item like-music"
-         style="'background: url('+ @{} +') top / cover no-repeat'">
+ style="'background: url('+ @{} +') top / cover no-repeat'">
         <div class="card-content">
             <div class="author-content-item-tips">
 
@@ -25,7 +25,7 @@
                 <div class="tips">跟 <?php bloginfo("name"); ?> 一起欣赏更多音乐</div>
             </div>
             <div <?php /* if() */ ?> class="banner-button-group">
-                <a class="banner-button"
+                <a class="banner-button">
                    target="_blank"
                    rel="noopener nofollow">
                     <i class="haofont hao-icon-circle-arrow-up-right-1"></i>

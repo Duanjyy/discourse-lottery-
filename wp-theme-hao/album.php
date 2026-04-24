@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
 
     <div class="page" id="body-wrap">
 
@@ -17,27 +17,26 @@
                     <div></div>
 
                     <div class="card-album">
-                        <th:block <?php /* loop */ ?>>
+
                             <div class="card">
-                                <img class="card_cover"
-                                >
+                                <img class="card_cover">
+>
                                 <div class="card__content">
                                     <p class="card__category"></p>
                                     <h3 class="card__heading"></h3>
                                 </div>
                             </div>
-                        </th:block>
-                        <th:block <?php /* loop */ ?>>
+
                             <div class="album-content-nocover"></div>
-                        </th:block>
+                        
                     </div>
                 </div>
                 <div class="gallery-groups" <?php /* if() */ ?>>
                     <h2 style="text-align:center;"></h2>
                     <div class="gallery-group-main">
-                        <th:block <?php /* loop */ ?>>
+
                             <figure class="gallery-group no-lightbox">
-                                <img class="gallery-group-img no-lightbox"
+                                <img class="gallery-group-img no-lightbox">
                                      alt="Group Image Gallery">
                                 <figcaption>
                                     <div class="gallery-group-name"></div>
@@ -45,7 +44,7 @@
                                                                                            rel="noopener"></a>
                                 </figcaption>
                             </figure>
-                        </th:block>
+                        
                     </div>
                 </div>
                 <style>
@@ -160,18 +159,18 @@
                     }
                 </style>
                 <!--/* 评论组件 */-->
-                <th:block />
+                
             </div>
 
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
         <!-- 卡片顶部气泡效果 -->
         <script <?php /* if() */ ?> async data-pjax
                 src="<?php echo get_template_directory_uri(); ?>/assets/libs/canvas/bubble.js"></script>
     </div>
 
-</th:block>
+
 
 
 <?php get_footer(); ?>

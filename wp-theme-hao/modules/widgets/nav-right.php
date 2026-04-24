@@ -42,14 +42,14 @@
         <div class="back-menu-list-groups">
             <div class="back-menu-list-group" style="margin: -4px -9px -4px -18px">
                 <div class="back-menu-list">
-                    <th:block sec:authorize="isAuthenticated()">
+                    
                         <a class="back-menu-item" rel="external nofollow" target="_blank" href="/console">
                             <span class="back-menu-item-text">控制台</span>
                         </a>
                         <a class="back-menu-item" rel="external nofollow" href="/logout">
                             <span class="back-menu-item-text">退出登录</span>
                         </a>
-                    </th:block>
+                    
                     <a sec:authorize="isAnonymous()" class="back-menu-item" rel="external nofollow" target="_blank"
                        href="/login"
                        onclick="this.href = '/login?redirect_uri=' + encodeURIComponent(window.location.href)">

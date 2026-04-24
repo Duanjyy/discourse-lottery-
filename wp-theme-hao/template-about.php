@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
     
     <div class="page" id="body-wrap">
         
@@ -18,36 +18,35 @@
                     
                     
                     <div class="author-info">
-                        <div class="author-tag-left"
+                        <div class="author-tag-left">
                              <?php /* if() */ ?>>
                             <span class="author-tag" <?php /* loop */ ?>></span>
                         </div>
                         <div class="author-img">
-                            <th:block>
+                            
                                 <img>
-                            </th:block>
+                            
                         </div>
-                        <div class="author-tag-right"
+                        <div class="author-tag-right">
                              <?php /* if() */ ?>>
                             <span class="author-tag" <?php /* loop */ ?>></span>
                         </div>
                     </div>
                     <div class="author-title"></div>
                     
-                    <th:block></th:block>
+                    
                     
                     <div class="author-content">
                         <div class="create-site-post author-content-item single">
                         </div>
                     </div>
                     
-                    <th:block <?php get_template_part("modules/widgets/about-widgets/tenyear"); ?>></th:block>
+                    <?php get_template_part("modules/widgets/about-widgets/tenyear"); ?>>
                     
-                    <th:block <?php get_template_part("modules/widgets/about-widgets/about-reward"); ?>></th:block>
+                    <?php get_template_part("modules/widgets/about-widgets/about-reward"); ?>>
                 
                 </div>
-                
-                <th:block <?php /* if() */ ?>>
+
                     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/tenyear.css" media="all"
                           onload="this.media='all'">
                     <script> (() => {
@@ -69,17 +68,17 @@
                         }, 2500);
                     })()
                     </script>
-                </th:block>
+                
             
             
             </div>
         
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
+
 
 
 <?php get_footer(); ?>

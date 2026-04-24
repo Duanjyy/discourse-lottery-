@@ -1,4 +1,4 @@
-<th:block>
+
     <div class="bangumi-item">
         <div class="bangumi-picture no-lightbox">
             <img
@@ -46,4 +46,4 @@
             </div>
         </div>
     </div>
-</th:block>
+

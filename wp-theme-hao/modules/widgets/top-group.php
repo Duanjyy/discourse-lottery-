@@ -7,33 +7,33 @@
              <?php /* if() */ ?>>
 
             <div class="post_cover">
-                <a href="<?php echo esc_url("<?php the_permalink(); ?>"); ?>">
+                <a href="<?php the_permalink(); ?>">
                     <span class="recent-post-top-text">荐</span>
-                    <img class="post_bg"
+                    <img class="post_bg">
                          th:with=' img = ' />
                 </a>
             </div>
             <div class="recent-post-info">
-                <a class="article-title" href="<?php echo esc_url("<?php the_permalink(); ?>"); ?>">
+                <a class="article-title" href="<?php the_permalink(); ?>">
                 </a>
             </div>
         </div>
         <!-- 自定义的文章右上角的推荐文章 -->
         <div class="recent-post-item" <?php /* loop */ ?>
              <?php /* if() */ ?>>
-            <th:block>
+            
                 <div class="post_cover">
-                    <a href="<?php echo esc_url("<?php the_permalink(); ?>"); ?>">
+                    <a href="<?php the_permalink(); ?>">
                         <span class="recent-post-top-text">荐</span>
-                        <img class="post_bg"
+                        <img class="post_bg">
                              th:with='img = ' />
                     </a>
                 </div>
                 <div class="recent-post-info">
-                    <a class="article-title" href="<?php echo esc_url("<?php the_permalink(); ?>"); ?>">
+                    <a class="article-title" href="<?php the_permalink(); ?>">
                     </a>
                 </div>
-            </th:block>
+            
         </div>
     </div>
 
@@ -44,7 +44,7 @@
             <div class="todayCard-title"></div>
         </div>
         <div class="todayCard-cover"
-             style="'background:url('+  +') no-repeat center/cover'">
+ style="'background:url('+  +') no-repeat center/cover'">
         </div>
         <div class="banner-button-group">
             <a class="banner-button" onclick="window.event.cancelBubble=!0;heo.hideTodayCard()">

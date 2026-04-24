@@ -8,7 +8,7 @@
             <div class="skills-style-group">
                 <div class="tags-group-all">
                     <!--  banners 使用默认值-->
-                    <div class="tags-group-wrapper"
+                    <div class="tags-group-wrapper">
                          <?php /* if() */ ?>>
                         <div class="tags-group-icon-pair">
                             <div class="tags-group-icon" style="background:#989bf8">
@@ -145,26 +145,26 @@
                     </div>
 
                     <!--  banners 使用默认值-->
-                    <div class="tags-group-wrapper"
+                    <div class="tags-group-wrapper">
                          <?php /* if() */ ?>>
-                        <th:block <?php /* loop */ ?>>
+
                             <div class="tags-group-icon-pair" <?php /* if() */ ?>>
                                 <div class="tags-group-icon"
-                                     style="'background:' + ">
+ style="'background:' + ">
                                     <img>
                                 </div>
 
                                 <div class="tags-group-icon"
-                                     style="'background:' + ">
+ style="'background:' + ">
                                     <img>
                                 </div>
                             </div>
-                        </th:block>
+                        
                     </div>
                 </div>
 
                 <!--  banners 使用默认值-->
-                <div class="skills-list"
+                <div class="skills-list">
                      <?php /* if() */ ?>>
 
                     <div class="skill-info">
@@ -270,9 +270,9 @@
 
                     <div class="etc">...</div>
                 </div>
-                <div class="skills-list"
+                <div class="skills-list">
                      <?php /* if() */ ?>>
-                    <th:block <?php /* loop */ ?>>
+
                         <div class="skill-info">
                             <div class="skill-icon" style="'background:' + ">
                                 <img>
@@ -281,7 +281,7 @@
                                 <span></span>
                             </div>
                         </div>
-                    </th:block>
+                    
                 </div>
             </div>
         </div>
@@ -291,7 +291,7 @@
         <div class="card-content">
             <div class="author-content-item-tips">生涯</div>
             <span class="author-content-item-title">无限进步</span>
-            <div class="careers-group"
+            <div class="careers-group">
                  <?php /* if() */ ?>>
                 <div class="careers-item" <?php /* loop */ ?>>
                     <div class="circle" style="'background:' + "></div>

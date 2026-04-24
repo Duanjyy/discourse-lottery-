@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
 
     <div class="page" id="body-wrap">
 
@@ -21,8 +21,8 @@
                                 <div class="bber-content">
                                     <div class="datacont" <?php /* if() */ ?>>
                                     </div>
-                                    <th:block <?php /* if() */ ?>>
-                                        <div class="bber-container-img"
+
+                                        <div class="bber-container-img">
                                              <?php /* if() */ ?>>
                                             <img <?php /* loop */ ?>
                                                  <?php /* if() */ ?> title="瞬间配图">
@@ -34,7 +34,7 @@
                                              <?php /* if() */ ?>>
                                             <video></video>
                                         </div>
-                                    </th:block>
+                                    
                                 </div>
 
                                 <hr>
@@ -46,7 +46,7 @@
                                     </div>
                                     <a class="bber-reply" <?php /* if() */ ?>
                                        data-pjax-state=""> <i class="haofont hao-icon-chat--fill"
-                                                              style="font-size: 20px;"></i>
+ style="font-size: 20px;"></i>
                                     </a>
                                 </div>
                             </li>
@@ -58,18 +58,18 @@
                 <script>heo.reflashEssayWaterFall();</script>
                 <hr <?php /* if() */ ?>
                 <!--/* 评论组件 */-->
-                <th:block />
+                
             </div>
 
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
         <!-- 卡片顶部气泡效果 -->
         <script <?php /* if() */ ?> async data-pjax
                 src="<?php echo get_template_directory_uri(); ?>/assets/libs/canvas/bubble.js"></script>
     </div>
 
-</th:block>
+
 
 
 <?php get_footer(); ?>

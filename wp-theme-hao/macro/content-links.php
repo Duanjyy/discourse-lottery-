@@ -1,6 +1,6 @@
-<th:block>
 
-    <th:block>
+
+    
         <div class="flink" id="banners">
             <div class="banners-title">
                 <div class="banners-title-small"></div>
@@ -24,8 +24,8 @@
             </div>
             <div class="tags-group-all nowrapMove">
                 <div class="tags-group-wrapper">
-                    <th:block <?php /* loop */ ?>>
-                        <th:block <?php /* loop */ ?> <?php /* if() */ ?>>
+
+                         <?php /* if() */ ?>>
                             <div class="tags-group-icon-pair" <?php /* if() */ ?>>
                                 <a class="tags-group-icon" target="_blank">
                                     <img>
@@ -34,18 +34,16 @@
                                     <img>
                                 </a>
                             </div>
-                        </th:block>
-                    </th:block>
+                        
+                    
                 </div>
             </div>
         </div>
 
         <!--互动友链-->
-        <th:block />
+        
 
         <div class="flink" id="article-container">
-
-            <th:block <?php /* loop */ ?>>
 
                 <h2 <?php /* if() */ ?>>
                     <a class="headerlink"></a>
@@ -81,7 +79,7 @@
 
                 </div>
 
-                <div class="flink-list"
+                <div class="flink-list">
                      <?php /* if() */ ?>>
                     <div class="flink-list-item" <?php /* loop */ ?>>
                         <span <?php /* if() */ ?>
@@ -98,7 +96,7 @@
                     </div>
                 </div>
 
-                <div class="flink-list mini"
+                <div class="flink-list mini">
                      <?php /* if() */ ?>>
                     <div class="flink-list-item" <?php /* loop */ ?>>
                         <a class="cf-friends-link" rel="external nofollow" target="_blank">
@@ -111,10 +109,6 @@
                         </a>
                     </div>
                 </div>
-
-            </th:block>
-
-            <th:block <?php /* if() */ ?>> </th:block>
 
             <script>
                 var fdataUser = {
@@ -129,10 +123,7 @@
             </script>
             <script  src="<?php echo get_template_directory_uri(); ?>/assets/libs/fcircle/heo-fcircle3mini.js}"></script>
 
-            <th:block <?php /* if() */ ?>>
-            </th:block>
-
         </div>
 
-    </th:block>
-</th:block>
+    
+

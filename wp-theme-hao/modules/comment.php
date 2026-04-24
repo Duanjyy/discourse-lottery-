@@ -1,4 +1,4 @@
-<th:block <?php /* if() */ ?>>
+
     <!-- 已知问题 PJAX 下，comment 首次请求会出错。当前的临时解决办法是使用 js 重试 -->
     <div id="post-comment">
         <div class="comment-head">
@@ -13,9 +13,6 @@
             </div>
         </div>
 
-
-        <th:block <?php /* if(${ #strings.equals(theme.config.comments.use, 'Twikoo') &&
-                 not #strings.isEmpty(theme.config.comments.twikoos.envId)}) */ ?>>
             <div id="twikoo-wrap"></div>
             <style>
                 #twikoo .tk-tag-green {
@@ -26,7 +23,7 @@
                 }
 
             </style>
-        </th:block>
+        
 
         <div <?php /* if() */ ?>
              id="artalk-wrap"></div>
@@ -36,4 +33,3 @@
 
         <halo:comment <?php /* if() */ ?> colorScheme="document.documentElement.getAttribute('data-theme')"/>
     </div>
-</th:block>

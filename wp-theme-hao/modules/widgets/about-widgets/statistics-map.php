@@ -1,7 +1,7 @@
 <!-- 数据统计&作者相关信息 -->
 <div class="author-content">
     <div class="about-statistic author-content-item"
-         style="background: url(https://bu.dusays.com/2023/03/12/640dc8c72f623.webp);">
+ style="background: url(https://bu.dusays.com/2023/03/12/640dc8c72f623.webp);">
         <div class="card-content">
             <div class="author-content-item-tips">数据</div>
             <span class="author-content-item-title">访问统计</span>
@@ -25,22 +25,22 @@
                 <b></b>
             </span>
         </div>
-        <div class="author-content-item selfInfo single"
+        <div class="author-content-item selfInfo single">
              <?php /* if() */ ?>>
             <div <?php /* if(>'0') */ ?>>
                 <span class="selfInfo-title">生于</span><span
-                    class="selfInfo-content"
+                    class="selfInfo-content">
                     id="selfInfo-content-year" style="'color:' + ">2000</span>
             </div>
             <div <?php /* if(>'1') */ ?>>
                 <span class="selfInfo-title">太原理工大学</span><span
                     class="selfInfo-content"
-                    style="'color:' + ">计算机科学</span>
+ style="'color:' + ">计算机科学</span>
             </div>
             <div <?php /* if(>'2') */ ?>>
                 <span class="selfInfo-title">现在职业</span><span
                     class="selfInfo-content"
-                    style="'color:' + ">BI工程师</span>
+ style="'color:' + ">BI工程师</span>
             </div>
         </div>
     </div>

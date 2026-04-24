@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
 
     <div class="page" id="body-wrap">
         <header class="not-top-img" id="page-header">
@@ -13,16 +13,16 @@
         </header>
         <main class="layout hide-aside" id="content-inner">
             <div id="page">
-                <th:block />
+                
                 <hr/>
                 <!--/* 评论组件 */-->
-                <th:block/>
+                
             </div>
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
+
 
 </html>

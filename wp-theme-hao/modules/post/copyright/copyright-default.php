@@ -1,5 +1,5 @@
 <!-- 版权样式默认 -->
-<th:block  <?php /* if() */ ?>>
+
     <div class="post-tools" id="post-tools">
         <div class="post-tools-left">
 
@@ -22,7 +22,7 @@
                                 <div class="post-qr-code-desc">支付宝</div>
                             </li>
                         </ul>
-                        <a class="reward-main-btn"
+                        <a class="reward-main-btn">
                            target="_blank">
                             <div class="reward-text">赞赏者名单</div>
                             <div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div>
@@ -99,4 +99,4 @@
     </div>
 
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/post-copyright.css">
-</th:block>
+

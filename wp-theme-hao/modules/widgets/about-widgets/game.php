@@ -1,7 +1,7 @@
 <!-- 爱好 -->
 <div class="author-content" >
     <div class="author-content-item game-lol"
-         style="'background: url('+ @{} +') top / cover no-repeat'">
+ style="'background: url('+ @{} +') top / cover no-repeat'">
         <div class="card-content">
             <div class="author-content-item-tips">
 

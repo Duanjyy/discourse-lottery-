@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
 
     <div class="page" id="body-wrap">
         <header class="not-top-img" id="page-header">
@@ -20,7 +20,7 @@
                         <!-- 月份没有样式所以不显示 -->
                         <!-- <div class="article-sort-item"></div> -->
                         <div class="article-sort-item" <?php /* loop */ ?>>
-                            <a class="article-sort-item-img" href="<?php echo esc_url("<?php the_permalink(); ?>"); ?>">
+                            <a class="article-sort-item-img" href="<?php the_permalink(); ?>">
                                 <img>
                             </a>
                             <div class="article-sort-item-info">
@@ -29,9 +29,9 @@
                                     </time>
                                 </div>
                                 <a class="article-sort-item-title" onclick="window.event.cancelBubble=!0"
-                                   href="<?php echo esc_url("<?php the_permalink(); ?>"); ?>"></a>
+                                   href="<?php the_permalink(); ?>"></a>
                                 <div class="article-sort-item-tags">
-                                    <a class="article-meta__tags"
+                                    <a class="article-meta__tags">
                                        <?php /* loop */ ?>>
                                         <span class="tags-punctuation"></span>
                                     </a>
@@ -48,10 +48,10 @@
             <div></div>
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
+
 
 
 <?php get_footer(); ?>

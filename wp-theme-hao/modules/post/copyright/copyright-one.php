@@ -1,5 +1,5 @@
 <!-- 版权样式一 -->
-<th:block <?php /* if() */ ?>>
+
     <!-- 版权声明 -->
     <div class="post-copyright">
         <div class="post-copyright__author_group">
@@ -16,7 +16,7 @@
         </div>
         <div class="post-tools" id="post-tools">
             <div class="post-tools-left">
-                <div class="rewardLeftButton"
+                <div class="rewardLeftButton">
                      <?php /* if() */ ?>>
                     <div <?php /* if() */ ?> class="post-reward"
                          onclick="AddRewardMask()">
@@ -37,7 +37,7 @@
                                         <div class="post-qr-code-desc">支付宝</div>
                                     </li>
                                 </ul>
-                                <a class="reward-main-btn"
+                                <a class="reward-main-btn">
                                    target="_blank">
                                     <div class="reward-text">赞赏者名单</div>
                                     <div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div>
@@ -46,10 +46,10 @@
                         </div>
                     </div>
                     <div <?php /* if() */ ?> class="reward-link mode"><a
-                            class="reward-link-button"
+                            class="reward-link-button">
                             data-pjax-state=""><i class="haofont hao-icon-plant-fill"></i>订阅</a></div>
                 </div>
-                <div class="shareRight"
+                <div class="shareRight">
                      <?php /* if() */ ?>>
                     <div class="share-link mobile" <?php /* if() */ ?>>
                         <div class="share-qrcode">
@@ -97,4 +97,4 @@
         </div>
     </div>
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/post-copyright-one.css">
-</th:block>
+

@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
     <div class="post" id="body-wrap">
 
         <header class="post-bg" id="page-header">
@@ -16,18 +16,16 @@
                 <div id="post-firstinfo">
                     <div class="meta-firstline">
                         <!-- 这里要跳转到版权页 -->
-                        <th:block
-                                  <?php /* if(${not #strings.isEmpty(#annotations.get(post, 'copyrightEnable')) ?
-                                          #annotations.get(post, 'copyrightEnable')  == 'true' : theme.config.post.copyrights.enable}) */ ?>>
-                            <a class="post-meta-original"
+
+                            <a class="post-meta-original">
                                title="该文章为原创文章，注意版权协议"
                                <?php /* if() */ ?>
                             >原创</a>
-                            <a class="post-meta-original"
+                            <a class="post-meta-original">
                                title="该文章为转载文章，版权归原作者所有"
                                <?php /* if() */ ?>
                             >转载</a>
-                        </th:block>
+                        
                         <span class="post-meta-categories" <?php /* loop */ ?>
                               <?php /* if() */ ?>>
                             <a class="post-meta-categories">
@@ -69,13 +67,11 @@
                         </span>
                         <span
                               class="post-meta-wechat">
-                            <th:block>
+                            
                                 <i class="haofont hao-icon-rss post-meta-icon"></i>博客独享
-                            </th:block>
 
-                            <th:block <?php /* if() */ ?>>
                                 <i class="haofont hao-icon-weixin1 post-meta-icon"></i>公众号同步
-                            </th:block>
+                            
                         </span>
                         <a class="post-meta-pv" data-flag-title="热度"
                            title="热度" >
@@ -102,14 +98,14 @@
                                 <i class="haofont hao-icon-spinner fa-spin"></i>
                             </span>
                         </a>
-                        <th:block>
+                        
                             <a class="post-meta-editor" sec:authorize="isAuthenticated()" data-flag-title="编辑文章"
                                title="编辑文章"
                                <?php /* if( == ) */ ?>>
                                 <i style="margin-top: 2px;" class="haofont hao-icon-bianji post-meta-icon"></i>
                                 <span>编辑</span>
                             </a>
-                        </th:block>
+                        
                     </div>
 
                 </div>
@@ -157,14 +153,14 @@
 
                 <!-- 文章内容 -->
                 <article id="article-container">
-                    <th:block <?php /* if() */ ?>>
+
                         <div class="note simple  warning"  <?php /* if() */ ?>>
                             <p>
-                                <th:block/><th:block/>
+                                
                             </p>
                         </div>
-                    </th:block>
-                    <th:block/>
+                    
+                    
                 </article>
 
                 <!-- 文章ai摘要 -->
@@ -173,7 +169,7 @@
                         src="<?php echo get_template_directory_uri(); ?>/assets/libs/gpt/post-ai.js"></script>
 
                 <!-- 版权声明 -->
-                <th:block <?php get_template_part("modules/post/copyright"); ?>></th:block>
+                <?php get_template_part("modules/post/copyright"); ?>>
 
                 <nav class="pagination-post needEndHide" id="pagination">
                     <div <?php /* if() */ ?>>
@@ -196,10 +192,10 @@
                     </div>
                 </nav>
                 <!-- 阅读建议 -->
-                <th:block <?php get_template_part("modules/post/relatedPosts"); ?>
+                <?php get_template_part("modules/post/relatedPosts"); ?>
                 <hr>
                 <!--/* 评论组件 */-->
-                <th:block/>
+                
 
             </div>
 
@@ -208,11 +204,11 @@
         </main>
 
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
 
     </div>
 
-</th:block>
+
 
 
 <?php get_footer(); ?>

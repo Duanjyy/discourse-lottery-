@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 
-<th:block>
-    <th:block></th:block>
-</th:block>
-<th:block>
+
+    
+
+
 
     <div class="page" id="body-wrap">
 
@@ -16,7 +16,7 @@
                 <div  id="article-container"></div>
                 <hr>
                 <!--/* 评论组件 */-->
-                <th:block/>
+                
 
             </div>
 
@@ -25,10 +25,10 @@
 
         </main>
         <!-- 底部 -->
-        <footer <?php get_template_part("modules/footer"); ?>
+        <?php get_template_part("modules/footer"); ?>
     </div>
 
-</th:block>
+
 
 
 <?php get_footer(); ?>

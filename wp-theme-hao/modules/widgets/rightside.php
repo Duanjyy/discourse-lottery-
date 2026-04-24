@@ -1,4 +1,4 @@
-<th:block >
+
     <div id="rightside">
         <div id="rightside-config-hide">
             <button <?php /* if() */ ?> id="readmode" type="button" title="阅读模式"><i class="haofont hao-icon-book-open"></i></button>
@@ -35,4 +35,3 @@
 
     <link <?php /* if() */ ?>
           rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/read-mode.css">
-</th:block>

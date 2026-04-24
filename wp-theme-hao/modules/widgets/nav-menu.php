@@ -1,27 +1,26 @@
-<th:block>
+
     <!-- 有子菜单则显示子菜单 -->
-    <th:block <?php /* if() */ ?>>
+
         <!-- 子菜单 -->
         <div class="menus_item_child">
             <div class="recursion_menus_item" <?php /* loop */ ?>>
                 <a class="site-page child">
-                    <th:block <?php /* if() */ ?>>
+
                         <svg class="ali_icon" aria-hidden="true">
                             <use></use>
                         </svg>
-                    </th:block>
-                    <th:block <?php /* if() */ ?>>
+
                         <i <?php /* if() */ ?>
                            style="font-size:.9em"></i>
-                    </th:block>
+                    
                     <span></span>
                 </a>
                 <!--递归调用-->
                 <div></div>
             </div>
         </div>
-    </th:block>
-</th:block>
+    
+
 
 <!-- 导航栏菜单栏 -->
 <div id="menus">
@@ -34,20 +33,20 @@
             <!-- javascript:void(0);" -->
             <a class="site-page" rel="external nofollow"
                <?php /* if() */ ?>>
-                <th:block <?php /* if() */ ?>>
+
                     <svg class="ali_icon" aria-hidden="true">
                         <use></use>
                     </svg>
-                </th:block>
+                
                 <span></span>
             </a>
             
             <a <?php /* if() */ ?> class="site-page" rel="external nofollow">
-                <th:block <?php /* if() */ ?>>
+
                     <svg class="ali_icon" aria-hidden="true">
                         <use></use>
                     </svg>
-                </th:block>
+                
                 <span></span>
             </a>
             <!--递归调用-->

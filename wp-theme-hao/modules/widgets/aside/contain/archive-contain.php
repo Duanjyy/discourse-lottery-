@@ -1,14 +1,14 @@
 <!-- 标签 -->
 
-<th:block  >
+
 
     <div  class="item-headline"><a class="card-more-btn" href="/archives/" title="查看更多" data-pjax-state=""></a></div>
     <ul  class="card-archive-list">
-        <th:block <?php /* loop */ ?>>
-            <li class="card-archive-list-item"
+
+            <li class="card-archive-list-item">
                 <?php /* loop */ ?>
             ><a
-                    class="card-archive-list-link"
+                    class="card-archive-list-link">
                     data-pjax-state=""><span
                     class="card-archive-list-date"> 
 
@@ -18,7 +18,7 @@
                         class="card-archive-list-count-unit">篇</span></div>
             </a>
             </li>
-        </th:block>
+        
     </ul>
 
-</th:block>
+
