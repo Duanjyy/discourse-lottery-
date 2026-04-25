@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iOS 26 Liquid TabBar Effect</title>
+    <title>iOS 26 Liquid Glass TabBar</title>
     <style>
         :root {
-            --bg-color: #e5e7eb;
-            --text-inactive: #9ca3af;
+            --bg-color: #e2e8f0;
+            --text-inactive: #64748b;
         }
 
         * {
@@ -26,195 +26,164 @@
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
         }
 
-        /* Phone frame simulation */
+        /* Phone frame */
         .device {
             width: 390px;
             height: 844px;
-            background: #f8f9fa;
+            background: #f1f5f9;
             border-radius: 44px;
             border: 8px solid #ffffff;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25), 0 0 0 1px #d1d5db;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25), 0 0 0 1px #cbd5e1;
             position: relative;
             overflow: hidden;
         }
 
-        /* Background map pattern */
-        .map-bg {
+        /* Animated Mesh Gradient Background to show off Glassmorphism */
+        .mesh-bg {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #f0f2f5;
-            background-image: radial-gradient(#d1d5db 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-color: #f8fafc;
+            overflow: hidden;
             z-index: 0;
         }
 
-        /* Top Search UI to match the GIF */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .blob-1 { width: 300px; height: 300px; background: #ff9a9e; top: -50px; left: -50px; }
+        .blob-2 { width: 350px; height: 350px; background: #a18cd1; bottom: 100px; right: -100px; animation-delay: -3s; animation-direction: reverse; }
+        .blob-3 { width: 250px; height: 250px; background: #fecfef; top: 40%; left: 10%; animation-delay: -6s; filter: blur(40px); }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Glassy Top Card */
         .top-card {
             position: absolute;
             top: 48px;
             left: 16px;
             right: 16px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px) saturate(150%);
+            -webkit-backdrop-filter: blur(24px) saturate(150%);
+            border-radius: 28px;
             padding: 20px;
             z-index: 1;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08), inset 0 1px 2px rgba(255,255,255,0.8);
         }
 
-        .location {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            color: #6b7280;
-            margin-bottom: 16px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .highlight {
-            color: #10b981;
-            font-weight: 500;
-        }
+        .location { display: flex; align-items: center; font-size: 14px; color: #475569; margin-bottom: 16px; font-weight: 500; }
+        .dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; margin-right: 10px; box-shadow: 0 0 10px rgba(16,185,129,0.5); }
+        .highlight { color: #0f766e; font-weight: 600; }
 
         .search-box {
-            display: flex;
-            align-items: center;
-            border: 2px solid #ff7b54;
-            border-radius: 100px;
-            padding: 12px 16px;
-            margin-bottom: 16px;
-            background: #fff;
+            display: flex; align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+            border-radius: 100px; padding: 12px 16px; margin-bottom: 16px;
         }
+        .search-icon { width: 20px; height: 20px; color: #334155; margin-right: 10px; }
+        .placeholder { font-size: 16px; font-weight: 600; color: #334155; flex: 1; }
+        .history-tag { background: rgba(255,255,255,0.8); padding: 6px 12px; border-radius: 100px; font-size: 12px; color: #475569; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
 
-        .search-icon {
-            width: 20px;
-            height: 20px;
-            color: #1f2937;
-            margin-right: 10px;
-        }
+        .action-row { display: flex; justify-content: space-between; }
+        .action-btn { display: flex; align-items: center; font-size: 13px; color: #475569; padding: 6px 0; font-weight: 600; }
+        .action-btn.active { color: #8b5cf6; }
+        .action-btn .icon { margin-right: 4px; font-size: 16px; }
 
-        .placeholder {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1f2937;
-            flex: 1;
-        }
-
-        .history-tag {
-            background: #f3f4f6;
-            padding: 6px 12px;
-            border-radius: 100px;
-            font-size: 12px;
-            color: #4b5563;
-        }
-
-        .action-row {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .action-btn {
-            display: flex;
-            align-items: center;
-            font-size: 13px;
-            color: #6b7280;
-            padding: 6px 0;
-            font-weight: 500;
-        }
-
-        .action-btn.active {
-            color: #8b5cf6;
-        }
-
-        .action-btn .icon {
-            margin-right: 4px;
-            font-size: 16px;
-        }
-
-        /* --- Tab Bar Styles --- */
+        /* --- Liquid Glass Tab Bar Styles --- */
         .tab-bar {
             position: absolute;
             bottom: 34px;
             left: 16px;
             right: 16px;
-            height: 76px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 38px;
+            height: 80px;
+            /* Glassmorphism Container */
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border-radius: 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(255,255,255,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), 
+                        inset 0 1px 1px rgba(255,255,255,1);
             z-index: 10;
         }
 
         .indicator-track {
             position: absolute;
-            top: 8px;
-            bottom: 8px;
-            left: 8px;
-            right: 8px;
+            top: 8px; bottom: 8px; left: 8px; right: 8px;
             z-index: 0;
             pointer-events: none;
         }
 
+        /* The Liquid Indicator */
         .indicator {
             position: absolute;
-            top: 0;
-            bottom: 0;
-            border-radius: 30px;
-            background-color: #ffeae3;
-            /* Default transition, will be overridden by JS */
+            top: 0; bottom: 0;
+            border-radius: 32px;
+            /* Base color injected via JS, but we make it slightly transparent */
             transition: all 0.4s ease;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            transform-origin: center bottom;
+        }
+
+        /* The Glass Shell over the Indicator */
+        .indicator-glass {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 32px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.1) 100%);
+            border: 1px solid rgba(255,255,255,0.9);
+            box-shadow: inset 0 3px 6px rgba(255,255,255,1),
+                        inset 0 -2px 6px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .tab {
-            flex: 1;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-            cursor: pointer;
+            flex: 1; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            position: relative; z-index: 1; cursor: pointer;
         }
 
         .icon-container {
-            width: 28px;
-            height: 28px;
-            margin-bottom: 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 28px; height: 28px; margin-bottom: 4px;
+            display: flex; justify-content: center; align-items: center;
             color: var(--text-inactive);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
         }
 
-        .icon-svg {
-            width: 24px;
-            height: 24px;
-        }
+        .icon-svg { width: 24px; height: 24px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.05)); }
 
         .tab span {
-            font-size: 11px;
-            font-weight: 600;
+            font-size: 11px; font-weight: 600;
             color: var(--text-inactive);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-shadow: 0 1px 2px rgba(255,255,255,0.5);
         }
 
         /* Active animations */
         .tab.active .icon-container {
             transform: translateY(-4px) scale(1.15);
+            /* Adds a subtle glowing effect to active icons */
+            filter: drop-shadow(0 4px 6px rgba(255,255,255,0.8));
         }
 
         .tab.active span {
@@ -223,15 +192,36 @@
         }
 
         /* Click feedback */
-        .tab:active .icon-container {
-            transform: scale(0.9);
+        .tab:active .icon-container { transform: scale(0.9); }
+
+        /* Liquid Water Drops Particle Effect */
+        .water-drop {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1), inset 0 2px 2px rgba(255,255,255,1);
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+            z-index: 2;
+            animation: splash 0.6s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes splash {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
 <div class="device">
-    <div class="map-bg"></div>
+    <div class="mesh-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
     
     <div class="top-card">
         <div class="location">
@@ -253,10 +243,12 @@
 
     <nav class="tab-bar">
         <div class="indicator-track">
-            <div class="indicator" id="indicator"></div>
+            <div class="indicator" id="indicator">
+                <div class="indicator-glass"></div>
+            </div>
         </div>
         
-        <div class="tab active" data-color="#ff5722" data-bg="#ffeae3" onclick="selectTab(0, this)">
+        <div class="tab active" data-color="#ea580c" data-bg="rgba(255, 123, 84, 0.4)" onclick="selectTab(0, this)">
             <div class="icon-container">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="icon-svg">
                     <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/>
@@ -266,7 +258,7 @@
             <span>首页</span>
         </div>
         
-        <div class="tab" data-color="#10b981" data-bg="#d1fae5" onclick="selectTab(1, this)">
+        <div class="tab" data-color="#059669" data-bg="rgba(16, 185, 129, 0.4)" onclick="selectTab(1, this)">
             <div class="icon-container">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="icon-svg">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
@@ -276,7 +268,7 @@
             <span>车主</span>
         </div>
         
-        <div class="tab" data-color="#2563eb" data-bg="#dbeafe" onclick="selectTab(2, this)">
+        <div class="tab" data-color="#2563eb" data-bg="rgba(59, 130, 246, 0.4)" onclick="selectTab(2, this)">
             <div class="icon-container">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="icon-svg">
                     <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
@@ -285,7 +277,7 @@
             <span>订票</span>
         </div>
         
-        <div class="tab" data-color="#4b5563" data-bg="#e5e7eb" onclick="selectTab(3, this)">
+        <div class="tab" data-color="#475569" data-bg="rgba(107, 114, 128, 0.3)" onclick="selectTab(3, this)">
             <div class="icon-container">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="icon-svg">
                     <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
@@ -294,7 +286,7 @@
             <span>送货</span>
         </div>
         
-        <div class="tab" data-color="#0891b2" data-bg="#cffafe" onclick="selectTab(4, this)">
+        <div class="tab" data-color="#0891b2" data-bg="rgba(6, 182, 212, 0.4)" onclick="selectTab(4, this)">
             <div class="icon-container">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="icon-svg">
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
@@ -310,37 +302,99 @@
     const indicator = document.getElementById('indicator');
     let currentIndex = 0;
 
+    function createWaterDrops(tab) {
+        // Create 3-4 tiny liquid water drops that splash outwards
+        const dropCount = 3 + Math.floor(Math.random() * 2);
+        
+        for(let i = 0; i < dropCount; i++) {
+            const drop = document.createElement('div');
+            drop.className = 'water-drop';
+            
+            // Randomize trajectory
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 20 + Math.random() * 30;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance - 10; // Bias slightly upwards
+            
+            drop.style.setProperty('--tx', \`\${tx}px\`);
+            drop.style.setProperty('--ty', \`\${ty}px\`);
+            
+            // Randomize size slightly
+            const size = 6 + Math.random() * 6;
+            drop.style.width = \`\${size}px\`;
+            drop.style.height = \`\${size}px\`;
+            
+            tab.appendChild(drop);
+            
+            // Cleanup after animation
+            setTimeout(() => drop.remove(), 600);
+        }
+    }
+
     function updateIndicator(targetTab, targetIndex, previousIndex, isInit = false) {
         const track = document.querySelector('.indicator-track');
         const trackRect = track.getBoundingClientRect();
         const tabRect = targetTab.getBoundingClientRect();
         
-        // padding to make the indicator slightly smaller than the tab space
         const padding = 6;
         const leftPos = tabRect.left - trackRect.left + padding;
         const rightPos = trackRect.right - tabRect.right + padding;
         
         if (isInit) {
             indicator.style.transition = 'none';
+            indicator.style.left = \`\${leftPos}px\`;
+            indicator.style.right = \`\${rightPos}px\`;
         } else {
+            const distance = Math.abs(targetIndex - previousIndex);
             const movingRight = targetIndex > previousIndex;
-            // The secret to the liquid/gooey stretch effect:
-            // Fast transition for the leading edge, delayed transition for the trailing edge.
+            
+            // Dynamic duration based on travel distance
+            const baseTime = 0.35;
+            const stretchTime = baseTime + (distance * 0.05);
+            const delayTime = 0.08 + (distance * 0.02);
+            
+            // Calculate how much the "liquid" should squish down while moving
+            const squishScale = distance > 0 ? Math.max(0.65, 1 - (distance * 0.1)) : 1;
+            
             if (movingRight) {
-                indicator.style.transition = 'right 0.35s cubic-bezier(0.25, 1, 0.5, 1), left 0.45s cubic-bezier(0.25, 1, 0.5, 1) 0.08s, background-color 0.4s ease';
+                indicator.style.transition = \`
+                    right \${stretchTime}s cubic-bezier(0.25, 1, 0.5, 1), 
+                    left \${stretchTime + 0.1}s cubic-bezier(0.25, 1, 0.5, 1) \${delayTime}s, 
+                    background-color 0.4s ease,
+                    transform \${stretchTime * 0.6}s cubic-bezier(0.25, 1, 0.5, 1)
+                \`;
             } else {
-                indicator.style.transition = 'left 0.35s cubic-bezier(0.25, 1, 0.5, 1), right 0.45s cubic-bezier(0.25, 1, 0.5, 1) 0.08s, background-color 0.4s ease';
+                indicator.style.transition = \`
+                    left \${stretchTime}s cubic-bezier(0.25, 1, 0.5, 1), 
+                    right \${stretchTime + 0.1}s cubic-bezier(0.25, 1, 0.5, 1) \${delayTime}s, 
+                    background-color 0.4s ease,
+                    transform \${stretchTime * 0.6}s cubic-bezier(0.25, 1, 0.5, 1)
+                \`;
             }
             
-            // Force reflow to ensure the transition property is updated before layout changes
+            // Force reflow
             void indicator.offsetWidth;
+            
+            indicator.style.left = \`\${leftPos}px\`;
+            indicator.style.right = \`\${rightPos}px\`;
+            
+            // Apply the squish effect to simulate liquid surface tension
+            if (distance > 0) {
+                indicator.style.transform = \`scaleY(\${squishScale})\`;
+                
+                // Plump back up when it arrives
+                clearTimeout(indicator.squishTimeout);
+                indicator.squishTimeout = setTimeout(() => {
+                    indicator.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    indicator.style.transform = 'scaleY(1)';
+                }, stretchTime * 1000 * 0.7);
+            }
+            
+            // Spawn liquid drops particle effect
+            createWaterDrops(targetTab);
         }
         
-        // Apply new positions
-        indicator.style.left = \`\${leftPos}px\`;
-        indicator.style.right = \`\${rightPos}px\`;
-        
-        // Apply colors
+        // Apply theme colors
         const themeBg = targetTab.getAttribute('data-bg');
         indicator.style.backgroundColor = themeBg;
         
@@ -360,7 +414,11 @@
     }
 
     function selectTab(index, element) {
-        if (index === currentIndex) return;
+        if (index === currentIndex) {
+            // Clicked active tab again, just splash
+            createWaterDrops(element);
+            return;
+        }
         
         const previousIndex = currentIndex;
         currentIndex = index;
@@ -371,7 +429,6 @@
         updateIndicator(element, index, previousIndex, false);
     }
 
-    // Initialize on load and handle resize
     function init() {
         updateIndicator(tabs[currentIndex], currentIndex, currentIndex, true);
     }
