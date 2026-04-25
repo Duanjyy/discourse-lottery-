@@ -8,16 +8,18 @@
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <style>
     :root {
-      --bg-color: #000000;
-      --tab-bg: #ffffff;
-      --icon-inactive: #8e8e93;
-      --icon-active: #000000;
-      --accent: #007aff;
+      --bg-gradient: linear-gradient(135deg, #fbc2eb 0%, #a18cd1 100%);
+      --tab-bg: #fff0ea; /* A soft cream/pink */
+      --icon-color: #5d1a2d; /* Dark burgundy */
+      --highlight-bg: rgba(255, 255, 255, 0.4);
+      --highlight-border: rgba(255, 255, 255, 0.8);
+      --pill-height: 70px;
     }
 
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     body {
@@ -27,67 +29,37 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background-color: var(--bg-color);
-      /* A stunning mesh gradient background to feel futuristic */
+      background: var(--bg-gradient);
+      /* Add some ambient glowing orbs behind the phone to match image vibe */
       background-image: 
-        radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-        radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-        radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+        radial-gradient(circle at 20% 30%, #fbc2eb 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, #fde4e9 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #d8c1e8 0%, transparent 60%);
+      background-color: #ebd1d8;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       overflow: hidden;
     }
 
     /* Mockup of a phone screen for presentation */
     .phone-mockup {
-      width: 390px;
-      height: 844px;
-      background: #000;
-      border-radius: 55px;
-      border: 12px solid #1c1c1e;
+      width: 400px;
+      height: 250px; /* Shortened to focus on the tab bar */
+      background: transparent;
       position: relative;
-      overflow: hidden;
-      box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(255,255,255,0.05);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-    }
-
-    /* The actual screen content area */
-    .screen-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.4), transparent 50%),
-        radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.4), transparent 50%),
-        radial-gradient(circle at 50% 80%, rgba(225, 29, 72, 0.4), transparent 50%);
-      background-color: #09090b;
-      z-index: 1;
-    }
-
-    /* Content placeholders */
-    .app-header {
-      position: absolute;
-      top: 60px;
-      left: 30px;
-      color: #fff;
-      font-size: 34px;
-      font-weight: 700;
-      letter-spacing: -1px;
     }
 
     /* Tab Bar Container */
     .tab-bar-container {
       position: relative;
       width: 100%;
-      height: 120px;
+      height: 100px;
       z-index: 10;
       display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      padding: 0 20px 30px 20px;
+      align-items: center;
+      padding: 0 10px;
     }
 
     /* SVG Filter definition (hidden) */
@@ -100,150 +72,238 @@
     /* The layer where the liquid magic happens */
     .liquid-wrapper {
       position: absolute;
-      bottom: 30px;
-      left: 20px;
-      right: 20px;
-      height: 90px;
+      top: 50%;
+      left: 10px;
+      right: 10px;
+      transform: translateY(-50%);
+      height: var(--pill-height);
       filter: url('#goo');
       pointer-events: none;
       z-index: 1;
+      display: flex;
+      align-items: center;
     }
 
     /* The main bar background */
-    .liquid-bg {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 65px;
+    .main-pill-bg {
+      flex: 1;
+      height: var(--pill-height);
       background: var(--tab-bg);
-      border-radius: 32.5px;
+      border-radius: calc(var(--pill-height) / 2);
+      transition: all 0.5s cubic-bezier(0.34, 1.26, 0.44, 1.05);
+      margin-right: 0px; /* Initially no margin, so they merge */
     }
 
-    /* The moving droplet */
-    .liquid-drop {
-      position: absolute;
-      bottom: 35px; /* Protrudes above the bar */
-      left: 0; /* Updated via JS */
-      width: 56px;
-      height: 56px;
+    /* The moving droplet / search circle background */
+    .search-circle-bg {
+      width: var(--pill-height);
+      height: var(--pill-height);
       background: var(--tab-bg);
       border-radius: 50%;
-      /* Start centered dynamically later */
-      transform: translateX(0);
-      /* Custom bouncy spring physics feeling */
-      transition: transform 0.6s cubic-bezier(0.34, 1.26, 0.44, 1.05);
+      flex-shrink: 0;
+      /* Using a slight negative margin or transform to control the bridge */
+      transform: translateX(-15px);
+      transition: all 0.5s cubic-bezier(0.34, 1.26, 0.44, 1.05);
     }
 
-    /* Navigation Items Layer */
-    .nav-items {
+    /* Content Layer */
+    .nav-content {
       position: absolute;
-      bottom: 30px;
-      left: 20px;
-      right: 20px;
-      height: 65px;
+      top: 50%;
+      left: 10px;
+      right: 10px;
+      transform: translateY(-50%);
+      height: var(--pill-height);
       display: flex;
-      justify-content: space-around;
       align-items: center;
       z-index: 10;
     }
 
+    .main-items {
+      flex: 1;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 100%;
+      padding: 0 10px;
+    }
+
     .nav-item {
       position: relative;
-      width: 65px;
-      height: 65px;
+      height: calc(var(--pill-height) - 10px);
+      flex: 1;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      color: var(--icon-inactive);
-      font-size: 26px;
+      color: var(--icon-color);
       transition: color 0.3s ease;
       z-index: 2;
-    }
-
-    /* Active state interactions */
-    .nav-item.active {
-      color: var(--icon-active);
+      border-radius: calc((var(--pill-height) - 10px) / 2);
+      gap: 4px;
     }
 
     .nav-item ion-icon {
-      transition: transform 0.6s cubic-bezier(0.34, 1.26, 0.44, 1.05);
+      font-size: 24px;
+      transition: transform 0.3s ease;
     }
 
-    /* When active, the icon moves up into the droplet */
+    .nav-item span {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* The Active Highlight styling as seen in the image (Radio is highlighted) */
+    .nav-item.active {
+      background: var(--highlight-bg);
+      border: 1.5px solid var(--highlight-border);
+      box-shadow: 
+        inset 0 4px 6px rgba(255,255,255,0.6),
+        0 2px 4px rgba(0,0,0,0.05);
+    }
+
     .nav-item.active ion-icon {
-      transform: translateY(-26px) scale(1.1);
+      transform: scale(1.1);
     }
 
-    /* A subtle glowing dot under the active icon */
-    .indicator-dot {
+    .search-btn {
+      width: var(--pill-height);
+      height: var(--pill-height);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--icon-color);
+      font-size: 26px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.5s cubic-bezier(0.34, 1.26, 0.44, 1.05);
+    }
+
+    /* Separated state classes for animation */
+    .tab-bar-container.separated .search-circle-bg {
+      transform: translateX(5px); /* Pulls away, breaking the liquid bridge */
+    }
+    
+    .tab-bar-container.bridged .search-circle-bg {
+      transform: translateX(-18px); /* Perfect distance for a thin gooey bridge */
+    }
+    
+    .tab-bar-container.merged .search-circle-bg {
+      transform: translateX(-40px); /* Merges deeply into the pill */
+    }
+
+    /* Add a slight inner shadow / reflection to the whole tab bar wrapper to fake the glass volume */
+    .glass-overlay {
       position: absolute;
-      bottom: 12px;
-      width: 5px;
-      height: 5px;
-      background: var(--icon-active);
-      border-radius: 50%;
-      opacity: 0;
-      transform: scale(0.5);
-      transition: all 0.4s ease;
-      transition-delay: 0.1s;
+      top: 50%;
+      left: 10px;
+      right: 10px;
+      transform: translateY(-50%);
+      height: var(--pill-height);
+      pointer-events: none;
+      z-index: 5;
+      display: flex;
+      align-items: center;
     }
 
-    .nav-item.active .indicator-dot {
-      opacity: 1;
-      transform: scale(1);
+    .glass-pill {
+      flex: 1;
+      height: 100%;
+      border-radius: calc(var(--pill-height) / 2);
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -2px 4px rgba(0,0,0,0.05);
+      transition: all 0.5s cubic-bezier(0.34, 1.26, 0.44, 1.05);
     }
+
+    .glass-circle {
+      width: var(--pill-height);
+      height: var(--pill-height);
+      border-radius: 50%;
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -2px 4px rgba(0,0,0,0.05);
+      flex-shrink: 0;
+      transform: translateX(-15px);
+      transition: all 0.5s cubic-bezier(0.34, 1.26, 0.44, 1.05);
+    }
+
+    .tab-bar-container.separated .glass-circle { transform: translateX(5px); }
+    .tab-bar-container.bridged .glass-circle { transform: translateX(-18px); }
+    .tab-bar-container.merged .glass-circle { transform: translateX(-40px); opacity: 0; }
+
+    /* Interactive text indicating what to do */
+    .instruction {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      color: var(--icon-color);
+      font-size: 14px;
+      opacity: 0.7;
+      font-weight: 500;
+    }
+
   </style>
 </head>
 <body>
 
-  <!-- Hidden SVG Filter -->
+  <!-- Hidden SVG Filter for Gooey Effect -->
   <svg class="goo-filter">
     <defs>
       <filter id="goo">
+        <!-- 1. Blur the items to make them bleed into each other -->
         <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-        <!-- Alpha thresholding to create the liquid merge effect -->
+        <!-- 2. Sharpen the alpha channel to create a solid shape with merged curves -->
+        <!-- The values control the "thickness" of the liquid bridge -->
         <feColorMatrix in="blur" mode="matrix" values="
           1 0 0 0 0  
           0 1 0 0 0  
           0 0 1 0 0  
-          0 0 0 20 -9" result="goo" />
+          0 0 0 19 -8" result="goo" />
+        <!-- 3. Keep the original colors -->
         <feBlend in="SourceGraphic" in2="goo" />
       </filter>
     </defs>
   </svg>
 
   <div class="phone-mockup">
-    <div class="screen-content">
-      <div class="app-header">Discover</div>
-    </div>
+    <div class="instruction">点击右侧“搜索”或“其他图标”体验液态水珠桥接与断开效果</div>
 
-    <div class="tab-bar-container">
+    <!-- Bridged is the default state that matches the image -->
+    <div class="tab-bar-container bridged" id="tabContainer">
       
-      <!-- Liquid Background & Drop -->
+      <!-- Liquid Background -->
       <div class="liquid-wrapper">
-        <div class="liquid-bg"></div>
-        <div class="liquid-drop"></div>
+        <div class="main-pill-bg"></div>
+        <div class="search-circle-bg"></div>
       </div>
 
-      <!-- Icons -->
-      <div class="nav-items">
-        <div class="nav-item active" onclick="selectTab(0)">
-          <ion-icon name="compass"></ion-icon>
-          <div class="indicator-dot"></div>
+      <!-- Fake glass reflections to give volume to the flat SVG filtered shapes -->
+      <div class="glass-overlay">
+        <div class="glass-pill"></div>
+        <div class="glass-circle"></div>
+      </div>
+
+      <!-- Interactive Icons and Text -->
+      <div class="nav-content">
+        <div class="main-items">
+          <div class="nav-item" onclick="selectMainTab(0)">
+            <ion-icon name="home"></ion-icon>
+            <span>主页</span>
+          </div>
+          <div class="nav-item active" onclick="selectMainTab(1)">
+            <!-- Radio icon -->
+            <ion-icon name="radio"></ion-icon>
+            <span>广播</span>
+          </div>
+          <div class="nav-item" onclick="selectMainTab(2)">
+            <!-- Library icon -->
+            <ion-icon name="library"></ion-icon>
+            <span>资料库</span>
+          </div>
         </div>
-        <div class="nav-item" onclick="selectTab(1)">
+        
+        <!-- Search Circle Button -->
+        <div class="search-btn" onclick="toggleSearch()">
           <ion-icon name="search"></ion-icon>
-          <div class="indicator-dot"></div>
-        </div>
-        <div class="nav-item" onclick="selectTab(2)">
-          <ion-icon name="chatbubbles"></ion-icon>
-          <div class="indicator-dot"></div>
-        </div>
-        <div class="nav-item" onclick="selectTab(3)">
-          <ion-icon name="person"></ion-icon>
-          <div class="indicator-dot"></div>
         </div>
       </div>
 
@@ -252,57 +312,42 @@
 
   <script>
     const items = document.querySelectorAll('.nav-item');
-    const drop = document.querySelector('.liquid-drop');
-    const nav = document.querySelector('.nav-items');
+    const container = document.getElementById('tabContainer');
+    
+    // State machine for the liquid bridge: 'bridged' -> 'merged' -> 'separated'
+    let currentState = 'bridged';
 
-    function selectTab(index) {
-      // Remove active class from all
-      items.forEach(item => {
-        item.classList.remove('active');
-        // Reset icon type to outline when inactive
-        const icon = item.querySelector('ion-icon');
-        if (icon.name.indexOf('-outline') === -1) {
-          icon.name = icon.name + '-outline';
-        }
-      });
+    function selectMainTab(index) {
+      items.forEach(item => item.classList.remove('active'));
+      items[index].classList.add('active');
 
-      // Add active class to selected
-      const selected = items[index];
-      selected.classList.add('active');
-      
-      // Change icon to solid when active
-      const activeIcon = selected.querySelector('ion-icon');
-      activeIcon.name = activeIcon.name.replace('-outline', '');
-
-      // Calculate position
-      const navRect = nav.getBoundingClientRect();
-      const itemRect = selected.getBoundingClientRect();
-      
-      // Center of the selected item relative to the nav container
-      const centerPos = (itemRect.left - navRect.left) + (itemRect.width / 2);
-      
-      // Drop width is 56px, so subtract half (28px) to center it
-      drop.style.transform = `translateX(${centerPos - 28}px)`;
+      // When clicking a main tab, break the bridge momentarily then reform it
+      container.className = 'tab-bar-container separated';
+      setTimeout(() => {
+        container.className = 'tab-bar-container bridged';
+      }, 400);
     }
 
-    // Initialize with outlines
-    items.forEach((item, idx) => {
-      if (idx !== 0) {
-        const icon = item.querySelector('ion-icon');
-        icon.name = icon.name + '-outline';
+    function toggleSearch() {
+      if (currentState === 'bridged' || currentState === 'separated') {
+        // Merge the search button into the main pill
+        container.className = 'tab-bar-container merged';
+        currentState = 'merged';
+        
+        // Deselect main tabs to indicate search is active
+        items.forEach(item => item.classList.remove('active'));
+      } else {
+        // Pop out the search button, stretching the liquid
+        container.className = 'tab-bar-container separated';
+        setTimeout(() => {
+          container.className = 'tab-bar-container bridged';
+          currentState = 'bridged';
+          
+          // Re-select a tab
+          items[1].classList.add('active');
+        }, 500);
       }
-    });
-
-    // Run layout calculation after a short delay to ensure rendering is complete
-    window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => selectTab(0), 50);
-    });
-    
-    // Recalculate on window resize
-    window.addEventListener('resize', () => {
-      const activeIndex = Array.from(items).findIndex(item => item.classList.contains('active'));
-      if(activeIndex !== -1) selectTab(activeIndex);
-    });
+    }
   </script>
 </body>
 </html>
