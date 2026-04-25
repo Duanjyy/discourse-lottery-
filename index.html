@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iOS 26 Liquid Tab Bar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>iOS 26 Draggable Liquid Tab Bar</title>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <style>
@@ -14,6 +14,9 @@
       --highlight-bg: rgba(255, 255, 255, 0.4);
       --highlight-border: rgba(255, 255, 255, 0.8);
       --pill-height: 70px;
+      /* Dynamic translation values modified by JS */
+      --drag-x: -18px; 
+      --drag-y: 0px;
     }
 
     * {
@@ -30,7 +33,6 @@
       align-items: center;
       min-height: 100vh;
       background: var(--bg-gradient);
-      /* Add some ambient glowing orbs behind the phone to match image vibe */
       background-image: 
         radial-gradient(circle at 20% 30%, #fbc2eb 0%, transparent 50%),
         radial-gradient(circle at 80% 70%, #fde4e9 0%, transparent 50%),
@@ -38,12 +40,12 @@
       background-color: #ebd1d8;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       overflow: hidden;
+      touch-action: none; /* Prevent scrolling while dragging */
     }
 
-    /* Mockup of a phone screen for presentation */
     .phone-mockup {
       width: 400px;
-      height: 250px; /* Shortened to focus on the tab bar */
+      height: 300px;
       background: transparent;
       position: relative;
       display: flex;
@@ -90,8 +92,7 @@
       height: var(--pill-height);
       background: var(--tab-bg);
       border-radius: calc(var(--pill-height) / 2);
-      transition: all 0.5s cubic-bezier(0.34, 1.26, 0.44, 1.05);
-      margin-right: 0px; /* Initially no margin, so they merge */
+      transition: border-radius 0.3s;
     }
 
     /* The moving droplet / search circle background */
@@ -101,9 +102,8 @@
       background: var(--tab-bg);
       border-radius: 50%;
       flex-shrink: 0;
-      /* Using a slight negative margin or transform to control the bridge */
-      transform: translateX(-15px);
-      transition: all 0.5s cubic-bezier(0.34, 1.26, 0.44, 1.05);
+      transform: translate(var(--drag-x), var(--drag-y));
+      /* Physics transitions are handled dynamically in JS (removed when dragging, added when released) */
     }
 
     /* Content Layer */
@@ -117,6 +117,7 @@
       display: flex;
       align-items: center;
       z-index: 10;
+      pointer-events: none; /* Let clicks pass through except on items */
     }
 
     .main-items {
@@ -126,6 +127,7 @@
       align-items: center;
       height: 100%;
       padding: 0 10px;
+      pointer-events: auto;
     }
 
     .nav-item {
@@ -154,7 +156,6 @@
       font-weight: 600;
     }
 
-    /* The Active Highlight styling as seen in the image (Radio is highlighted) */
     .nav-item.active {
       background: var(--highlight-bg);
       border: 1.5px solid var(--highlight-border);
@@ -167,30 +168,29 @@
       transform: scale(1.1);
     }
 
-    .search-btn {
+    /* The draggable interactive zone for the search button */
+    .search-btn-wrapper {
+      position: absolute;
+      right: 0;
       width: var(--pill-height);
       height: var(--pill-height);
       display: flex;
       justify-content: center;
       align-items: center;
-      color: var(--icon-color);
-      font-size: 26px;
-      cursor: pointer;
       flex-shrink: 0;
-      transition: all 0.5s cubic-bezier(0.34, 1.26, 0.44, 1.05);
+      pointer-events: auto;
+      cursor: grab;
+      transform: translate(var(--drag-x), var(--drag-y));
+    }
+    
+    .search-btn-wrapper:active {
+      cursor: grabbing;
     }
 
-    /* Separated state classes for animation */
-    .tab-bar-container.separated .search-circle-bg {
-      transform: translateX(5px); /* Pulls away, breaking the liquid bridge */
-    }
-    
-    .tab-bar-container.bridged .search-circle-bg {
-      transform: translateX(-18px); /* Perfect distance for a thin gooey bridge */
-    }
-    
-    .tab-bar-container.merged .search-circle-bg {
-      transform: translateX(-40px); /* Merges deeply into the pill */
+    .search-btn-wrapper ion-icon {
+      color: var(--icon-color);
+      font-size: 26px;
+      pointer-events: none; /* Ignore icon clicks to grab the wrapper easily */
     }
 
     /* Add a slight inner shadow / reflection to the whole tab bar wrapper to fake the glass volume */
@@ -212,7 +212,6 @@
       height: 100%;
       border-radius: calc(var(--pill-height) / 2);
       box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -2px 4px rgba(0,0,0,0.05);
-      transition: all 0.5s cubic-bezier(0.34, 1.26, 0.44, 1.05);
     }
 
     .glass-circle {
@@ -221,24 +220,26 @@
       border-radius: 50%;
       box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -2px 4px rgba(0,0,0,0.05);
       flex-shrink: 0;
-      transform: translateX(-15px);
-      transition: all 0.5s cubic-bezier(0.34, 1.26, 0.44, 1.05);
+      transform: translate(var(--drag-x), var(--drag-y));
     }
-
-    .tab-bar-container.separated .glass-circle { transform: translateX(5px); }
-    .tab-bar-container.bridged .glass-circle { transform: translateX(-18px); }
-    .tab-bar-container.merged .glass-circle { transform: translateX(-40px); opacity: 0; }
 
     /* Interactive text indicating what to do */
     .instruction {
       position: absolute;
-      top: 20px;
+      top: 0px;
       width: 100%;
       text-align: center;
       color: var(--icon-color);
       font-size: 14px;
       opacity: 0.7;
       font-weight: 500;
+    }
+    
+    /* Animation class for when releasing the drag */
+    .snap-back .search-circle-bg,
+    .snap-back .search-btn-wrapper,
+    .snap-back .glass-circle {
+      transition: transform 0.6s cubic-bezier(0.34, 1.26, 0.44, 1.05);
     }
 
   </style>
@@ -249,37 +250,35 @@
   <svg class="goo-filter">
     <defs>
       <filter id="goo">
-        <!-- 1. Blur the items to make them bleed into each other -->
-        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-        <!-- 2. Sharpen the alpha channel to create a solid shape with merged curves -->
-        <!-- The values control the "thickness" of the liquid bridge -->
+        <!-- Blur -->
+        <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
+        <!-- Alpha thresholding to create the viscous liquid bridge -->
+        <!-- Higher multiplier = thinner bridge / snaps earlier -->
         <feColorMatrix in="blur" mode="matrix" values="
           1 0 0 0 0  
           0 1 0 0 0  
           0 0 1 0 0  
-          0 0 0 19 -8" result="goo" />
-        <!-- 3. Keep the original colors -->
+          0 0 0 22 -10" result="goo" />
         <feBlend in="SourceGraphic" in2="goo" />
       </filter>
     </defs>
   </svg>
 
   <div class="phone-mockup">
-    <div class="instruction">点击右侧“搜索”或“其他图标”体验液态水珠桥接与断开效果</div>
+    <div class="instruction">随意拖拽右侧“搜索”圆球<br>体验极其黏稠的物理拉丝与回弹断开效果</div>
 
-    <!-- Bridged is the default state that matches the image -->
-    <div class="tab-bar-container bridged" id="tabContainer">
+    <div class="tab-bar-container snap-back" id="tabContainer">
       
       <!-- Liquid Background -->
       <div class="liquid-wrapper">
         <div class="main-pill-bg"></div>
-        <div class="search-circle-bg"></div>
+        <div class="search-circle-bg" id="searchBg"></div>
       </div>
 
-      <!-- Fake glass reflections to give volume to the flat SVG filtered shapes -->
+      <!-- Fake glass reflections -->
       <div class="glass-overlay">
         <div class="glass-pill"></div>
-        <div class="glass-circle"></div>
+        <div class="glass-circle" id="searchGlass"></div>
       </div>
 
       <!-- Interactive Icons and Text -->
@@ -290,19 +289,17 @@
             <span>主页</span>
           </div>
           <div class="nav-item active" onclick="selectMainTab(1)">
-            <!-- Radio icon -->
             <ion-icon name="radio"></ion-icon>
             <span>广播</span>
           </div>
           <div class="nav-item" onclick="selectMainTab(2)">
-            <!-- Library icon -->
             <ion-icon name="library"></ion-icon>
             <span>资料库</span>
           </div>
         </div>
         
-        <!-- Search Circle Button -->
-        <div class="search-btn" onclick="toggleSearch()">
+        <!-- Draggable Search Circle Wrapper -->
+        <div class="search-btn-wrapper" id="draggableBtn">
           <ion-icon name="search"></ion-icon>
         </div>
       </div>
@@ -313,41 +310,104 @@
   <script>
     const items = document.querySelectorAll('.nav-item');
     const container = document.getElementById('tabContainer');
+    const draggableBtn = document.getElementById('draggableBtn');
     
-    // State machine for the liquid bridge: 'bridged' -> 'merged' -> 'separated'
-    let currentState = 'bridged';
+    // Physics & State variables
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    
+    // The default resting position of the search bubble (the 'bridged' state)
+    const baseTranslateX = -18; 
+    const baseTranslateY = 0;
+    
+    // Current positions
+    let currentX = baseTranslateX;
+    let currentY = baseTranslateY;
 
     function selectMainTab(index) {
       items.forEach(item => item.classList.remove('active'));
       items[index].classList.add('active');
-
-      // When clicking a main tab, break the bridge momentarily then reform it
-      container.className = 'tab-bar-container separated';
-      setTimeout(() => {
-        container.className = 'tab-bar-container bridged';
-      }, 400);
-    }
-
-    function toggleSearch() {
-      if (currentState === 'bridged' || currentState === 'separated') {
-        // Merge the search button into the main pill
-        container.className = 'tab-bar-container merged';
-        currentState = 'merged';
-        
-        // Deselect main tabs to indicate search is active
-        items.forEach(item => item.classList.remove('active'));
-      } else {
-        // Pop out the search button, stretching the liquid
-        container.className = 'tab-bar-container separated';
+      
+      // Give a tiny bump to the search bubble to show the liquid connection is alive
+      if(!isDragging) {
+        document.documentElement.style.setProperty('--drag-x', `${baseTranslateX + 5}px`);
         setTimeout(() => {
-          container.className = 'tab-bar-container bridged';
-          currentState = 'bridged';
-          
-          // Re-select a tab
-          items[1].classList.add('active');
-        }, 500);
+          document.documentElement.style.setProperty('--drag-x', `${baseTranslateX}px`);
+        }, 300);
       }
     }
+
+    // --- Drag Logic (Mouse & Touch) ---
+    
+    function startDrag(e) {
+      isDragging = true;
+      // Remove transition class so it follows mouse exactly without delay
+      container.classList.remove('snap-back');
+      
+      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+      
+      startX = clientX - currentX;
+      startY = clientY - currentY;
+    }
+
+    function onDrag(e) {
+      if (!isDragging) return;
+      e.preventDefault(); // Prevent scrolling
+      
+      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+      
+      // Calculate raw dragged distance
+      let rawX = clientX - startX;
+      let rawY = clientY - startY;
+      
+      // Apply some resistance/rubber-band physics when pulling too far
+      // The further you pull, the harder it gets
+      const pullDistanceX = rawX - baseTranslateX;
+      const pullDistanceY = rawY - baseTranslateY;
+      
+      // Resistance factor (0 to 1, where lower means more resistance)
+      const resistance = 0.5;
+      
+      currentX = baseTranslateX + (pullDistanceX * resistance);
+      currentY = baseTranslateY + (pullDistanceY * resistance);
+      
+      // Limit how far it can go inside the pill (merging)
+      if (currentX < -60) currentX = -60;
+      
+      // Update CSS Variables to move the bubble, its background, and its glass overlay
+      document.documentElement.style.setProperty('--drag-x', `${currentX}px`);
+      document.documentElement.style.setProperty('--drag-y', `${currentY}px`);
+    }
+
+    function endDrag() {
+      if (!isDragging) return;
+      isDragging = false;
+      
+      // Add the springy physics class back
+      container.classList.add('snap-back');
+      
+      // Snap back to default bridged position
+      currentX = baseTranslateX;
+      currentY = baseTranslateY;
+      
+      document.documentElement.style.setProperty('--drag-x', `${currentX}px`);
+      document.documentElement.style.setProperty('--drag-y', `${currentY}px`);
+    }
+
+    // Event Listeners for Mouse
+    draggableBtn.addEventListener('mousedown', startDrag);
+    window.addEventListener('mousemove', onDrag);
+    window.addEventListener('mouseup', endDrag);
+
+    // Event Listeners for Touch (Mobile)
+    draggableBtn.addEventListener('touchstart', startDrag, { passive: false });
+    window.addEventListener('touchmove', onDrag, { passive: false });
+    window.addEventListener('touchend', endDrag);
+    window.addEventListener('touchcancel', endDrag);
+    
   </script>
 </body>
 </html>
