@@ -24,7 +24,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
         }
       }
       return (
-        <p key={index} className="whitespace-pre-wrap leading-relaxed text-zinc-300 font-sans">
+        <p key={index} className="whitespace-pre-wrap leading-relaxed text-warm-text font-sans">
           {part}
         </p>
       );
@@ -34,29 +34,29 @@ export function MessageBubble({ message }: MessageBubbleProps) {
   return (
     <div
       className={clsx(
-        "flex w-full group py-4 px-2 md:px-4 rounded-xl transition-colors",
-        isUser ? "bg-transparent" : "bg-zinc-900/40"
+        "flex w-full group py-5 px-4 md:px-6 rounded-[2rem] transition-all",
+        isUser ? "bg-warm-user shadow-sm border border-warm-border/30" : "bg-warm-bubble shadow-float border border-warm-border/40"
       )}
     >
       {/* Avatar */}
-      <div className="flex-shrink-0 mr-4">
+      <div className="flex-shrink-0 mr-4 mt-1">
         <div
           className={clsx(
-            "w-8 h-8 rounded-full flex items-center justify-center shadow-md",
-            isUser ? "bg-zinc-800 text-zinc-200" : "bg-gradient-to-br from-blue-600 to-indigo-600 text-white"
+            "w-9 h-9 rounded-full flex items-center justify-center shadow-sm",
+            isUser ? "bg-warm-bg text-warm-text border border-warm-border" : "bg-warm-accent text-white"
           )}
         >
-          {isUser ? <User size={18} /> : <Bot size={18} />}
+          {isUser ? <User size={18} /> : <Bot size={20} />}
         </div>
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-hidden">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="font-semibold text-sm text-zinc-200">
-            {isUser ? 'You' : 'Codex Agent'}
+      <div className="flex-1 overflow-hidden mt-1.5">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="font-bold text-sm text-warm-text">
+            {isUser ? 'You' : 'AI Agent'}
           </span>
-          <span className="text-xs text-zinc-500">
+          <span className="text-xs font-medium text-warm-muted">
             {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
           </span>
         </div>
@@ -69,8 +69,8 @@ export function MessageBubble({ message }: MessageBubbleProps) {
       {/* Action Buttons (visible on hover) */}
       <div className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 flex flex-col gap-1">
         {!isUser && (
-          <button className="p-1.5 text-zinc-500 hover:text-white rounded hover:bg-zinc-800 transition-colors" title="Copy response">
-            <FileCode2 size={16} />
+          <button className="p-2 text-warm-muted hover:text-warm-text rounded-xl hover:bg-black/5 transition-colors" title="Copy response">
+            <FileCode2 size={18} />
           </button>
         )}
       </div>

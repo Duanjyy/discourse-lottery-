@@ -41,17 +41,17 @@ export function InputArea() {
     <form
       onSubmit={handleSubmit}
       className={clsx(
-        "relative flex flex-col w-full bg-codex-input border rounded-xl shadow-lg transition-all duration-200",
-        isFocused ? "border-codex-accent shadow-codex-accent/20" : "border-zinc-700/50 hover:border-zinc-600/80"
+        "relative flex flex-col w-full bg-warm-input border rounded-3xl shadow-float transition-all duration-300",
+        isFocused ? "border-warm-accent shadow-warm-accent/10" : "border-warm-border hover:border-warm-accent/50"
       )}
     >
-      <div className="flex items-end gap-2 p-3">
+      <div className="flex items-end gap-3 p-4">
         <button
           type="button"
-          className="p-2 text-zinc-400 hover:text-white transition-colors rounded-lg hover:bg-zinc-700/50"
+          className="p-2.5 text-warm-muted hover:text-warm-text transition-colors rounded-2xl hover:bg-black/5"
           title="Upload file"
         >
-          <FileUp size={20} />
+          <FileUp size={22} />
         </button>
 
         <textarea
@@ -61,8 +61,8 @@ export function InputArea() {
           onKeyDown={handleKeyDown}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholder="Ask Codex to write code..."
-          className="flex-1 max-h-[200px] min-h-[24px] py-1.5 bg-transparent border-none outline-none resize-none text-zinc-100 placeholder:text-zinc-500 custom-scrollbar"
+          placeholder="Ask AI to write code..."
+          className="flex-1 max-h-[200px] min-h-[24px] py-2.5 bg-transparent border-none outline-none resize-none text-warm-text placeholder:text-warm-muted custom-scrollbar font-medium"
           rows={1}
         />
 
@@ -70,22 +70,22 @@ export function InputArea() {
           type="submit"
           disabled={!content.trim()}
           className={clsx(
-            "p-2 rounded-lg transition-all",
+            "p-3 rounded-full transition-all",
             content.trim()
-              ? "bg-codex-accent text-white hover:bg-blue-400"
-              : "bg-zinc-700/30 text-zinc-500 cursor-not-allowed"
+              ? "bg-warm-accent text-white hover:bg-[#C29363] shadow-sm scale-100"
+              : "bg-black/5 text-warm-muted cursor-not-allowed scale-95"
           )}
         >
-          <Send size={18} />
+          <Send size={20} className={clsx(content.trim() && "translate-x-0.5 -translate-y-0.5")} />
         </button>
       </div>
 
-      <div className="flex items-center justify-between px-4 py-2 border-t border-zinc-800/50 text-xs text-zinc-500">
-        <div className="flex items-center gap-1.5">
-          <Sparkles size={12} className="text-codex-accent" />
-          <span>Codex AI Model</span>
+      <div className="flex items-center justify-between px-6 py-3 border-t border-warm-border/50 text-xs font-bold text-warm-muted bg-black/[0.02] rounded-b-3xl">
+        <div className="flex items-center gap-2">
+          <Sparkles size={14} className="text-warm-accent" />
+          <span>AI Model</span>
         </div>
-        <div className="hidden sm:block">Press <kbd className="px-1 py-0.5 bg-zinc-800 rounded text-zinc-300">Enter</kbd> to send, <kbd className="px-1 py-0.5 bg-zinc-800 rounded text-zinc-300">Shift</kbd> + <kbd className="px-1 py-0.5 bg-zinc-800 rounded text-zinc-300">Enter</kbd> for new line</div>
+        <div className="hidden sm:block tracking-wide">Press <kbd className="px-1.5 py-0.5 bg-black/5 border border-black/10 rounded text-warm-text font-mono">Enter</kbd> to send, <kbd className="px-1.5 py-0.5 bg-black/5 border border-black/10 rounded text-warm-text font-mono">Shift</kbd> + <kbd className="px-1.5 py-0.5 bg-black/5 border border-black/10 rounded text-warm-text font-mono">Enter</kbd> for new line</div>
       </div>
     </form>
   );

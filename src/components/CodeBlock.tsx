@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Check, Copy } from 'lucide-react';
 import { clsx } from 'clsx';
 
@@ -19,15 +19,15 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
   };
 
   return (
-    <div className="relative rounded-lg overflow-hidden border border-zinc-800 bg-codex-code font-mono text-sm shadow-xl my-4">
+    <div className="relative rounded-2xl overflow-hidden border border-warm-border bg-warm-code font-mono text-sm shadow-sm my-4">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2 bg-zinc-800/50 text-zinc-400 text-xs font-semibold select-none border-b border-zinc-800/50">
-        <span>{language.toUpperCase()}</span>
+      <div className="flex items-center justify-between px-4 py-2.5 bg-black/5 text-warm-muted text-xs font-bold select-none border-b border-warm-border">
+        <span className="uppercase tracking-wider">{language || 'text'}</span>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 hover:text-white transition-colors"
+          className="flex items-center gap-1.5 hover:text-warm-text transition-colors"
         >
-          {isCopied ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
+          {isCopied ? <Check size={14} className="text-green-600" /> : <Copy size={14} />}
           <span>{isCopied ? 'Copied!' : 'Copy'}</span>
         </button>
       </div>
@@ -36,20 +36,20 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
       <div className="custom-scrollbar overflow-x-auto">
         <SyntaxHighlighter
           language={language || 'text'}
-          style={vscDarkPlus}
+          style={oneLight}
           customStyle={{
             margin: 0,
-            padding: '1rem',
+            padding: '1.25rem',
             background: 'transparent',
-            fontSize: '13px',
-            lineHeight: '1.5',
+            fontSize: '13.5px',
+            lineHeight: '1.6',
           }}
           wrapLines={true}
           showLineNumbers={true}
           lineNumberStyle={{
             minWidth: '2.5em',
-            paddingRight: '1em',
-            color: '#6e7681',
+            paddingRight: '1.2em',
+            color: '#A0988F',
             textAlign: 'right',
           }}
         >

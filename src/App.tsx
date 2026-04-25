@@ -7,7 +7,7 @@ export default function App() {
   const { isSidebarOpen } = useChatStore();
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-codex-bg text-codex-text selection:bg-codex-accent/30 selection:text-white">
+    <div className="flex h-screen w-full overflow-hidden bg-warm-bg text-warm-text selection:bg-warm-accent/20 selection:text-warm-text">
       {/* Sidebar */}
       <Sidebar />
 
