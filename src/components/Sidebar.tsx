@@ -1,6 +1,6 @@
 import React from 'react';
 import { useChatStore } from '../store/chatStore';
-import { MessageSquare, Plus, Settings, User, X, PanelLeftClose } from 'lucide-react';
+import { Plus, Settings, User, X, Folder, LayoutGrid, Cpu, SquarePen } from 'lucide-react';
 import { clsx } from 'clsx';
 
 export function Sidebar() {
@@ -30,48 +30,59 @@ export function Sidebar() {
           !isSidebarOpen && "-translate-x-full md:hidden"
         )}
       >
-        {/* Header - New Chat Button */}
-        <div className="p-4">
+        {/* macOS Window Controls */}
+        <div className="flex items-center gap-2 px-4 py-4">
+          <div className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]"></div>
+          <div className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]"></div>
+          <div className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]"></div>
+        </div>
+
+        {/* Top Navigation */}
+        <div className="px-3 space-y-1">
           <button 
             onClick={createNewSession}
-            className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold transition-all border border-warm-border rounded-2xl bg-warm-bg hover:shadow-soft text-warm-text hover:bg-white"
+            className="flex items-center gap-3 w-full px-3 py-2 text-sm font-medium transition-colors rounded-lg text-warm-text hover:bg-black/5"
           >
-            <Plus size={18} className="text-warm-accent" />
-            <span>New chat</span>
+            <SquarePen size={16} className="text-warm-muted" />
+            <span>New thread</span>
+          </button>
+          <button className="flex items-center gap-3 w-full px-3 py-2 text-sm font-medium transition-colors rounded-lg text-warm-text hover:bg-black/5">
+            <Cpu size={16} className="text-warm-muted" />
+            <span>Automations</span>
+          </button>
+          <button className="flex items-center gap-3 w-full px-3 py-2 text-sm font-medium transition-colors rounded-lg text-warm-text hover:bg-black/5">
+            <LayoutGrid size={16} className="text-warm-muted" />
+            <span>Skills</span>
           </button>
         </div>
 
-        {/* Chat History List */}
-        <div className="flex-1 overflow-y-auto custom-scrollbar px-3 py-2">
-          <div className="text-xs font-bold text-warm-muted mb-3 px-3 uppercase tracking-wider">Today</div>
+        {/* Threads Section */}
+        <div className="mt-6 flex-1 overflow-y-auto custom-scrollbar px-3">
+          <div className="flex items-center justify-between px-3 mb-2">
+            <span className="text-xs font-semibold text-warm-muted">Threads</span>
+            <button className="text-warm-muted hover:text-warm-text">
+              <Folder size={14} />
+            </button>
+          </div>
+          
           <div className="space-y-1">
-            {sessions.map((session) => (
-              <button
-                key={session.id}
-                onClick={() => setActiveSession(session.id)}
-                className={clsx(
-                  "flex items-center gap-3 w-full px-4 py-3 text-sm rounded-2xl transition-all group",
-                  activeSessionId === session.id 
-                    ? "bg-white text-warm-text shadow-soft border border-warm-border/50" 
-                    : "text-warm-muted hover:bg-black/5 hover:text-warm-text border border-transparent"
-                )}
-              >
-                <MessageSquare size={16} className={activeSessionId === session.id ? "text-warm-accent" : "text-warm-muted/70 group-hover:text-warm-muted"} />
-                <span className="truncate flex-1 text-left font-medium">{session.title}</span>
-              </button>
-            ))}
+            <button className="flex items-center gap-3 w-full px-3 py-2 text-sm font-medium transition-colors rounded-lg text-warm-text hover:bg-black/5">
+              <Folder size={16} className="text-warm-muted" />
+              <span>Dropkit v2</span>
+            </button>
+            <div className="pl-9 py-2 text-xs text-warm-muted font-medium">
+              No threads
+            </div>
           </div>
         </div>
 
-        {/* Footer - User & Settings */}
-        <div className="p-4 border-t border-warm-border space-y-1">
-          <button className="flex items-center gap-3 w-full px-4 py-3 text-sm rounded-2xl font-medium transition-colors text-warm-text hover:bg-black/5">
-            <User size={18} className="text-warm-muted" />
-            <span>Account</span>
-          </button>
-          <button className="flex items-center gap-3 w-full px-4 py-3 text-sm rounded-2xl font-medium transition-colors text-warm-text hover:bg-black/5">
-            <Settings size={18} className="text-warm-muted" />
-            <span>Settings</span>
+        {/* Footer - Personal */}
+        <div className="p-3 border-t border-warm-border">
+          <button className="flex items-center gap-3 w-full px-3 py-2 text-sm rounded-lg font-medium transition-colors text-warm-text hover:bg-black/5">
+            <div className="w-5 h-5 rounded-full bg-warm-border flex items-center justify-center border border-black/10">
+              <User size={12} className="text-warm-muted" />
+            </div>
+            <span>Personal</span>
           </button>
         </div>
 
