@@ -14,7 +14,7 @@ export interface CellData {
 export const DIFFICULTY_CONFIG: Record<Difficulty, { rows: number; cols: number; mines: number }> = {
   beginner: { rows: 9, cols: 9, mines: 10 },
   intermediate: { rows: 16, cols: 16, mines: 40 },
-  expert: { rows: 30, cols: 16, mines: 99 }, // 竖屏适配，通常PC是16x30，手机竖屏30x16比较合理
+  expert: { rows: 24, cols: 12, mines: 55 }, // 调整为更适合手机的适中尺寸
 };
 
 export const createEmptyBoard = (rows: number, cols: number): CellData[][] => {
