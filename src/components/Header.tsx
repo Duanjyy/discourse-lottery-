@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useGameStore } from '../store/gameStore';
 import { Difficulty } from '../utils/minesweeper';
+import { Volume2, VolumeX } from 'lucide-react';
 
 const Header: React.FC = () => {
   const {
@@ -8,9 +9,11 @@ const Header: React.FC = () => {
     timeElapsed,
     status,
     difficulty,
+    soundEnabled,
     initGame,
     resetGame,
     incrementTime,
+    toggleSound,
   } = useGameStore();
 
   useEffect(() => {
@@ -66,7 +69,7 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex gap-2 mt-1 sm:mt-0">
+      <div className="flex gap-2 mt-1 sm:mt-0 items-center">
         <select
           value={difficulty}
           onChange={handleDifficultyChange}
@@ -76,6 +79,14 @@ const Header: React.FC = () => {
           <option value="intermediate">中级 (16x16)</option>
           <option value="expert">高级 (16x30)</option>
         </select>
+
+        <button 
+          onClick={toggleSound}
+          className="p-1.5 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-400 hover:text-zinc-200 transition-colors"
+          style={{ WebkitTapHighlightColor: 'transparent' }}
+        >
+          {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+        </button>
       </div>
     </div>
   );

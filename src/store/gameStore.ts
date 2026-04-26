@@ -9,6 +9,7 @@ import {
   revealCell,
   checkWin,
 } from '../utils/minesweeper';
+import { audioController } from '../utils/audio';
 
 interface GameState {
   board: CellData[][];
@@ -17,12 +18,14 @@ interface GameState {
   minesLeft: number;
   timeElapsed: number;
   isFlagMode: boolean;
+  soundEnabled: boolean;
 
   initGame: (diff?: Difficulty) => void;
   handleCellClick: (x: number, y: number) => void;
   handleCellLongPress: (x: number, y: number) => void;
   handleCellDoubleClick: (x: number, y: number) => void;
   toggleFlagMode: () => void;
+  toggleSound: () => void;
   incrementTime: () => void;
   resetGame: () => void;
 }
@@ -34,6 +37,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   minesLeft: 10,
   timeElapsed: 0,
   isFlagMode: false,
+  soundEnabled: true,
 
   initGame: (diff) => {
     const newDiff = diff || get().difficulty;
@@ -61,6 +65,14 @@ export const useGameStore = create<GameState>((set, get) => ({
     set((state) => ({ isFlagMode: !state.isFlagMode }));
   },
 
+  toggleSound: () => {
+    set((state) => {
+      const newState = !state.soundEnabled;
+      audioController.enabled = newState;
+      return { soundEnabled: newState };
+    });
+  },
+
   handleCellLongPress: (x: number, y: number) => {
     const { status, board, minesLeft } = get();
     if (status !== 'playing' && status !== 'idle') return;
@@ -73,9 +85,11 @@ export const useGameStore = create<GameState>((set, get) => ({
     if (cell.isFlagged) {
       cell.isFlagged = false;
       set({ board: newBoard, minesLeft: minesLeft + 1 });
+      audioController.playUnflag();
     } else if (minesLeft > 0) {
       cell.isFlagged = true;
       set({ board: newBoard, minesLeft: minesLeft - 1 });
+      audioController.playFlag();
       if (window.navigator && window.navigator.vibrate) {
         window.navigator.vibrate(50);
       }
@@ -109,6 +123,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     if (flaggedCount === cell.neighborMines) {
       let hitMine = false;
       let newBoard = currentBoard;
+      let revealedAny = false;
       
       // Reveal unflagged neighbors
       for (let dy = -1; dy <= 1; dy++) {
@@ -119,6 +134,7 @@ export const useGameStore = create<GameState>((set, get) => ({
           if (ny >= 0 && ny < currentBoard.length && nx >= 0 && nx < currentBoard[0].length) {
             const nCell = currentBoard[ny][nx];
             if (!nCell.isRevealed && !nCell.isFlagged) {
+              revealedAny = true;
               const res = revealCell(newBoard, nx, ny);
               newBoard = res.newBoard;
               if (res.hitMine) hitMine = true;
@@ -128,6 +144,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       }
 
       if (hitMine) {
+        audioController.playExplosion();
         newBoard.forEach((row) =>
           row.forEach((c) => {
             if (c.isMine && !c.isFlagged) c.isRevealed = true;
@@ -140,7 +157,12 @@ export const useGameStore = create<GameState>((set, get) => ({
         return;
       }
 
+      if (revealedAny) {
+        audioController.playDig();
+      }
+
       if (checkWin(newBoard)) {
+        audioController.playWin();
         set({ board: newBoard, status: 'won' });
         return;
       }
@@ -175,6 +197,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     const { newBoard, hitMine } = revealCell(currentBoard, x, y);
 
     if (hitMine) {
+      audioController.playExplosion();
       newBoard.forEach((row) =>
         row.forEach((c) => {
           if (c.isMine && !c.isFlagged) c.isRevealed = true;
@@ -187,7 +210,16 @@ export const useGameStore = create<GameState>((set, get) => ({
       return;
     }
 
+    // 根据翻开的方块内容播放不同音效
+    const revealedCell = newBoard[y][x];
+    if (revealedCell.neighborMines > 0) {
+      audioController.playNumber();
+    } else {
+      audioController.playDig();
+    }
+
     if (checkWin(newBoard)) {
+      audioController.playWin();
       set({ board: newBoard, status: 'won' });
       return;
     }
