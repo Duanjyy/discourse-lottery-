@@ -14,7 +14,7 @@ export interface CellData {
 export const DIFFICULTY_CONFIG: Record<Difficulty, { rows: number; cols: number; mines: number }> = {
   beginner: { rows: 9, cols: 9, mines: 10 },
   intermediate: { rows: 16, cols: 16, mines: 40 },
-  expert: { rows: 24, cols: 12, mines: 55 }, // 调整为更适合手机的适中尺寸
+  expert: { rows: 20, cols: 12, mines: 48 }, // 12x20，雷密度 20%
 };
 
 export const createEmptyBoard = (rows: number, cols: number): CellData[][] => {

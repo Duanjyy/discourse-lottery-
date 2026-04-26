@@ -77,7 +77,7 @@ const Header: React.FC = () => {
         >
           <option value="beginner">初级 (9x9)</option>
           <option value="intermediate">中级 (16x16)</option>
-          <option value="expert">高级 (12x24)</option>
+          <option value="expert">高级 (12x20)</option>
         </select>
 
         <button 
