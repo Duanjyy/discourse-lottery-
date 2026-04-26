@@ -61,7 +61,7 @@ const Cell: React.FC<CellProps> = ({ cell, onClick, onLongPress, onDoubleClick }
       onTouchMove={handleTouchMove}
       className={twMerge(
         clsx(
-          'w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center font-bold text-lg sm:text-xl rounded shadow-sm select-none transition-all duration-200',
+          'w-7 h-7 sm:w-10 sm:h-10 flex items-center justify-center font-bold text-base sm:text-xl rounded shadow-sm select-none transition-all duration-200',
           !cell.isRevealed
             ? 'bg-zinc-700 hover:bg-zinc-600 border border-zinc-600 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.2)] active:scale-95 cursor-pointer'
             : 'bg-zinc-900 border border-zinc-800 shadow-inner',
@@ -72,14 +72,14 @@ const Cell: React.FC<CellProps> = ({ cell, onClick, onLongPress, onDoubleClick }
     >
       {cell.isRevealed ? (
         cell.isMine ? (
-          '💣'
+          <span className="text-sm sm:text-base">💣</span>
         ) : cell.neighborMines > 0 ? (
           <span className={colorMap[cell.neighborMines]} style={{ textShadow: '0px 1px 2px rgba(0,0,0,0.5)' }}>
             {cell.neighborMines}
           </span>
         ) : null
       ) : cell.isFlagged ? (
-        <span className="drop-shadow-md">🚩</span>
+        <span className="drop-shadow-md text-sm sm:text-base">🚩</span>
       ) : null}
     </div>
   );

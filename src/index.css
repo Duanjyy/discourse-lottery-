@@ -12,3 +12,17 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* 隐藏滚动条但保留滚动功能 */
+.custom-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.custom-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body {
+  overflow: hidden;
+  touch-action: none; /* 防止 Safari 的橡皮筋效果和下拉刷新 */
+}
