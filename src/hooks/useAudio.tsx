@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import useSound from 'use-sound';
+import { Howler } from 'howler';
+import { createAudioLifecycleManager } from '../utils/audio-lifecycle';
 
 interface AudioContextType {
   isMuted: boolean;
@@ -23,7 +25,7 @@ export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return saved ? JSON.parse(saved) : false;
   });
 
-  const [playBgm, { stop: stopBgm }] = useSound(BGM_URL, { 
+  const [playBgm, { stop: stopBgm, pause: pauseBgm, sound: bgmSound }] = useSound(BGM_URL, { 
     loop: true, 
     volume: isMuted ? 0 : 0.3 
   });
@@ -34,14 +36,38 @@ export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const [hasInteracted, setHasInteracted] = useState(false);
 
+  // Setup Audio Lifecycle
+  useEffect(() => {
+    const mgr = createAudioLifecycleManager({
+      getExistingAudioContext: () => Howler.ctx,
+      onPlayError: (key, err) => console.warn(`Audio Lifecycle resume failed for [${key}]:`, err)
+    });
+
+    mgr.trackCustom('bgm', {
+      isPlaying: () => bgmSound ? bgmSound.playing() : false,
+      pause: () => {
+        if (bgmSound) bgmSound.pause();
+      },
+      resume: () => {
+        if (bgmSound && !isMuted) bgmSound.play();
+      }
+    });
+
+    mgr.attach();
+
+    return () => {
+      mgr.detach();
+    };
+  }, [bgmSound, isMuted]);
+
   useEffect(() => {
     localStorage.setItem('xiaolegexiao-muted', JSON.stringify(isMuted));
     if (!isMuted && hasInteracted) {
       playBgm();
     } else {
-      stopBgm();
+      pauseBgm();
     }
-  }, [isMuted, hasInteracted, playBgm, stopBgm]);
+  }, [isMuted, hasInteracted, playBgm, pauseBgm]);
 
   useEffect(() => {
     const handleInteraction = () => {
